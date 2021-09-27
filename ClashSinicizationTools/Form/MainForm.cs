@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing.Text;
 using System.IO;
+using System.Text;
+using System.Windows.Forms;
+;
 
 namespace ClashSinicizationTools
 {
@@ -34,68 +28,27 @@ namespace ClashSinicizationTools
             logTextBox.Text = string.Empty;
         }
 
-        private void openTranslationFileButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //点击浏览翻译脚本文件查找脚本文件
-        private void translationScriptBrowseButton_Click(object sender, EventArgs e)
-        {
-            openFileDialog.Title = "请选择翻译脚本";
-            openFileDialog.FileName = "英汉对照.txt";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                scriptFilePath = openFileDialog.FileName;
-                translationScriptPath.Text = scriptFilePath;
-                StreamReader streamReader = new StreamReader(scriptFilePath, Encoding.UTF8);
-                translationScriptText.Text = streamReader.ReadToEnd();
-                streamReader.Close();
-            }
-        }
-
         //保存当前翻译脚本的修改
         private void saveTranslationScriptButton_Click(object sender, EventArgs e)
         {
-            StreamWriter streamWriter = new StreamWriter(scriptFilePath, false);
-            streamWriter.WriteLine(translationScriptText.Text);
-            streamWriter.Flush();
-            streamWriter.Close();
-        }
-
-        //翻译脚本地址栏修改时执行
-        private void translationScriptPath_TextChanged(object sender, EventArgs e)
-        {
-            if (translationScriptPath.Text == string.Empty)
-            {
-                //地址栏为空时，打开文件按钮失效
-                openTranslationFileButton.Enabled = false;
-                translationScriptText.Text = string.Empty;
-            }
-            else
-            {
-                //不为空时，打开文件按钮开启
-                openTranslationFileButton.Enabled = true;
-            }
-
-            //地址栏修改时，把地址交给地址变量           
-            if (File.Exists(translationScriptPath.Text))
-            {
-                scriptFilePath = translationScriptPath.Text;
-                translationScriptPath.Text = scriptFilePath;
-                StreamReader streamReader = new StreamReader(scriptFilePath, Encoding.UTF8);
-                translationScriptText.Text = streamReader.ReadToEnd();
-                streamReader.Close();
-            }
-
-
+            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+            translationScriptFile.SaveScript(scriptFilePath, translationScriptText, logTextBox);
         }
 
         //自动检测翻译脚本位置（必须在当前目录）
-        private void autoTranslationButton_Click(object sender, EventArgs e)
+        private void loadTranslationScriptButton_Click(object sender, EventArgs e)
         {
-            scriptFilePath = Directory.GetCurrentDirectory() + @"\" + translationScriptPath.Text;
-            MessageBox.Show(scriptFilePath);
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\" + translationScriptPath.Text))
+            {
+                scriptFilePath = Directory.GetCurrentDirectory() + @"\" + translationScriptPath.Text;
+                translationScriptPath.Text = scriptFilePath;
+                logTextBox.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
+            }
+            else
+            {
+                logTextBox.AppendText("未检测到当前目录翻译脚本，请重新检查输入内容" + Environment.NewLine);
+            }
+
         }
 
         //点击浏览文件夹并将path传递给clash path
@@ -124,12 +77,22 @@ namespace ClashSinicizationTools
             if (translationScriptText.Text == streamReader.ReadToEnd())
             {
                 saveTranslationScriptButton.Enabled = false;
+
             }
             else
             {
                 saveTranslationScriptButton.Enabled = true;
             }
             streamReader.Close();
+
+            if (scriptFilePath == string.Empty)
+            {
+                openTranslationFileButton.Enabled = false;
+            }
+            else
+            {
+                openTranslationFileButton.Enabled = true;
+            }
         }
 
         //手动输入path

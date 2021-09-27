@@ -31,11 +31,10 @@ namespace ClashSinicizationTools
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.translationScriptBrowseButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.ClashBrowseButton = new System.Windows.Forms.Button();
             this.autoClashPathButton = new System.Windows.Forms.Button();
-            this.autoTranslationButton = new System.Windows.Forms.Button();
+            this.loadTranslationScriptButton = new System.Windows.Forms.Button();
             this.logTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.CleanLogButton = new System.Windows.Forms.Button();
@@ -47,8 +46,6 @@ namespace ClashSinicizationTools
             this.openTranslationFileButton = new System.Windows.Forms.Button();
             this.openClashBrowseButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.translationScriptText = new System.Windows.Forms.TextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -71,17 +68,6 @@ namespace ClashSinicizationTools
             this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "翻译脚本：";
-            // 
-            // translationScriptBrowseButton
-            // 
-            this.translationScriptBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.translationScriptBrowseButton.Location = new System.Drawing.Point(682, 6);
-            this.translationScriptBrowseButton.Name = "translationScriptBrowseButton";
-            this.translationScriptBrowseButton.Size = new System.Drawing.Size(75, 23);
-            this.translationScriptBrowseButton.TabIndex = 2;
-            this.translationScriptBrowseButton.Text = "浏览";
-            this.translationScriptBrowseButton.UseVisualStyleBackColor = true;
-            this.translationScriptBrowseButton.Click += new System.EventHandler(this.translationScriptBrowseButton_Click);
             // 
             // label2
             // 
@@ -115,16 +101,16 @@ namespace ClashSinicizationTools
             this.autoClashPathButton.Text = "自动检测";
             this.autoClashPathButton.UseVisualStyleBackColor = true;
             // 
-            // autoTranslationButton
+            // loadTranslationScriptButton
             // 
-            this.autoTranslationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.autoTranslationButton.Location = new System.Drawing.Point(763, 6);
-            this.autoTranslationButton.Name = "autoTranslationButton";
-            this.autoTranslationButton.Size = new System.Drawing.Size(75, 23);
-            this.autoTranslationButton.TabIndex = 3;
-            this.autoTranslationButton.Text = "自动检测";
-            this.autoTranslationButton.UseVisualStyleBackColor = true;
-            this.autoTranslationButton.Click += new System.EventHandler(this.autoTranslationButton_Click);
+            this.loadTranslationScriptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadTranslationScriptButton.Location = new System.Drawing.Point(682, 6);
+            this.loadTranslationScriptButton.Name = "loadTranslationScriptButton";
+            this.loadTranslationScriptButton.Size = new System.Drawing.Size(75, 23);
+            this.loadTranslationScriptButton.TabIndex = 3;
+            this.loadTranslationScriptButton.Text = "加载";
+            this.loadTranslationScriptButton.UseVisualStyleBackColor = true;
+            this.loadTranslationScriptButton.Click += new System.EventHandler(this.loadTranslationScriptButton_Click);
             // 
             // logTextBox
             // 
@@ -215,7 +201,6 @@ namespace ClashSinicizationTools
             this.openTranslationFileButton.TabIndex = 2;
             this.openTranslationFileButton.Text = "用外部程序打开文件";
             this.openTranslationFileButton.UseVisualStyleBackColor = true;
-            this.openTranslationFileButton.Click += new System.EventHandler(this.openTranslationFileButton_Click);
             // 
             // openClashBrowseButton
             // 
@@ -227,10 +212,6 @@ namespace ClashSinicizationTools
             this.openClashBrowseButton.TabIndex = 2;
             this.openClashBrowseButton.Text = "打开当前目录";
             this.openClashBrowseButton.UseVisualStyleBackColor = true;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // translationScriptText
             // 
@@ -297,7 +278,6 @@ namespace ClashSinicizationTools
             this.translationScriptPath.Name = "translationScriptPath";
             this.translationScriptPath.Size = new System.Drawing.Size(448, 25);
             this.translationScriptPath.TabIndex = 10;
-            this.translationScriptPath.TextUpdate += new System.EventHandler(this.translationScriptPath_TextChanged);
             // 
             // clashForWindowsPath
             // 
@@ -327,14 +307,13 @@ namespace ClashSinicizationTools
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.autoTranslationButton);
+            this.Controls.Add(this.loadTranslationScriptButton);
             this.Controls.Add(this.CleanLogButton);
             this.Controls.Add(this.saveTranslationScriptButton);
             this.Controls.Add(this.autoClashPathButton);
             this.Controls.Add(this.ClashBrowseButton);
             this.Controls.Add(this.openClashBrowseButton);
             this.Controls.Add(this.openTranslationFileButton);
-            this.Controls.Add(this.translationScriptBrowseButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MainForm";
@@ -349,11 +328,10 @@ namespace ClashSinicizationTools
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button translationScriptBrowseButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button ClashBrowseButton;
         private System.Windows.Forms.Button autoClashPathButton;
-        private System.Windows.Forms.Button autoTranslationButton;
+        private System.Windows.Forms.Button loadTranslationScriptButton;
         private System.Windows.Forms.TextBox logTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button CleanLogButton;
@@ -365,8 +343,6 @@ namespace ClashSinicizationTools
         private System.Windows.Forms.Button openTranslationFileButton;
         private System.Windows.Forms.Button openClashBrowseButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox translationScriptText;
         private System.Windows.Forms.StatusStrip statusStrip;
