@@ -53,7 +53,7 @@ namespace ClashSinicizationTools
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.label4 = new System.Windows.Forms.Label();
             this.saveTranslationScriptButton = new System.Windows.Forms.Button();
-            this.translationScriptPath = new System.Windows.Forms.ComboBox();
+            this.translationScriptFileName = new System.Windows.Forms.ComboBox();
             this.clashForWindowsPath = new System.Windows.Forms.ComboBox();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -269,15 +269,15 @@ namespace ClashSinicizationTools
             this.saveTranslationScriptButton.UseVisualStyleBackColor = true;
             this.saveTranslationScriptButton.Click += new System.EventHandler(this.saveTranslationScriptButton_Click);
             // 
-            // translationScriptPath
+            // translationScriptFileName
             // 
-            this.translationScriptPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.translationScriptFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.translationScriptPath.FormattingEnabled = true;
-            this.translationScriptPath.Location = new System.Drawing.Point(86, 6);
-            this.translationScriptPath.Name = "translationScriptPath";
-            this.translationScriptPath.Size = new System.Drawing.Size(448, 25);
-            this.translationScriptPath.TabIndex = 10;
+            this.translationScriptFileName.FormattingEnabled = true;
+            this.translationScriptFileName.Location = new System.Drawing.Point(86, 6);
+            this.translationScriptFileName.Name = "translationScriptFileName";
+            this.translationScriptFileName.Size = new System.Drawing.Size(448, 25);
+            this.translationScriptFileName.TabIndex = 10;
             // 
             // clashForWindowsPath
             // 
@@ -296,7 +296,7 @@ namespace ClashSinicizationTools
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(850, 523);
             this.Controls.Add(this.clashForWindowsPath);
-            this.Controls.Add(this.translationScriptPath);
+            this.Controls.Add(this.translationScriptFileName);
             this.Controls.Add(this.translationScriptText);
             this.Controls.Add(this.logTextBox);
             this.Controls.Add(this.statusStrip);
@@ -350,7 +350,7 @@ namespace ClashSinicizationTools
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.Button saveTranslationScriptButton;
-        private System.Windows.Forms.ComboBox translationScriptPath;
+        private System.Windows.Forms.ComboBox translationScriptFileName;
         private System.Windows.Forms.ComboBox clashForWindowsPath;
     }
 }

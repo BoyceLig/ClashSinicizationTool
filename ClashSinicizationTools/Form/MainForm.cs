@@ -1,14 +1,17 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-;
+using System.Threading.Tasks;
+using System.Drawing.Text;
+using System.IO;
 
 namespace ClashSinicizationTools
 {
     public partial class MainForm : Form
     {
-        string scriptFilePath, clashPath;
+        string clashPath;
         public MainForm()
         {
             InitializeComponent();
@@ -17,7 +20,29 @@ namespace ClashSinicizationTools
         //加载时执行
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //检查创建列表文件
+            if (!File.Exists("Script List.ini"))
+            {
+                FileStream fileStream = new FileStream("Script List.ini", FileMode.CreateNew);
+                fileStream.Close();
+                logTextBox.AppendText("已生成脚本列表" + Environment.NewLine);
+            }
+            else
+            {
+                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+                translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, "Script List.ini");
 
+                if (File.ReadAllText("Script List.ini") == string.Empty)
+                {
+                    logTextBox.AppendText("脚本列表为空，手动输入后自动记忆，下次打开自动加载。" + Environment.NewLine);
+                }
+            }
+            //自动加载第一个文件
+            if (translationScriptFileName.Text != string.Empty && File.Exists(translationScriptFileName.Text))
+            {
+                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+                translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+            }
         }
 
 
@@ -32,17 +57,17 @@ namespace ClashSinicizationTools
         private void saveTranslationScriptButton_Click(object sender, EventArgs e)
         {
             TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-            translationScriptFile.SaveScript(scriptFilePath, translationScriptText, logTextBox);
+            translationScriptFile.SaveScript(translationScriptFileName.Text, translationScriptText, logTextBox);
         }
 
         //自动检测翻译脚本位置（必须在当前目录）
         private void loadTranslationScriptButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\" + translationScriptPath.Text))
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\" + translationScriptFileName.Text))
             {
-                scriptFilePath = Directory.GetCurrentDirectory() + @"\" + translationScriptPath.Text;
-                translationScriptPath.Text = scriptFilePath;
-                logTextBox.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
+                translationScriptFileName.Text = Directory.GetCurrentDirectory() + @"\" + translationScriptFileName.Text;
+                translationScriptFileName.Text = translationScriptFileName.Text;
+                logTextBox.AppendText("已加载翻译脚本 " + translationScriptFileName.Text + Environment.NewLine);
             }
             else
             {
@@ -73,7 +98,7 @@ namespace ClashSinicizationTools
         //翻译脚本显示器修改时，检测与源文件匹配，控制保存开关
         private void translationScriptText_TextChanged(object sender, EventArgs e)
         {
-            StreamReader streamReader = new StreamReader(scriptFilePath, Encoding.UTF8);
+            StreamReader streamReader = new StreamReader(translationScriptFileName.Text, Encoding.UTF8);
             if (translationScriptText.Text == streamReader.ReadToEnd())
             {
                 saveTranslationScriptButton.Enabled = false;
@@ -85,7 +110,7 @@ namespace ClashSinicizationTools
             }
             streamReader.Close();
 
-            if (scriptFilePath == string.Empty)
+            if (translationScriptFileName.Text == string.Empty)
             {
                 openTranslationFileButton.Enabled = false;
             }

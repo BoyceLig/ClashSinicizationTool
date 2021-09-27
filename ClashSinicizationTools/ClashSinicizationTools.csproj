@@ -5,6 +5,11 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Boyce</Authors>
+    <StartupObject>ClashSinicizationTools.Program</StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Script\" />
+  </ItemGroup>
 
 </Project>
