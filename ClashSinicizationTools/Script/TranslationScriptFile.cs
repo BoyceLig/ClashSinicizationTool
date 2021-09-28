@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Drawing.Text;
 using System.IO;
+using System.Collections;
 
 namespace ClashSinicizationTools
 {
@@ -31,7 +32,7 @@ namespace ClashSinicizationTools
         }
 
         //导入脚本列表
-        public void LoadScriptList(ComboBox translationScriptPath, TextBox logText, string filePath)
+        public void LoadScriptList(ComboBox translationScriptFileName, TextBox logText, string filePath)
         {
             string[] lines = File.ReadAllLines(filePath);
             for (int i = 0; i < lines.Length; i++)
@@ -39,24 +40,73 @@ namespace ClashSinicizationTools
                 //不加载空行空行
                 if (lines[i] != string.Empty)
                 {
-                    translationScriptPath.Items.Add(lines[i]);
+                    translationScriptFileName.Items.Add(lines[i]);
                 }
             }
-            translationScriptPath.Text = translationScriptPath.Items[0].ToString();
-            logText.AppendText("已加载脚本列表。如需删除某个文件名，请进入”Script List.ini“删除对应关键字" + Environment.NewLine);
+            translationScriptFileName.Text = translationScriptFileName.Items[0].ToString();
 
             //删除空行，遍历修改文件
-            if (translationScriptPath.Items.Count != lines.Length)
+            if (translationScriptFileName.Items.Count != lines.Length)
             {
-                string[] newLines = new string[translationScriptPath.Items.Count];
-                for (int i = 0; i < translationScriptPath.Items.Count; i++)
+                string[] newLines = new string[translationScriptFileName.Items.Count];
+                for (int i = 0; i < translationScriptFileName.Items.Count; i++)
                 {
-                    newLines[i] = translationScriptPath.Items[i].ToString();
+                    newLines[i] = translationScriptFileName.Items[i].ToString();
                 }
                 File.WriteAllLines(filePath, newLines);
                 logText.AppendText("”Script List.ini“文件内有空行，已自动删除。" + Environment.NewLine);
 
             }
+        }
+
+        //导入Clash目录文件
+        public void LoadClashList(ComboBox clashPath, TextBox logText, string filePath)
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] != string.Empty)
+                {
+                    clashPath.Items.Add(lines[i]);
+                }
+                //把第一个目录显示到列表
+                clashPath.Text = clashPath.Items[0].ToString();
+            }
+
+            //删除空行，遍历修改文件
+            if (clashPath.Items.Count != lines.Length)
+            {
+                string[] newLines = new string[clashPath.Items.Count];
+                for (int i = 0; i < clashPath.Items.Count; i++)
+                {
+                    newLines[i] = clashPath.Items[i].ToString();
+                }
+                File.WriteAllLines(filePath, newLines);
+                logText.AppendText("”Clash Path List.ini“文件内有空行，已自动删除。" + Environment.NewLine);
+            }
+        }
+
+        //清理失效列表文件
+        public void CleanList(ComboBox comboBox)
+        {
+            for (int i = 0; i < comboBox.Items.Count; i++)
+            {
+                if (!File.Exists(comboBox.Items[i].ToString()))
+                {
+                    comboBox.Items.Remove(comboBox.Items[i].ToString());
+                }
+            }
+        }
+
+        //保存列表文件
+        public void SaveListFile(ComboBox comboBox, string filePath)
+        {
+            string[] newlines = new string[comboBox.Items.Count];
+            for (int i = 0; i < comboBox.Items.Count; i++)
+            {
+                newlines[i] = comboBox.Items[i].ToString();
+            }
+            File.WriteAllLines(filePath, newlines);
         }
     }
 }

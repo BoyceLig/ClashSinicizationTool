@@ -8,8 +8,4 @@
     <StartupObject>ClashSinicizationTools.Program</StartupObject>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Script\" />
-  </ItemGroup>
-
 </Project>
