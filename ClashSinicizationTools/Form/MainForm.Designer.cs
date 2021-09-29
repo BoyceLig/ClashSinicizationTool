@@ -52,6 +52,8 @@ namespace ClashSinicizationTools
             this.translationScriptFileName = new System.Windows.Forms.ComboBox();
             this.clashForWindowsPath = new System.Windows.Forms.ComboBox();
             this.autoCleanButton = new System.Windows.Forms.Button();
+            this.OpenClashButton = new System.Windows.Forms.Button();
+            this.revertButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -144,6 +146,7 @@ namespace ClashSinicizationTools
             // 
             // unpackButton
             // 
+            this.unpackButton.Enabled = false;
             this.unpackButton.Location = new System.Drawing.Point(12, 96);
             this.unpackButton.Name = "unpackButton";
             this.unpackButton.Size = new System.Drawing.Size(75, 23);
@@ -154,6 +157,7 @@ namespace ClashSinicizationTools
             // 
             // sinicizationButton
             // 
+            this.sinicizationButton.Enabled = false;
             this.sinicizationButton.Location = new System.Drawing.Point(93, 96);
             this.sinicizationButton.Name = "sinicizationButton";
             this.sinicizationButton.Size = new System.Drawing.Size(75, 23);
@@ -164,21 +168,25 @@ namespace ClashSinicizationTools
             // 
             // simplifyButton
             // 
+            this.simplifyButton.Enabled = false;
             this.simplifyButton.Location = new System.Drawing.Point(177, 96);
             this.simplifyButton.Name = "simplifyButton";
             this.simplifyButton.Size = new System.Drawing.Size(283, 23);
             this.simplifyButton.TabIndex = 7;
             this.simplifyButton.Text = "2-2. 精简包体（慎点，删除无用文件）（可选）";
             this.simplifyButton.UseVisualStyleBackColor = true;
+            this.simplifyButton.Click += new System.EventHandler(this.simplifyButton_Click);
             // 
             // packButton
             // 
+            this.packButton.Enabled = false;
             this.packButton.Location = new System.Drawing.Point(466, 96);
             this.packButton.Name = "packButton";
             this.packButton.Size = new System.Drawing.Size(75, 23);
             this.packButton.TabIndex = 7;
             this.packButton.Text = "3. 打包";
             this.packButton.UseVisualStyleBackColor = true;
+            this.packButton.Click += new System.EventHandler(this.packButton_Click);
             // 
             // openTranslationFileButton
             // 
@@ -190,6 +198,7 @@ namespace ClashSinicizationTools
             this.openTranslationFileButton.TabIndex = 2;
             this.openTranslationFileButton.Text = "用外部程序打开文件";
             this.openTranslationFileButton.UseVisualStyleBackColor = true;
+            this.openTranslationFileButton.Click += new System.EventHandler(this.openTranslationFileButton_Click);
             // 
             // openClashBrowseButton
             // 
@@ -199,19 +208,20 @@ namespace ClashSinicizationTools
             this.openClashBrowseButton.Name = "openClashBrowseButton";
             this.openClashBrowseButton.Size = new System.Drawing.Size(136, 23);
             this.openClashBrowseButton.TabIndex = 2;
-            this.openClashBrowseButton.Text = "打开当前目录";
+            this.openClashBrowseButton.Text = "打开 Clash 目录";
             this.openClashBrowseButton.UseVisualStyleBackColor = true;
+            this.openClashBrowseButton.Click += new System.EventHandler(this.openClashBrowseButton_Click);
             // 
             // translationScriptText
             // 
             this.translationScriptText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.translationScriptText.Location = new System.Drawing.Point(0, 147);
+            this.translationScriptText.Location = new System.Drawing.Point(12, 147);
             this.translationScriptText.Multiline = true;
             this.translationScriptText.Name = "translationScriptText";
             this.translationScriptText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.translationScriptText.Size = new System.Drawing.Size(802, 167);
+            this.translationScriptText.Size = new System.Drawing.Size(790, 167);
             this.translationScriptText.TabIndex = 8;
             this.translationScriptText.TextChanged += new System.EventHandler(this.translationScriptText_TextChanged);
             // 
@@ -265,9 +275,30 @@ namespace ClashSinicizationTools
             this.autoCleanButton.Name = "autoCleanButton";
             this.autoCleanButton.Size = new System.Drawing.Size(118, 23);
             this.autoCleanButton.TabIndex = 3;
-            this.autoCleanButton.Text = "自动清理失效脚本和目录";
+            this.autoCleanButton.Text = "自动清理失效列表";
             this.autoCleanButton.UseVisualStyleBackColor = true;
             this.autoCleanButton.Click += new System.EventHandler(this.autoCleanButton_Click);
+            // 
+            // OpenClashButton
+            // 
+            this.OpenClashButton.Location = new System.Drawing.Point(573, 67);
+            this.OpenClashButton.Name = "OpenClashButton";
+            this.OpenClashButton.Size = new System.Drawing.Size(171, 23);
+            this.OpenClashButton.TabIndex = 7;
+            this.OpenClashButton.Text = "打开 Clash for Windows";
+            this.OpenClashButton.UseVisualStyleBackColor = true;
+            this.OpenClashButton.Click += new System.EventHandler(this.OpenClashButton_Click);
+            // 
+            // revertButton
+            // 
+            this.revertButton.Enabled = false;
+            this.revertButton.Location = new System.Drawing.Point(547, 96);
+            this.revertButton.Name = "revertButton";
+            this.revertButton.Size = new System.Drawing.Size(75, 23);
+            this.revertButton.TabIndex = 7;
+            this.revertButton.Text = "4. 还原";
+            this.revertButton.UseVisualStyleBackColor = true;
+            this.revertButton.Click += new System.EventHandler(this.revertButton_Click);
             // 
             // MainForm
             // 
@@ -278,6 +309,8 @@ namespace ClashSinicizationTools
             this.Controls.Add(this.translationScriptFileName);
             this.Controls.Add(this.translationScriptText);
             this.Controls.Add(this.logTextBox);
+            this.Controls.Add(this.OpenClashButton);
+            this.Controls.Add(this.revertButton);
             this.Controls.Add(this.packButton);
             this.Controls.Add(this.simplifyButton);
             this.Controls.Add(this.sinicizationButton);
@@ -327,6 +360,8 @@ namespace ClashSinicizationTools
         private System.Windows.Forms.ComboBox translationScriptFileName;
         private System.Windows.Forms.ComboBox clashForWindowsPath;
         private System.Windows.Forms.Button autoCleanButton;
+        private System.Windows.Forms.Button OpenClashButton;
+        private System.Windows.Forms.Button revertButton;
     }
 }
 

@@ -14,33 +14,41 @@ namespace ClashSinicizationTools
     {
         public void CharacterReplace(TextBox textBox, string filePath)
         {
-            //string[] newScript = new string[textBox.Lines.Length];
-            //for (int i = 0; i < textBox.Lines.Length; i++)
-            //{
-            //    newScript[i] = textBox.Lines[i];
-            //}
-
             //读取要被替换的文件
-            StreamReader streamReader = new StreamReader(filePath);
-            TextBox textBox1 = new TextBox();
-            textBox1.Visible = false;
-            textBox1.Multiline = true;
-            textBox1.Text = streamReader.ReadToEnd();
+            StreamReader streamReader = new StreamReader(filePath, Encoding.UTF8);
+            string s = streamReader.ReadToEnd();
 
             //拆分替换文本
             for (int i = 0; i < textBox.Lines.Length; i++)
             {
                 if (textBox.Lines[i].FirstOrDefault() != '#')
                 {
-                    string[] t = Regex.Split(textBox.Lines[i], "=", RegexOptions.None);
+                    string[] t = textBox.Lines[i].Split('=');
+                    switch (t.Length)
+                    {
+                        //只有一个等号 en=zh
+                        case 2:
+                            s.Replace(t[0], t[1]);
+                            break;
+                        //有3个等号 en=0=zh=0
+                        case 4:
+                            s.Replace(t[0] + "=" + t[1], t[2] + "=" + t[3]);
+                            break;
+                        //有5个等号 en=a=0=zh=a=0
+                        case 6:
+                            s.Replace(t[0] + "=" + t[1] + "=" + t[2], t[3] + "=" + t[4] + "=" + t[5]);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
-            //开始替换
-            for (int i = 0; i < textBox.Lines.Length; i++)
-            {
-
-            }
+            //保存替换后字段
+            StreamWriter streamWriter = new StreamWriter(filePath, false, Encoding.UTF8);
+            streamWriter.WriteLine(s);
+            streamWriter.Flush();
+            streamWriter.Close();
         }
     }
 }
