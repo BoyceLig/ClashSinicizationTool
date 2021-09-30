@@ -8,7 +8,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Collections;
 
-namespace ClashSinicizationTools
+namespace ClashSinicizationTool
 {
     class TranslationScriptFile
     {

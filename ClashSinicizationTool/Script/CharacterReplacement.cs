@@ -8,7 +8,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace ClashSinicizationTools
+namespace ClashSinicizationTool
 {
     class CharacterReplacement
     {

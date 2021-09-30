@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClashSinicizationTools", "ClashSinicizationTools\ClashSinicizationTools.csproj", "{7473371D-61AD-4080-B988-98A0F420D1AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClashSinicizationTool", "ClashSinicizationTool\ClashSinicizationTool.csproj", "{7473371D-61AD-4080-B988-98A0F420D1AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

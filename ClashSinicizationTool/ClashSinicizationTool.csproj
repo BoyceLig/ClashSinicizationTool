@@ -5,15 +5,16 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Boyce Lig</Authors>
-    <StartupObject>ClashSinicizationTools.Program</StartupObject>
+    <StartupObject>ClashSinicizationTool.Program</StartupObject>
     <Version>1.0.5</Version>
-    <Product>Clash Sinicization Tools</Product>
+    <Product>Clash Sinicization Tool</Product>
     <Company>Boyce Lig</Company>
-    <PackageId>ClashSinicizationTools</PackageId>
-    <AssemblyName>Clash Sinicization Tools</AssemblyName>
+    <PackageId>ClashSinicizationTool</PackageId>
+    <AssemblyName>Clash Sinicization Tool</AssemblyName>
     <PackageIcon></PackageIcon>
     <PackageIconUrl />
     <ApplicationIcon>Image\tray_normal.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
 </Project>
