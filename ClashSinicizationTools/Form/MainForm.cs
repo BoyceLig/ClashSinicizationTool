@@ -173,6 +173,7 @@ namespace ClashSinicizationTools
         {
             TranslationScriptFile translationScriptFile = new TranslationScriptFile();
             translationScriptFile.SaveScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+            saveTranslationScriptButton.Enabled = false;
         }
 
         //自动检测翻译脚本位置（必须在当前目录）
