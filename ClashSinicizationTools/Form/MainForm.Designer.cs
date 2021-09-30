@@ -30,6 +30,7 @@ namespace ClashSinicizationTools
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.ClashBrowseButton = new System.Windows.Forms.Button();
@@ -331,6 +332,7 @@ namespace ClashSinicizationTools
             this.Controls.Add(this.openTranslationFileButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(681, 501);
             this.Name = "MainForm";
             this.Text = "Clash 汉化工具";

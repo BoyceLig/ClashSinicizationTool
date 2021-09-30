@@ -22,26 +22,11 @@ namespace ClashSinicizationTools
             //拆分替换文本
             for (int i = 0; i < textBox.Lines.Length; i++)
             {
-                if (textBox.Lines[i].FirstOrDefault() != '#')
+                if (textBox.Lines[i].FirstOrDefault() != '#' && textBox.Lines[i] != string.Empty)
                 {
-                    string[] t = textBox.Lines[i].Split('=');
-                    switch (t.Length)
-                    {
-                        //只有一个等号 en=zh
-                        case 2:
-                            s = s.Replace(t[0], t[1]);
-                            break;
-                        //有3个等号 en=0=zh=0
-                        case 4:
-                            s = s.Replace(t[0] + "=" + t[1], t[2] + "=" + t[3]);
-                            break;
-                        //有5个等号 en=a=0=zh=a=0
-                        case 6:
-                            s = s.Replace(t[0] + "=" + t[1] + "=" + t[2], t[3] + "=" + t[4] + "=" + t[5]);
-                            break;
-                        default:
-                            break;
-                    }
+                    string[] t = textBox.Lines[i].Split('=', 2, StringSplitOptions.None);
+                    s = s.Replace(t[0], t[1]);
+
                 }
             }
 

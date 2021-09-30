@@ -210,6 +210,12 @@ namespace ClashSinicizationTools
             {
                 clashPath = folderBrowserDialog.SelectedPath;
                 clashForWindowsPath.Text = clashPath;
+                openClashBrowseButton.Enabled = true;
+                unpackButton.Enabled = true;
+                simplifyButton.Enabled = true;
+                sinicizationButton.Enabled = true;
+                packButton.Enabled = true;
+                revertButton.Enabled = true;
                 if (clashForWindowsPath.Items.Count == 0)
                 {
                     //把文件名加载到列表
@@ -440,14 +446,17 @@ namespace ClashSinicizationTools
             process.Start();
         }
 
+        //打开文件夹目录
         private void openClashBrowseButton_Click(object sender, EventArgs e)
         {
             Process.Start("Explorer.exe", clashPath);
+            logTextBox.AppendText("已打开Clash文件夹" + Environment.NewLine);
         }
 
+        //还原按钮
         private void revertButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(clashPath + @"\resources\app.asar") && File.Exists(clashPath + @"\resources\app.asar.bak"))
+            if (File.Exists(clashPath + @"\resources\app.asar.bak"))
             {
                 foreach (Process p in Process.GetProcesses())
                 {
@@ -458,16 +467,23 @@ namespace ClashSinicizationTools
                         goto c;
                     }
                 }
-                File.Delete(clashPath + @"\resources\app.asar");
                 File.Move(clashPath + @"\resources\app.asar.bak", clashPath + @"\resources\app.asar", true);
+                logTextBox.AppendText("已还原英文版" + Environment.NewLine);
+            }
+            else
+            {
+                logTextBox.AppendText("无法还原，" + clashPath + @"\resources\app.asar.bak" + "文件丢失,请下载原版自行替换app.asar。" + Environment.NewLine);
             }
         c:;
         }
 
+        //打开clash按钮
         private void OpenClashButton_Click(object sender, EventArgs e)
         {
             Process.Start(clashPath + @"\Clash for Windows.exe");
+            logTextBox.AppendText("已打开Clash for Windows" + Environment.NewLine);
         }
 
     }
 }
+
