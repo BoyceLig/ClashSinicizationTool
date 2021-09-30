@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace ClashSinicizationTools
+namespace ClashSinicizationTool
 {
     public partial class MainForm : Form
     {
@@ -159,7 +159,6 @@ namespace ClashSinicizationTools
             TranslationScriptFile translationScriptFile = new TranslationScriptFile();
             translationScriptFile.SaveListFile(translationScriptFileName, "Script List.ini");
             translationScriptFile.SaveListFile(clashForWindowsPath, "Clash Path List.ini");
-
         }
 
         //点击清理按钮时执行清空log窗口
@@ -233,7 +232,6 @@ namespace ClashSinicizationTools
                     }
                 }
             }
-
         }
 
         //翻译脚本显示器修改时，检测与源文件匹配，控制保存开关
@@ -270,6 +268,7 @@ namespace ClashSinicizationTools
             CMDCommand command = new CMDCommand();
             command.Unpack(clashPath, logTextBox);
         }
+
         //自动清理失效目录和文件
         private void autoCleanButton_Click(object sender, EventArgs e)
         {
@@ -278,6 +277,7 @@ namespace ClashSinicizationTools
             translationScriptFile.CleanList(clashForWindowsPath);
             logTextBox.AppendText("清理列表成功" + Environment.NewLine);
         }
+
         //判定加载按钮和用外部程序打开按钮开关
         private void translationScriptFileName_SelectedIndexChanged(object sender, EventArgs e)
         {

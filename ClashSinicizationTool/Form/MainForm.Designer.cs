@@ -1,5 +1,5 @@
 ﻿
-namespace ClashSinicizationTools
+namespace ClashSinicizationTool
 {
     partial class MainForm
     {
