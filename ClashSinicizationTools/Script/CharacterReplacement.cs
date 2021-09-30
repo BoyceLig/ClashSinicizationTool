@@ -12,11 +12,12 @@ namespace ClashSinicizationTools
 {
     class CharacterReplacement
     {
-        public void CharacterReplace(TextBox textBox, string filePath)
+        public void CharacterReplace(TextBox textBox, string filePath, TextBox logText)
         {
             //读取要被替换的文件
             StreamReader streamReader = new StreamReader(filePath, Encoding.UTF8);
             string s = streamReader.ReadToEnd();
+            streamReader.Close();
 
             //拆分替换文本
             for (int i = 0; i < textBox.Lines.Length; i++)
@@ -28,15 +29,15 @@ namespace ClashSinicizationTools
                     {
                         //只有一个等号 en=zh
                         case 2:
-                            s.Replace(t[0], t[1]);
+                            s = s.Replace(t[0], t[1]);
                             break;
                         //有3个等号 en=0=zh=0
                         case 4:
-                            s.Replace(t[0] + "=" + t[1], t[2] + "=" + t[3]);
+                            s = s.Replace(t[0] + "=" + t[1], t[2] + "=" + t[3]);
                             break;
                         //有5个等号 en=a=0=zh=a=0
                         case 6:
-                            s.Replace(t[0] + "=" + t[1] + "=" + t[2], t[3] + "=" + t[4] + "=" + t[5]);
+                            s = s.Replace(t[0] + "=" + t[1] + "=" + t[2], t[3] + "=" + t[4] + "=" + t[5]);
                             break;
                         default:
                             break;

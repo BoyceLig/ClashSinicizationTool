@@ -107,12 +107,14 @@ namespace ClashSinicizationTools
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.logTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.logTextBox.Location = new System.Drawing.Point(0, 345);
+            this.logTextBox.MaxLength = 0;
             this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.logTextBox.Size = new System.Drawing.Size(802, 157);
             this.logTextBox.TabIndex = 4;
+            this.logTextBox.WordWrap = false;
             // 
             // label3
             // 
@@ -218,11 +220,13 @@ namespace ClashSinicizationTools
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.translationScriptText.Location = new System.Drawing.Point(12, 147);
+            this.translationScriptText.MaxLength = 0;
             this.translationScriptText.Multiline = true;
             this.translationScriptText.Name = "translationScriptText";
             this.translationScriptText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.translationScriptText.Size = new System.Drawing.Size(790, 167);
             this.translationScriptText.TabIndex = 8;
+            this.translationScriptText.WordWrap = false;
             this.translationScriptText.TextChanged += new System.EventHandler(this.translationScriptText_TextChanged);
             // 
             // label4

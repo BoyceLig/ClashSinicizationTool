@@ -8,6 +8,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace ClashSinicizationTools
 {
@@ -25,6 +26,9 @@ namespace ClashSinicizationTools
         //加载时执行
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //增加版本号标注
+            mainForm.Text = "Clash 汉化工具 " + "v" + Application.ProductVersion.ToString(); ;
+
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
             if (!File.Exists("Script List.ini"))
@@ -267,7 +271,6 @@ namespace ClashSinicizationTools
             translationScriptFile.CleanList(clashForWindowsPath);
             logTextBox.AppendText("清理列表成功" + Environment.NewLine);
         }
-
         //判定加载按钮和用外部程序打开按钮开关
         private void translationScriptFileName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -353,8 +356,15 @@ namespace ClashSinicizationTools
                 CharacterReplacement characterReplacement = new CharacterReplacement();
                 for (int i = 0; i < replacePaths.Length; i++)
                 {
-                    characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i]);
-                    logTextBox.AppendText("已汉化文件" + clashPath + replacePaths[i] + Environment.NewLine);
+                    if (File.Exists(clashPath + replacePaths[i]))
+                    {
+                        characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
+                        logTextBox.AppendText("已汉化文件 " + clashPath + replacePaths[i] + Environment.NewLine);
+                    }
+                    else
+                    {
+                        logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
+                    }
                 }
                 logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
             }
@@ -374,8 +384,15 @@ namespace ClashSinicizationTools
             {
                 for (int i = 0; i < delectPaths.Length; i++)
                 {
-                    Directory.Delete(clashPath + delectPaths[i]);
-                    logTextBox.AppendText("已删除多余目录" + clashPath + delectPaths[i] + Environment.NewLine);
+                    if (Directory.Exists(clashPath + delectPaths[i]))
+                    {
+                        Directory.Delete(clashPath + delectPaths[i], true);
+                        logTextBox.AppendText("已删除多余目录" + clashPath + delectPaths[i] + Environment.NewLine);
+                    }
+                    else
+                    {
+                        logTextBox.AppendText("目录不存在" + clashPath + delectPaths[i] + Environment.NewLine);
+                    }
                 }
                 logTextBox.AppendText("精简完成，请执行下一步操作" + Environment.NewLine);
             }
@@ -403,7 +420,7 @@ namespace ClashSinicizationTools
                 //打包命令
                 CMDCommand command = new CMDCommand();
                 command.Pack(clashPath, logTextBox);
-                Directory.Delete(clashPath + @"\resources\app");
+                Directory.Delete(clashPath + @"\resources\app", true);
                 logTextBox.AppendText("已删除解包文件夹app" + Environment.NewLine);
             }
             else
