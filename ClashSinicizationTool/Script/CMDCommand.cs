@@ -11,7 +11,7 @@ namespace ClashSinicizationTool
     class CMDCommand
     {
         //解包命令
-        public void Unpack(string appPath, TextBox logText)
+        public void Unpack(string appPath)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             Process process = new Process();

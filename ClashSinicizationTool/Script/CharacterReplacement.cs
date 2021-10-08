@@ -26,7 +26,6 @@ namespace ClashSinicizationTool
                 {
                     string[] t = textBox.Lines[i].Split('=', 2, StringSplitOptions.None);
                     s = s.Replace(t[0], t[1]);
-
                 }
             }
 
@@ -35,6 +34,8 @@ namespace ClashSinicizationTool
             streamWriter.WriteLine(s);
             streamWriter.Flush();
             streamWriter.Close();
+            logText.AppendText("已汉化文件 " + filePath + Environment.NewLine);
+
         }
     }
 }

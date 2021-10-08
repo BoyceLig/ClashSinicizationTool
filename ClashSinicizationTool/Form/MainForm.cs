@@ -101,10 +101,7 @@ namespace ClashSinicizationTool
                     @"\resources\app\node_modules\axios\dist\axios.js",
                     @"\resources\app\node_modules\axios\dist\axios.min.js",
                     @"\resources\app\node_modules\axios\dist\axios.map",
-                    @"\resources\app\node_modules\axios\dist\axios.min.map",
-                    @"\resources\app\node_modules\moment\dist\locale\zh-cn.js",
-                    @"\resources\app\node_modules\moment\locale\zh-cn.js",
-                    @"\resources\app\node_modules\moment\src\locale\zh-cn.js",
+                    @"\resources\app\node_modules\axios\dist\axios.min.map"
                 };
                 File.WriteAllLines("Replace Path.ini", replacePaths, Encoding.UTF8);
             }
@@ -266,7 +263,8 @@ namespace ClashSinicizationTool
             logTextBox.AppendText("app.asar文件备份成功，已备份到app.asar目录下的app.asar.bak文件" + Environment.NewLine);
             //解包命令
             CMDCommand command = new CMDCommand();
-            command.Unpack(clashPath, logTextBox);
+            command.Unpack(clashPath);
+            logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
         }
 
         //自动清理失效目录和文件
@@ -360,20 +358,28 @@ namespace ClashSinicizationTool
 
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                CharacterReplacement characterReplacement = new CharacterReplacement();
-                for (int i = 0; i < replacePaths.Length; i++)
+                if (File.Exists("moment-with-CN.js"))
                 {
-                    if (File.Exists(clashPath + replacePaths[i]))
+                    File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
+                    logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+                    CharacterReplacement characterReplacement = new CharacterReplacement();
+                    for (int i = 0; i < replacePaths.Length; i++)
                     {
-                        characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
-                        logTextBox.AppendText("已汉化文件 " + clashPath + replacePaths[i] + Environment.NewLine);
+                        if (File.Exists(clashPath + replacePaths[i]))
+                        {
+                            characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
+                        }
+                        else
+                        {
+                            logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
+                        }
                     }
-                    else
-                    {
-                        logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
-                    }
+                    logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
                 }
-                logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
+                else
+                {
+                    logTextBox.AppendText("moment-with-CN.js 文件不存在" + Environment.NewLine);
+                }
             }
             else
             {
