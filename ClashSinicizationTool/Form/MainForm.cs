@@ -26,8 +26,19 @@ namespace ClashSinicizationTool
         //加载时执行
         private void MainForm_Load(object sender, EventArgs e)
         {
+            #region 标题
             //增加版本号标注
-            mainForm.Text = "Clash 汉化工具 " + "v" + Application.ProductVersion.ToString(); ;
+            if (Environment.Is64BitProcess)
+            {
+                //64位
+                mainForm.Text = "Clash 汉化工具 " + " v" + Application.ProductVersion.ToString() + " 64-bit ";
+            }
+            else
+            {
+                //32位
+                mainForm.Text = "Clash 汉化工具 " + " v" + Application.ProductVersion.ToString() + " 32-bit ";
+            }
+            #endregion
 
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件

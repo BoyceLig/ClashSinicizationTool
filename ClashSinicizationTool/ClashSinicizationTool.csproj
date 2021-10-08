@@ -16,6 +16,7 @@
     <ApplicationIcon>Image\tray_normal.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
 </Project>
