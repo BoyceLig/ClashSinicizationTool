@@ -147,16 +147,31 @@ namespace ClashSinicizationTool
             #endregion
 
             #region 检查环境
-            //CMDCommand command = new CMDCommand();
-            //if (command.IsInastallNode(logTextBox))
-            //{
-            //    logTextBox.AppendText("已安装node" + Environment.NewLine);
-            //}
-            //else
-            //{
-            //    logTextBox.AppendText("请安装node程序，否则无法正常运行" + Environment.NewLine);
-            //    MessageBox.Show("请安装Node");
-            //}
+            LoadCheck loadCheck = new LoadCheck();
+            //检查Node是否安装
+            if (loadCheck.CheckNode())
+            {
+                //检查Asar是否安装
+                if (!loadCheck.CheckAsar())
+                {
+                    //安装Asar
+                    CMDCommand cmd = new CMDCommand();
+                    cmd.CMDCommondBase("npm install -g asar");
+                }
+            }
+            else
+            {
+                DialogResult dialog = MessageBox.Show("未安装Node，请点击OK键跳转到网页进行下载安装，安装成功后重新打开此程序。", "警告", MessageBoxButtons.OKCancel);
+                if (dialog == DialogResult.OK)
+                {
+                    Process.Start("explorer.exe", @"https://nodejs.org/zh-cn/");
+                    Application.Exit();
+                }
+                else if (dialog == DialogResult.Cancel)
+                {
+                    Application.Exit();
+                }
+            }
             #endregion
         }
 
@@ -275,7 +290,26 @@ namespace ClashSinicizationTool
             //解包命令
             CMDCommand command = new CMDCommand();
             command.Unpack(clashPath);
-            logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+            if (Directory.Exists(clashPath + @"\resources\app"))
+            {
+                logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+            }
+            else
+            {
+                LoadCheck loadCheck = new LoadCheck();
+                //检查Asar是否安装
+                if (!loadCheck.CheckAsar())
+                {
+                    //提示Asar未安装
+                    MessageBox.Show("解包失败！Asar未安装，请手动安装或重启软件重试");
+                    logTextBox.AppendText("解包失败！Asar未安装，请手动安装或重启软件重试" + Environment.NewLine);
+                }
+                else
+                {
+                    MessageBox.Show("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找");
+                    logTextBox.AppendText("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                }
+            }
         }
 
         //自动清理失效目录和文件
@@ -443,7 +477,7 @@ namespace ClashSinicizationTool
                 }
                 //打包命令
                 CMDCommand command = new CMDCommand();
-                command.Pack(clashPath, logTextBox);
+                command.Pack(clashPath);
                 Directory.Delete(clashPath + @"\resources\app", true);
                 logTextBox.AppendText("已删除解包文件夹app" + Environment.NewLine);
             }
