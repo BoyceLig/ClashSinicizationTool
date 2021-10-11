@@ -287,27 +287,60 @@ namespace ClashSinicizationTool
             //备份文件
             File.Copy(clashPath + @"\resources\app.asar", clashPath + @"\resources\app.asar.bak", true);
             logTextBox.AppendText("app.asar文件备份成功，已备份到app.asar目录下的app.asar.bak文件" + Environment.NewLine);
-            //解包命令
-            CMDCommand command = new CMDCommand();
-            command.Unpack(clashPath);
+            //解包前检查app文件夹是否存在
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
-            }
-            else
-            {
-                LoadCheck loadCheck = new LoadCheck();
-                //检查Asar是否安装
-                if (!loadCheck.CheckAsar())
+                //已存在删除文件夹再执行解包
+                Directory.Delete(clashPath + @"\resources\app", true);
+
+                //解包命令
+                CMDCommand command = new CMDCommand();
+                command.Unpack(clashPath);
+                if (Directory.Exists(clashPath + @"\resources\app"))
                 {
-                    //提示Asar未安装
-                    MessageBox.Show("解包失败！Asar未安装，请手动安装或重启软件重试");
-                    logTextBox.AppendText("解包失败！Asar未安装，请手动安装或重启软件重试" + Environment.NewLine);
+                    logTextBox.AppendText("app文件夹存在，已删除并解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
                 }
                 else
                 {
-                    MessageBox.Show("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找");
-                    logTextBox.AppendText("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                    LoadCheck loadCheck = new LoadCheck();
+                    //检查Asar是否安装
+                    if (!loadCheck.CheckAsar())
+                    {
+                        //提示Asar未安装
+                        MessageBox.Show("解包失败！Asar未安装，请手动安装或重启软件重试");
+                        logTextBox.AppendText("解包失败！Asar未安装，请手动安装或重启软件重试" + Environment.NewLine);
+                    }
+                    else
+                    {
+                        MessageBox.Show("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找");
+                        logTextBox.AppendText("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                    }
+                }
+            }
+            else
+            {
+                //解包命令
+                CMDCommand command = new CMDCommand();
+                command.Unpack(clashPath);
+                if (Directory.Exists(clashPath + @"\resources\app"))
+                {
+                    logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+                }
+                else
+                {
+                    LoadCheck loadCheck = new LoadCheck();
+                    //检查Asar是否安装
+                    if (!loadCheck.CheckAsar())
+                    {
+                        //提示Asar未安装
+                        MessageBox.Show("解包失败！Asar未安装，请手动安装或重启软件重试");
+                        logTextBox.AppendText("解包失败！Asar未安装，请手动安装或重启软件重试" + Environment.NewLine);
+                    }
+                    else
+                    {
+                        MessageBox.Show("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找");
+                        logTextBox.AppendText("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                    }
                 }
             }
         }
@@ -400,36 +433,43 @@ namespace ClashSinicizationTool
         {
             //调取ini文件
             string[] replacePaths = File.ReadAllLines("Replace Path.ini");
-
-            if (Directory.Exists(clashPath + @"\resources\app"))
+            if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
             {
-                if (File.Exists("moment-with-CN.js"))
-                {
-                    File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
-                    logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
-                    CharacterReplacement characterReplacement = new CharacterReplacement();
-                    for (int i = 0; i < replacePaths.Length; i++)
-                    {
-                        if (File.Exists(clashPath + replacePaths[i]))
-                        {
-                            characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
-                        }
-                        else
-                        {
-                            logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
-                        }
-                    }
-                    logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
-                }
-                else
-                {
-                    logTextBox.AppendText("moment-with-CN.js 文件不存在" + Environment.NewLine);
-                }
+                MessageBox.Show("您已汉化，不需要二次汉化");
+                logTextBox.AppendText("您已汉化，不需要二次汉化" + Environment.NewLine);
             }
             else
             {
-                logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
-                MessageBox.Show("尚未解包，请按步骤操作");
+                if (Directory.Exists(clashPath + @"\resources\app"))
+                {
+                    if (File.Exists("moment-with-CN.js"))
+                    {
+                        File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
+                        logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+                        CharacterReplacement characterReplacement = new CharacterReplacement();
+                        for (int i = 0; i < replacePaths.Length; i++)
+                        {
+                            if (File.Exists(clashPath + replacePaths[i]))
+                            {
+                                characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
+                            }
+                            else
+                            {
+                                logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
+                            }
+                        }
+                        logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
+                    }
+                    else
+                    {
+                        logTextBox.AppendText("moment-with-CN.js 文件不存在" + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
+                    MessageBox.Show("尚未解包，请按步骤操作");
+                }
             }
         }
 
@@ -532,8 +572,17 @@ namespace ClashSinicizationTool
         //打开clash按钮
         private void OpenClashButton_Click(object sender, EventArgs e)
         {
-            Process.Start(clashPath + @"\Clash for Windows.exe");
-            logTextBox.AppendText("已打开Clash for Windows" + Environment.NewLine);
+            if (Directory.Exists(clashPath + @"\resources\app"))
+            {
+                File.Delete(clashPath + @"\resources\app.asar");
+                Process.Start(clashPath + @"\Clash for Windows.exe");
+                logTextBox.AppendText("已打开Clash for Windows" + Environment.NewLine);
+            }
+            else
+            {
+                Process.Start(clashPath + @"\Clash for Windows.exe");
+                logTextBox.AppendText("已打开Clash for Windows" + Environment.NewLine);
+            }
         }
 
     }
