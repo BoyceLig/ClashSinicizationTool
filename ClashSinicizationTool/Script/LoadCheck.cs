@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic.Devices;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,6 +29,20 @@ namespace ClashSinicizationTool
             else
             {
                 return false;
+            }
+        }
+
+        public bool CheckPing(string url)
+        {
+            Network network = new Network();
+            try
+            {
+                return network.Ping(url) ? true : false;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
             }
         }
     }

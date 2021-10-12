@@ -17,6 +17,8 @@
     <SignAssembly>false</SignAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>AnyCPU;x86;x64</Platforms>
+    <Copyright>Boyce Lig</Copyright>
+    <Description>Clash for Windows 汉化程序</Description>
   </PropertyGroup>
 
 </Project>

@@ -155,8 +155,18 @@ namespace ClashSinicizationTool
                 if (!loadCheck.CheckAsar())
                 {
                     //安装Asar
-                    CMDCommand cmd = new CMDCommand();
-                    cmd.CMDCommondBase("npm install -g asar");
+                    if (loadCheck.CheckPing("baidu.com"))
+                    {
+                        CMDCommand cmd = new CMDCommand();
+                        cmd.CMDCommondBase("npm install -g asar");
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("请检查网络连接") == DialogResult.OK)
+                        {
+                            Application.Exit();
+                        }
+                    }
                 }
             }
             else
