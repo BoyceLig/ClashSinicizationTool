@@ -55,11 +55,12 @@ namespace ClashSinicizationTool
             this.autoCleanButton = new System.Windows.Forms.Button();
             this.OpenClashButton = new System.Windows.Forms.Button();
             this.revertButton = new System.Windows.Forms.Button();
+            this.CloseClashButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
@@ -70,7 +71,7 @@ namespace ClashSinicizationTool
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 38);
@@ -217,8 +218,8 @@ namespace ClashSinicizationTool
             // 
             // translationScriptText
             // 
-            this.translationScriptText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.translationScriptText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.translationScriptText.Location = new System.Drawing.Point(12, 147);
             this.translationScriptText.MaxLength = 0;
@@ -253,7 +254,7 @@ namespace ClashSinicizationTool
             // 
             // translationScriptFileName
             // 
-            this.translationScriptFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.translationScriptFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.translationScriptFileName.FormattingEnabled = true;
             this.translationScriptFileName.Location = new System.Drawing.Point(86, 6);
@@ -264,7 +265,7 @@ namespace ClashSinicizationTool
             // 
             // clashForWindowsPath
             // 
-            this.clashForWindowsPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.clashForWindowsPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clashForWindowsPath.FormattingEnabled = true;
             this.clashForWindowsPath.Location = new System.Drawing.Point(177, 33);
@@ -286,7 +287,7 @@ namespace ClashSinicizationTool
             // 
             // OpenClashButton
             // 
-            this.OpenClashButton.Location = new System.Drawing.Point(573, 67);
+            this.OpenClashButton.Location = new System.Drawing.Point(442, 67);
             this.OpenClashButton.Name = "OpenClashButton";
             this.OpenClashButton.Size = new System.Drawing.Size(171, 23);
             this.OpenClashButton.TabIndex = 7;
@@ -305,6 +306,16 @@ namespace ClashSinicizationTool
             this.revertButton.UseVisualStyleBackColor = true;
             this.revertButton.Click += new System.EventHandler(this.revertButton_Click);
             // 
+            // CloseClashButton
+            // 
+            this.CloseClashButton.Location = new System.Drawing.Point(619, 67);
+            this.CloseClashButton.Name = "CloseClashButton";
+            this.CloseClashButton.Size = new System.Drawing.Size(171, 23);
+            this.CloseClashButton.TabIndex = 7;
+            this.CloseClashButton.Text = "关闭 Clash for Windows";
+            this.CloseClashButton.UseVisualStyleBackColor = true;
+            this.CloseClashButton.Click += new System.EventHandler(this.CloseClashButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -314,6 +325,7 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.translationScriptFileName);
             this.Controls.Add(this.translationScriptText);
             this.Controls.Add(this.logTextBox);
+            this.Controls.Add(this.CloseClashButton);
             this.Controls.Add(this.OpenClashButton);
             this.Controls.Add(this.revertButton);
             this.Controls.Add(this.packButton);
@@ -368,6 +380,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button autoCleanButton;
         private System.Windows.Forms.Button OpenClashButton;
         private System.Windows.Forms.Button revertButton;
+        private System.Windows.Forms.Button CloseClashButton;
     }
 }
 

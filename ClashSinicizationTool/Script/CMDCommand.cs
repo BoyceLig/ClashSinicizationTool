@@ -80,7 +80,5 @@ namespace ClashSinicizationTool
         {
             CMDCommondBase(appPath + @"\resources", "asar pack app app.asar");
         }
-
-
     }
 }

@@ -9,12 +9,14 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Reflection;
+using Microsoft.Win32;
 
 namespace ClashSinicizationTool
 {
     public partial class MainForm : Form
     {
         public string clashPath;
+        string clashProcessName = "Clash for Windows";
         public static MainForm mainForm;
 
         public MainForm()
@@ -185,7 +187,7 @@ namespace ClashSinicizationTool
             #endregion
         }
 
-        //软件关闭时
+        //软件关闭时执行
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             //保存列表文件
@@ -194,6 +196,7 @@ namespace ClashSinicizationTool
             translationScriptFile.SaveListFile(clashForWindowsPath, "Clash Path List.ini");
         }
 
+        #region 按钮
         //点击清理按钮时执行清空log窗口
         private void CleanLogButton_Click(object sender, EventArgs e)
         {
@@ -264,30 +267,6 @@ namespace ClashSinicizationTool
                         }
                     }
                 }
-            }
-        }
-
-        //翻译脚本显示器修改时，检测与源文件匹配，控制保存开关
-        private void translationScriptText_TextChanged(object sender, EventArgs e)
-        {
-            StreamReader streamReader = new StreamReader(translationScriptFileName.Text, Encoding.UTF8);
-            if (translationScriptText.Text == streamReader.ReadToEnd())
-            {
-                saveTranslationScriptButton.Enabled = false;
-            }
-            else
-            {
-                saveTranslationScriptButton.Enabled = true;
-            }
-            streamReader.Close();
-
-            if (translationScriptFileName.Text == string.Empty)
-            {
-                openTranslationFileButton.Enabled = false;
-            }
-            else
-            {
-                openTranslationFileButton.Enabled = true;
             }
         }
 
@@ -362,80 +341,6 @@ namespace ClashSinicizationTool
             translationScriptFile.CleanList(translationScriptFileName);
             translationScriptFile.CleanList(clashForWindowsPath);
             logTextBox.AppendText("清理列表成功" + Environment.NewLine);
-        }
-
-        //判定加载按钮和用外部程序打开按钮开关
-        private void translationScriptFileName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (translationScriptFileName.Text == string.Empty)
-            {
-                loadTranslationScriptButton.Enabled = false;
-                openTranslationFileButton.Enabled = false;
-                unpackButton.Enabled = false;
-                simplifyButton.Enabled = false;
-                sinicizationButton.Enabled = false;
-                packButton.Enabled = false;
-                revertButton.Enabled = false;
-            }
-            else
-            {
-                if (File.Exists(translationScriptFileName.Text))
-                {
-                    loadTranslationScriptButton.Enabled = true;
-                    openTranslationFileButton.Enabled = true;
-                    unpackButton.Enabled = true;
-                    simplifyButton.Enabled = true;
-                    sinicizationButton.Enabled = true;
-                    packButton.Enabled = true;
-                    revertButton.Enabled = true;
-                }
-                else
-                {
-                    loadTranslationScriptButton.Enabled = false;
-                    openTranslationFileButton.Enabled = false;
-                    unpackButton.Enabled = false;
-                    simplifyButton.Enabled = false;
-                    sinicizationButton.Enabled = false;
-                    packButton.Enabled = false;
-                    revertButton.Enabled = false;
-                }
-            }
-        }
-
-        //clash目录栏文字修改时候
-        private void clashForWindowsPath_TextUpdate(object sender, EventArgs e)
-        {
-            if (clashForWindowsPath.Text == string.Empty)
-            {
-                openClashBrowseButton.Enabled = false;
-                unpackButton.Enabled = false;
-                simplifyButton.Enabled = false;
-                sinicizationButton.Enabled = false;
-                packButton.Enabled = false;
-                revertButton.Enabled = false;
-            }
-            else
-            {
-                if (Directory.Exists(clashForWindowsPath.Text) && File.Exists(clashForWindowsPath.Text + @"\Clash for Windows.exe"))
-                {
-                    openClashBrowseButton.Enabled = true;
-                    clashPath = clashForWindowsPath.Text;
-                    unpackButton.Enabled = true;
-                    simplifyButton.Enabled = true;
-                    sinicizationButton.Enabled = true;
-                    packButton.Enabled = true;
-                    revertButton.Enabled = true;
-                }
-                else
-                {
-                    openClashBrowseButton.Enabled = false;
-                    unpackButton.Enabled = false;
-                    simplifyButton.Enabled = false;
-                    sinicizationButton.Enabled = false;
-                    packButton.Enabled = false;
-                    revertButton.Enabled = false;
-                }
-            }
         }
 
         //汉化按钮
@@ -518,7 +423,7 @@ namespace ClashSinicizationTool
             {
                 foreach (Process p in Process.GetProcesses())
                 {
-                    if (p.ProcessName == "Clash for Windows" || p.ProcessName == "Clash for Windows.exe")
+                    if (p.ProcessName == clashProcessName)
                     {
                         MessageBox.Show("Clash for Windows已开启，请关闭后重试。");
                         logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
@@ -562,7 +467,7 @@ namespace ClashSinicizationTool
             {
                 foreach (Process p in Process.GetProcesses())
                 {
-                    if (p.ProcessName == "Clash for Windows" || p.ProcessName == "Clash for Windows.exe")
+                    if (p.ProcessName == clashProcessName)
                     {
                         MessageBox.Show("Clash for Windows已开启，请关闭后重试。");
                         logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
@@ -582,6 +487,15 @@ namespace ClashSinicizationTool
         //打开clash按钮
         private void OpenClashButton_Click(object sender, EventArgs e)
         {
+            foreach (Process vProc in Process.GetProcesses())
+            {
+                if (vProc.ProcessName == clashProcessName)
+                {
+                    logTextBox.AppendText(clashProcessName + " 已开启，无需重复开启" + Environment.NewLine);
+                    MessageBox.Show(clashProcessName + " 已开启，无需重复开启");
+                    goto c;
+                }
+            }
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 File.Delete(clashPath + @"\resources\app.asar");
@@ -593,8 +507,142 @@ namespace ClashSinicizationTool
                 Process.Start(clashPath + @"\Clash for Windows.exe");
                 logTextBox.AppendText("已打开Clash for Windows" + Environment.NewLine);
             }
+        c:;
         }
 
+        //关闭Clash按钮
+        private void CloseClashButton_Click(object sender, EventArgs e)
+        {
+            Process last = Process.GetProcesses().Last();
+            foreach (Process vProc in Process.GetProcesses())   //[BugHere]:请不要加.Exe后缀名称
+            {
+                if (vProc.ProcessName.ToUpper() == clashProcessName.ToUpper())
+                {
+                    try
+                    {
+                        vProc.Kill();
+                        logTextBox.AppendText("已关闭程序 " + clashProcessName + Environment.NewLine);
+                        ProxySetting proxy = new ProxySetting();
+                        proxy.CloseProxy();
+                        goto c;
+                    }
+                    catch (Exception)
+                    {
+                        logTextBox.AppendText("关闭 " + clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
+                        MessageBox.Show(clashProcessName + "关闭 " + clashProcessName + " 失败，请手动关闭");
+                        goto c;
+                        throw;
+                    }
+                }
+            }
+            logTextBox.AppendText(clashProcessName + " 未开启，无需关闭" + Environment.NewLine);
+            MessageBox.Show(clashProcessName + " 未开启，无需关闭");
+        c:;
+        }
+
+        #endregion
+
+        #region Text检测
+        //翻译脚本显示器修改时，检测与源文件匹配，控制保存开关
+        private void translationScriptText_TextChanged(object sender, EventArgs e)
+        {
+            StreamReader streamReader = new StreamReader(translationScriptFileName.Text, Encoding.UTF8);
+            if (translationScriptText.Text == streamReader.ReadToEnd())
+            {
+                saveTranslationScriptButton.Enabled = false;
+            }
+            else
+            {
+                saveTranslationScriptButton.Enabled = true;
+            }
+            streamReader.Close();
+
+            if (translationScriptFileName.Text == string.Empty)
+            {
+                openTranslationFileButton.Enabled = false;
+            }
+            else
+            {
+                openTranslationFileButton.Enabled = true;
+            }
+        }
+
+        //判定加载按钮和用外部程序打开按钮开关
+        private void translationScriptFileName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (translationScriptFileName.Text == string.Empty)
+            {
+                loadTranslationScriptButton.Enabled = false;
+                openTranslationFileButton.Enabled = false;
+                unpackButton.Enabled = false;
+                simplifyButton.Enabled = false;
+                sinicizationButton.Enabled = false;
+                packButton.Enabled = false;
+                revertButton.Enabled = false;
+            }
+            else
+            {
+                if (File.Exists(translationScriptFileName.Text))
+                {
+                    loadTranslationScriptButton.Enabled = true;
+                    openTranslationFileButton.Enabled = true;
+                    unpackButton.Enabled = true;
+                    simplifyButton.Enabled = true;
+                    sinicizationButton.Enabled = true;
+                    packButton.Enabled = true;
+                    revertButton.Enabled = true;
+                }
+                else
+                {
+                    loadTranslationScriptButton.Enabled = false;
+                    openTranslationFileButton.Enabled = false;
+                    unpackButton.Enabled = false;
+                    simplifyButton.Enabled = false;
+                    sinicizationButton.Enabled = false;
+                    packButton.Enabled = false;
+                    revertButton.Enabled = false;
+                }
+            }
+        }
+
+        //clash目录栏文字修改时候
+        private void clashForWindowsPath_TextUpdate(object sender, EventArgs e)
+        {
+            if (clashForWindowsPath.Text == string.Empty)
+            {
+                openClashBrowseButton.Enabled = false;
+                unpackButton.Enabled = false;
+                simplifyButton.Enabled = false;
+                sinicizationButton.Enabled = false;
+                packButton.Enabled = false;
+                revertButton.Enabled = false;
+            }
+            else
+            {
+                if (Directory.Exists(clashForWindowsPath.Text) && File.Exists(clashForWindowsPath.Text + @"\Clash for Windows.exe"))
+                {
+                    openClashBrowseButton.Enabled = true;
+                    clashPath = clashForWindowsPath.Text;
+                    unpackButton.Enabled = true;
+                    simplifyButton.Enabled = true;
+                    sinicizationButton.Enabled = true;
+                    packButton.Enabled = true;
+                    revertButton.Enabled = true;
+                }
+                else
+                {
+                    openClashBrowseButton.Enabled = false;
+                    unpackButton.Enabled = false;
+                    simplifyButton.Enabled = false;
+                    sinicizationButton.Enabled = false;
+                    packButton.Enabled = false;
+                    revertButton.Enabled = false;
+                }
+            }
+        }
+
+        #endregion
     }
 }
+
 

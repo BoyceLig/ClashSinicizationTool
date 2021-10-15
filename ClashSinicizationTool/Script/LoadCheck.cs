@@ -14,8 +14,7 @@ namespace ClashSinicizationTool
     {
         public bool CheckNode()
         {
-            RegistryKey regKey = Registry.CurrentUser;
-            RegistryKey regSubKey = regKey.OpenSubKey(@"SOFTWARE\Node.js");
+            RegistryKey regSubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Node.js");
             return regSubKey == null ? false : true;
         }
 
