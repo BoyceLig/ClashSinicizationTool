@@ -60,8 +60,8 @@ namespace ClashSinicizationTool
             process.Start();
 
             //输入命令
-            process.StandardInput.WriteLine(command);
-            process.StandardInput.WriteLine("exit");
+            process.StandardInput.WriteLine(command + " & exit");
+            //process.StandardInput.WriteLine("exit");
             process.StandardInput.AutoFlush = true;
             string output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();

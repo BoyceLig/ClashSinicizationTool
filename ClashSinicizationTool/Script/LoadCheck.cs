@@ -14,21 +14,16 @@ namespace ClashSinicizationTool
     {
         public bool CheckNode()
         {
-            RegistryKey regSubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Node.js");
-            return regSubKey == null ? false : true;
+            //RegistryKey regSubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Node.js");
+            //return regSubKey == null ? false : true;
+            CMDCommand cmd = new CMDCommand();
+            return cmd.CMDCommondBase("npm").Contains("npm <command>");
         }
 
         public bool CheckAsar()
         {
             CMDCommand cmd = new CMDCommand();
-            if (cmd.CMDCommondBase("asar -h").Contains("Manipulate asar archive files"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return cmd.CMDCommondBase("asar -h").Contains("Manipulate asar archive files");
         }
 
         public bool CheckPing(string url)

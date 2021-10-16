@@ -53,8 +53,6 @@ namespace ClashSinicizationTool
             }
             else
             {
-
-
                 if (File.ReadAllText("Script List.ini") == string.Empty)
                 {
 
@@ -65,15 +63,17 @@ namespace ClashSinicizationTool
                     TranslationScriptFile translationScriptFile = new TranslationScriptFile();
                     translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, "Script List.ini");
                     //自动加载第一个文件
-                    if (File.Exists(translationScriptFileName.Items[0].ToString()))
+                    if (translationScriptFileName.Items.Count != 0)
                     {
-                        translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
-                        loadTranslationScriptButton.Enabled = true;
-                        openTranslationFileButton.Enabled = true;
+                        if (File.Exists(translationScriptFileName.Items[0].ToString()))
+                        {
+                            translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+                            loadTranslationScriptButton.Enabled = true;
+                            openTranslationFileButton.Enabled = true;
+                        }
                     }
                 }
             }
-
             #endregion
 
             #region 检查创建clash目录列表
@@ -93,8 +93,11 @@ namespace ClashSinicizationTool
                 {
                     TranslationScriptFile translationScriptFile = new TranslationScriptFile();
                     translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, "Clash Path List.ini");
-                    openClashBrowseButton.Enabled = true;
-                    clashPath = clashForWindowsPath.Text;
+                    if (clashForWindowsPath.Items.Count != 0)
+                    {
+                        openClashBrowseButton.Enabled = true;
+                        clashPath = clashForWindowsPath.Text;
+                    }
                 }
             }
             #endregion
@@ -332,15 +335,6 @@ namespace ClashSinicizationTool
                     }
                 }
             }
-        }
-
-        //自动清理失效目录和文件
-        private void autoCleanButton_Click(object sender, EventArgs e)
-        {
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-            translationScriptFile.CleanList(translationScriptFileName);
-            translationScriptFile.CleanList(clashForWindowsPath);
-            logTextBox.AppendText("清理列表成功" + Environment.NewLine);
         }
 
         //汉化按钮
@@ -642,6 +636,22 @@ namespace ClashSinicizationTool
         }
 
         #endregion
+
+        //Ctrl+S快捷键
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
+            {
+                if (saveTranslationScriptButton.Enabled)
+                {
+                    saveTranslationScriptButton_Click(sender, e);
+                }
+                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+                translationScriptFile.SaveListFile(translationScriptFileName, "Script List.ini");
+                translationScriptFile.SaveListFile(clashForWindowsPath, "Clash Path List.ini");
+                logTextBox.AppendText("已保存列表文件" + Environment.NewLine);
+            }
+        }
     }
 }
 

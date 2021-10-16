@@ -38,13 +38,15 @@ namespace ClashSinicizationTool
             for (int i = 0; i < lines.Length; i++)
             {
                 //不加载空行空行
-                if (lines[i] != string.Empty)
+                if (lines[i] != string.Empty && File.Exists(lines[i]))
                 {
                     translationScriptFileName.Items.Add(lines[i]);
                 }
             }
-            translationScriptFileName.Text = translationScriptFileName.Items[0].ToString();
-
+            if (translationScriptFileName.Items.Count != 0)
+            {
+                translationScriptFileName.Text = translationScriptFileName.Items[0].ToString();
+            }
             //删除空行，遍历修改文件
             if (translationScriptFileName.Items.Count != lines.Length)
             {
@@ -65,12 +67,15 @@ namespace ClashSinicizationTool
             string[] lines = File.ReadAllLines(filePath);
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i] != string.Empty)
+                if (lines[i] != string.Empty && Directory.Exists(lines[i]))
                 {
                     clashPath.Items.Add(lines[i]);
                 }
                 //把第一个目录显示到列表
-                clashPath.Text = clashPath.Items[0].ToString();
+                if (clashPath.Items.Count != 0)
+                {
+                    clashPath.Text = clashPath.Items[0].ToString();
+                }
             }
 
             //删除空行，遍历修改文件

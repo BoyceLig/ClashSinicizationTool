@@ -52,7 +52,6 @@ namespace ClashSinicizationTool
             this.saveTranslationScriptButton = new System.Windows.Forms.Button();
             this.translationScriptFileName = new System.Windows.Forms.ComboBox();
             this.clashForWindowsPath = new System.Windows.Forms.ComboBox();
-            this.autoCleanButton = new System.Windows.Forms.Button();
             this.OpenClashButton = new System.Windows.Forms.Button();
             this.revertButton = new System.Windows.Forms.Button();
             this.CloseClashButton = new System.Windows.Forms.Button();
@@ -274,17 +273,6 @@ namespace ClashSinicizationTool
             this.clashForWindowsPath.TabIndex = 10;
             this.clashForWindowsPath.TextUpdate += new System.EventHandler(this.clashForWindowsPath_TextUpdate);
             // 
-            // autoCleanButton
-            // 
-            this.autoCleanButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.autoCleanButton.Location = new System.Drawing.Point(684, 96);
-            this.autoCleanButton.Name = "autoCleanButton";
-            this.autoCleanButton.Size = new System.Drawing.Size(118, 23);
-            this.autoCleanButton.TabIndex = 3;
-            this.autoCleanButton.Text = "自动清理失效列表";
-            this.autoCleanButton.UseVisualStyleBackColor = true;
-            this.autoCleanButton.Click += new System.EventHandler(this.autoCleanButton_Click);
-            // 
             // OpenClashButton
             // 
             this.OpenClashButton.Location = new System.Drawing.Point(442, 67);
@@ -338,18 +326,19 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.loadTranslationScriptButton);
             this.Controls.Add(this.CleanLogButton);
             this.Controls.Add(this.saveTranslationScriptButton);
-            this.Controls.Add(this.autoCleanButton);
             this.Controls.Add(this.ClashBrowseButton);
             this.Controls.Add(this.openClashBrowseButton);
             this.Controls.Add(this.openTranslationFileButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(681, 501);
             this.Name = "MainForm";
             this.Text = "Clash 汉化工具";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,7 +366,6 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button saveTranslationScriptButton;
         private System.Windows.Forms.ComboBox translationScriptFileName;
         private System.Windows.Forms.ComboBox clashForWindowsPath;
-        private System.Windows.Forms.Button autoCleanButton;
         private System.Windows.Forms.Button OpenClashButton;
         private System.Windows.Forms.Button revertButton;
         private System.Windows.Forms.Button CloseClashButton;
