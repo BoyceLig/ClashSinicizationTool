@@ -36,7 +36,9 @@ namespace ClashSinicizationTool
             this.ClashBrowseButton = new System.Windows.Forms.Button();
             this.loadTranslationScriptButton = new System.Windows.Forms.Button();
             this.logTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.logBoxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CopyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CleanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CleanLogButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.unpackButton = new System.Windows.Forms.Button();
@@ -46,9 +48,7 @@ namespace ClashSinicizationTool
             this.openTranslationFileButton = new System.Windows.Forms.Button();
             this.openClashBrowseButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.translationScriptText = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.saveTranslationScriptButton = new System.Windows.Forms.Button();
             this.translationScriptFileName = new System.Windows.Forms.ComboBox();
             this.clashForWindowsPath = new System.Windows.Forms.ComboBox();
@@ -56,6 +56,9 @@ namespace ClashSinicizationTool
             this.OpenClashButton = new System.Windows.Forms.Button();
             this.revertButton = new System.Windows.Forms.Button();
             this.CloseClashButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.logBoxMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -83,7 +86,7 @@ namespace ClashSinicizationTool
             // ClashBrowseButton
             // 
             this.ClashBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClashBrowseButton.Location = new System.Drawing.Point(715, 35);
+            this.ClashBrowseButton.Location = new System.Drawing.Point(770, 35);
             this.ClashBrowseButton.Name = "ClashBrowseButton";
             this.ClashBrowseButton.Size = new System.Drawing.Size(75, 23);
             this.ClashBrowseButton.TabIndex = 3;
@@ -95,7 +98,7 @@ namespace ClashSinicizationTool
             // 
             this.loadTranslationScriptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.loadTranslationScriptButton.Enabled = false;
-            this.loadTranslationScriptButton.Location = new System.Drawing.Point(715, 6);
+            this.loadTranslationScriptButton.Location = new System.Drawing.Point(770, 6);
             this.loadTranslationScriptButton.Name = "loadTranslationScriptButton";
             this.loadTranslationScriptButton.Size = new System.Drawing.Size(75, 23);
             this.loadTranslationScriptButton.TabIndex = 3;
@@ -106,32 +109,45 @@ namespace ClashSinicizationTool
             // logTextBox
             // 
             this.logTextBox.BackColor = System.Drawing.SystemColors.MenuText;
+            this.logTextBox.ContextMenuStrip = this.logBoxMenuStrip;
             this.logTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.logTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.logTextBox.Location = new System.Drawing.Point(0, 345);
+            this.logTextBox.Location = new System.Drawing.Point(0, 376);
             this.logTextBox.MaxLength = 0;
             this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.logTextBox.Size = new System.Drawing.Size(802, 157);
+            this.logTextBox.Size = new System.Drawing.Size(857, 157);
             this.logTextBox.TabIndex = 4;
             this.logTextBox.WordWrap = false;
             // 
-            // label3
+            // logBoxMenuStrip
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 326);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "日志信息：";
+            this.logBoxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyToolStripMenuItem,
+            this.CleanToolStripMenuItem});
+            this.logBoxMenuStrip.Name = "contextMenuStrip";
+            this.logBoxMenuStrip.Size = new System.Drawing.Size(125, 48);
+            // 
+            // CopyToolStripMenuItem
+            // 
+            this.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem";
+            this.CopyToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.CopyToolStripMenuItem.Text = "复制";
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
+            // 
+            // CleanToolStripMenuItem
+            // 
+            this.CleanToolStripMenuItem.Name = "CleanToolStripMenuItem";
+            this.CleanToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.CleanToolStripMenuItem.Text = "清空日志";
+            this.CleanToolStripMenuItem.Click += new System.EventHandler(this.CleanToolStripMenuItem_Click);
             // 
             // CleanLogButton
             // 
             this.CleanLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CleanLogButton.Location = new System.Drawing.Point(727, 320);
+            this.CleanLogButton.Location = new System.Drawing.Point(782, 352);
             this.CleanLogButton.Name = "CleanLogButton";
             this.CleanLogButton.Size = new System.Drawing.Size(75, 23);
             this.CleanLogButton.TabIndex = 3;
@@ -196,7 +212,7 @@ namespace ClashSinicizationTool
             // 
             this.openTranslationFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.openTranslationFileButton.Enabled = false;
-            this.openTranslationFileButton.Location = new System.Drawing.Point(573, 6);
+            this.openTranslationFileButton.Location = new System.Drawing.Point(628, 6);
             this.openTranslationFileButton.Name = "openTranslationFileButton";
             this.openTranslationFileButton.Size = new System.Drawing.Size(136, 23);
             this.openTranslationFileButton.TabIndex = 2;
@@ -208,7 +224,7 @@ namespace ClashSinicizationTool
             // 
             this.openClashBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.openClashBrowseButton.Enabled = false;
-            this.openClashBrowseButton.Location = new System.Drawing.Point(573, 35);
+            this.openClashBrowseButton.Location = new System.Drawing.Point(628, 35);
             this.openClashBrowseButton.Name = "openClashBrowseButton";
             this.openClashBrowseButton.Size = new System.Drawing.Size(136, 23);
             this.openClashBrowseButton.TabIndex = 2;
@@ -221,30 +237,21 @@ namespace ClashSinicizationTool
             this.translationScriptText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.translationScriptText.Location = new System.Drawing.Point(12, 147);
+            this.translationScriptText.Location = new System.Drawing.Point(0, 147);
             this.translationScriptText.MaxLength = 0;
             this.translationScriptText.Multiline = true;
             this.translationScriptText.Name = "translationScriptText";
             this.translationScriptText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.translationScriptText.Size = new System.Drawing.Size(790, 167);
+            this.translationScriptText.Size = new System.Drawing.Size(857, 204);
             this.translationScriptText.TabIndex = 8;
             this.translationScriptText.WordWrap = false;
             this.translationScriptText.TextChanged += new System.EventHandler(this.translationScriptText_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 127);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 17);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "翻译脚本信息";
             // 
             // saveTranslationScriptButton
             // 
             this.saveTranslationScriptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveTranslationScriptButton.Enabled = false;
-            this.saveTranslationScriptButton.Location = new System.Drawing.Point(684, 123);
+            this.saveTranslationScriptButton.Location = new System.Drawing.Point(739, 123);
             this.saveTranslationScriptButton.Name = "saveTranslationScriptButton";
             this.saveTranslationScriptButton.Size = new System.Drawing.Size(118, 23);
             this.saveTranslationScriptButton.TabIndex = 3;
@@ -259,7 +266,7 @@ namespace ClashSinicizationTool
             this.translationScriptFileName.FormattingEnabled = true;
             this.translationScriptFileName.Location = new System.Drawing.Point(86, 6);
             this.translationScriptFileName.Name = "translationScriptFileName";
-            this.translationScriptFileName.Size = new System.Drawing.Size(482, 25);
+            this.translationScriptFileName.Size = new System.Drawing.Size(537, 25);
             this.translationScriptFileName.TabIndex = 10;
             this.translationScriptFileName.TextUpdate += new System.EventHandler(this.translationScriptFileName_SelectedIndexChanged);
             // 
@@ -270,24 +277,25 @@ namespace ClashSinicizationTool
             this.clashForWindowsPath.FormattingEnabled = true;
             this.clashForWindowsPath.Location = new System.Drawing.Point(177, 33);
             this.clashForWindowsPath.Name = "clashForWindowsPath";
-            this.clashForWindowsPath.Size = new System.Drawing.Size(391, 25);
+            this.clashForWindowsPath.Size = new System.Drawing.Size(446, 25);
             this.clashForWindowsPath.TabIndex = 10;
             this.clashForWindowsPath.TextUpdate += new System.EventHandler(this.clashForWindowsPath_TextUpdate);
             // 
             // autoCleanButton
             // 
             this.autoCleanButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.autoCleanButton.Location = new System.Drawing.Point(684, 96);
+            this.autoCleanButton.Location = new System.Drawing.Point(739, 96);
             this.autoCleanButton.Name = "autoCleanButton";
-            this.autoCleanButton.Size = new System.Drawing.Size(118, 23);
+            this.autoCleanButton.Size = new System.Drawing.Size(106, 23);
             this.autoCleanButton.TabIndex = 3;
-            this.autoCleanButton.Text = "自动清理失效列表";
+            this.autoCleanButton.Text = "清理失效列表";
             this.autoCleanButton.UseVisualStyleBackColor = true;
             this.autoCleanButton.Click += new System.EventHandler(this.autoCleanButton_Click);
             // 
             // OpenClashButton
             // 
-            this.OpenClashButton.Location = new System.Drawing.Point(442, 67);
+            this.OpenClashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.OpenClashButton.Location = new System.Drawing.Point(497, 64);
             this.OpenClashButton.Name = "OpenClashButton";
             this.OpenClashButton.Size = new System.Drawing.Size(171, 23);
             this.OpenClashButton.TabIndex = 7;
@@ -308,7 +316,8 @@ namespace ClashSinicizationTool
             // 
             // CloseClashButton
             // 
-            this.CloseClashButton.Location = new System.Drawing.Point(619, 67);
+            this.CloseClashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloseClashButton.Location = new System.Drawing.Point(674, 64);
             this.CloseClashButton.Name = "CloseClashButton";
             this.CloseClashButton.Size = new System.Drawing.Size(171, 23);
             this.CloseClashButton.TabIndex = 7;
@@ -316,11 +325,35 @@ namespace ClashSinicizationTool
             this.CloseClashButton.UseVisualStyleBackColor = true;
             this.CloseClashButton.Click += new System.EventHandler(this.CloseClashButton_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Location = new System.Drawing.Point(0, 127);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(857, 154);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "翻译脚本信息";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Location = new System.Drawing.Point(0, 357);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(857, 176);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "日志信息";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 502);
+            this.ClientSize = new System.Drawing.Size(857, 533);
+            this.Controls.Add(this.CleanLogButton);
             this.Controls.Add(this.clashForWindowsPath);
             this.Controls.Add(this.translationScriptFileName);
             this.Controls.Add(this.translationScriptText);
@@ -332,11 +365,8 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.simplifyButton);
             this.Controls.Add(this.sinicizationButton);
             this.Controls.Add(this.unpackButton);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.loadTranslationScriptButton);
-            this.Controls.Add(this.CleanLogButton);
             this.Controls.Add(this.saveTranslationScriptButton);
             this.Controls.Add(this.autoCleanButton);
             this.Controls.Add(this.ClashBrowseButton);
@@ -344,14 +374,17 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.openTranslationFileButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(681, 501);
+            this.MinimumSize = new System.Drawing.Size(873, 572);
             this.Name = "MainForm";
             this.Text = "Clash 汉化工具";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.logBoxMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,7 +396,6 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button ClashBrowseButton;
         private System.Windows.Forms.Button loadTranslationScriptButton;
         private System.Windows.Forms.TextBox logTextBox;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button CleanLogButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button unpackButton;
@@ -373,9 +405,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button openTranslationFileButton;
         private System.Windows.Forms.Button openClashBrowseButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox translationScriptText;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button saveTranslationScriptButton;
         private System.Windows.Forms.ComboBox translationScriptFileName;
         private System.Windows.Forms.ComboBox clashForWindowsPath;
@@ -383,6 +413,11 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button OpenClashButton;
         private System.Windows.Forms.Button revertButton;
         private System.Windows.Forms.Button CloseClashButton;
+        private System.Windows.Forms.ContextMenuStrip logBoxMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem CopyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CleanToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

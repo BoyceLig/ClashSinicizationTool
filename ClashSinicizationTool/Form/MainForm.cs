@@ -637,6 +637,24 @@ namespace ClashSinicizationTool
                 logTextBox.AppendText("已保存列表文件" + Environment.NewLine);
             }
         }
+
+        #region log右键菜单
+        //复制
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (logTextBox.SelectedText != string.Empty)
+            {
+                Clipboard.SetDataObject(logTextBox.SelectedText);
+            }
+        }
+
+        //清空log
+        private void CleanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CleanLogButton_Click(sender, e);
+        }
+        #endregion
+
     }
 }
 
