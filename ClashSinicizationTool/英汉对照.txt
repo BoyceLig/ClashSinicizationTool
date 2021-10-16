@@ -1,0 +1,1227 @@
+###此文件很乱，顺序也不要更改，因为部分关键字段替换需要按先后顺序进行，不然可能会导致替换后不正常。
+###字段有可能在新的版本改动，然后此对照关系可能部分失效！！
+###0.15.0
+###更新：2021-3-26
+###0.15.2
+###更新：2021-4-9
+###感谢：谷歌翻译，必应翻译，百度翻译，有道翻译；感谢网友们翻译
+###
+
+("New")=("有新版本")
+('New')=('有新版本')
+
+###v0.15.5
+"\n        Connections\n        "="\n        连接状态\n        "
+###v0.15.5
+
+'Connections')='连接状态')
+"Connections")="连接状态")
+startup",items:=startup",items:["静默","错误","警告","信息","调试"],NoUseItem:
+#以上renderer必须先翻译，否则可能会被后面的覆盖
+
+#可能--main拖动菜单白屏相关
+"menu-item-change","general"="menu-item-change","常规"
+"menu-item-change",'general'="menu-item-change",'常规'
+'menu-item-change',"general"='menu-item-change',"常规"
+'menu-item-change','general'='menu-item-change','常规'
+"menu-item-change","proxy"="menu-item-change","代理"
+"menu-item-change",'proxy'="menu-item-change",'代理'
+'menu-item-change',"proxy"='menu-item-change',"代理"
+'menu-item-change','proxy'='menu-item-change','代理'
+"menu-item-change","server"="menu-item-change","配置"
+"menu-item-change",'server'="menu-item-change",'配置'
+'menu-item-change',"server"='menu-item-change',"配置"
+'menu-item-change','server'='menu-item-change','配置'
+"menu-item-change","log"="menu-item-change","日志"
+"menu-item-change",'log'="menu-item-change",'日志'
+'menu-item-change',"log"='menu-item-change',"日志"
+'menu-item-change','log'='menu-item-change','日志'
+"menu-item-change","connection"="menu-item-change","连接"
+"menu-item-change",'connection'="menu-item-change",'连接'
+'menu-item-change',"connection"='menu-item-change',"连接"
+'menu-item-change','connection'='menu-item-change','连接'
+"menu-item-change","setting"="menu-item-change","设置"
+"menu-item-change",'setting'="menu-item-change",'设置'
+'menu-item-change',"setting"='menu-item-change',"设置"
+'menu-item-change','setting'='menu-item-change','设置'
+"menu-item-change","about"="menu-item-change","关于"
+"menu-item-change",'about'="menu-item-change",'关于'
+'menu-item-change',"about"='menu-item-change',"关于"
+'menu-item-change','about'='menu-item-change','关于'
+#
+Dashboard has crashed=主窗口崩溃了
+"Reload"="重载"
+'Reload'='重载'
+"Exit"="退出"
+'Exit'='退出'
+"General"="常规"
+'General'='常规'
+"Proxies"="代理"
+'Proxies'='代理'
+"Profiles"="配置"
+'Profiles'='配置'
+"Logs"="日志"
+'Logs'='日志'
+"Connections"="连接"
+'Connections'='连接'
+"Settings"="设置"
+'Settings'='设置'
+"Feedback"="关于"
+'Feedback'='关于'
+"Dashboard"="显示窗口"
+'Dashboard'='显示窗口'
+label:"Run Tray Script"=label:"运行托盘脚本"
+"System Proxy"="系统代理"
+'System Proxy'='系统代理'
+"Mixin"="混合配置"
+'Mixin'='混合配置'
+"Proxy Mode"="代理模式"
+'Proxy Mode'='代理模式'
+"Global"="全局"
+'Global'='全局'
+'label':"Rule"='label':"规则"
+'label':'Rule'='label':'规则'
+label:"Rule"=label:"规则"
+"Direct"="直连"
+'Direct'='直连'
+'label':"Script"='label':"脚本"
+'label':'Script'='label':'脚本'
+label:"Script"=label:"脚本"
+"More"="更多"
+'More'='更多'
+"Toggle DevTools"="切换开发工具"
+"Force Quit"="强制退出"
+'Force Quit'='强制退出'
+"Quit"="退出程序"
+'Quit'='退出程序'
+"The iterator does not provide a 'throw' method"="该迭代器不提供 'throw' 方法"
+'The iterator does not provide a \'throw\' method'='该迭代器不提供 \'throw\' 方法'
+"iterator result is not an object"="迭代器结果不是对象"
+'iterator result is not an object'='迭代器结果不是对象'
+"try statement without catch or finally"="try 语句缺少 catch 或 finally"
+'try statement without catch or finally'='try 语句缺少 catch 或 finally'
+"illegal catch attempt"="捕获到 catch 非法错误"
+'illegal catch attempt'='捕获到 catch 非法错误'
+Attempting to call a function in a renderer window that has been closed or released=尝试调用已关闭或释放的渲染器窗口中的函数
+
+#以下是 renderer.js 独有
+
+###v0.15.3修改--二维码相关
+"Go to URL"="显示二维码"
+'Go to URL'='显示二维码'
+"Remove":"Include"="移除":"包含"
+###v0.15.3修改--二维码相关
+
+
+
+'Logs'='日志'
+System Proxy:=系统代理:
+"check() is only allowed in idle status"="仅允许在空闲状态下使用 check() 函数"
+'check() is only allowed in idle status'='仅允许在空闲状态下使用 check() 函数'
+'check()\x20is\x20only\x20allowed\x20in\x20idle\x20status'='仅允许在空闲状态下使用 check() 函数'
+'No\x20browser\x20support'='无浏览器支持'
+"No browser support"="无浏览器支持"
+'No browser support'='无浏览器支持'
+'Manifest\x20request\x20to\x20'='发起请求到 '
+"Manifest request to "="发起请求到 "
+'Manifest request to '='发起请求到 '
+" failed."=" 失败."
+' failed.'=' 失败.'
+" timed out."=" 超时."
+' timed out.'=' 超时.'
+'\x20timed\x20out.'=' 超时.'
+"apply() is only allowed in ready status"="仅允许在就绪状态下使用 apply() 函数"
+'apply() is only allowed in ready status'='仅允许在就绪状态下使用 apply() 函数'
+"[HMR] unexpected require("="[HMR] 请求("
+'[HMR] unexpected require('='[HMR] 请求('
+'[HMR]\x20unexpected\x20require('='[HMR] 请求('
+") to disposed module"=")处理模块时发生异常"
+') to disposed module'=') 处理模块时发生异常'
+')\x20to\x20disposed\x20module'=')处理模块时发生异常'
+Update propagation:=更新传播:
+"Aborted because of self decline: "="因自身拒绝而中止: "
+'Aborted because of self decline: '='因自身拒绝而中止: '
+Unexception type=异常类型
+vue-style-loader\x20cannot\x20be\x20used\x20in\x20a\x20non-browser\x20environment.\x20Use\x20{\x20target:\x20\x27node\x27\x20}\x20in\x20your\x20Webpack\x20config\x20to\x20indicate\x20a\x20server-rendering\x20environment.=vue-style-loader 不能在非浏览器环境中使用. 在你的 Webpack 配置中使用 { target: "node" } 来表示服务器渲染环境.
+vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.=vue-style-loader 不能在非浏览器环境中使用. 在你的 Webpack 配置中使用 { target: 'node' } 来表示服务器渲染环境.
+vue-style-loader cannot be used in a non-browser environment. Use { target: \'node\' } in your Webpack config to indicate a server-rendering environment.=vue-style-loader 不能在非浏览器环境中使用. 在你的 Webpack 配置中使用 { target: \'node\' } 来表示服务器渲染环境.
+Promise/async=诺言/异步
+#可能不翻译a
+'get\x20['='['
+'get ['='['
+"get ["="["
+"] from cache failed with error:"="] 从缓存中获取失败:"
+'] from cache failed with error:'='] 从缓存中获取失败:'
+Vue compiler=Vue 编译器
+#可能不翻译b
+"Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."="实例不可迭代。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。"
+'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'='实例不可迭代。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。'
+"Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."="试图解构非迭代实例无效。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。"
+'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'='试图解构非迭代实例无效。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。'
+"Generator is already running"="发生器已运行"
+'Generator is already running'='发生器已运行'
+'Generator\x20is\x20already\x20running'='发生器已运行'
+"The iterator does not provide a 'throw' method"="该迭代器不提供 'throw' 方法"
+'The\x20iterator\x20does\x20not\x20provide\x20a\x20\x27throw\x27\x20method'='该迭代器不提供 "throw" 方法'
+"iterator result is not an object"="迭代器结果不是对象"
+'iterator result is not an object'='迭代器结果不是对象'
+"try statement without catch or finally"="try 语句缺少 catch 或 finally"
+'try statement without catch or finally'='try 语句缺少 catch 或 finally'
+"illegal catch attempt"="捕获到 catch 非法错误"
+'illegal catch attempt'='捕获到 catch 非法错误'
+"Cannot find module '"="找不到模块 '"
+'Cannot\x20find\x20module\x20\x27'='找不到模块 \x27'
+'Cannot find module \''='找不到模块 \''
+"Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."="尝试传播不可迭代实例无效。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。"
+'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'='尝试传播不可迭代实例无效。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。'
+'Invalid\x20attempt\x20to\x20iterate\x20non-iterable\x20instance.\x0aIn\x20order\x20to\x20be\x20iterable,\x20non-array\x20objects\x20must\x20have\x20a\x20[Symbol.iterator]()\x20method.'='实例不可迭代。\n为了可以迭代，非数组对象必须要有 [Symbol.iterator]() 方法。'
+"required key(*) must have a value"="必填项(*) 必须输入内容"
+'required key(*) must have a value'='必填项(*) 必须输入内容'
+"Cancel"="取消"
+'Cancel'='取消'
+"OK"="确定"
+'OK'='确定'
+"Error"="错误"
+'Error'='错误'
+"\n          Cancel\n        "="\n          取消\n        "
+'\n          Cancel\n        '='\n          取消\n        '
+"Select"="选择"
+'Select'='选择'
+", at \""=", 位于 \""
+', at "'=', 位于 "'
+',\x20at\x20\x22'=', 位于 \x22'
+"Error: "="错误: "
+'Error: '='错误: '
+"recording..."="正在录制，请按下任意键盘组合键..."
+'recording...'='正在录制，请按下任意键盘组合键...'
+"Choose outbound interface"="选择出站网卡接口"
+'Choose outbound interface'='选择出站网卡接口'
+'Choose\x20outbound\x20interface'='选择出站网卡接口'
+"only works when TAP mode enabled"="仅在启用 TAP 模式时生效"
+'only works when TAP mode enabled'='仅在启用 TAP 模式时生效'
+"[ Reset ]"="[ 重置 ]"
+'[ Reset ]'='[ 重置 ]'
+"openFile"="打开文件"
+'openFile'='打开文件'
+"openDirectory"="打开文件夹"
+'openDirectory'='打开文件夹'
+"Warning"="警告"
+'Warning'='警告'
+"Are you sure to reset all settings?"="确定重置所有设置吗?"
+'Are you sure to reset all settings?'='确定重置所有设置吗?'
+'Settings'='设置'
+'Reset\x20All\x20Settings'='重置所有设置'
+"Reset All Settings"="重置所有设置"
+'Reset All Settings'='重置所有设置'
+"General"="常规"
+"Settings Editor"="配置编辑器"
+'Settings Editor'='配置编辑器'
+"Editor"="编辑器"
+'Editor'='编辑器'
+'Notifications'='通知'
+"Notifications"="通知"
+"Silent Start"="启动 Clash For Windows 时自动最小化到通知栏"
+'Silent Start'='启动 Clash For Windows 时自动最小化到通知栏'
+'Silent\x20Start'='启动 Clash For Windows 时自动最小化到通知栏'
+"Random Controller Port"="使用动态端口连接 Clash 核心程序"
+'Random Controller Port'='使用动态端口连接 Clash 核心程序'
+Stop Sorting=停止排序
+"GUI Log Folder"="GUI 日志文件夹"
+'GUI Log Folder'='GUI 日志文件夹'
+"Open"="打开"
+'Open'='打开'
+"Appearance"="外观"
+'Appearance'='外观'
+'Theme'='主题'
+"Theme"="主题"
+"Light"="明亮"
+'Light'='明亮'
+"Dark"="暗黑"
+'Dark'='暗黑'
+"Cyberpunk"="赛博朋克"
+'Cyberpunk'='赛博朋克'
+"Follow System Theme"="跟随系统主题"
+'Follow System Theme'='跟随系统主题'
+'Follow\x20System\x20Theme'='跟随系统主题'
+"Font Family"="字体"
+'Font Family'='字体'
+'Font\x20Family'='字体'
+"Default Icon Path"="默认状态的图标路径"
+'Default Icon Path'='默认状态的图标路径'
+"ICO(.ico) asset path"="ICO(.ico) 图标路径"
+'ICO(.ico) asset path'='ICO(.ico) 图标路径'
+"System Proxy On Icon Path"="启用系统代理时的图标路径"
+'System\x20Proxy\x20On\x20Icon\x20Path'='启用系统代理时的图标路径'
+'System Proxy On Icon Path'='启用系统代理时的图标路径'
+'ICO(.ico)\x20asset\x20path'='ICO(.ico) 图标路径'
+"Tray Speed"="托盘速度"
+'Tray Speed'='托盘速度'
+"Tray Color"="托盘颜色"
+'Tray Color'='托盘颜色'
+'Tray\x20Color(Dark)'='托盘颜色(暗黑)'
+"Tray Color(Dark)"="托盘颜色(暗黑)"
+'Tray Color(Dark)'='托盘颜色(暗黑)'
+"Show New Version Icon"="有新版本时提醒"
+'Show New Version Icon'='有新版本时提醒'
+'System\x20Proxy'='系统代理'
+'Type'='类型'
+"PAC Content"="PAC 内容"
+'PAC Content'='PAC 内容'
+'Edit'='编辑'
+'Bypass\x20Domain/IPNet'='系统代理绕过的域名/IP网段'
+"Bypass Domain/IPNet"="系统代理绕过的域名/IP网段"
+'Bypass Domain/IPNet'='系统代理绕过的域名/IP网段'
+"Edit"="编辑"
+"Profile Mixin"="Mixin 混合配置"
+'Profile Mixin'='Mixin 混合配置'
+"Type"="类型"
+#"Proxies"="代理"
+"Proxy Item Width"="代理节点条目宽度"
+'Proxy Item Width'='代理节点条目宽度'
+'Proxy\x20Item\x20Width'='代理节点条目宽度'
+"Order By"="排序规则"
+'Order By'='排序规则'
+'Default'='默认'
+"Default"="默认"
+"Latency"="延迟"
+'Latency'='延迟'
+"Alphabet"="字母"
+'Alphabet'='字母'
+"Latency Test URL"="延迟测试 URL"
+'Latency Test URL'='延迟测试 URL'
+'Latency\x20Test\x20URL'='延迟测试 URL'
+"Latency Test Timeout"="延迟测试超时时间"
+'Latency Test Timeout'='延迟测试超时时间'
+"Show Filter"="在节点列表右下角显示筛选按钮"
+'Show Filter'='在节点列表右下角显示筛选按钮'
+'Connections'='连接'
+"Break When Proxy Change"="代理更改时中断连接"
+'Break When Proxy Change'='代理更改时中断连接'
+"None"="不中断"
+'None'='不中断'
+'Chain'='旧链'
+"Chain"="旧链"
+"All"="全部"
+'All'='全部'
+"Break When Profile Change"="配置更改时中断连接"
+'Break When Profile Change'='配置更改时中断连接'
+'Break\x20When\x20Profile\x20Change'='配置更改时中断连接'
+'Break\x20When\x20Mode\x20Change'='代理模式更改时中断连接'
+"Break When Mode Change"="代理模式更改时中断连接"
+'Break When Mode Change'='代理模式更改时中断连接'
+"Display Type"="连接面板显示的连接类型"
+'Display Type'='连接面板显示的连接类型'
+"Keep Disconnected"="在连接面板保留已断开的连接条目"
+'Keep Disconnected'='在连接面板保留已断开的连接条目'
+'Keep\x20Disconnected'='在连接面板保留已断开的连接条目'
+"Outbound"="出站"
+'Outbound'='出站'
+"Interface Name"="网卡接口名称"
+'Interface Name'='网卡接口名称'
+"Detected: "="检测到: "
+'Detected: '='检测到: '
+'Detected:\x20'='检测到: '
+"Child Processes"="子进程"
+'Child Processes'='子进程'
+"Processes"="进程"
+'Processes'='进程'
+'Profiles'='配置'
+'Parsers'='预处理配置'
+"Parsers"="预处理配置"
+"Console Output"="控制台输出日志"
+'Console Output'='控制台输出日志'
+"Open File"="打开文件"
+'Open File'='打开文件'
+'Open\x20File'='打开文件'
+"Folder Path"="配置文件目录"
+'Folder Path'='配置文件目录'
+"Profiles folder path"="配置文件路径"
+'Profiles folder path'='配置文件路径'
+"Request Headers"="请求头"
+'Request Headers'='请求头'
+'Select\x20After\x20Updated'='更新订阅后直接切换为该配置文件'
+"Select After Updated"="更新订阅后直接切换为该配置文件"
+'Select After Updated'='更新订阅后直接切换为该配置文件'
+"Shortcuts"="热键"
+'Shortcuts'='热键'
+"Record"="点击以录制热键"
+'Record'='点击以录制热键'
+'Global\x20Mode'='全局模式'
+'Global Mode'='全局模式'
+"Global Mode"="全局模式"
+"Rule Mode"="规则模式"
+'Rule Mode'='规则模式'
+'Direct\x20Mode'='直连模式'
+'Direct Mode'='直连模式'
+'Script\x20Mode'='脚本模式'
+'Script Mode'='脚本模式'
+"Script Mode"="脚本模式"
+" is\n      launching for editing.\n    "=" \n      正在启动以进行编辑.\n    "
+' is\n      launching for editing.\n    '=' \n      正在启动以进行编辑.\n    '
+"Close the editing file to Save."="关闭编辑文件以保存."
+'Close the editing file to Save.'='关闭编辑文件以保存.'
+#主界面翻译内容
+'General'='常规'
+"mixed-port changed"="mixed-port 已变更"
+'mixed-port changed'='mixed-port 已变更'
+"external controller port changed"="外部控制器端口已变更"
+"new outbound interface: "="新出站网卡接口: "
+'new outbound interface: '='新出站网卡接口: '
+"Shortcut"="触发热键"
+'Shortcut'='触发热键'
+System Proxy: "=系统代理: "
+System Proxy: '=系统代理: '
+"On"="开启"
+'On'='开启'
+"Off"="关闭"
+'Off'='关闭'
+'Mixin:\x20'='混合配置: '
+"Mixin: "="混合配置: "
+'Mixin: '='混合配置: '
+'Mode:\x20'='模式: '
+'Mode: '='模式: '
+"Mode: "="模式: "
+"system resume, restart tun2socks"="系统恢复, 重新启动 tun2socks"
+'system resume, restart tun2socks'='系统恢复, 重新启动 tun2socks'
+'system\x20resume,\x20restart\x20tun2socks'='系统恢复, 重新启动 tun2socks'
+"Download progress: "="下载进度: "
+'Download progress: '='下载进度: '
+'Download\x20progress:\x20'='下载进度: '
+"Connected"="已连接"
+'Connected'='已连接'
+"Disconnected"="已断开"
+'Disconnected'='已断开'
+'Installing'='正在安装'
+"Installing"="正在安装"
+"Uninstalling"="正在卸载"
+'Uninstalling'='正在卸载'
+'clash\x20is\x20not\x20ready,\x20retry\x20'='clash 未就绪, 重试 '
+'clash is not ready, retry '='clash 未就绪, 重试 '
+"clash is not ready, retry "="clash 未就绪, 重试 "
+" times"=" 次"
+' times'=' 次'
+'restore\x20at\x20index:\x20'='恢复到: '
+'restore at index: '='恢复到: '
+"restore at index: "="恢复到: "
+"TUN mode enable but no interface-name in this YAML"="TUN 模式已开启但此 YAML 配置文件内未设置网络接口"
+'TUN mode enable but no interface-name in this YAML'='TUN 模式已开启但此 YAML 配置文件内未设置网络接口'
+"TUN mode enable but no interface-name setted"="TUN 模式已开启但未设置网络接口"
+'TUN mode enable but no interface-name setted'='TUN 模式已开启但未设置网络接口'
+"TAP mode enable but no interface-name in this YAML"="TAP 模式已开启但此 YAML 配置文件内未设置网络接口"
+'TAP mode enable but no interface-name in this YAML'='TAP 模式已开启但此 YAML 配置文件内未设置网络接口'
+"TUN mode enabled but wintun.dll is missing!"="TUN 模式已启用但找不到 wintun.dll!"
+'TUN mode enabled but wintun.dll is missing!'='TUN 模式已启用但找不到 wintun.dll!'
+"click to open document"="点击打开帮助文档"
+'click to open document'='点击打开帮助文档'
+"TAP mode enable but no interface-name setted"="TAP 模式已开启但未设置网络接口"
+'TAP mode enable but no interface-name setted'='TAP 模式已开启但未设置网络接口'
+"Switching profile failed with status: "="切换配置失败: "
+'Switching profile failed with status: '='切换配置失败: '
+", on line: "=", 位于行: "
+', on line: '=', 位于行: '
+", at column: "=", 列: "
+', at column: '=', 列: '
+'Error:\x20'='错误: '
+"fail to restore last profile with error: "="恢复最近一次配置失败: "
+'fail to restore last profile with error: '='恢复最近一次配置失败: '
+"restore proxy settings"="恢复代理设置"
+'restore proxy settings'='恢复代理设置'
+'restore\x20proxy\x20settings'='恢复代理设置'
+"restarting clash core..."="正在重启 clash 核心程序..."
+'restarting clash core...'='正在重启 clash 核心程序...'
+RESTful API listening at:=API 监听在:
+"clash core startup success!"="clash 核心程序启动成功!"
+'clash core startup success!'='clash 核心程序启动成功!'
+"clash core startup failed!!!"="clash 核心程序启动失败!!!"
+'clash core startup failed!!!'='clash 核心程序启动失败!!!'
+wait for method [=等待 [
+] to be fulfilled, retry=] 函数完成, 重试
+'check\x20for\x20app\x20update,\x20current:\x20'='检查更新, 当前版本: '
+"check for app update, current: "="检查更新, 当前版本: "
+'check for app update, current: '='检查更新, 当前版本: '
+"load data from general config.yaml"="从标准 config.yaml 加载数据"
+'load data from general config.yaml'='从标准 config.yaml 加载数据'
+"fail to load general config.yaml with error: "="加载标准 config.yaml 文件出错: "
+'fail to load general config.yaml with error: '='加载标准 config.yaml 文件出错: '
+'first\x20luanch,\x20creating\x20config.yaml...'='首次运行，正在创建配置文件 config.yaml...'
+"first luanch, creating config.yaml..."="首次运行，正在创建配置文件 config.yaml..."
+'first luanch, creating config.yaml...'='首次运行，正在创建配置文件 config.yaml...'
+"fail to update profile with url: "="从 url 更新配置文件失败: "
+'fail to update profile with url: '='从 url 更新配置文件失败: '
+"Profile update failed"="配置文件更新失败"
+'Profile update failed'='配置文件更新失败'
+'Profile\x20update\x20failed'='配置文件更新失败'
+'config.yaml\x20has\x20been\x20changed'='config.yaml 已被更改'
+"config.yaml has been changed"="config.yaml 已被更改"
+"http server started at: "="http 服务已启动: "
+'http server started at: '='http 服务已启动: '
+"http server failed to start with error: "="http 服务启动失败: "
+'http server failed to start with error: '='http 服务启动失败: '
+"app start with mode: "="app 运行方式为: "
+'app start with mode: '='app 运行方式为: '
+"app exiting, turn off system proxy"="程序退出, 关闭系统代理"
+'app exiting, turn off system proxy'='程序退出, 关闭系统代理'
+"Clash is running in the background"="Clash 正在后台运行"
+'Clash is running in the background'='Clash 正在后台运行'
+'Enjoy\x20your\x20free\x20time!'='开始享受你的美好时光!'
+"Enjoy your free time!"="开始享受你的美好时光!"
+'Enjoy your free time!'='开始享受你的美好时光!'
+'New'='新增'
+" Proxy Group"=" 代理组"
+' Proxy Group'=' 代理组'
+'\x20Proxy\x20Group'=' 代理组'
+'Group\x20Name'='分组名称'
+'Group Name'='分组名称'
+"Group Name"="分组名称"
+"Interval ( Second )"="间隔 ( 秒 )"
+'Interval ( Second )'='间隔 ( 秒 )'
+"New"="新增"
+" Proxy"=" 代理"
+' Proxy'=' 代理'
+'\x20Proxy'=' 代理'
+'Proxy\x20Name'='代理名称'
+'Proxy Name'='代理名称'
+"Proxy Name"="代理名称"
+"Server"="服务器IP或域名"
+'Server'='服务器IP或域名'
+"Port"="端口"
+'Port'='端口'
+"Password"="密码"
+'Password'='密码'
+"Obfs (Optional, tls or http)"="Obfs 混淆(可选项, tls 或 http)"
+'Obfs (Optional, tls or http)'='Obfs 混淆(可选项, tls 或 http)'
+'Obfs-host\x20(Optional)'='Obfs-host\x20(可选项)'
+"Obfs-host (Optional)"="Obfs-host (可选项)"
+'Obfs-host (Optional)'='Obfs-host (可选项)'
+"AlterId"="AlterId"
+'AlterId'='AlterId'
+"User Name (Optional)"="用户名 (可选项)"
+'User Name (Optional)'='用户名 (可选项)'
+"Password (Optional)"="密码 (可选项)"
+'Password (Optional)'='密码 (可选项)'
+'Password\x20(Optional)'='密码 (可选项)'
+'ws\x20path'='ws path 伪装路径'
+'ws path'='ws path 伪装路径'
+"ws path"="ws path 伪装路径"
+"ws headers (JSON)"="ws headers (JSON 格式)"
+'ws headers (JSON)'='ws headers (JSON 格式)'
+'Skip\x20Cert\x20Verify'='跳过证书验证'
+'Skip Cert Verify'='跳过证书验证'
+"Skip Cert Verify"="跳过证书验证"
+'Cancel'='取消'
+"Save"="保存"
+"Could not edit proxy gorup type ["="无法编辑代理组类型 ["
+'Could not edit proxy gorup type ['='无法编辑代理组类型 ['
+'Could\x20not\x20edit\x20proxy\x20gorup\x20type\x20['='无法编辑代理组类型 ['
+"Could not edit proxy type ["="无法编辑代理类型 ["
+'Could not edit proxy type ['='无法编辑代理类型 ['
+'Save'='保存'
+"Drag to sort or add to the list on the right."="拖动排序或添加到右边的列表."
+'Drag to sort or add to the list on the right.'='拖动排序或添加到右边的列表.'
+"Proxy Groups"="代理分组"
+'Proxy Groups'='代理分组'
+"Add"="添加"
+'Add'='添加'
+"Special Proxies"="特殊代理"
+'Special Proxies'='特殊代理'
+'Special\x20Proxies'='特殊代理'
+"Create a new rule"="新建一条规则"
+'Create a new rule'='新建一条规则'
+"\n                Cancel\n              "="\n                取消\n              "
+'\n                Cancel\n              '='\n                取消\n              '
+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Content\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'='\n              内容\n            '
+"\n              Content\n            "="\n              内容\n            "
+'\n              Content\n            '='\n              内容\n            '
+'Proxy\x20or\x20Policy'='代理或策略'
+'Proxy or Policy'='代理或策略'
+"Proxy or Policy"="代理或策略"
+"Success"="成功"
+'Success'='成功'
+']\x20has\x20been\x20updated!'='] 已更新!'
+'] has been updated!'='] 已更新!'
+"] has been updated!"="] 已更新!"
+"Failed"="失败"
+'Failed'='失败'
+']\x20update\x20failed(Server\x20Error)!'='] 更新失败(服务器错误)!'
+'] update failed(Server Error)!'='] 更新失败(服务器错误)!'
+"] update failed(Server Error)!"="] 更新失败(服务器错误)!"
+"] update failed(Network Error)!"="] 更新失败(网络错误)!"
+'] update failed(Network Error)!'='] 更新失败(网络错误)!'
+']\x20update\x20failed(Network\x20Error)!'='] 更新失败(网络错误)!'
+"Done"="完成"
+'Done'='完成'
+"Fail"="失败"
+"Top 100 matching rules("="前100条匹配规则("
+'Top 100 matching rules('='前100条匹配规则('
+'Top\x20100\x20matching\x20rules('='前100条匹配规则('
+"\n        Add\n      "="\n        添加\n      "
+'\n        Add\n      '='\n        添加\n      '
+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20Add\x0a\x20\x20\x20\x20\x20\x20'='\n        添加\n      '
+"\n        Cancel\n      "="\n        取消\n      "
+'\n        Cancel\n      '='\n        取消\n      '
+'fiter\x20by\x20keywords'='关键字过滤'
+'fiter by keywords'='关键字过滤'
+"fiter by keywords"="关键字过滤"
+"\n            Rules: "="\n            规则数: "
+'\n            Rules: '='\n            规则数: '
+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Rules:\x20'='\n            规则数: '
+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Last\x20Updated:\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'='\n            最后更新于:\n            '
+'\n            Last Updated:\n            '='\n            最后更新于:\n            '
+"\n            Last Updated:\n            "="\n            最后更新于:\n            "
+"Download from a URL"="输入URL下载配置文件"
+'Download from a URL'='输入URL下载配置文件'
+"Downloading"="下载中"
+'Downloading'='下载中'
+"Error!"="出错!"
+'Error!'='出错!'
+"Success!"="成功!"
+'Success!'='成功!'
+"Download"="下载"
+'Download'='下载'
+#可能不翻译a
+"Direct Mode"="直连模式"
+#可能不翻译b
+'Found\x20'='找到 '
+'Found '='找到 '
+"Found "="找到 "
+" matching parsers"=" 条匹配的预处理配置信息"
+' matching parsers'=' 条匹配的预处理配置信息'
+"Name"="名称"
+'Name'='名称'
+'Input\x20a\x20new\x20file\x20name'='输入新文件名'
+'Input a new file name'='输入新文件名'
+"Input a new file name"="输入新文件名"
+'Copy\x20profile'='复制配置'
+'Copy profile'='复制配置'
+"Copy profile"="复制配置"
+"Edit profile information"="编辑配置信息"
+'Edit profile information'='编辑配置信息'
+"Update Interval (hour)"="更新间隔(小时)"
+'Update Interval (hour)'='更新间隔(小时)'
+'Update\x20Interval\x20(hour)'='更新间隔(小时)'
+"Update Interval must be an integer"="更新间隔必须是整数"
+'Update Interval must be an integer'='更新间隔必须是整数'
+'Local\x20file\x20already\x20exist.'='本地文件已存在.'
+'Local file already exist.'='本地文件已存在.'
+"Local file already exist."="本地文件已存在."
+'Error'='错误'
+'Are\x20you\x20sure\x20to\x20delete\x20\x22'='确定要删除\x22'
+'Are you sure to delete \"'='确定要删除\"'
+"Are you sure to delete \""="确定要删除 \""
+'Are you sure to delete "'='确定要删除 "'
+'Yes'='是'
+"Yes"="是"
+'No'='否'
+"No"="否"
+"Could not switch to this profile!"="无法切换到此配置文件!"
+'Could not switch to this profile!'='无法切换到此配置文件!'
+"Edit in Text Mode"="以文本模式编辑"
+'Edit\x20in\x20Text\x20Mode'='以文本模式编辑'
+'Edit in Text Mode'='以文本模式编辑'
+'local\x20file'='本地文件'
+'local file'='本地文件'
+"local file"="本地文件"
+"Download profile("="下载配置("
+'Download profile('='下载配置('
+')\x20failed\x20with\x20error:\x20HTTP\x20Response\x20Status\x20Code('=') 失败: HTTP 返回状态码('
+') failed with error: HTTP Response Status Code('=') 失败: HTTP 返回状态码('
+") failed with error: HTTP Response Status Code("=") 失败: HTTP 返回状态码("
+'Download\x20profile('='下载配置('
+')\x20failed\x20with\x20error:\x20'=') 失败: '
+') failed with error: '=') 失败: '
+") failed with error: "=") 失败: "
+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Update\x20All\x0a\x20\x20\x20\x20\x20\x20\x20\x20'='\n          全部更新\n        '
+'\n          Update All\n        '='\n          全部更新\n        '
+"\n          Update All\n        "="\n          全部更新\n        "
+'Import'='导入'
+"Import"="导入"
+"Last updated: "="最后更新于: "
+'Last updated: '='最后更新于: '
+"Edit in text mode"="以文本模式编辑"
+'Edit in text mode'='以文本模式编辑'
+'Edit\x20policies'='修改策略'
+"Edit policies"="修改策略"
+'Edit policies'='修改策略'
+"Edit rules"="修改规则"
+'Edit rules'='修改规则'
+"Duplicate profile"="复制为新的配置"
+'Duplicate profile'='复制为新的配置'
+'Duplicate\x20profile'='复制为新的配置'
+"Go to URL"="用浏览器打开订阅URL"
+'Go to URL'='用浏览器打开订阅URL'
+"Parsers info"="预处理配置信息"
+'Parsers info'='预处理配置信息'
+"Change information"="修改配置信息"
+'Change information'='修改配置信息'
+'Update\x20this\x20profile'='更新此配置'
+'Update this profile'='更新此配置'
+"Update this profile"="更新此配置"
+"Please confirm"="请确认"
+'Please confirm'='请确认'
+"config.yaml and country.mmdb will be removed."="config.yaml 和 country.mmdb 将被删除."
+'config.yaml and country.mmdb will be removed.'='config.yaml 和 country.mmdb 将被删除.'
+"Could not connect to Clash Core"="无法连接到 Clash 核心程序"
+'Could not connect to Clash Core'='无法连接到 Clash 核心程序'
+'oops,\x20got\x20an\x20error\x20here'='哎呀,出错了'
+'oops, got an error here'='哎呀,出错了'
+"oops, got an error here"="哎呀,出错了"
+"\n      Home Directory\n    "="\n      配置文件主目录\n    "
+'\n      Home Directory\n    '='\n      配置文件主目录\n    '
+"\n      Logs Folder\n    "="\n      日志文件夹\n    "
+'\n      Logs Folder\n    '='\n      日志文件夹\n    '
+"Try to repair"="尝试修复"
+'Try to repair'='尝试修复'
+("Errors"=("错误"
+('Errors'=('错误'
+"\n        Home Directory\n      "="\n        配置文件主目录\n      "
+'\n        Home Directory\n      '='\n        配置文件主目录\n      '
+"\n        Logs Folder\n      "="\n        日志文件夹\n      "
+'\n        Logs Folder\n      '='\n        日志文件夹\n      '
+"\n        Try to repair\n      "="\n        尝试修复\n      "
+'\n        Try to repair\n      '='\n        尝试修复\n      '
+"Loading..."="加载中..."
+'Loading...'='加载中...'
+"Start with macOS"="开机启动"
+'Start with macOS'='开机启动'
+'Start\x20with\x20Windows'='开机启动'
+'Start with Windows'='开机启动'
+"Start with Windows"="开机启动"
+Service management=服务管理
+"It might take a while.<br/>The APP will be relaunched automatically.<br/><br/>Current status: "="这可能需要一段时间.<br/>APP 将自动重新启动.<br/><br/>当前状态: "
+'It might take a while.<br/>The APP will be relaunched automatically.<br/><br/>Current status: '='这可能需要一段时间.<br/>APP 将自动重新启动.<br/><br/>当前状态: '
+##v0.17.0
+"<br/><br/><strong>nftables</strong> and <strong>iproute2</strong> are required, please install them first!!!"="<br/><br/>请先安装 <strong>nftables</strong> 和 <strong>iproute2</strong>!!!"
+"It might take a while.<br/>The APP will be relaunched automatically."="这可能需要一段时间.<br/>APP 将自动重新启动."
+"<br/><br/>Current status: "="<br/><br/>当前状态: "
+##v0.17.0-end
+?"Inactive":"Active"=?"无效":"已激活"
+?"Inactive":'Active'=?"无效":'已激活'
+?'Inactive':'Active'=?'无效':'已激活'
+?'Inactive':"Active"=?'无效':"已激活"
+"TAP device management"="TAP 设备管理"
+'TAP\x20device\x20management'='TAP 设备管理'
+'TAP device management'='TAP 设备管理'
+"An adapter named \"cfw-tap\" will route your data into clash.<br /><br />If the installation box pops up, keep clicking \"Next\" until the installation is complete."="数据将通过一个名称为 \"cfw-tap\" 的网络适配器路由到 clash.<br /><br />如果安装对话框弹出，请继续单击 \"下一步\" 直到安装完成."
+An adapter named "cfw-tap" will route your data into clash.<br /><br />If the installation box pops up, keep clicking "Next" until the installation is complete.=数据将通过一个名称为 "cfw-tap" 的网络适配器路由到 clash.<br /><br />如果安装对话框弹出，请继续单击 "下一步" 直到安装完成.
+"Install"="安装"
+'Install'='安装'
+"Uninstall"="卸载"
+'Uninstall'='卸载'
+"Remove"="卸载"
+'Remove'='卸载'
+Change Log Level=更改日志级别
+Log Level=当前日志级别
+restore proxy group=恢复代理分组
+" to "=" 到 "
+" failed"=" 失败"
+" failed with reason: "=" 失败: "
+faile to get user dns setting with error:=获取用户DNS出错:
+upgrade app failed with error:=升级失败:
+upgrade asset path:=升级路径:
+"Package downloaded successfully, do you want to execute it?"="安装包下载完成, 是否运行?"
+'Package downloaded successfully, do you want to execute it?'='安装包下载完成, 是否运行?'
+"Update installed successfully, do you want to restart the APP?"="安装更新完成, 是否重新启动 APP?"
+silent will prevent .log file to generate on next startup=Clash 核心程序默认是将日志打印输出到&nbsp;标准输出设备(通常是屏幕).&nbsp;CFW&nbsp;在日志级别为非&nbsp;silent&nbsp;时会把日志写入到磁盘文件。<br/>日志量由少到多排序为：<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;静默&nbsp;<&nbsp;错误&nbsp;<&nbsp;警告&nbsp;<&nbsp;信息&nbsp;<&nbsp;调试<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;silent&nbsp;<&nbsp;error&nbsp;<&nbsp;warning&nbsp;<&nbsp;info&nbsp;<&nbsp;debug<br/>silent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;不记录日志<br/>error&nbsp;&nbsp;&nbsp;&nbsp;：记录错误和异常信息到日志文件<br/>warning:&nbsp;记录错误和异常还有告警信息<br/>info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;记录程序正常运行时的日志(包括警告，错<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;误和异常信息)<br/>debug&nbsp;&nbsp;:&nbsp;日志量最多，一般用于提供日志文件给开<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发者进行诊断问题
+"Customize"="自定义设置 IP"
+'Customize'='自定义设置 IP'
+'Success'='成功'
+"cfw-tap device had been installed"="cfw-tap 网络适配器已安装"
+'cfw-tap device had been installed'='cfw-tap 网络适配器已安装'
+"counld not install cfw-tap device."="无法安装 cfw-tap 网络适配器."
+'counld not install cfw-tap device.'='无法安装 cfw-tap 网络适配器.'
+'cfw-tap\x20device\x20had\x20been\x20removed'='cfw-tap 网络适配器已卸载'
+"cfw-tap device had been removed"="cfw-tap 网络适配器已卸载"
+'cfw-tap device had been removed'='cfw-tap 网络适配器已卸载'
+"counld not remove cfw-tap device."="无法卸载 cfw-tap 网络适配器."
+'counld not remove cfw-tap device.'='无法卸载 cfw-tap 网络适配器.'
+"IP Address"="IP 地址"
+'IP Address'='IP 地址'
+'Subnet\x20Mask'='子网掩码'
+"Subnet Mask"="子网掩码"
+'Subnet Mask'='子网掩码'
+"Default Gateway"="默认网关"
+'Default Gateway'='默认网关'
+"TAP device"="TAP 网络适配器"
+'TAP device'='TAP 网络适配器'
+"You need to reinstall the TAP device after you change these fields!"="更改这些字段后，你需要重新安装 TAP 网络适配器!"
+'You need to reinstall the TAP device after you change these fields!'='更改这些字段后，你需要重新安装 TAP 网络适配器!'
+'Open\x20terminal\x20with\x20proxy\x20set\x20up'='打开终端并设置终端的代理'
+'Open terminal with proxy set up'='打开终端并设置终端的代理'
+"Open terminal with proxy set up"="打开终端并设置终端的代理"
+"Select a terminal"="选择终端"
+'Select a terminal'='选择终端'
+'Select\x20a\x20terminal'='选择终端'
+Copy Commands Only=复制命令
+New Port=新端口
+Port must be an integer between 0 to 65353=端口必须是一个0到65353之间的整数
+Change Mixed Port=变更 Mixed 端口
+' had been released'=' 已发布'
+'\x20had\x20been\x20released'=' 已发布'
+" had been released"=" 已发布"
+"Copy URL"="复制下载链接"
+'Copy URL'='复制下载链接'
+'Copy\x20URL'='复制下载链接'
+"You are awesome"="你真棒！"
+'You are awesome'='你真棒！'
+'You\x20are\x20awesome'='你真棒！'
+"The current version is up to date."="当前使用的是最新版."
+'The current version is up to date.'='当前使用的是最新版.'
+"Copy proxy setting commands"="复制代理设置命令"
+'Copy proxy setting commands'='复制代理设置命令'
+"Commands have been copied to Clipboad!"="命令已复制到剪切板!"
+'Commands have been copied to Clipboad!'='命令已复制到剪切板!'
+"Updating GeoIP database is not allowed in CFW, please do it manually."="CFW(Clash For Windows)不允许更新 GeoIP 数据库, 请手动更新."
+'Updating GeoIP database is not allowed in CFW, please do it manually.'='CFW(Clash For Windows)不允许更新 GeoIP 数据库, 请手动更新.'
+"Note"="注意"
+'Note'='注意'
+"MaxMind User License Key"="MaxMind 用户许可证密钥"
+'MaxMind User License Key'='MaxMind 用户许可证密钥'
+"Update GeoIP database"="更新 GeoIP 数据库"
+'Update GeoIP database'='更新 GeoIP 数据库'
+"Input fields are alternative"="输入字段是可选字段"
+'Input fields are alternative'='输入字段是可选字段'
+"Updating... (0%)"="正在更新... (0%)"
+'Updating... (0%)'='正在更新... (0%)'
+'Restarting\x20core...'='正在重启内核...'
+'Restarting core...'='正在重启内核...'
+"Restarting core..."="正在重启内核..."
+"Updating... ("="正在更新... ("
+'Updating... ('='正在更新... ('
+"Download GeoIP database failed with error: "="下载 GeoIP 数据库失败: "
+'Download\x20GeoIP\x20database\x20failed\x20with\x20error:\x20'='下载 GeoIP 数据库失败: '
+'Download GeoIP database failed with error: '='下载 GeoIP 数据库失败: '
+"Download GeoIP database failed with error: "="下载 GeoIP 数据库失败: "
+'Updating...\x20(0%)'='正在更新... (0%)'
+"Updating... (0%)"="正在更新... (0%)"
+'Updating... (0%)'='正在更新... (0%)'
+"Restarting core..."="正在重启内核..."
+'Restarting core...'='正在重启内核...'
+"CMD with proxy"="CMD 代理"
+'CMD with proxy'='CMD 代理'
+"Allow LAN"="允许局域网连接"
+'Allow LAN'='允许局域网连接'
+"Core Version"="Clash 核心版本"
+'Core Version'='Clash 核心版本'
+"Clash Core"="Clash 核心 ( API 端口 )"
+'Clash Core'='Clash 核心 ( API 端口 )'
+"Home Directory"="配置文件主目录"
+'Home Directory'='配置文件主目录'
+'Home\x20Directory'='配置文件主目录'
+'\n        Open Folder\n      '='\n        打开目录\n      '
+"\n        Open Folder\n      "="\n        打开目录\n      "
+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20Open\x20Folder\x0a\x20\x20\x20\x20\x20\x20'='\n        打开目录\n      '
+'GeoIP\x20Database'='GeoIP 数据库'
+'GeoIP Database'='GeoIP 数据库'
+"GeoIP Database"="GeoIP 数据库"
+"UWP Loopback"="UWP 应用网络回环"
+'UWP Loopback'='UWP 应用网络回环'
+"\n        Launch Helper\n      "="\n        启动助手\n      "
+'\n        Launch Helper\n      '='\n        启动助手\n      '
+'TAP\x20Device'='TAP 网络适配器'
+'TAP Device'='TAP 网络适配器'
+"TAP Device"="TAP 网络适配器"
+"\n        Manage\n      "="\n        管理\n      "
+'\n        Manage\n      '='\n        管理\n      '
+"Service Mode"="服务模式"
+"Root Enable"="获取 Root 权限"
+'Root Enable'='获取 Root 权限'
+"Authorize"="授权"
+'Authorize'='授权'
+"General YAML"="通用 YAML 配置"
+'General YAML'='通用 YAML 配置'
+"\n        Text Mode Edit\n      "="\n        文本模式编辑\n      "
+'\n        Text Mode Edit\n      '='\n        文本模式编辑\n      '
+"Docs"="文档"
+'Docs'='文档'
+"\n          Mixin allows you to overwrite the original configuration file.\n          "="\n          Mixin 混合配置允许你覆盖原有配置文件以注入公共属性设置.\n          "
+'\n          Mixin allows you to overwrite the original configuration file.\n          '='\n          Mixin 混合配置允许你覆盖原有配置文件以注入公共属性设置.\n          '
+:["global"=:["全局"
+:['global'=:['全局'
+,"rule",=,"规则",
+,'rule',=,'规则',
+,"direct",=,"直连",
+,'direct',=,'直连',
+"script"]}="脚本"]}
+'script']}='脚本']}
+"Proxy Providers"="代理服务商"
+'Proxy Providers'='代理服务商'
+"Rule Providers"="规则服务商"
+'Rule Providers'='规则服务商'
+"Update"="更新"
+'Update'='更新'
+"Health Check"="健康检查"
+'Health Check'='健康检查'
+"Update All"="全部更新"
+'Update All'='全部更新'
+'Health\x20Check\x20All'='全部检查'
+'Health Check All'='全部检查'
+"Health Check All"="全部检查"
+'Refresh'='刷新'
+"Refresh"="刷新"
+"No provider in this profile."="此配置文件中没有配置代理服务商."
+'No provider in this profile.'='此配置文件中没有配置代理服务商.'
+'Check'='测试'
+"Check"="测试"
+"Timeout"="超时"
+'Timeout'='超时'
+"Provider: "="代理服务商: "
+'Provider: '='代理服务商: '
+'Provider:\x20'='代理服务商: '
+"No proxy group in this profile"="此配置文件无代理分组"
+'No proxy group in this profile'='此配置文件无代理分组'
+"\n        Go to\n        "="\n        请转到\n        "
+'\n        Go to\n        '='\n        请转到\n        '
+"\n        to import/switch a profile\n      "="\n        进行导入或切换配置文件\n      "
+'\n        to import/switch a profile\n      '='\n        进行导入或切换配置文件\n      '
+"Update provider"="更新服务列表"
+'Update provider'='更新服务列表'
+"could not update provider"="无法更新服务列表"
+'could not update provider'='无法更新服务列表'
+"Providers"="服务商"
+'Providers'='服务商'
+"Image is on the way"="图片正在加载"
+'Image is on the way'='图片正在加载'
+"Image not found"="找不到图片"
+'Image not found'='找不到图片'
+"Relevance"="相关信息"
+'Relevance'='相关信息'
+"Document"="帮助文档"
+'Document'='帮助文档'
+'Thanks'='鸣谢'
+"Thanks"="鸣谢"
+"Advertisement"="广告"
+'Advertisement'='广告'
+'Developer'='开发者'
+"Developer"="开发者"
+"Stop"="暂停"
+'Stop'='暂停'
+"Start"="开始"
+'Start'='开始'
+"Copied to Clipboad!"="已复制到剪切板!"
+'Copied to Clipboad!'='已复制到剪切板!'
+"Request Logs"="请求日志"
+'Request Logs'='请求日志'
+"mode: "="模式: "
+'mode: '='模式: '
+"Clear"="清空"
+'Clear'='清空'
+'Empty\x20log\x20list'='暂无日志'
+'Empty log list'='暂无日志'
+"Empty log list"="暂无日志"
+'Refresh\x20your\x20browser\x20to\x20make\x20requests.'='刷新浏览器以发出请求.'
+'Refresh your browser to make requests.'='刷新浏览器以发出请求.'
+"Refresh your browser to make requests."="刷新浏览器以发出请求."
+'Upload\x20Speed'='上传速度'
+'Upload Speed'='上传速度'
+"Upload Speed"="上传速度"
+"Download Speed"="下载速度"
+'Download Speed'='下载速度'
+'Download\x20Speed'='下载速度'
+'Upload\x20Traffic'='上传流量'
+'Upload Traffic'='上传流量'
+"Upload Traffic"="上传流量"
+'Download Traffic'='下载流量'
+"Download Traffic"="下载流量"
+"Time"="时间"
+'Time'='时间'
+
+
+
+#时间汉化
+#['fromNow']()=.locale('zh-cn')['fromNow']()
+#["fromNow"]()=.locale('zh-cn')["fromNow"]()
+#其中 #.fromNow()},handleAllProvidersUpdate 是 服务商 页面的更新时间
+###updatedAt))+")=updatedAt))+"更新) #缺少一个  服务商的翻译了，这里不用再翻译
+###updatedAt))+"=updatedAt))+"更新  服务商的翻译了，这里不用再翻译
+#from(this.now)}catch(e){return"missing file"}}  是 配置 页面的更新时间
+#.fromNow()},traffic  是 连接 页面的时间
+# fromNow()},providerOfPayload 这里要翻译成  前 ，是 规则集使用了provider 的情况
+
+#下边正常
+#前建立连接
+#.fromNow()},traffic=.locale("zh-co").fromNow()},traffic
+#.fromNow()},traffic=.locale("zh-tr").fromNow()},traffic
+.fromNow()},traffic=.locale("tr").fromNow()},traffic
+
+#前更新
+#.fromNow()},handleAllProvidersUpdate=.locale("zh-mo").fromNow()},handleAllProvidersUpdate
+#.fromNow()},handleAllProvidersUpdate=.locale("zh-pr").fromNow()},handleAllProvidersUpdate
+.fromNow()},handleAllProvidersUpdate=.locale("pr").fromNow()},handleAllProvidersUpdate
+
+#前更新--配置页
+#.from(this.now)}catch(e){return"missing file"}}=.locale("zh-hk").from(this.now)}catch(e){return"文件丢失"}}
+#.from(this.now)}catch(e){return"missing file"}}=.locale("zh-co").from(this.now)}catch(e){return"文件丢失"}}
+.from(this.now)}catch(e){return"missing file"}}=.locale("co").from(this.now)}catch(e){return"文件丢失"}}
+
+#.fromNow()},providerOfPayload=.locale("zh-tw").fromNow()},providerOfPayload
+
+#规则集最后更新于用来，翻译成 xxx 前
+.fromNow()},providerOfPayload=.locale("zh-cn").fromNow()},providerOfPayload
+
+
+#上边正常
+"\n          "+e._s(t.payload)="名称\n          "+e._s(t.payload)
+"\n          "+e._s(t.type)="类型\n          "+e._s(t.type)
+"\n            "+e._s(e.providerOfPayload(t.payload).vehicleType)="规则来源:\n            "+e._s(e.providerOfPayload(t.payload).vehicleType)
+"\n            "+e._s(e.providerOfPayload(t.payload).behavior)="  行为类型:\n            "+e._s(e.providerOfPayload(t.payload).behavior)
+
+
+
+
+'Host'='主机'
+'Upload'='上传'
+'Download'='下载'
+'Source'='连接源'
+'Destination'='目标'
+'Rule'='规则'
+'Chains'='链路'
+"Connection Info"="连接信息"
+'Connection Info'='连接信息'
+"Total="流量
+'Total='流量
+"\n      Close All\n    "="\n      全部断开\n    "
+'\n      Close All\n    '='\n      全部断开\n    '
+#配置面板三个按钮大小设置
+}.confirm-right=;width:80px;}.confirm-right
+{margin-left:10px}.confirm-copy={margin-left:10px;width:80px;}.confirm-copy
++" Rules)\n=+" 条规则)\n
++' Rules)\n=+' 条规则)\n
+
+Clash Core Service started by Clash for Windows=用于 Clash 代理开机自启的服务
+
+
+"unknow error"="未知错误"
+"[Parser Error] "="[Parser 错误] "
+Lightweight Mode=轻量模式
+Proxies)=个代理节点)
+
+##v0.15.0
+Host:=主机:
+Upload:=上传:
+,Download:=,下载:
+,Source:=,连接源:
+Destination:=目标:
+,Rule:=,规则:
+Chains:=链路:
+"Pause"="暂停"
+"Resume"="恢复"
+"search"="筛选"
+##v0.15.0
+
+###v0.15.2
+"Enhanced Tray"="增强托盘"
+"Text"="文本"
+"Text to display in tray"="要在增强托盘中显示的文本"
+v("Script"=v("脚本"
+"Script to run"="增强托盘运行的脚本"
+,["global","规则","直连","script"]=,["global","rule","direct","script"]
+;["direct","规则","global","script"]=;["direct","rule","global","script"]
+###v0.15.2-end
+###v0.15.3
+"Specify Protocol"="指定协议( Windows 系统)"
+"Transparent"="背景透明"
+"foreground color"="前景色 red 或 #CBF 等"
+" Scheme\n    "="跳转方案(URI Scheme)\n    "
+###v0.15.3-end
+
+
+
+
+
+
+
+###############
+###############
+# 以下是其它JS的
+# parseMap.js
+Merge nodes aliases can only point to maps=合并节点别名只能指向映射
+Merge nodes can only have Alias nodes as values=合并节点只能有别名节点作为值
+Map keys must be unique=映射键必须唯一
+is repeated=重复
+Nested mappings are not allowed in compact mappings=紧凑映射中不允许嵌套映射
+Implicit map keys need to be followed by map values=隐式映射键后面需要跟随映射值
+Implicit map keys need to be on a single line=隐式映射键需要放在一行上
+Flow map contains an unexpected=Flow流格式映射包含意外的字符
+Indicator : missing in flow map entry=flow流格式不正确,缺少冒号
+Separator , missing in flow map=flow流格式不正确,缺少逗号
+Expected flow map to end with }=flow流格式应当以 } 结尾
+Network Error=网络错误
+timeout of=连接超时
+exceeded=已超过
+Request failed with status code=请求失败，错误代码:
+executor must be a function=执行器必须是函数
+node cannot be resolved as a mapping=节点无法解析为映射
+
+
+
+###未加密混淆启用AA：
+#.fromNow()=.locale('zh-cn').fromNow()
+
+
+t.chains[0]=t.chains[0]==="DIRECT"?"直连":t.chains[0]
+["btn"];=["btn"];"全局"==e?e="global":"规则"==e?e="rule":"直连"==e?e="direct":"脚本"==e&&(e="script");
+####switchMode:function(e){var t=this;
+,t},switchMode:function(e){var t=,t},switchMode:function(e){"全局"==e?e="global":"规则"==e?e="rule":"直连"==e?e="direct":"脚本"==e&&(e="script");var t
+e._s(e.mode)=("global"==e._s(e.mode)?"全局":"rule"==e._s(e.mode)?"规则":"direct"==e._s(e.mode)?"直连":"script"==e._s(e.mode)?"脚本":e._s(e.mode))
+e._s(e.logLevel)=("silent"==e._s(e.logLevel)?"静默":"error"==e._s(e.logLevel)?"错误":"warning"==e._s(e.logLevel)?"警告":"info"==e._s(e.logLevel)?"信息":"debug"==e._s(e.logLevel)?"调试":e._s(e.logLevel))
+###v0.15.3
+e.mode[0].toUpperCase()=("G"==e.mode[0].toUpperCase()?"全局":"R"==e.mode[0].toUpperCase()?"规则":"D"==e.mode[0].toUpperCase()?"直连":"S"==e.mode[0].toUpperCase()?"脚本":e.mode[0].toUpperCase())
+#).width=).width+65
+#,300,=,360,
+###v0.15.3
+###v0.15.4
+#流量箭头线条
+#concat(c.unit),270,30)=concat(c.unit),270,30)
+#concat(d.unit),270,58)=concat(d.unit),270,58)
+#u.moveTo(93,31),u.lineTo(100,22),u.lineTo(107,31)=u.moveTo(93,31),u.lineTo(100,22),u.lineTo(107,31)
+#u.moveTo(107,38),u.lineTo(100,47),u.lineTo(93,38)=u.moveTo(107,38),u.lineTo(100,47),u.lineTo(93,38)
+
+#20210910
+#,300,=,310,
+#i.fillText(c,300,50))=i.fillText(c,320,50)) ## 增强托盘自定义文字位置
+##a?280+(=a?280+(  ## 0 B/s末尾位置
+##20+parseInt(=50+parseInt(   ## 增强托盘自定义文字位置
+##280+(0<s?20
+#280+(0<s?20=310+(0<s?50
+
+## 增强托盘自定义文字位置
+fillText(c,300,50)=fillText(c,320,50)
+
+## 0 B/s末尾位置
+280+(=310+(
+
+#20210910
+
+#,270,=,290,
+,270,=,300,
+93,3=123,3
+lineTo(100=lineTo(130
+107,3=137,3
+
+
+###v0.15.4
+###v0.15.5
+"Hide Unselectable Group"="隐藏不可选择的代理组"
+"Display Chain Type"="连接面板中显示的链路信息类型"
+"Proxy","Group","Both"="节点名","分组名","全部"
+"Run Tray Script"="运行增强托盘配置的脚本"
+,Network=,网络协议
+Traffic:=流量:
+"Start Time"="开始时间"
+###v0.15.5-end
+###v0.15.6
+"Run Time Format"="运行时间格式"
+"Show/Hide Dashboard"="打开/关闭主界面"
+###v0.15.6-end
+###v0.15.7
+"Edit Parsers"="编辑预处理配置"
+"\n        Force Quit\n      "="\n        强制退出\n      "
+"Credits"="鸣谢"
+###v0.15.7-end
+###v0.16.0
+"Static Host"="静态主机IP地址(启用DHCP服务端时作为局域网代理网关用)"
+"Router"="路由"
+"Select a interface"="选择一个接口"
+"Configuration"="配置"
+"Interface"="接口"
+"Local IP Address"="本地IP地址"
+"DHCP IP Range"="DHCP 分配 IP 地址范围"
+"From"="起始IP地址"
+"To"="结束IP地址"
+"Netmask"="子网掩码"
+"Default Router"="默认路由"
+"DNS Servers"="DNS 服务器地址"
+"Primary"="首选"
+"Alternative"="备用"
+"Continue"="继续"
+"dhcp server listen at "="DHCP服务器监听在 "
+"DHCP Server"="DHCP 服务器"
+"\n          Connections\n        "="\n          连接\n        "
+###v0.16.0-end
+###v0.16.1
+"Edit file"="编辑文件"
+###v0.16.1-end
+###v0.16.2
+["direct","规则","global","script"]=["direct","rule","global","script"]
+###v0.16.2-end
+###v0.16.3
+"Use System Emoji"="使用系统表情符号"
+###v0.16.3-end
+
+#20210716补充翻译
+"Profile"="配置"
+"Profile had been downloaded successfully."="配置文件下载成功。"
+" server").concat(1<t.data.all.length?"s":"")=" 个节点")
+"clash status change to ["="clash 状态变更为 ["
+"connected":"disconnected","]"="已连接":"已断开","]"
+"clash axios client changed"="clash axios 客户端已改变"
+#20210716补充翻译
+#v0.16.4
+"Restart"="重启"
+#v0.16.4-end
+#v0.17.1
+#之前多翻译一个地方，导致连接页面不显示信息。
+#以下是此版本的修正和补充翻译
+"Custom"="自定义"
+"Copy Command"="复制命令"
+
+#.from(this.now)=.locale('zh-cn').from(this.now)
+
+
+"Update Cron (UNIX)"="更新定时任务 (UNIX 系统)"
+#v0.17.1-end
+#v0.18.0补充
+"auto upgrade failed with error: "="自动升级失败: "
+"upgrade to "="升级到 "
+"silent upgrade done, stop checking"="后台升级完成, 停止检查"
+"inner port:"="内网端口:"
+"this profile could not be parsed!"="无法解析此配置文件!"
+"\n    Press Enter to stop\n  "="\n    按回车停止\n  "
+"Start with Linux"="开机启动"
+#v0.18.0补充-end
+#v0.18.2
+"Mini List Width"="策略组导航器宽度"
+#v0.18.2-end
+#v0.18.3
+## 请手动把之前的 Service Mode=服务模式 改成 "Service Mode"="服务模式"
+"scroll to selected proxy"="滚动到选定的节点"
+"scroll to selected porxy"="滚动到选定的节点"
+hide)"=隐藏)"
+"test latency"="测试延迟"
+"show or hide proxies"="显示或隐藏代理"
+"edit"="以文本模式编辑"
+"edit policies"="修改策略"
+"edit rules"="修改规则"
+"duplicate profile"="复制为新的配置"
+hint:"URL"=hint:"显示URL和二维码"
+"matching parsers"="预处理配置信息"
+"settings"="修改配置信息"
+"refresh"="更新此配置"
+hint:"delete"=hint:"删除此配置"
+"Make sure you have "="请确认你已经 "
+serviceNeedUpdate?"updated":"installed"=serviceNeedUpdate?"更新":"安装"
+" Service Mode to control system proxy."=" 服务模式以便控制系统代理."
+" Now"=" 现在"
+"Later"="稍后"
+"service done"="服务完成"
+"Automatic Upgrade completed!"="自动升级完成!"
+"Do you want to restart the APP?"="是否重新启动 APP?"
+t.from)=t.from.replace("connect error:","错误:").replace("connectex: A socket operation was attempted to an unreachable network"," 尝试对无法访问的网络进行套接字操作").replace("all DNS requests failed, first error","所有DNS请求失败，第一个错误").replace("use default dns resolve failed: couldn't find ip","使用默认DNS解析失败:找不到IP").replace("dial","连接").replace("timeout","超时").replace("lookup","查找").replace("no such host","域名未解析"))
+"Aborted because of declined dependency: "="由于依赖关系被拒绝而中止: "
+("Aborted because "+I+" is not accepted"+D)=("中止原因: "+I+" 未被 "+D+"所接受")
+" success, path: "=" 成功, 路径: "
+#供应商错误信息处理
+t.message=t.message.replace("Invalid date","日期无效，请刷新页面").replace("unmarshal errors","解析错误").replace(" line","位于行").replace("cannot unmarshal","无法解析").replace("into","到").replace("Get","获取").replace("context deadline exceeded","连接超时").replace("dial","连接").replace("connectex: No connection could be made because the target machine actively refused it","出错:由于目标机主动拒绝连接，所以无法进行连接").replace("lookup","查找").replace("no such host","域名未解析").replace("connectex: A socket operation was attempted to an unreachable network"," 尝试对无法访问的网络进行套接字操作").replace("all DNS requests failed, first error","所有DNS请求失败，第一个错误").replace("use default dns resolve failed: couldn't find ip","使用默认DNS解析失败:找不到IP").replace("couldn't find ip","找不到 IP").replace("certificate has expired or is not yet valid","网站证书已过期或无效").replace("handshake timeout","握手超时")
+#下方是切换配置文件报错信息处理
+detail:i=detail:i.replace("Document contains trailing content not separated by a ... or --- line at","文件含有尾部未使用...或---的行").replace("initial proxy provider","初始化代理集").replace("error","出错").replace("Error","错误").replace("open","打开").replace("The system cannot find the file specified","系统找不到该配置文件").replace("Implicit map keys need to be on a single line at line","隐式映射键需要放在同一行上，位于行").replace("column","列").replace("initial rule provider","初始化规则集").replace("format invalid","格式无效").replace("Command failed","执行命令失败").replace("Cannot read property 'put' of null","无法读取为空的 'put' 的属性").replace("unmarshal errors","解析错误").replace("cannot unmarshal","无法解析").replace("into","到")
+#v0.18.3-end
+
+#v0.18.4
+"You can make some changes to a profile then we merge them for you when you refresh the profile."="你可以对配置文件进行一些更改，然后会在你更新配置文件时为你合并它们"
+"Delete diff files"="删除 Diff 文件"
+"Make changes"="修改 Diff 文件"
+"Init diff files"="初始化 Diff 文件"
+{hint:"make diff"}={hint:"Diff 处理"}
+#v0.18.4-end
+
+
