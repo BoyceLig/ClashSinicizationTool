@@ -1223,5 +1223,3 @@ detail:i=detail:i.replace("Document contains trailing content not separated by a
 "Init diff files"="初始化 Diff 文件"
 {hint:"make diff"}={hint:"Diff 处理"}
 #v0.18.4-end
-
-
