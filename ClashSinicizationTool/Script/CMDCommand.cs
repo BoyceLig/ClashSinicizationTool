@@ -28,6 +28,8 @@ namespace ClashSinicizationTool
             process.StartInfo.RedirectStandardOutput = true;
             //输出错误
             process.StartInfo.RedirectStandardError = true;
+            //以管理员运行
+            //process.StartInfo.Verb = "runas";
             //启动程序
             process.Start();
 

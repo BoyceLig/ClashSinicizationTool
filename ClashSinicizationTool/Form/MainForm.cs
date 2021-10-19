@@ -570,6 +570,15 @@ namespace ClashSinicizationTool
                     sinicizationButton.Enabled = true;
                     packButton.Enabled = true;
                     revertButton.Enabled = true;
+                    foreach (string item in translationScriptFileName.Items)
+                    {
+                        if (item == translationScriptFileName.Text)
+                        {
+                            goto c;
+                        }
+                    }
+                    translationScriptFileName.Items.Add(translationScriptFileName.Text);
+                c:;
                 }
                 else
                 {
@@ -607,6 +616,15 @@ namespace ClashSinicizationTool
                     sinicizationButton.Enabled = true;
                     packButton.Enabled = true;
                     revertButton.Enabled = true;
+                    foreach (string item in clashForWindowsPath.Items)
+                    {
+                        if (item == clashForWindowsPath.Text)
+                        {
+                            goto c;
+                        }
+                    }
+                    clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                c:;
                 }
                 else
                 {
@@ -654,7 +672,6 @@ namespace ClashSinicizationTool
             CleanLogButton_Click(sender, e);
         }
         #endregion
-
     }
 }
 
