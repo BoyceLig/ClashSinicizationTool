@@ -51,8 +51,6 @@ namespace ClashSinicizationTool
                 {
                     @"\resources\app\dist\electron\renderer.js",
                     @"\resources\app\dist\electron\main.js",
-                    @"\resources\app\node_modules\yaml\dist\schema\parseMap.js",
-                    @"\resources\app\node_modules\yaml\browser\dist\schema\parseMap.js",
                     @"\resources\app\node_modules\axios\lib\adapters\xhr.js",
                     @"\resources\app\node_modules\axios\dist\axios.js",
                     @"\resources\app\node_modules\axios\dist\axios.min.js",
