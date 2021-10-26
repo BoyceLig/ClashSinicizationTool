@@ -39,5 +39,12 @@ namespace ClashSinicizationTool
                 throw;
             }
         }
+
+        public bool CheckIntegratedAsar()
+        {
+            CMDCommand cmd = new CMDCommand();
+            string[] commands = new string[] { "set path=npm;%path%", "asar -h" };
+            return cmd.CMDCommondBase(commands).Contains("Manipulate asar archive files");
+        }
     }
 }

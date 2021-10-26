@@ -1207,6 +1207,7 @@ serviceNeedUpdate?"updated":"installed"=serviceNeedUpdate?"更新":"安装"
 "Automatic Upgrade completed!"="自动升级完成!"
 "Do you want to restart the APP?"="是否重新启动 APP?"
 t.from)=t.from.replace("connect error:","错误:").replace("connectex: A socket operation was attempted to an unreachable network"," 尝试对无法访问的网络进行套接字操作").replace("all DNS requests failed, first error","所有DNS请求失败，第一个错误").replace("use default dns resolve failed: couldn't find ip","使用默认DNS解析失败:找不到IP").replace("dial","连接").replace("timeout","超时").replace("lookup","查找").replace("no such host","域名未解析"))
+
 "Aborted because of declined dependency: "="由于依赖关系被拒绝而中止: "
 ("Aborted because "+I+" is not accepted"+D)=("中止原因: "+I+" 未被 "+D+"所接受")
 " success, path: "=" 成功, 路径: "
@@ -1215,11 +1216,14 @@ t.message=t.message.replace("Invalid date","日期无效，请刷新页面").rep
 #下方是切换配置文件报错信息处理
 detail:i=detail:i.replace("Document contains trailing content not separated by a ... or --- line at","文件含有尾部未使用...或---的行").replace("initial proxy provider","初始化代理集").replace("error","出错").replace("Error","错误").replace("open","打开").replace("The system cannot find the file specified","系统找不到该配置文件").replace("Implicit map keys need to be on a single line at line","隐式映射键需要放在同一行上，位于行").replace("column","列").replace("initial rule provider","初始化规则集").replace("format invalid","格式无效").replace("Command failed","执行命令失败").replace("Cannot read property 'put' of null","无法读取为空的 'put' 的属性").replace("unmarshal errors","解析错误").replace("cannot unmarshal","无法解析").replace("into","到")
 #v0.18.3-end
-
 #v0.18.4
-"You can make some changes to a profile then we merge them for you when you refresh the profile."="你可以对配置文件进行一些更改，然后会在你更新配置文件时为你合并它们"
+"You can make some changes to a profile then we merge them for you when you refresh the profile."="你可以对配置文件进行一些更改，程序将会在配置文件更新时自动合并到新的配置文件中。"
 "Delete diff files"="删除 Diff 文件"
 "Make changes"="修改 Diff 文件"
 "Init diff files"="初始化 Diff 文件"
-{hint:"make diff"}={hint:"Diff 处理"}
+{hint:"make diff"}={hint:"构建 Diff 文件"}
 #v0.18.4-end
+
+
+
+
