@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.Drawing.Text;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Reflection;
-using Microsoft.Win32;
 
 namespace ClashSinicizationTool
 {
