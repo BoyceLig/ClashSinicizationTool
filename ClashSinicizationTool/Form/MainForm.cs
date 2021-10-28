@@ -17,7 +17,6 @@ namespace ClashSinicizationTool
     {
         public string clashPath;
         string clashProcessName = "Clash for Windows";
-        bool installNode, integratedAsar;
         public static MainForm mainForm;
 
         public MainForm()
@@ -125,47 +124,6 @@ namespace ClashSinicizationTool
                 revertButton.Enabled = true;
             }
             #endregion
-
-            #region 检查环境
-            LoadCheck loadCheck = new LoadCheck();
-            //检查Node是否安装
-            if (loadCheck.CheckNode())
-            {
-                installNode = true;
-                //检查Asar是否安装
-                if (!loadCheck.CheckAsar())
-                {
-                    //安装Asar
-                    if (loadCheck.CheckPing("baidu.com"))
-                    {
-                        CMDCommand cmd = new CMDCommand();
-                        cmd.CMDCommondBase("npm install -g asar");
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("请检查网络连接") == DialogResult.OK)
-                        {
-                            Application.Exit();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                installNode = false;
-                integratedAsar = loadCheck.CheckIntegratedAsar();
-                //DialogResult dialog = MessageBox.Show("未安装Node，请点击OK键跳转到网页进行下载安装，安装成功后重新打开此程序。", "警告", MessageBoxButtons.OKCancel);
-                //if (dialog == DialogResult.OK)
-                //{
-                //    Process.Start("explorer.exe", @"https://nodejs.org/zh-cn/");
-                //    Application.Exit();
-                //}
-                //else if (dialog == DialogResult.Cancel)
-                //{
-                //    Application.Exit();
-                //}
-            }
-            #endregion
         }
 
         //软件关闭时执行
@@ -265,28 +223,26 @@ namespace ClashSinicizationTool
                 Directory.Delete(clashPath + @"\resources\app", true);
             }
 
-            //解包命令
-            CMDCommand command = new CMDCommand();
-            command.Unpack(clashPath, installNode);
-            if (Directory.Exists(clashPath + @"\resources\app"))
+            //检查npm文件夹是否存在
+            if (Directory.Exists("npm"))
             {
-                logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
-            }
-            else
-            {
-                LoadCheck loadCheck = new LoadCheck();
-                //检查Asar是否安装
-                if (!loadCheck.CheckAsar())
+                //解包命令
+                CMDCommand command = new CMDCommand();
+                command.Unpack(clashPath);
+                if (Directory.Exists(clashPath + @"\resources\app"))
                 {
-                    //提示Asar未安装
-                    MessageBox.Show("解包失败！Asar未安装，请手动安装或重启软件重试");
-                    logTextBox.AppendText("解包失败！Asar未安装，请手动安装或重启软件重试" + Environment.NewLine);
+                    logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
                 }
                 else
                 {
-                    MessageBox.Show("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找");
-                    logTextBox.AppendText("解包失败！Asar已安装，但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                    MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找");
+                    logTextBox.AppendText("解包失败！但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
                 }
+            }
+            else
+            {
+                MessageBox.Show("解包失败！npm文件夹检测不存在，请在TG群组求助");
+                logTextBox.AppendText("解包失败！npm文件夹检测不存在，请在TG群组求助" + Environment.NewLine);
             }
         }
 
@@ -388,7 +344,7 @@ namespace ClashSinicizationTool
                 }
                 //打包命令
                 CMDCommand command = new CMDCommand();
-                command.Pack(clashPath, installNode);
+                command.Pack(clashPath);
                 Directory.Delete(clashPath + @"\resources\app", true);
                 logTextBox.AppendText("已删除解包文件夹app" + Environment.NewLine);
             }

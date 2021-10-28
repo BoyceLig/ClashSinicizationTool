@@ -88,8 +88,6 @@ namespace ClashSinicizationTool
             process.StartInfo.RedirectStandardOutput = true;
             //输出错误
             process.StartInfo.RedirectStandardError = true;
-            //以管理员运行
-            //process.StartInfo.Verb = "runas";
             //启动程序
             process.Start();
 
@@ -138,33 +136,17 @@ namespace ClashSinicizationTool
         }
 
         //解包命令
-        public void Unpack(string appPath, bool installNode)
+        public void Unpack(string appPath)
         {
-            //if (installNode)
-            //{
-            //    CMDCommondBase(appPath + @"\resources", "asar extract app.asar app");
-            //}
-            //else
-            //{
-            CMDCommand cmd = new CMDCommand();
-            string[] commands = new string[] { "set path=npm;%path%", "asar extract app.asar app" };
-            cmd.CMDCommondBase(appPath + @"\resources", commands);
-            //}
+            string[] commands = new string[] { $@"set path={Application.StartupPath}\npm;%path%", "asar extract app.asar app" };
+            CMDCommondBase(appPath + @"\resources", commands);
         }
 
         //打包
-        public void Pack(string appPath, bool installNode)
+        public void Pack(string appPath)
         {
-            if (installNode)
-            {
-                CMDCommondBase(appPath + @"\resources", "asar pack app app.asar");
-            }
-            else
-            {
-                CMDCommand cmd = new CMDCommand();
-                string[] commands = new string[] { "set path=npm;%path%", "asar pack app app.asar" };
-                cmd.CMDCommondBase(appPath + @"\resources", commands);
-            }
+            string[] commands = new string[] { $@"set path={Application.StartupPath}\npm;%path%", "asar pack app app.asar" };
+            CMDCommondBase(appPath + @"\resources", commands);
         }
     }
 }
