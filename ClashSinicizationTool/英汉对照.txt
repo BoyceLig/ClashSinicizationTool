@@ -1224,6 +1224,10 @@ detail:i=detail:i.replace("Document contains trailing content not separated by a
 {hint:"make diff"}={hint:"构建 Diff 文件"}
 #v0.18.4-end
 
-
-
-
+#v0.18.6
+"Show in folder"="打开所在文件夹"
+"Rules"="规则"
+"Copy"="复制"
+"QRCode"="URL和二维码"
+"Delete"="删除"
+#v0.18.6-end
