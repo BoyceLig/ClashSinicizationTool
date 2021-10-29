@@ -22,13 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Delect Path.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="moment-with-CN.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Replace Path.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Script List.ini">
