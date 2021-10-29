@@ -130,12 +130,6 @@ namespace ClashSinicizationTool
         }
 
         #region 按钮
-        //点击清理按钮时执行清空log窗口
-        private void CleanLogButton_Click(object sender, EventArgs e)
-        {
-            logTextBox.Text = string.Empty;
-        }
-
         //保存当前翻译脚本的修改
         private void saveTranslationScriptButton_Click(object sender, EventArgs e)
         {
@@ -144,7 +138,7 @@ namespace ClashSinicizationTool
             saveTranslationScriptButton.Enabled = false;
         }
 
-        //自动检测翻译脚本位置（必须在当前目录）
+        //加载按钮
         private void loadTranslationScriptButton_Click(object sender, EventArgs e)
         {
             TranslationScriptFile translationScriptFile = new TranslationScriptFile();
@@ -596,7 +590,7 @@ namespace ClashSinicizationTool
         //清空log
         private void CleanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CleanLogButton_Click(sender, e);
+            logTextBox.Text = string.Empty;
         }
         #endregion
     }

@@ -18,6 +18,8 @@ namespace ClashSinicizationTool
             StreamReader streamReader = new StreamReader(scriptFilePath, Encoding.UTF8);
             translationScriptText.Text = streamReader.ReadToEnd();
             streamReader.Close();
+            translationScriptText.SelectionStart = translationScriptText.Text.Length;
+            translationScriptText.ScrollToCaret();
             logText.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
         }
 
