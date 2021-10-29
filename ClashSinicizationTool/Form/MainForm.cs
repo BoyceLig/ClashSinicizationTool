@@ -188,13 +188,15 @@ namespace ClashSinicizationTool
                 {
                     for (int i = 0; i < clashForWindowsPath.Items.Count; i++)
                     {
-                        if (clashForWindowsPath.Text != clashForWindowsPath.Items[i].ToString())
+                        if (clashForWindowsPath.Text == clashForWindowsPath.Items[i].ToString())
                         {
-                            clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                            goto c;
                         }
                     }
+                    clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
                 }
             }
+        c:;
         }
 
         //解包
@@ -413,7 +415,6 @@ namespace ClashSinicizationTool
         //关闭Clash按钮
         private void CloseClashButton_Click(object sender, EventArgs e)
         {
-            Process last = Process.GetProcesses().Last();
             foreach (Process vProc in Process.GetProcesses())   //[BugHere]:请不要加.Exe后缀名称
             {
                 if (vProc.ProcessName.ToUpper() == clashProcessName.ToUpper())
@@ -440,6 +441,45 @@ namespace ClashSinicizationTool
         c:;
         }
 
+        //自动检测clash地址
+        private void autoCkeckClashPathButton_Click(object sender, EventArgs e)
+        {
+            foreach (Process vProc in Process.GetProcesses())
+            {
+                if (vProc.ProcessName.ToUpper() == clashProcessName.ToUpper())
+                {
+                    clashPath = vProc.MainModule.FileName.Replace(@"\Clash for Windows.exe", "");
+                    clashForWindowsPath.Text = clashPath;
+                    openClashBrowseButton.Enabled = true;
+                    unpackButton.Enabled = true;
+                    simplifyButton.Enabled = true;
+                    sinicizationButton.Enabled = true;
+                    packButton.Enabled = true;
+                    revertButton.Enabled = true;
+                    if (clashForWindowsPath.Items.Count == 0)
+                    {
+                        //把文件名加载到列表
+                        clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < clashForWindowsPath.Items.Count; i++)
+                        {
+                            if (clashForWindowsPath.Text == clashForWindowsPath.Items[i].ToString())
+                            {
+                                goto c;
+                            }
+                        }
+                        clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                    }
+                    logTextBox.AppendText("已加载地址" + clashPath + Environment.NewLine);
+                    goto c;
+                }
+            }
+            logTextBox.AppendText(clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试" + Environment.NewLine);
+            MessageBox.Show(clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试");
+        c:;
+        }
         #endregion
 
         #region Text检测
@@ -468,7 +508,7 @@ namespace ClashSinicizationTool
         }
 
         //判定加载按钮和用外部程序打开按钮开关
-        private void translationScriptFileName_SelectedIndexChanged(object sender, EventArgs e)
+        private void translationScriptFileName_TextChanged(object sender, EventArgs e)
         {
             if (translationScriptFileName.Text == string.Empty)
             {

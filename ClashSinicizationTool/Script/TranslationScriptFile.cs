@@ -106,7 +106,7 @@ namespace ClashSinicizationTool
         {
             for (int i = 0; i < comboBox.Items.Count; i++)
             {
-                if (!File.Exists(comboBox.Items[i].ToString()))
+                if (!File.Exists(comboBox.Items[i].ToString()) && !Directory.Exists(comboBox.Items[i].ToString()))
                 {
                     comboBox.Items.Remove(comboBox.Items[i].ToString());
                 }
