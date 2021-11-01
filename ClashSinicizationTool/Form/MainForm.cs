@@ -456,6 +456,21 @@ namespace ClashSinicizationTool
                     sinicizationButton.Enabled = true;
                     packButton.Enabled = true;
                     revertButton.Enabled = true;
+
+                    try
+                    {
+                        vProc.Kill();
+                        logTextBox.AppendText("已关闭程序 " + clashProcessName + Environment.NewLine);
+                        ProxySetting proxy = new ProxySetting();
+                        proxy.CloseProxy();
+                    }
+                    catch (Exception)
+                    {
+                        logTextBox.AppendText("关闭 " + clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
+                        MessageBox.Show(clashProcessName + "关闭 " + clashProcessName + " 失败，请手动关闭");
+                        throw;
+                    }
+
                     if (clashForWindowsPath.Items.Count == 0)
                     {
                         //把文件名加载到列表
