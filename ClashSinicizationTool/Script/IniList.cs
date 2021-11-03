@@ -77,7 +77,6 @@ namespace Ini
         {
             List<string> iniFileTexts = new List<string>();
             iniFileTexts = File.ReadAllLines(iniFilePath).ToList();
-            List<string> currentSectionTexts = new List<string>();
             int currentSectionValue = 100;
             for (int i = 0; i < iniFileTexts.Count; i++)
             {
