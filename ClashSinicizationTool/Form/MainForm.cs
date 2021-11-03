@@ -18,7 +18,6 @@ namespace ClashSinicizationTool
         public MainForm()
         {
             InitializeComponent();
-            mainForm = this;
         }
 
         //加载时执行
@@ -29,23 +28,23 @@ namespace ClashSinicizationTool
             if (Environment.Is64BitProcess)
             {
                 //64位
-                mainForm.Text = "Clash 汉化工具 " + " v" + Application.ProductVersion.ToString() + " 64-bit ";
+                Text = "Clash 汉化工具 " + " v" + Application.ProductVersion.ToString() + " 64-bit ";
             }
             else
             {
                 //32位
-                mainForm.Text = "Clash 汉化工具 " + " v" + Application.ProductVersion.ToString() + " 32-bit ";
+                Text = "Clash 汉化工具 " + " v" + Application.ProductVersion.ToString() + " 32-bit ";
             }
             #endregion
 
+            //检查文件是否存在
             if (!File.Exists(iniFilePath))
             {
                 if (MessageBox.Show(iniFilePath + " 列表文件不存在，无法进行汉化，请找回配置文件后再次尝试") == DialogResult.OK)
                 {
-                    Environment.Exit(0);
+                    Close();
                 }
             }
-
 
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
