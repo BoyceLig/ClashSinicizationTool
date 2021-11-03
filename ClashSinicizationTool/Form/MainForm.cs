@@ -4,13 +4,15 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using Ini;
+using System.Collections.Generic;
 
 namespace ClashSinicizationTool
 {
     public partial class MainForm : Form
     {
         public string clashPath;
-        string clashProcessName = "Clash for Windows";
+        string clashProcessName = "Clash for Windows", iniFilePath = "PathList.ini";
         public static MainForm mainForm;
 
         public MainForm()
@@ -36,77 +38,48 @@ namespace ClashSinicizationTool
             }
             #endregion
 
-            #region 创建 Replace Path.ini文件
-            if (!File.Exists("Replace Path.ini"))
+            if (!File.Exists(iniFilePath))
             {
-                FileStream fileStream = new FileStream("Replace Path.ini", FileMode.CreateNew);
-                fileStream.Close();
-                string[] replacePaths = new string[]
+                if (MessageBox.Show(iniFilePath + " 列表文件不存在，无法进行汉化，请找回配置文件后再次尝试") == DialogResult.OK)
                 {
-                    @"\resources\app\dist\electron\renderer.js",
-                    @"\resources\app\dist\electron\main.js",
-                    @"\resources\app\node_modules\axios\lib\adapters\xhr.js",
-                    @"\resources\app\node_modules\axios\dist\axios.js",
-                    @"\resources\app\node_modules\axios\dist\axios.min.js",
-                    @"\resources\app\node_modules\axios\dist\axios.map",
-                    @"\resources\app\node_modules\axios\dist\axios.min.map"
-                };
-                File.WriteAllLines("Replace Path.ini", replacePaths, Encoding.UTF8);
+                    Environment.Exit(0);
+                }
             }
-            #endregion
 
-            #region 创建 Delect Path.ini文件
-            if (!File.Exists("Delect Path.ini"))
-            {
-                FileStream fileStream = new FileStream("Delect Path.ini", FileMode.CreateNew);
-                fileStream.Close();
-                string[] delectPaths = new string[]
-                {
-                    @"\resources\app\dist\electron\static\files",
-                    @"\resources\app\node_modules\moment\dist",
-                    @"\resources\app\node_modules\moment\min",
-                    @"\resources\app\node_modules\moment\src",
-                    @"\resources\app\node_modules\moment\locale"
-                };
-                File.WriteAllLines("Delect Path.ini", delectPaths, Encoding.UTF8);
-            }
-            #endregion
 
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
-            if (File.Exists("Script List.ini"))
+
+            if (File.ReadAllText(iniFilePath) != string.Empty)
             {
-                if (File.ReadAllText("Script List.ini") != string.Empty)
+                //加载列表文件
+                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+                translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, iniFilePath);
+                //自动加载第一个文件
+                if (translationScriptFileName.Items.Count != 0)
                 {
-                    //加载列表文件
-                    TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-                    translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, "Script List.ini");
-                    //自动加载第一个文件
-                    if (translationScriptFileName.Items.Count != 0)
+                    if (File.Exists(translationScriptFileName.Items[0].ToString()))
                     {
-                        if (File.Exists(translationScriptFileName.Items[0].ToString()))
-                        {
-                            translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
-                            loadTranslationScriptButton.Enabled = true;
-                            openTranslationFileButton.Enabled = true;
-                        }
+                        translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+                        loadTranslationScriptButton.Enabled = true;
+                        openTranslationFileButton.Enabled = true;
                     }
                 }
             }
+
             #endregion
 
             #region 检查创建clash目录列表
-            if (File.Exists("Clash Path List.ini"))
+
+            if (File.ReadAllText(iniFilePath) != string.Empty)
             {
-                if (File.ReadAllText("Clash Path List.ini") != string.Empty)
-                {
-                    TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-                    translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, "Clash Path List.ini");
-                    openClashBrowseButton.Enabled = true;
-                    clashPath = clashForWindowsPath.Text;
-                }
+                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+                translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, iniFilePath);
+                openClashBrowseButton.Enabled = true;
+                clashPath = clashForWindowsPath.Text;
             }
-            #endregion           
+
+            #endregion
 
             #region 解包……按钮使用权控制
             if (File.Exists(translationScriptFileName.Text) && Directory.Exists(clashPath))
@@ -118,15 +91,6 @@ namespace ClashSinicizationTool
                 revertButton.Enabled = true;
             }
             #endregion
-        }
-
-        //软件关闭时执行
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //保存列表文件
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-            translationScriptFile.SaveListFile(translationScriptFileName, "Script List.ini");
-            translationScriptFile.SaveListFile(clashForWindowsPath, "Clash Path List.ini");
         }
 
         #region 按钮
@@ -194,6 +158,8 @@ namespace ClashSinicizationTool
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                    IniList ini = new IniList();
+                    ini.AddSectionValue("Clash Path", iniFilePath, clashForWindowsPath.Text);
                 }
             }
         c:;
@@ -239,9 +205,29 @@ namespace ClashSinicizationTool
         //自动清理失效目录和文件
         private void autoCleanButton_Click(object sender, EventArgs e)
         {
+            IniList ini = new IniList();
+            ini.CleanSectionValue("Script Path", iniFilePath);
+            ini.CleanSectionValue("Clash Path", iniFilePath);
+            translationScriptFileName.Items.Clear();
+            clashForWindowsPath.Items.Clear();
+
             TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-            translationScriptFile.CleanList(translationScriptFileName);
-            translationScriptFile.CleanList(clashForWindowsPath);
+            translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, iniFilePath);
+            openClashBrowseButton.Enabled = true;
+            clashPath = clashForWindowsPath.Text;
+
+            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, iniFilePath);
+            //自动加载第一个文件
+            if (translationScriptFileName.Items.Count != 0)
+            {
+                if (File.Exists(translationScriptFileName.Items[0].ToString()))
+                {
+                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+                    loadTranslationScriptButton.Enabled = true;
+                    openTranslationFileButton.Enabled = true;
+                }
+            }
+
             logTextBox.AppendText("清理列表成功" + Environment.NewLine);
         }
 
@@ -249,7 +235,8 @@ namespace ClashSinicizationTool
         private void sinicizationButton_Click(object sender, EventArgs e)
         {
             //调取ini文件
-            string[] replacePaths = File.ReadAllLines("Replace Path.ini");
+            IniList iniList = new IniList();
+            string[] replacePaths = iniList.GetSectionValue("Replace Path", iniFilePath).ToArray();
             if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
             {
                 MessageBox.Show("您已汉化，不需要二次汉化");
@@ -294,7 +281,8 @@ namespace ClashSinicizationTool
         private void simplifyButton_Click(object sender, EventArgs e)
         {
             //调取ini文件
-            string[] delectPaths = File.ReadAllLines("Delect Path.ini");
+            IniList iniList = new IniList();
+            string[] delectPaths = iniList.GetSectionValue("Delect Path", iniFilePath).ToArray();
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 for (int i = 0; i < delectPaths.Length; i++)
@@ -475,6 +463,8 @@ namespace ClashSinicizationTool
                     {
                         //把文件名加载到列表
                         clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                        IniList ini = new IniList();
+                        ini.AddSectionValue("Clash Path", iniFilePath, clashForWindowsPath.Text);
                     }
                     else
                     {
@@ -486,6 +476,8 @@ namespace ClashSinicizationTool
                             }
                         }
                         clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                        IniList ini = new IniList();
+                        ini.AddSectionValue("Clash Path", iniFilePath, clashForWindowsPath.Text);
                     }
                     logTextBox.AppendText("已加载地址" + clashPath + Environment.NewLine);
                     goto c;
@@ -554,6 +546,8 @@ namespace ClashSinicizationTool
                         }
                     }
                     translationScriptFileName.Items.Add(translationScriptFileName.Text);
+                    IniList ini = new IniList();
+                    ini.AddSectionValue("Script Path", iniFilePath, translationScriptFileName.Text);
                 c:;
                 }
                 else
@@ -600,6 +594,8 @@ namespace ClashSinicizationTool
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
+                    IniList ini = new IniList();
+                    ini.AddSectionValue("Clash Path", iniFilePath, clashForWindowsPath.Text);
                 c:;
                 }
                 else
@@ -625,9 +621,6 @@ namespace ClashSinicizationTool
                 {
                     saveTranslationScriptButton_Click(sender, e);
                 }
-                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-                translationScriptFile.SaveListFile(translationScriptFileName, "Script List.ini");
-                translationScriptFile.SaveListFile(clashForWindowsPath, "Clash Path List.ini");
                 logTextBox.AppendText("已保存列表文件" + Environment.NewLine);
             }
         }

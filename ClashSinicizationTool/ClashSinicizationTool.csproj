@@ -25,7 +25,7 @@
     <None Update="moment-with-CN.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Script List.ini">
+    <None Update="PathList.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="英汉对照.txt">
