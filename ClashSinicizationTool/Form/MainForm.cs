@@ -42,13 +42,12 @@ namespace ClashSinicizationTool
             {
                 if (MessageBox.Show(iniFilePath + " 列表文件不存在，无法进行汉化，请找回配置文件后再次尝试") == DialogResult.OK)
                 {
-                    Close();
+                    Environment.Exit(0);
                 }
             }
 
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
-
             if (File.ReadAllText(iniFilePath) != string.Empty)
             {
                 //加载列表文件
@@ -65,7 +64,6 @@ namespace ClashSinicizationTool
                     }
                 }
             }
-
             #endregion
 
             #region 检查创建clash目录列表
