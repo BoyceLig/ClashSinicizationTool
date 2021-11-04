@@ -630,7 +630,7 @@ namespace ClashSinicizationTool
             {
                 Clipboard.SetDataObject(logTextBox.SelectedText);
             }
-        }        
+        }
 
         //清空log
         private void CleanToolStripMenuItem_Click(object sender, EventArgs e)
