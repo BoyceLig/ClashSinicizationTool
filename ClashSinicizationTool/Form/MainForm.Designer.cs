@@ -61,7 +61,7 @@ namespace ClashSinicizationTool
             this.autoCkeckClashPathButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.githubToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -388,19 +388,19 @@ namespace ClashSinicizationTool
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel,
             this.githubToolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip.Location = new System.Drawing.Point(0, 538);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(857, 22);
+            this.statusStrip.Size = new System.Drawing.Size(857, 23);
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(719, 17);
-            this.toolStripStatusLabel1.Spring = true;
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(713, 18);
+            this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
             // 
@@ -408,7 +408,7 @@ namespace ClashSinicizationTool
             this.githubToolStripStatusLabel.Image = global::ClashSinicizationTool.Properties.Resources._9919;
             this.githubToolStripStatusLabel.IsLink = true;
             this.githubToolStripStatusLabel.Name = "githubToolStripStatusLabel";
-            this.githubToolStripStatusLabel.Size = new System.Drawing.Size(92, 17);
+            this.githubToolStripStatusLabel.Size = new System.Drawing.Size(92, 18);
             this.githubToolStripStatusLabel.Text = "GitHub 地址";
             this.githubToolStripStatusLabel.ToolTipText = "点击进入 GitHub 项目地址。";
             this.githubToolStripStatusLabel.Click += new System.EventHandler(this.githubToolStripStatusLabel_Click);
@@ -490,7 +490,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button autoCkeckClashPathButton;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel githubToolStripStatusLabel;
     }
 }
