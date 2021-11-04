@@ -630,7 +630,7 @@ namespace ClashSinicizationTool
             {
                 Clipboard.SetDataObject(logTextBox.SelectedText);
             }
-        }
+        }        
 
         //清空log
         private void CleanToolStripMenuItem_Click(object sender, EventArgs e)
@@ -638,6 +638,12 @@ namespace ClashSinicizationTool
             logTextBox.Text = string.Empty;
         }
         #endregion
+
+        //GitHub链接点击进入
+        private void githubToolStripStatusLabel_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "https://github.com/BoyceLig/ClashSinicizationTool");
+        }
     }
 }
 
