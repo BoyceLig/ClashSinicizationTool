@@ -1,4 +1,4 @@
-###此文件很乱，顺序也不要更改，因为部分关键字段替换需要按先后顺序进行，不然可能会导致替换后不正常。
+﻿###此文件很乱，顺序也不要更改，因为部分关键字段替换需要按先后顺序进行，不然可能会导致替换后不正常。
 ###字段有可能在新的版本改动，然后此对照关系可能部分失效！！
 ###0.15.0
 ###更新：2021-3-26
@@ -1189,7 +1189,7 @@ Traffic:=流量:
 hide)"=隐藏)"
 "test latency"="测试延迟"
 "show or hide proxies"="显示或隐藏代理"
-"edit"="以文本模式编辑"
+"edit"="编辑"
 "edit policies"="修改策略"
 "edit rules"="修改规则"
 "duplicate profile"="复制为新的配置"
@@ -1237,3 +1237,8 @@ attrs:{hint:"update"},on:{click:function(n){return n.stopPropagation(),e.openPro
 attrs:{hint:"update"},on:{click:function(n){return n.stopPropagation(),e.refreshProfile(t)}}=attrs:{hint:"更新"},on:{click:function(n){return n.stopPropagation(),e.refreshProfile(t)}}
 #v0.18.6-end
 
+#v0.18.7
+"Show:"="显示:"
+"Hide:"="隐藏:"
+hint:"reverse"=hint:"反向"
+#v0.18.7-end

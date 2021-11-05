@@ -183,7 +183,7 @@ namespace ClashSinicizationTool
             this.sinicizationButton.Size = new System.Drawing.Size(75, 23);
             this.sinicizationButton.TabIndex = 7;
             this.sinicizationButton.Text = "2-1. 汉化";
-            this.toolTip.SetToolTip(this.sinicizationButton, "根据翻译脚本信息字段替换对应文件相应字段。");
+            this.toolTip.SetToolTip(this.sinicizationButton, "根据翻译脚本信息字段替换对应文件相应字段。\r\n将被汉化文件备份到 “我的文档\\Clash Sinicization Tool\\backup_original”。");
             this.sinicizationButton.UseVisualStyleBackColor = true;
             this.sinicizationButton.Click += new System.EventHandler(this.sinicizationButton_Click);
             // 
@@ -207,7 +207,7 @@ namespace ClashSinicizationTool
             this.packButton.Size = new System.Drawing.Size(75, 23);
             this.packButton.TabIndex = 7;
             this.packButton.Text = "3. 打包";
-            this.toolTip.SetToolTip(this.packButton, "打包已修改后的app文件夹的内容到app.asar文件。");
+            this.toolTip.SetToolTip(this.packButton, "打包已修改后的app文件夹的内容到app.asar文件。\r\n如果Clash开启状态，则可以一键关闭并打包。");
             this.packButton.UseVisualStyleBackColor = true;
             this.packButton.Click += new System.EventHandler(this.packButton_Click);
             // 
@@ -318,7 +318,9 @@ namespace ClashSinicizationTool
             this.revertButton.Size = new System.Drawing.Size(75, 23);
             this.revertButton.TabIndex = 7;
             this.revertButton.Text = "4. 还原";
-            this.toolTip.SetToolTip(this.revertButton, "需要 resources 目录内有 app.asar.bak 文件，还原此文件。");
+            this.toolTip.SetToolTip(this.revertButton, "如果解包后文件夹app存在，则只还原被汉化后的备份文件（备份文件位置在“我的文档\\Clash Sinicization Tool\\backup_original”" +
+        "）。\r\n如果不存在，则还原.bak文件。\r\n需要 resources 目录内有 app.asar.bak 文件，还原此文件。\r\n如果Clash开启状态，则可以一" +
+        "键关闭并还原。");
             this.revertButton.UseVisualStyleBackColor = true;
             this.revertButton.Click += new System.EventHandler(this.revertButton_Click);
             // 
@@ -399,7 +401,7 @@ namespace ClashSinicizationTool
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(750, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(719, 17);
             this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
