@@ -22,7 +22,7 @@ namespace ClashSinicizationTool.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ClashSinicizationTool.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ClashSinicizationTool.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace ClashSinicizationTool.Properties {
         ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,10 +63,136 @@ namespace ClashSinicizationTool.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _9919 {
+        public static System.Drawing.Bitmap _9919 {
             get {
                 object obj = ResourceManager.GetObject("9919", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Clash for Windows 的本地化字符串。
+        /// </summary>
+        public static string clashProcessName {
+            get {
+                return ResourceManager.GetString("clashProcessName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 PathList.ini 的本地化字符串。
+        /// </summary>
+        public static string iniFilePath {
+            get {
+                return ResourceManager.GetString("iniFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon logo_拷贝 {
+            get {
+                object obj = ResourceManager.GetObject("logo 拷贝", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ;(function (global, factory) {
+        ///    typeof exports === &apos;object&apos; &amp;&amp; typeof module !== &apos;undefined&apos; ? module.exports = factory() :
+        ///    typeof define === &apos;function&apos; &amp;&amp; define.amd ? define(factory) :
+        ///    global.moment = factory()
+        ///}(this, (function () { &apos;use strict&apos;;
+        ///
+        ///    var hookCallback;
+        ///
+        ///    function hooks() {
+        ///        return hookCallback.apply(null, arguments);
+        ///    }
+        ///
+        ///    function setHookCallback(callback) {
+        ///        hookCallback = callback;
+        ///    }
+        ///
+        ///    function isArray(input) {
+        ///        return (        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string moment_with_CN {
+            get {
+                return ResourceManager.GetString("moment_with_CN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 [Delect Path]
+        ///\resources\app\dist\electron\static\files
+        ///\resources\app\node_modules\moment\dist
+        ///\resources\app\node_modules\moment\min
+        ///\resources\app\node_modules\moment\src
+        ///\resources\app\node_modules\moment\locale
+        ///
+        ///[Replace Path]
+        ///\resources\app\dist\electron\renderer.js
+        ///\resources\app\dist\electron\main.js
+        ///\resources\app\node_modules\axios\lib\adapters\xhr.js
+        ///\resources\app\node_modules\axios\dist\axios.js
+        ///\resources\app\node_modules\axios\dist\axios.min.js
+        ///\resources\app\node_modules\axios\d [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string PathList {
+            get {
+                return ResourceManager.GetString("PathList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://github.com/BoyceLig/ClashSinicizationTool 的本地化字符串。
+        /// </summary>
+        public static string projectAddress {
+            get {
+                return ResourceManager.GetString("projectAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon tray_normal {
+            get {
+                object obj = ResourceManager.GetObject("tray_normal", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ###此文件很乱，顺序也不要更改，因为部分关键字段替换需要按先后顺序进行，不然可能会导致替换后不正常。
+        ///###字段有可能在新的版本改动，然后此对照关系可能部分失效！！
+        ///###0.15.0
+        ///###更新：2021-3-26
+        ///###0.15.2
+        ///###更新：2021-4-9
+        ///###感谢：谷歌翻译，必应翻译，百度翻译，有道翻译；感谢网友们翻译
+        ///###
+        ///
+        ///(&quot;New&quot;)=(&quot;有新版本&quot;)
+        ///(&apos;New&apos;)=(&apos;有新版本&apos;)
+        ///
+        ///###v0.15.5
+        ///&quot;\n        Connections\n        &quot;=&quot;\n        连接状态\n        &quot;
+        ///###v0.15.5
+        ///
+        ///&apos;Connections&apos;)=&apos;连接状态&apos;)
+        ///&quot;Connections&quot;)=&quot;连接状态&quot;)
+        ///startup&quot;,items:=startup&quot;,items:[&quot;静默&quot;,&quot;错误&quot;,&quot;警告&quot;,&quot;信息&quot;,&quot;调试&quot;],NoUseItem:
+        ///#以上renderer必须先翻译，否则可能会被后面的覆盖
+        ///
+        ///#可能--main拖动菜单白屏相关
+        ///&quot;menu-item-change&quot;,&quot;general&quot;=&quot;menu [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string 英汉对照 {
+            get {
+                return ResourceManager.GetString("英汉对照", resourceCulture);
             }
         }
     }
