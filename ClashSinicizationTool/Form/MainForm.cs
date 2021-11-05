@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Ini;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 
 namespace ClashSinicizationTool
 {
@@ -14,9 +15,10 @@ namespace ClashSinicizationTool
     {
         string
             clashPath,
-            cacheList = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\CacheList.ini";
+            cacheList = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\CacheList.ini",
+            backup_original = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\backup_original";
 
-        Version newVersion, currentVersion;
+        Version currentVersion;
 
         public MainForm()
         {
@@ -26,10 +28,10 @@ namespace ClashSinicizationTool
         //加载时执行
         private void MainForm_Load(object sender, EventArgs e)
         {
-            currentVersion = new Version(Application.ProductVersion.ToString());
-
             #region 标题
             //增加版本号标注
+            currentVersion = new Version(Application.ProductVersion.ToString());
+
             if (Environment.Is64BitProcess)
             {
                 //64位
@@ -42,26 +44,10 @@ namespace ClashSinicizationTool
             }
             #endregion
 
-            #region 自动更新
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(GlobalData.versionPath);
-            WebResponse response = request.GetResponse();
-            Stream resStream = response.GetResponseStream();
-            StreamReader streamReader = new StreamReader(resStream, Encoding.UTF8);
-            newVersion = new Version(streamReader.ReadLine());
-            if (newVersion > currentVersion)
-            {
-                if (MessageBox.Show($"当前版本 {currentVersion}，有新版本 {newVersion}，是否更新至新版本？", "新版本提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    UpdateForm updateForm = new UpdateForm();
-                    updateForm.ShowDialog();
-                }
-            }
-            #endregion
-
             //检查文件是否存在
             if (!File.Exists(GlobalData.iniFilePath))
             {
-                if (MessageBox.Show(GlobalData.iniFilePath + " 列表文件不存在，无法进行汉化，请找回配置文件后再次尝试") == DialogResult.OK)
+                if (MessageBox.Show(GlobalData.iniFilePath + " 列表文件不存在，无法进行汉化，请找回配置文件后再次尝试", "提示") == DialogResult.OK)
                 {
                     Environment.Exit(0);
                 }
@@ -212,13 +198,13 @@ namespace ClashSinicizationTool
                 }
                 else
                 {
-                    MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找");
+                    MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找", "提示");
                     logTextBox.AppendText("解包失败！但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
                 }
             }
             else
             {
-                MessageBox.Show("解包失败！npm文件夹检测不存在，请在TG群组求助");
+                MessageBox.Show("解包失败！npm文件夹检测不存在，请在TG群组求助", "提示");
                 logTextBox.AppendText("解包失败！npm文件夹检测不存在，请在TG群组求助" + Environment.NewLine);
             }
         }
@@ -260,7 +246,7 @@ namespace ClashSinicizationTool
             string[] replacePaths = iniList.GetSectionValue("Replace Path", GlobalData.iniFilePath).ToArray();
             if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
             {
-                MessageBox.Show("您已汉化，不需要二次汉化");
+                MessageBox.Show("您已汉化，不需要二次汉化", "提示");
                 logTextBox.AppendText("您已汉化，不需要二次汉化" + Environment.NewLine);
             }
             else
@@ -269,6 +255,14 @@ namespace ClashSinicizationTool
                 {
                     if (File.Exists("moment-with-CN.js"))
                     {
+                        //创建备份目录
+                        if (!Directory.Exists(backup_original))
+                        {
+                            Directory.CreateDirectory(backup_original);
+                        }
+                        //备份
+                        File.Copy(clashPath + @"\resources\app\node_modules\moment\moment.js", backup_original + @"\moment.js", true);
+                        logTextBox.AppendText("已备份文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
                         File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                         logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
                         CharacterReplacement characterReplacement = new CharacterReplacement();
@@ -276,6 +270,10 @@ namespace ClashSinicizationTool
                         {
                             if (File.Exists(clashPath + replacePaths[i]))
                             {
+                                string[] s = replacePaths[i].Split(@"\");
+                                string fileName = s[s.Length - 1];
+                                File.Copy(clashPath + replacePaths[i], backup_original + @"\" + fileName, true);
+                                logTextBox.AppendText("已备份文件 " + clashPath + replacePaths[i] + Environment.NewLine);
                                 characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
                             }
                             else
@@ -293,7 +291,7 @@ namespace ClashSinicizationTool
                 else
                 {
                     logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
-                    MessageBox.Show("尚未解包，请按步骤操作");
+                    MessageBox.Show("尚未解包，请按步骤操作", "提示");
                 }
             }
         }
@@ -323,24 +321,32 @@ namespace ClashSinicizationTool
             else
             {
                 logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
-                MessageBox.Show("尚未解包，请按步骤操作");
+                MessageBox.Show("尚未解包，请按步骤操作", "提示");
             }
         }
 
         //打包app.asar
         private void packButton_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(clashPath + @"\resources\app"))
+            foreach (Process p in Process.GetProcesses())
             {
-                foreach (Process p in Process.GetProcesses())
+                if (p.ProcessName == GlobalData.clashProcessName)
                 {
-                    if (p.ProcessName == GlobalData.clashProcessName)
+                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        MessageBox.Show("Clash for Windows已开启，请关闭后重试。");
+                        CloseClashButton_Click(sender, e);
+                        break;
+                    }
+                    else
+                    {
                         logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
                         goto c;
                     }
                 }
+            }
+            Thread.Sleep(2000);
+            if (Directory.Exists(clashPath + @"\resources\app"))
+            {
                 //打包命令
                 CMDCommand command = new CMDCommand();
                 command.Pack(clashPath);
@@ -350,7 +356,7 @@ namespace ClashSinicizationTool
             else
             {
                 logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
-                MessageBox.Show("尚未解包，请按步骤操作");
+                MessageBox.Show("尚未解包，请按步骤操作", "提示");
             }
         c:;
         }
@@ -374,19 +380,52 @@ namespace ClashSinicizationTool
         //还原按钮
         private void revertButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(clashPath + @"\resources\app.asar.bak"))
+            foreach (Process p in Process.GetProcesses())
             {
-                foreach (Process p in Process.GetProcesses())
+                if (p.ProcessName == GlobalData.clashProcessName)
                 {
-                    if (p.ProcessName == GlobalData.clashProcessName)
+                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        MessageBox.Show("Clash for Windows已开启，请关闭后重试。");
+                        CloseClashButton_Click(sender, e);
+                        break;
+                    }
+                    else
+                    {
                         logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
                         goto c;
                     }
                 }
-                File.Move(clashPath + @"\resources\app.asar.bak", clashPath + @"\resources\app.asar", true);
-                logTextBox.AppendText("已还原英文版" + Environment.NewLine);
+            }
+            if (Directory.Exists(clashPath + @"\resources\app"))
+            {
+                IniList ini = new IniList();
+                string[] replacePath = ini.GetSectionValue("Replace Path", GlobalData.iniFilePath).ToArray();
+                File.Copy(backup_original + @"\moment.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
+                logTextBox.AppendText("已还原被汉化文件" + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+                foreach (string item in replacePath)
+                {
+                    string[] s = item.Split(@"\");
+                    string fileName = s[s.Length - 1];
+                    File.Copy(backup_original + @"\" + fileName, clashPath + item, true);
+                    logTextBox.AppendText("已还原被汉化文件 " + clashPath + item + Environment.NewLine);
+                }
+                MessageBox.Show("文件还原完毕，已还原至已解包状态，可以继续汉化。", "提示");
+                logTextBox.AppendText("文件还原完毕，已还原至已解包状态，可以继续汉化。" + Environment.NewLine);
+            }
+            else if (File.Exists(clashPath + @"\resources\app.asar.bak"))
+            {
+                Thread.Sleep(2000);
+                try
+                {
+                    File.Delete(clashPath + @"\resources\app.asar");
+                    File.Move(clashPath + @"\resources\app.asar.bak", clashPath + @"\resources\app.asar", true);
+                    logTextBox.AppendText("已还原英文版" + Environment.NewLine);
+                }
+                catch (Exception)
+                {
+                    logTextBox.AppendText("无法还原，" + clashPath + @"\resources\app.asar.bak" + "文件丢失,请下载原版自行替换app.asar。" + Environment.NewLine);
+                    throw;
+                }
             }
             else
             {
@@ -403,7 +442,7 @@ namespace ClashSinicizationTool
                 if (vProc.ProcessName == GlobalData.clashProcessName)
                 {
                     logTextBox.AppendText(GlobalData.clashProcessName + " 已开启，无需重复开启" + Environment.NewLine);
-                    MessageBox.Show(GlobalData.clashProcessName + " 已开启，无需重复开启");
+                    MessageBox.Show(GlobalData.clashProcessName + " 已开启，无需重复开启", "提示");
                     goto c;
                 }
             }
@@ -439,14 +478,14 @@ namespace ClashSinicizationTool
                     catch (Exception)
                     {
                         logTextBox.AppendText("关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
-                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭");
+                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭", "提示");
                         goto c;
                         throw;
                     }
                 }
             }
             logTextBox.AppendText(GlobalData.clashProcessName + " 未开启，无需关闭" + Environment.NewLine);
-            MessageBox.Show(GlobalData.clashProcessName + " 未开启，无需关闭");
+            MessageBox.Show(GlobalData.clashProcessName + " 未开启，无需关闭", "提示");
         c:;
         }
 
@@ -476,7 +515,7 @@ namespace ClashSinicizationTool
                     catch (Exception)
                     {
                         logTextBox.AppendText("关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
-                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭");
+                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭", "提示");
                         throw;
                     }
 
@@ -505,7 +544,7 @@ namespace ClashSinicizationTool
                 }
             }
             logTextBox.AppendText(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试" + Environment.NewLine);
-            MessageBox.Show(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试");
+            MessageBox.Show(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试", "提示");
         c:;
         }
         #endregion
@@ -642,7 +681,6 @@ namespace ClashSinicizationTool
                 {
                     saveTranslationScriptButton_Click(sender, e);
                 }
-                logTextBox.AppendText("已保存列表文件" + Environment.NewLine);
             }
         }
 
@@ -666,7 +704,7 @@ namespace ClashSinicizationTool
         //GitHub链接点击进入
         private void githubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", "https://github.com/BoyceLig/ClashSinicizationTool");
+            Process.Start("explorer.exe", GlobalData.projectAddress);
         }
     }
 }

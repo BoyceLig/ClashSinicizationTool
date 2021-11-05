@@ -6,19 +6,24 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Boyce Lig</Authors>
     <StartupObject>ClashSinicizationTool.Program</StartupObject>
-    <Version>1.1.4</Version>
+    <Version>1.2.0</Version>
     <Product>Clash Sinicization Tool</Product>
     <Company>Boyce Lig</Company>
     <PackageId>ClashSinicizationTool</PackageId>
     <AssemblyName>Clash Sinicization Tool</AssemblyName>
-    <PackageIcon></PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <PackageIconUrl />
-    <ApplicationIcon>Image\tray_normal.ico</ApplicationIcon>
+    <ApplicationIcon>Image\logo 拷贝.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>AnyCPU</Platforms>
-    <Copyright>Boyce Lig</Copyright>
+    <Copyright>Copyright © 2021</Copyright>
     <Description>Clash for Windows 汉化程序</Description>
+    <PackageProjectUrl>https://github.com/BoyceLig/ClashSinicizationTool</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BoyceLig/ClashSinicizationTool.git</RepositoryUrl>
+    <RepositoryType>GithHub</RepositoryType>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +39,10 @@
     </None>
     <None Update="英汉对照.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Image\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 

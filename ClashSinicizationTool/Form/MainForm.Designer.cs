@@ -390,16 +390,16 @@ namespace ClashSinicizationTool
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel,
             this.githubToolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 538);
+            this.statusStrip.Location = new System.Drawing.Point(0, 539);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(857, 23);
+            this.statusStrip.Size = new System.Drawing.Size(857, 22);
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(713, 18);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(750, 17);
             this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
@@ -408,7 +408,7 @@ namespace ClashSinicizationTool
             this.githubToolStripStatusLabel.Image = global::ClashSinicizationTool.Properties.Resources._9919;
             this.githubToolStripStatusLabel.IsLink = true;
             this.githubToolStripStatusLabel.Name = "githubToolStripStatusLabel";
-            this.githubToolStripStatusLabel.Size = new System.Drawing.Size(92, 18);
+            this.githubToolStripStatusLabel.Size = new System.Drawing.Size(92, 17);
             this.githubToolStripStatusLabel.Text = "GitHub 地址";
             this.githubToolStripStatusLabel.ToolTipText = "点击进入 GitHub 项目地址。";
             this.githubToolStripStatusLabel.Click += new System.EventHandler(this.githubToolStripStatusLabel_Click);

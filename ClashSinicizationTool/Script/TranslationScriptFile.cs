@@ -27,10 +27,7 @@ namespace ClashSinicizationTool
         //保存脚本
         public void SaveScript(string scriptFilePath, TextBox translationScriptText, TextBox logText)
         {
-            StreamWriter streamWriter = new StreamWriter(scriptFilePath, false);
-            streamWriter.WriteLine(translationScriptText.Text);
-            streamWriter.Flush();
-            streamWriter.Close();
+            File.WriteAllText(scriptFilePath, translationScriptText.Text, Encoding.UTF8);
             logText.AppendText("已保存翻译脚本 " + scriptFilePath + Environment.NewLine);
         }
 
