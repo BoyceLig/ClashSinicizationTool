@@ -15,7 +15,6 @@
     <PackageIconUrl />
     <ApplicationIcon>Image\logo 拷贝.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <Platforms>AnyCPU</Platforms>
     <Copyright>Copyright © 2021</Copyright>
     <Description>Clash for Windows 汉化程序</Description>
@@ -24,11 +23,9 @@
     <RepositoryType>GithHub</RepositoryType>
     <NeutralLanguage>zh-CN</NeutralLanguage>
     <PackageReleaseNotes />
+    <Win32Resource />
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SharpCompress" Version="0.30.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Update="moment-with-CN.js">
