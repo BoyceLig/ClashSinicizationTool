@@ -1240,5 +1240,5 @@ attrs:{hint:"update"},on:{click:function(n){return n.stopPropagation(),e.refresh
 #v0.18.7
 "Show:"="显示:"
 "Hide:"="隐藏:"
-hint:"reverse"=hint:"反向"
+hint:"reverse"=hint:"反向排序"
 #v0.18.7-end
