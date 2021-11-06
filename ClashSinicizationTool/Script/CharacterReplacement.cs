@@ -35,7 +35,6 @@ namespace ClashSinicizationTool
             streamWriter.Flush();
             streamWriter.Close();
             logText.AppendText("已汉化文件 " + filePath + Environment.NewLine);
-
-        }
+        }        
     }
 }
