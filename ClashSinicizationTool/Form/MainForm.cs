@@ -348,7 +348,8 @@ namespace ClashSinicizationTool
                 CMDCommand command = new CMDCommand();
                 command.Pack(clashPath);
                 Directory.Delete(clashPath + @"\resources\app", true);
-                logTextBox.AppendText("已删除解包文件夹app" + Environment.NewLine);
+                logTextBox.AppendText("已删除解包文件夹app。" + Environment.NewLine);
+                logTextBox.AppendText("打包完成。请打开 Clash for Windows 使用。" + Environment.NewLine);
             }
             else
             {
