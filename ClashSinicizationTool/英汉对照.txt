@@ -1212,9 +1212,9 @@ t.from)=t.from.replace("connect error:","错误:").replace("connectex: A socket 
 ("Aborted because "+I+" is not accepted"+D)=("中止原因: "+I+" 未被 "+D+"所接受")
 " success, path: "=" 成功, 路径: "
 #供应商错误信息处理
-t.message=t.message.replace("Invalid date","日期无效，请刷新页面").replace("unmarshal errors","解析错误").replace(" line","位于行").replace("cannot unmarshal","无法解析").replace("into","到").replace("Get","获取").replace("context deadline exceeded","连接超时").replace("dial","连接").replace("connectex: No connection could be made because the target machine actively refused it","出错:由于目标机主动拒绝连接，所以无法进行连接").replace("lookup","查找").replace("no such host","域名未解析").replace("connectex: A socket operation was attempted to an unreachable network"," 尝试对无法访问的网络进行套接字操作").replace("all DNS requests failed, first error","所有DNS请求失败，第一个错误").replace("use default dns resolve failed: couldn't find ip","使用默认DNS解析失败:找不到IP").replace("couldn't find ip","找不到 IP").replace("certificate has expired or is not yet valid","网站证书已过期或无效").replace("handshake timeout","握手超时")
+t.message=t.message.replace("Invalid date","日期无效，请刷新页面").replace("unmarshal errors","解析错误").replace(" line","位于行").replace("cannot unmarshal","无法解析").replace("into","到").replace("Get","获取").replace("context deadline exceeded","连接超时").replace("dial","连接").replace("connectex: No connection could be made because the target machine actively refused it","出错:由于目标机主动拒绝连接，所以无法进行连接").replace("lookup","查找").replace("no such host","域名未解析").replace("connectex: A socket operation was attempted to an unreachable network"," 尝试对无法访问的网络进行套接字操作").replace("all DNS requests failed, first error","所有DNS请求失败，第一个错误").replace("use default dns resolve failed: couldn't find ip","使用默认DNS解析失败:找不到IP").replace("couldn't find ip","找不到 IP").replace("certificate has expired or is not yet valid","网站证书已过期或无效").replace("handshake timeout","握手超时").replace("All collection items must start at the same column at line","所有集合项目必须从同一列开始，位于行")
 #下方是切换配置文件报错信息处理
-detail:i=detail:i.replace("Document contains trailing content not separated by a ... or --- line at","文件含有尾部未使用...或---的行").replace("initial proxy provider","初始化代理集").replace("error","出错").replace("Error","错误").replace("open","打开").replace("The system cannot find the file specified","系统找不到该配置文件").replace("Implicit map keys need to be on a single line at line","隐式映射键需要放在同一行上，位于行").replace("column","列").replace("initial rule provider","初始化规则集").replace("format invalid","格式无效").replace("Command failed","执行命令失败").replace("Cannot read property 'put' of null","无法读取为空的 'put' 的属性").replace("unmarshal errors","解析错误").replace("cannot unmarshal","无法解析").replace("into","到")
+detail:i=detail:i.replace("Document contains trailing content not separated by a ... or --- line at","文件含有尾部未使用...或---的行").replace("initial proxy provider","初始化代理集").replace("error","出错").replace("Error","错误").replace("open","打开").replace("The system cannot find the file specified","系统找不到该配置文件").replace("Implicit map keys need to be on a single line at line","隐式映射键需要放在同一行上，位于行").replace("column","列").replace("initial rule provider","初始化规则集").replace("format invalid","格式无效").replace("Command failed","执行命令失败").replace("Cannot read property 'put' of null","无法读取为空的 'put' 的属性").replace("unmarshal errors","解析错误").replace("cannot unmarshal","无法解析").replace("into","到").replace("expected type","期望类型是").replace("got unconvertible type","得到了不可转换的类型").replace("All collection items must start at the same column at line","所有集合项目必须从同一列开始，位于行")
 #v0.18.3-end
 #v0.18.4
 "You can make some changes to a profile then we merge them for you when you refresh the profile."="你可以对配置文件进行一些更改，程序将会在配置文件更新时自动合并到新的配置文件中。"
@@ -1233,8 +1233,8 @@ detail:i=detail:i.replace("Document contains trailing content not separated by a
 "Show connections"="查看连接"
 "Reorder"="重新排序"
 "Diff"="合并"
-attrs:{hint:"update"},on:{click:function(n){return n.stopPropagation(),e.openProfile(t)}}=attrs:{hint:"编辑"},on:{click:function(n){return n.stopPropagation(),e.openProfile(t)}}
-attrs:{hint:"update"},on:{click:function(n){return n.stopPropagation(),e.refreshProfile(t)}}=attrs:{hint:"更新"},on:{click:function(n){return n.stopPropagation(),e.refreshProfile(t)}}
+hint:"update"},on:{click:function(n){return n.stopPropagation(),e.refreshProfile=hint:"更新"},on:{click:function(n){return n.stopPropagation(),e.refreshProfile
+hint:"update"},on:{click:function(n){return n.stopPropagation(),e.openProfile=hint:"编辑"},on:{click:function(n){return n.stopPropagation(),e.openProfile
 #v0.18.6-end
 
 #v0.18.7
