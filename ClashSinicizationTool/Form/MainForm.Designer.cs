@@ -113,7 +113,7 @@ namespace ClashSinicizationTool
             this.loadTranslationScriptButton.Text = "加载";
             this.toolTip.SetToolTip(this.loadTranslationScriptButton, "如果文件用外部程序修改过，汉化前请点击加载按钮将修改内容加载到当前软件。");
             this.loadTranslationScriptButton.UseVisualStyleBackColor = true;
-            this.loadTranslationScriptButton.Click += new System.EventHandler(this.loadTranslationScriptButton_Click);
+            this.loadTranslationScriptButton.Click += new System.EventHandler(this.LoadTranslationScriptButton_Click);
             // 
             // logTextBox
             // 
@@ -173,7 +173,7 @@ namespace ClashSinicizationTool
             this.toolTip.SetToolTip(this.unpackButton, "解包 resources\\app.asar 文件到 resources 目录。\r\n解包后文件夹名称为app。\r\n备份app.asar到app.asar.bak，用" +
         "于还原英文版本。");
             this.unpackButton.UseVisualStyleBackColor = true;
-            this.unpackButton.Click += new System.EventHandler(this.unpackButton_Click);
+            this.unpackButton.Click += new System.EventHandler(this.UnpackButton_Click);
             // 
             // sinicizationButton
             // 
@@ -185,7 +185,7 @@ namespace ClashSinicizationTool
             this.sinicizationButton.Text = "2-1. 汉化";
             this.toolTip.SetToolTip(this.sinicizationButton, "根据翻译脚本信息字段替换对应文件相应字段。\r\n将被汉化文件备份到 “我的文档\\Clash Sinicization Tool\\backup_original”。");
             this.sinicizationButton.UseVisualStyleBackColor = true;
-            this.sinicizationButton.Click += new System.EventHandler(this.sinicizationButton_Click);
+            this.sinicizationButton.Click += new System.EventHandler(this.SinicizationButton_Click);
             // 
             // simplifyButton
             // 
@@ -197,7 +197,7 @@ namespace ClashSinicizationTool
             this.simplifyButton.Text = "2-2. 精简包体（慎点，删除无用文件）（可选）";
             this.toolTip.SetToolTip(this.simplifyButton, "删除不必要的文件，被删除目录可参考 Delete Script.ini 文件。");
             this.simplifyButton.UseVisualStyleBackColor = true;
-            this.simplifyButton.Click += new System.EventHandler(this.simplifyButton_Click);
+            this.simplifyButton.Click += new System.EventHandler(this.SimplifyButton_Click);
             // 
             // packButton
             // 
@@ -209,7 +209,7 @@ namespace ClashSinicizationTool
             this.packButton.Text = "3. 打包";
             this.toolTip.SetToolTip(this.packButton, "打包已修改后的app文件夹的内容到app.asar文件。\r\n如果Clash开启状态，则可以一键关闭并打包。");
             this.packButton.UseVisualStyleBackColor = true;
-            this.packButton.Click += new System.EventHandler(this.packButton_Click);
+            this.packButton.Click += new System.EventHandler(this.PackButton_Click);
             // 
             // openTranslationFileButton
             // 
@@ -222,7 +222,7 @@ namespace ClashSinicizationTool
             this.openTranslationFileButton.Text = "用外部程序打开文件";
             this.toolTip.SetToolTip(this.openTranslationFileButton, "用外部程序打开当前翻译脚本。");
             this.openTranslationFileButton.UseVisualStyleBackColor = true;
-            this.openTranslationFileButton.Click += new System.EventHandler(this.openTranslationFileButton_Click);
+            this.openTranslationFileButton.Click += new System.EventHandler(this.OpenTranslationFileButton_Click);
             // 
             // openClashBrowseButton
             // 
@@ -235,7 +235,7 @@ namespace ClashSinicizationTool
             this.openClashBrowseButton.Text = "打开 Clash 目录";
             this.toolTip.SetToolTip(this.openClashBrowseButton, "需要路径已输入并且存在，才能打开 Clash for Windows 目录。");
             this.openClashBrowseButton.UseVisualStyleBackColor = true;
-            this.openClashBrowseButton.Click += new System.EventHandler(this.openClashBrowseButton_Click);
+            this.openClashBrowseButton.Click += new System.EventHandler(this.OpenClashBrowseButton_Click);
             // 
             // translationScriptText
             // 
@@ -248,7 +248,7 @@ namespace ClashSinicizationTool
             this.translationScriptText.Size = new System.Drawing.Size(845, 199);
             this.translationScriptText.TabIndex = 8;
             this.translationScriptText.WordWrap = false;
-            this.translationScriptText.TextChanged += new System.EventHandler(this.translationScriptText_TextChanged);
+            this.translationScriptText.TextChanged += new System.EventHandler(this.TranslationScriptText_TextChanged);
             // 
             // saveTranslationScriptButton
             // 
@@ -261,7 +261,7 @@ namespace ClashSinicizationTool
             this.saveTranslationScriptButton.Text = "保存当前翻译脚本";
             this.toolTip.SetToolTip(this.saveTranslationScriptButton, "用于保存下方已修改的翻译脚本信息。\r\n已加设快捷键 Ctrl + S 来保存翻译脚本信息和列表路径。");
             this.saveTranslationScriptButton.UseVisualStyleBackColor = true;
-            this.saveTranslationScriptButton.Click += new System.EventHandler(this.saveTranslationScriptButton_Click);
+            this.saveTranslationScriptButton.Click += new System.EventHandler(this.SaveTranslationScriptButton_Click);
             // 
             // translationScriptFileName
             // 
@@ -273,7 +273,7 @@ namespace ClashSinicizationTool
             this.translationScriptFileName.Size = new System.Drawing.Size(537, 25);
             this.translationScriptFileName.TabIndex = 10;
             this.toolTip.SetToolTip(this.translationScriptFileName, "可手动粘贴路径（支持相对路径和绝对路径）。");
-            this.translationScriptFileName.TextUpdate += new System.EventHandler(this.translationScriptFileName_TextChanged);
+            this.translationScriptFileName.TextUpdate += new System.EventHandler(this.TranslationScriptFileName_TextChanged);
             // 
             // clashForWindowsPath
             // 
@@ -285,7 +285,7 @@ namespace ClashSinicizationTool
             this.clashForWindowsPath.Size = new System.Drawing.Size(364, 25);
             this.clashForWindowsPath.TabIndex = 10;
             this.toolTip.SetToolTip(this.clashForWindowsPath, "可手动粘贴路径（支持相对路径和绝对路径）。");
-            this.clashForWindowsPath.TextUpdate += new System.EventHandler(this.clashForWindowsPath_TextUpdate);
+            this.clashForWindowsPath.TextUpdate += new System.EventHandler(this.ClashForWindowsPath_TextUpdate);
             // 
             // autoCleanButton
             // 
@@ -297,7 +297,7 @@ namespace ClashSinicizationTool
             this.autoCleanButton.Text = "清理失效列表";
             this.toolTip.SetToolTip(this.autoCleanButton, "清理无效的翻译脚本路径和 Clash for Windows 路径存档。");
             this.autoCleanButton.UseVisualStyleBackColor = true;
-            this.autoCleanButton.Click += new System.EventHandler(this.autoCleanButton_Click);
+            this.autoCleanButton.Click += new System.EventHandler(this.AutoCleanButton_Click);
             // 
             // OpenClashButton
             // 
@@ -322,7 +322,7 @@ namespace ClashSinicizationTool
         "）。\r\n如果不存在，则还原.bak文件。\r\n需要 resources 目录内有 app.asar.bak 文件，还原此文件。\r\n如果Clash开启状态，则可以一" +
         "键关闭并还原。");
             this.revertButton.UseVisualStyleBackColor = true;
-            this.revertButton.Click += new System.EventHandler(this.revertButton_Click);
+            this.revertButton.Click += new System.EventHandler(this.RevertButton_Click);
             // 
             // CloseClashButton
             // 
@@ -385,7 +385,7 @@ namespace ClashSinicizationTool
             this.autoCkeckClashPathButton.Text = "自动检测目录";
             this.toolTip.SetToolTip(this.autoCkeckClashPathButton, "需要打开 Clash for Windows 程序，来检测已打开的Clash for Windows的目录位置。检测后自动关闭。");
             this.autoCkeckClashPathButton.UseVisualStyleBackColor = true;
-            this.autoCkeckClashPathButton.Click += new System.EventHandler(this.autoCkeckClashPathButton_Click);
+            this.autoCkeckClashPathButton.Click += new System.EventHandler(this.AutoCkeckClashPathButton_Click);
             // 
             // statusStrip
             // 
@@ -413,7 +413,7 @@ namespace ClashSinicizationTool
             this.githubToolStripStatusLabel.Size = new System.Drawing.Size(92, 17);
             this.githubToolStripStatusLabel.Text = "GitHub 地址";
             this.githubToolStripStatusLabel.ToolTipText = "点击进入 GitHub 项目地址。";
-            this.githubToolStripStatusLabel.Click += new System.EventHandler(this.githubToolStripStatusLabel_Click);
+            this.githubToolStripStatusLabel.Click += new System.EventHandler(this.GithubToolStripStatusLabel_Click);
             // 
             // MainForm
             // 

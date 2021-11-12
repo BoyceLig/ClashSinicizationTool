@@ -11,11 +11,9 @@ namespace ClashSinicizationTool
 {
     public partial class MainForm : Form
     {
-        string
-            clashPath,
-            cacheList = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\CacheList.ini",
-            backup_original = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\backup_original";
-
+        private string clashPath;
+        private readonly string cacheList = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\CacheList.ini";
+        private readonly string backup_original = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\backup_original";
         Version currentVersion;
 
         public MainForm()
@@ -52,7 +50,7 @@ namespace ClashSinicizationTool
             }
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+            TranslationScriptFile translationScriptFile = new();
             if (!File.Exists(cacheList))
             {
                 if (!Directory.Exists(cacheList.Replace(@"\CacheList.ini", string.Empty)))
@@ -99,17 +97,17 @@ namespace ClashSinicizationTool
 
         #region 按钮
         //保存当前翻译脚本的修改
-        private void saveTranslationScriptButton_Click(object sender, EventArgs e)
+        private void SaveTranslationScriptButton_Click(object sender, EventArgs e)
         {
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+            TranslationScriptFile translationScriptFile = new();
             translationScriptFile.SaveScript(translationScriptFileName.Text, translationScriptText, logTextBox);
             saveTranslationScriptButton.Enabled = false;
         }
 
         //加载按钮
-        private void loadTranslationScriptButton_Click(object sender, EventArgs e)
+        private void LoadTranslationScriptButton_Click(object sender, EventArgs e)
         {
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+            TranslationScriptFile translationScriptFile = new();
             translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
 
             //把文件名加载到列表
@@ -162,7 +160,7 @@ namespace ClashSinicizationTool
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
-                    IniList ini = new IniList();
+                    IniList ini = new();
                     ini.AddSectionValue("Clash Path", cacheList, clashForWindowsPath.Text);
                 }
             }
@@ -170,7 +168,7 @@ namespace ClashSinicizationTool
         }
 
         //解包
-        private void unpackButton_Click(object sender, EventArgs e)
+        private void UnpackButton_Click(object sender, EventArgs e)
         {
             //备份文件
             File.Copy(clashPath + @"\resources\app.asar", clashPath + @"\resources\app.asar.bak", true);
@@ -187,7 +185,7 @@ namespace ClashSinicizationTool
             if (Directory.Exists("npm"))
             {
                 //解包命令
-                CMDCommand command = new CMDCommand();
+                CMDCommand command = new();
                 command.Unpack(clashPath);
                 if (Directory.Exists(clashPath + @"\resources\app"))
                 {
@@ -207,15 +205,15 @@ namespace ClashSinicizationTool
         }
 
         //自动清理失效目录和文件
-        private void autoCleanButton_Click(object sender, EventArgs e)
+        private void AutoCleanButton_Click(object sender, EventArgs e)
         {
-            IniList ini = new IniList();
+            IniList ini = new();
             ini.CleanSectionValue("Script Path", Resources.iniFilePath);
             ini.CleanSectionValue("Clash Path", Resources.iniFilePath);
             translationScriptFileName.Items.Clear();
             clashForWindowsPath.Items.Clear();
 
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+            TranslationScriptFile translationScriptFile = new();
             translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, Resources.iniFilePath);
             openClashBrowseButton.Enabled = true;
             clashPath = clashForWindowsPath.Text;
@@ -236,10 +234,10 @@ namespace ClashSinicizationTool
         }
 
         //汉化按钮
-        private void sinicizationButton_Click(object sender, EventArgs e)
+        private void SinicizationButton_Click(object sender, EventArgs e)
         {
             //调取ini文件
-            IniList iniList = new IniList();
+            IniList iniList = new();
             string[] replacePaths = iniList.GetSectionValue("Replace Path", Resources.iniFilePath).ToArray();
             if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
             {
@@ -262,13 +260,13 @@ namespace ClashSinicizationTool
                         logTextBox.AppendText("已备份文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
                         File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                         logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
-                        CharacterReplacement characterReplacement = new CharacterReplacement();
+                        CharacterReplacement characterReplacement = new();
                         for (int i = 0; i < replacePaths.Length; i++)
                         {
                             if (File.Exists(clashPath + replacePaths[i]))
                             {
                                 string[] s = replacePaths[i].Split(@"\");
-                                string fileName = s[s.Length - 1];
+                                string fileName = s[^1];
                                 File.Copy(clashPath + replacePaths[i], backup_original + @"\" + fileName, true);
                                 logTextBox.AppendText("已备份文件 " + clashPath + replacePaths[i] + Environment.NewLine);
                                 characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
@@ -294,10 +292,10 @@ namespace ClashSinicizationTool
         }
 
         //点击精简包时候
-        private void simplifyButton_Click(object sender, EventArgs e)
+        private void SimplifyButton_Click(object sender, EventArgs e)
         {
             //调取ini文件
-            IniList iniList = new IniList();
+            IniList iniList = new();
             string[] delectPaths = iniList.GetSectionValue("Delect Path", Resources.iniFilePath).ToArray();
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
@@ -323,7 +321,7 @@ namespace ClashSinicizationTool
         }
 
         //打包app.asar
-        private void packButton_Click(object sender, EventArgs e)
+        private void PackButton_Click(object sender, EventArgs e)
         {
             foreach (Process p in Process.GetProcesses())
             {
@@ -345,7 +343,7 @@ namespace ClashSinicizationTool
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 //打包命令
-                CMDCommand command = new CMDCommand();
+                CMDCommand command = new();
                 command.Pack(clashPath);
                 Directory.Delete(clashPath + @"\resources\app", true);
                 logTextBox.AppendText("已删除解包文件夹app。" + Environment.NewLine);
@@ -360,23 +358,23 @@ namespace ClashSinicizationTool
         }
 
         //用外界程序打开脚本
-        private void openTranslationFileButton_Click(object sender, EventArgs e)
+        private void OpenTranslationFileButton_Click(object sender, EventArgs e)
         {
-            Process process = new Process();
+            Process process = new();
             process.StartInfo.FileName = translationScriptFileName.Text;
             process.StartInfo.UseShellExecute = true;
             process.Start();
         }
 
         //打开文件夹目录
-        private void openClashBrowseButton_Click(object sender, EventArgs e)
+        private void OpenClashBrowseButton_Click(object sender, EventArgs e)
         {
             Process.Start("Explorer.exe", clashPath);
             logTextBox.AppendText("已打开Clash文件夹" + Environment.NewLine);
         }
 
         //还原按钮
-        private void revertButton_Click(object sender, EventArgs e)
+        private void RevertButton_Click(object sender, EventArgs e)
         {
             foreach (Process p in Process.GetProcesses())
             {
@@ -396,14 +394,14 @@ namespace ClashSinicizationTool
             }
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                IniList ini = new IniList();
+                IniList ini = new();
                 string[] replacePath = ini.GetSectionValue("Replace Path", Resources.iniFilePath).ToArray();
                 File.Copy(backup_original + @"\moment.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                 logTextBox.AppendText("已还原被汉化文件" + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
                 foreach (string item in replacePath)
                 {
                     string[] s = item.Split(@"\");
-                    string fileName = s[s.Length - 1];
+                    string fileName = s[^1];
                     File.Copy(backup_original + @"\" + fileName, clashPath + item, true);
                     logTextBox.AppendText("已还原被汉化文件 " + clashPath + item + Environment.NewLine);
                 }
@@ -469,7 +467,7 @@ namespace ClashSinicizationTool
                     {
                         vProc.Kill();
                         logTextBox.AppendText("已关闭程序 " + Resources.clashProcessName + Environment.NewLine);
-                        ProxySetting proxy = new ProxySetting();
+                        ProxySetting proxy = new();
                         proxy.CloseProxy();
                         goto c;
                     }
@@ -488,7 +486,7 @@ namespace ClashSinicizationTool
         }
 
         //自动检测clash地址
-        private void autoCkeckClashPathButton_Click(object sender, EventArgs e)
+        private void AutoCkeckClashPathButton_Click(object sender, EventArgs e)
         {
             foreach (Process vProc in Process.GetProcesses())
             {
@@ -507,7 +505,7 @@ namespace ClashSinicizationTool
                     {
                         vProc.Kill();
                         logTextBox.AppendText("已关闭程序 " + Resources.clashProcessName + Environment.NewLine);
-                        ProxySetting proxy = new ProxySetting();
+                        ProxySetting proxy = new();
                         proxy.CloseProxy();
                     }
                     catch (Exception)
@@ -521,7 +519,7 @@ namespace ClashSinicizationTool
                     {
                         //把文件名加载到列表
                         clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
-                        IniList ini = new IniList();
+                        IniList ini = new();
                         ini.AddSectionValue("Clash Path", cacheList, clashForWindowsPath.Text);
                     }
                     else
@@ -534,7 +532,7 @@ namespace ClashSinicizationTool
                             }
                         }
                         clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
-                        IniList ini = new IniList();
+                        IniList ini = new();
                         ini.AddSectionValue("Clash Path", cacheList, clashForWindowsPath.Text);
                     }
                     logTextBox.AppendText("已加载地址" + clashPath + Environment.NewLine);
@@ -549,9 +547,9 @@ namespace ClashSinicizationTool
 
         #region Text检测
         //翻译脚本显示器修改时，检测与源文件匹配，控制保存开关
-        private void translationScriptText_TextChanged(object sender, EventArgs e)
+        private void TranslationScriptText_TextChanged(object sender, EventArgs e)
         {
-            StreamReader streamReader = new StreamReader(translationScriptFileName.Text, Encoding.UTF8);
+            StreamReader streamReader = new(translationScriptFileName.Text, Encoding.UTF8);
             if (translationScriptText.Text == streamReader.ReadToEnd())
             {
                 saveTranslationScriptButton.Enabled = false;
@@ -573,7 +571,7 @@ namespace ClashSinicizationTool
         }
 
         //判定加载按钮和用外部程序打开按钮开关
-        private void translationScriptFileName_TextChanged(object sender, EventArgs e)
+        private void TranslationScriptFileName_TextChanged(object sender, EventArgs e)
         {
             if (translationScriptFileName.Text == string.Empty)
             {
@@ -604,7 +602,7 @@ namespace ClashSinicizationTool
                         }
                     }
                     translationScriptFileName.Items.Add(translationScriptFileName.Text);
-                    IniList ini = new IniList();
+                    IniList ini = new();
                     ini.AddSectionValue("Script Path", cacheList, translationScriptFileName.Text);
                 c:;
                 }
@@ -622,7 +620,7 @@ namespace ClashSinicizationTool
         }
 
         //clash目录栏文字修改时候
-        private void clashForWindowsPath_TextUpdate(object sender, EventArgs e)
+        private void ClashForWindowsPath_TextUpdate(object sender, EventArgs e)
         {
             if (clashForWindowsPath.Text == string.Empty)
             {
@@ -652,7 +650,7 @@ namespace ClashSinicizationTool
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
-                    IniList ini = new IniList();
+                    IniList ini = new();
                     ini.AddSectionValue("Clash Path", cacheList, clashForWindowsPath.Text);
                 c:;
                 }
@@ -677,7 +675,7 @@ namespace ClashSinicizationTool
             {
                 if (saveTranslationScriptButton.Enabled)
                 {
-                    saveTranslationScriptButton_Click(sender, e);
+                    SaveTranslationScriptButton_Click(sender, e);
                 }
             }
         }
@@ -700,7 +698,7 @@ namespace ClashSinicizationTool
         #endregion
 
         //GitHub链接点击进入
-        private void githubToolStripStatusLabel_Click(object sender, EventArgs e)
+        private void GithubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Resources.projectAddress);
         }
