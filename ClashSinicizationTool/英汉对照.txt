@@ -1242,3 +1242,22 @@ hint:"update"},on:{click:function(n){return n.stopPropagation(),e.openProfile=hi
 "Hide:"="隐藏:"
 hint:"reverse"=hint:"反向排序"
 #v0.18.7-end
+
+#v0.18.8
+e._v("Scripts")=e._v("脚本")
+"Actions"="操作"
+"Run script"="运行脚本"
+#修复设置右边快捷跳转栏汉化后无法跳转
+ref:"section-general"=ref:"section-常规"
+ref:"section-appearance"=ref:"section-外观"
+ref:"section-system-proxy"=ref:"section-系统代理"
+ref:"section-profile-mixin"=ref:"section-mixin-混合配置"
+ref:"section-proxies"=ref:"section-代理"
+ref:"section-connections"=ref:"section-连接"
+ref:"section-outbound"=ref:"section-出站"
+ref:"section-child-processes"=ref:"section-子进程"
+ref:"section-profiles"=ref:"section-配置"
+ref:"section-actions"=ref:"section-操作"
+ref:"section-shortcuts"=ref:"section-热键"
+#修复设置右边快捷跳转栏汉化后无法跳转-end
+#v0.18.8-end
