@@ -195,9 +195,9 @@ namespace ClashSinicizationTool
             this.simplifyButton.Enabled = false;
             this.simplifyButton.Location = new System.Drawing.Point(177, 93);
             this.simplifyButton.Name = "simplifyButton";
-            this.simplifyButton.Size = new System.Drawing.Size(283, 23);
+            this.simplifyButton.Size = new System.Drawing.Size(240, 23);
             this.simplifyButton.TabIndex = 7;
-            this.simplifyButton.Text = "2-2. 精简包体（慎点，删除无用文件）（可选）";
+            this.simplifyButton.Text = "2-2. 精简包体（删除无用文件）（可选）";
             this.toolTip.SetToolTip(this.simplifyButton, "删除不必要的文件，被删除目录可参考 Delete Script.ini 文件。");
             this.simplifyButton.UseVisualStyleBackColor = true;
             this.simplifyButton.Click += new System.EventHandler(this.SimplifyButton_Click);
@@ -205,7 +205,7 @@ namespace ClashSinicizationTool
             // packButton
             // 
             this.packButton.Enabled = false;
-            this.packButton.Location = new System.Drawing.Point(466, 93);
+            this.packButton.Location = new System.Drawing.Point(423, 93);
             this.packButton.Name = "packButton";
             this.packButton.Size = new System.Drawing.Size(75, 23);
             this.packButton.TabIndex = 7;
@@ -316,7 +316,7 @@ namespace ClashSinicizationTool
             // revertButton
             // 
             this.revertButton.Enabled = false;
-            this.revertButton.Location = new System.Drawing.Point(547, 93);
+            this.revertButton.Location = new System.Drawing.Point(504, 93);
             this.revertButton.Name = "revertButton";
             this.revertButton.Size = new System.Drawing.Size(75, 23);
             this.revertButton.TabIndex = 7;
