@@ -142,9 +142,6 @@
     <value>https://github.com/BoyceLig/ClashSinicizationTool</value>
     <comment>项目地址</comment>
   </data>
-  <data name="tray_normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image\tray_normal.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="英汉对照" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\英汉对照.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

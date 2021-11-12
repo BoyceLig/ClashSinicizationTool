@@ -156,16 +156,6 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Icon tray_normal {
-            get {
-                object obj = ResourceManager.GetObject("tray_normal", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 ###此文件很乱，顺序也不要更改，因为部分关键字段替换需要按先后顺序进行，不然可能会导致替换后不正常。
         ///###字段有可能在新的版本改动，然后此对照关系可能部分失效！！
         ///###0.15.0
