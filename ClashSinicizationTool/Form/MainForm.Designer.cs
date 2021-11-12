@@ -405,7 +405,7 @@ namespace ClashSinicizationTool
             this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.splitContainer.Cursor = System.Windows.Forms.Cursors.Default;
             this.splitContainer.Location = new System.Drawing.Point(0, 122);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
