@@ -67,6 +67,9 @@ namespace ClashSinicizationTool
                 //创建翻译脚本文件
                 File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
                 File.WriteAllText(GlobalData.FilePath.translationScriptFilePath, Resources.translationScript);
+                IniList ini = new();
+                ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
+                ini.CleanSectionValue(GlobalData.IniSection.scriptPath, cacheList);
             }
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
