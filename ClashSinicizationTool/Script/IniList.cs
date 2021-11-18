@@ -49,12 +49,23 @@ namespace Ini
                 {
                     isSection = true;
                     currentSectionValue = i;
-                    break;
+                }
+                if (currentSectionValue < i)
+                {
+                    if (iniFileTexts[i] == value)
+                    {
+                        return;
+                    }
+                    if (iniFileTexts[i].First() == '[')
+                    {
+                        break;
+                    }
                 }
             }
             if (isSection)
             {
                 iniFileTexts.Insert(currentSectionValue + 1, value);
+                isSection = false;
             }
             else
             {
