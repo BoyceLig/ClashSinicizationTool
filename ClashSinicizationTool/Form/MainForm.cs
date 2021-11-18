@@ -16,6 +16,8 @@ namespace ClashSinicizationTool
         private readonly string backup_original = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\backup_original";
         Version currentVersion;
 
+
+
         public MainForm()
         {
             InitializeComponent();
@@ -41,12 +43,25 @@ namespace ClashSinicizationTool
             #endregion
 
             //检查文件是否存在
-            if (!File.Exists(Resources.iniFilePath))
+            if (!File.Exists(GlobalData.FilePath.iniFilePath))
             {
-                if (MessageBox.Show(Resources.iniFilePath + " 列表文件不存在，无法进行汉化，请找回配置文件后再次尝试", "提示") == DialogResult.OK)
-                {
-                    Environment.Exit(0);
-                }
+                //创建替换索引路径文件
+                File.Create(GlobalData.FilePath.iniFilePath).Close();
+                File.WriteAllText(GlobalData.FilePath.iniFilePath, Resources.pathList);
+            }
+
+            if (!File.Exists(GlobalData.FilePath.momentFilePath))
+            {
+                //创建翻译所需文件
+                File.Create(GlobalData.FilePath.momentFilePath).Close();
+                File.WriteAllText(GlobalData.FilePath.momentFilePath, Resources.moment_with_CN);
+            }
+
+            if (!File.Exists(GlobalData.FilePath.translationScriptFilePath))
+            {
+                //创建翻译脚本文件
+                File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
+                File.WriteAllText(GlobalData.FilePath.translationScriptFilePath, Resources.translationScript);
             }
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
@@ -57,10 +72,11 @@ namespace ClashSinicizationTool
                 {
                     Directory.CreateDirectory(cacheList.Replace(@"\CacheList.ini", string.Empty));
                 }
+                //创建cacheList文件
                 File.Create(cacheList).Close();
-                
-                File.WriteAllLines(cacheList, GlobalData.cacheList);
+                File.WriteAllText(cacheList, Resources.cacheList);
             }
+
 
             //加载列表文件                
             translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
@@ -209,17 +225,17 @@ namespace ClashSinicizationTool
         private void AutoCleanButton_Click(object sender, EventArgs e)
         {
             IniList ini = new();
-            ini.CleanSectionValue("Script Path", Resources.iniFilePath);
-            ini.CleanSectionValue("Clash Path", Resources.iniFilePath);
+            ini.CleanSectionValue("Script Path", GlobalData.FilePath.iniFilePath);
+            ini.CleanSectionValue("Clash Path", GlobalData.FilePath.iniFilePath);
             translationScriptFileName.Items.Clear();
             clashForWindowsPath.Items.Clear();
 
             TranslationScriptFile translationScriptFile = new();
-            translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, Resources.iniFilePath);
+            translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, GlobalData.FilePath.iniFilePath);
             openClashBrowseButton.Enabled = true;
             clashPath = clashForWindowsPath.Text;
 
-            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, Resources.iniFilePath);
+            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, GlobalData.FilePath.iniFilePath);
             //自动加载第一个文件
             if (translationScriptFileName.Items.Count != 0)
             {
@@ -239,7 +255,7 @@ namespace ClashSinicizationTool
         {
             //调取ini文件
             IniList iniList = new();
-            string[] replacePaths = iniList.GetSectionValue("Replace Path", Resources.iniFilePath).ToArray();
+            string[] replacePaths = iniList.GetSectionValue("Replace Path", GlobalData.FilePath.iniFilePath).ToArray();
             if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
             {
                 MessageBox.Show("您已汉化，不需要二次汉化", "提示");
@@ -297,7 +313,7 @@ namespace ClashSinicizationTool
         {
             //调取ini文件
             IniList iniList = new();
-            string[] delectPaths = iniList.GetSectionValue("Delect Path", Resources.iniFilePath).ToArray();
+            string[] delectPaths = iniList.GetSectionValue("Delect Path", GlobalData.FilePath.iniFilePath).ToArray();
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 for (int i = 0; i < delectPaths.Length; i++)
@@ -396,7 +412,7 @@ namespace ClashSinicizationTool
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 IniList ini = new();
-                string[] replacePath = ini.GetSectionValue("Replace Path", Resources.iniFilePath).ToArray();
+                string[] replacePath = ini.GetSectionValue("Replace Path", GlobalData.FilePath.iniFilePath).ToArray();
                 File.Copy(backup_original + @"\moment.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                 logTextBox.AppendText("已还原被汉化文件" + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
                 foreach (string item in replacePath)

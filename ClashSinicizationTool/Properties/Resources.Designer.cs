@@ -61,25 +61,15 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        public static System.Drawing.Bitmap _9919 {
-            get {
-                object obj = ResourceManager.GetObject("9919", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 [Script Path]
-        ///英汉对照.txt
+        ///翻译脚本.txt
         ///
         ///[Clash Path]
         /// 的本地化字符串。
         /// </summary>
-        public static string CacheList {
+        public static string cacheList {
             get {
-                return ResourceManager.GetString("CacheList", resourceCulture);
+                return ResourceManager.GetString("cacheList", resourceCulture);
             }
         }
         
@@ -93,11 +83,12 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
-        ///   查找类似 PathList.ini 的本地化字符串。
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static string iniFilePath {
+        public static System.Drawing.Bitmap GitHub_Logo {
             get {
-                return ResourceManager.GetString("iniFilePath", resourceCulture);
+                object obj = ResourceManager.GetObject("GitHub Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -153,9 +144,9 @@ namespace ClashSinicizationTool.Properties {
         ///\resources\app\node_modules\axios\dist\axios.min.js
         ///\resources\app\node_modules\axios\d [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
-        public static string PathList {
+        public static string pathList {
             get {
-                return ResourceManager.GetString("PathList", resourceCulture);
+                return ResourceManager.GetString("pathList", resourceCulture);
             }
         }
         
@@ -193,9 +184,9 @@ namespace ClashSinicizationTool.Properties {
         ///#可能--main拖动菜单白屏相关
         ///&quot;menu-item-change&quot;,&quot;general&quot;=&quot;menu [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
-        public static string 英汉对照 {
+        public static string translationScript {
             get {
-                return ResourceManager.GetString("英汉对照", resourceCulture);
+                return ResourceManager.GetString("translationScript", resourceCulture);
             }
         }
     }

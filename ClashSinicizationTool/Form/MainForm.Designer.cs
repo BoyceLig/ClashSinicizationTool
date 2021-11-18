@@ -386,13 +386,13 @@ namespace ClashSinicizationTool
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(750, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(719, 17);
             this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
             // 
             this.githubToolStripStatusLabel.AutoToolTip = true;
-            this.githubToolStripStatusLabel.Image = global::ClashSinicizationTool.Properties.Resources._9919;
+            this.githubToolStripStatusLabel.Image = global::ClashSinicizationTool.Properties.Resources.GitHub_Logo;
             this.githubToolStripStatusLabel.IsLink = true;
             this.githubToolStripStatusLabel.Name = "githubToolStripStatusLabel";
             this.githubToolStripStatusLabel.Size = new System.Drawing.Size(92, 17);

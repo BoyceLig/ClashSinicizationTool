@@ -8,12 +8,11 @@ namespace ClashSinicizationTool
 {
     class GlobalData
     {
-        public static readonly string[] cacheList = {
-            "[Script Path]",
-            "英汉对照.txt",
-            "",
-            "[Clash Path]",
-            ""
-        };
+        public struct FilePath
+        {
+            public const string iniFilePath = "PathList.ini";
+            public const string momentFilePath = "moment-with-CN.js";
+            public const string translationScriptFilePath = "翻译脚本.txt";
+        }
     }
 }
