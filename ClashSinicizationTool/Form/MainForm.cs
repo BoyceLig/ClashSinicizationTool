@@ -58,6 +58,7 @@ namespace ClashSinicizationTool
                     Directory.CreateDirectory(cacheList.Replace(@"\CacheList.ini", string.Empty));
                 }
                 File.Create(cacheList).Close();
+                
                 File.WriteAllLines(cacheList, GlobalData.cacheList);
             }
 

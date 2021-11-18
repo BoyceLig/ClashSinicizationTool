@@ -121,6 +121,9 @@
   <data name="9919" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\9919.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CacheList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CacheList.ini;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="clashProcessName" xml:space="preserve">
     <value>Clash for Windows</value>
     <comment>程序名称</comment>
@@ -129,8 +132,8 @@
     <value>PathList.ini</value>
     <comment>替换和删除列表ini文件地址</comment>
   </data>
-  <data name="logo 拷贝" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image\logo 拷贝.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image\logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="moment_with_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\moment-with-cn.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

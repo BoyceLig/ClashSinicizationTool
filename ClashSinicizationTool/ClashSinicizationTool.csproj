@@ -13,7 +13,7 @@
     <AssemblyName>Clash Sinicization Tool</AssemblyName>
     <PackageIcon>logo.png</PackageIcon>
     <PackageIconUrl />
-    <ApplicationIcon>Image\logo 拷贝.ico</ApplicationIcon>
+    <ApplicationIcon>Image\logo.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
     <Platforms>AnyCPU</Platforms>
     <Copyright>Copyright © 2021</Copyright>
@@ -27,11 +27,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Resources\**" />
-    <EmbeddedResource Remove="Resources\**" />
-    <None Remove="Resources\**" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Update="moment-with-CN.js">
@@ -42,10 +40,6 @@
     </None>
     <None Update="英汉对照.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Image\logo.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 

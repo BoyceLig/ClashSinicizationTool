@@ -71,6 +71,19 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
+        ///   查找类似 [Script Path]
+        ///英汉对照.txt
+        ///
+        ///[Clash Path]
+        /// 的本地化字符串。
+        /// </summary>
+        public static string CacheList {
+            get {
+                return ResourceManager.GetString("CacheList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Clash for Windows 的本地化字符串。
         /// </summary>
         public static string clashProcessName {
@@ -91,9 +104,9 @@ namespace ClashSinicizationTool.Properties {
         /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Icon logo_拷贝 {
+        public static System.Drawing.Icon logo {
             get {
-                object obj = ResourceManager.GetObject("logo 拷贝", resourceCulture);
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
