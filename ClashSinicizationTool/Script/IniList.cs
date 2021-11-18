@@ -56,7 +56,7 @@ namespace Ini
                     {
                         return;
                     }
-                    if (iniFileTexts[i].First() == '[')
+                    if (iniFileTexts[i].StartsWith('['))
                     {
                         break;
                     }
