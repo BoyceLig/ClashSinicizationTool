@@ -225,8 +225,8 @@ namespace ClashSinicizationTool
         private void AutoCleanButton_Click(object sender, EventArgs e)
         {
             IniList ini = new();
-            ini.CleanSectionValue("Script Path", GlobalData.FilePath.iniFilePath);
-            ini.CleanSectionValue("Clash Path", GlobalData.FilePath.iniFilePath);
+            ini.CleanSectionValue("Script Path", cacheList);
+            ini.CleanSectionValue("Clash Path", cacheList);
             translationScriptFileName.Items.Clear();
             clashForWindowsPath.Items.Clear();
 
