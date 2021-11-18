@@ -153,9 +153,9 @@ namespace ClashSinicizationTool.Properties {
         /// <summary>
         ///   查找类似 https://github.com/BoyceLig/ClashSinicizationTool 的本地化字符串。
         /// </summary>
-        public static string projectAddress {
+        public static string projectUrl {
             get {
-                return ResourceManager.GetString("projectAddress", resourceCulture);
+                return ResourceManager.GetString("projectUrl", resourceCulture);
             }
         }
         

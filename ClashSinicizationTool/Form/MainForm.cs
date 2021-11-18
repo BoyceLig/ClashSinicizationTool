@@ -717,7 +717,7 @@ namespace ClashSinicizationTool
         //GitHub链接点击进入
         private void GithubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", Resources.projectAddress);
+            Process.Start("explorer.exe", Resources.projectUrl);
         }
     }
 }
