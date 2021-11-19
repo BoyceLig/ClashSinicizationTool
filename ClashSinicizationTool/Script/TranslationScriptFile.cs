@@ -16,9 +16,11 @@ namespace ClashSinicizationTool
         //加载脚本
         public void LoadScript(string scriptFilePath, TextBox translationScriptText, TextBox logText)
         {
-            StreamReader streamReader = new StreamReader(scriptFilePath, Encoding.UTF8);
-            translationScriptText.Text = streamReader.ReadToEnd();
-            streamReader.Close();
+            //StreamReader reader = new StreamReader(scriptFilePath, Encoding.UTF8);
+            //translationScriptText.Text = reader.ReadToEnd();
+            //reader.Close();
+            //translationScriptText.Lines = File.ReadAllLines(scriptFilePath, Encoding.UTF8);
+            translationScriptText.Text = File.ReadAllText(scriptFilePath, Encoding.UTF8);
             translationScriptText.SelectionStart = translationScriptText.Text.Length;
             translationScriptText.ScrollToCaret();
             logText.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
@@ -55,7 +57,7 @@ namespace ClashSinicizationTool
         }
 
         //导入Clash目录文件
-        public void LoadClashList(ComboBox clashPath, TextBox logText, string iniPath)
+        public void LoadClashList(ComboBox clashPath, string iniPath)
         {
             IniList ini = new IniList();
             string[] lines = ini.GetSectionValue("Clash Path", iniPath).ToArray();

@@ -124,10 +124,6 @@
   <data name="cacheList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CacheList.ini;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="clashProcessName" xml:space="preserve">
-    <value>Clash for Windows</value>
-    <comment>程序名称</comment>
-  </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image\logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,12 +132,5 @@
   </data>
   <data name="pathList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\pathlist.ini;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="projectUrl" xml:space="preserve">
-    <value>https://github.com/BoyceLig/ClashSinicizationTool</value>
-    <comment>项目地址</comment>
-  </data>
-  <data name="translationScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\翻译脚本.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

@@ -74,15 +74,6 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Clash for Windows 的本地化字符串。
-        /// </summary>
-        public static string clashProcessName {
-            get {
-                return ResourceManager.GetString("clashProcessName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap GitHub_Logo {
@@ -147,46 +138,6 @@ namespace ClashSinicizationTool.Properties {
         public static string pathList {
             get {
                 return ResourceManager.GetString("pathList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 https://github.com/BoyceLig/ClashSinicizationTool 的本地化字符串。
-        /// </summary>
-        public static string projectUrl {
-            get {
-                return ResourceManager.GetString("projectUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 ###此文件很乱，顺序也不要更改，因为部分关键字段替换需要按先后顺序进行，不然可能会导致替换后不正常。
-        ///###字段有可能在新的版本改动，然后此对照关系可能部分失效！！
-        ///###0.15.0
-        ///###更新：2021-3-26
-        ///###0.15.2
-        ///###更新：2021-4-9
-        ///###感谢：谷歌翻译，必应翻译，百度翻译，有道翻译；感谢网友们翻译
-        ///###
-        ///
-        ///(&quot;New&quot;)=(&quot;有新版本&quot;)
-        ///(&apos;New&apos;)=(&apos;有新版本&apos;)
-        ///
-        ///###v0.15.5
-        ///&quot;\n        Connections\n        &quot;=&quot;\n        连接状态\n        &quot;
-        ///###v0.15.5
-        ///
-        ///&apos;Connections&apos;)=&apos;连接状态&apos;)
-        ///&quot;Connections&quot;)=&quot;连接状态&quot;)
-        ///startup&quot;,items:=startup&quot;,items:[&quot;静默&quot;,&quot;错误&quot;,&quot;警告&quot;,&quot;信息&quot;,&quot;调试&quot;],NoUseItem:
-        ///#以上renderer必须先翻译，否则可能会被后面的覆盖
-        ///
-        ///#可能--main拖动菜单白屏相关
-        ///&quot;menu-item-change&quot;,&quot;general&quot;=&quot;menu [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        public static string translationScript {
-            get {
-                return ResourceManager.GetString("translationScript", resourceCulture);
             }
         }
     }

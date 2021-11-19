@@ -15,7 +15,7 @@ namespace ClashSinicizationTool
         public void CharacterReplace(TextBox textBox, string filePath, TextBox logText)
         {
             //读取要被替换的文件
-            StreamReader streamReader = new StreamReader(filePath, Encoding.UTF8);
+            StreamReader streamReader = new(filePath, Encoding.UTF8);
             string s = streamReader.ReadToEnd();
             streamReader.Close();
 

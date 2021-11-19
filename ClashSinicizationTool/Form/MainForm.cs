@@ -66,10 +66,7 @@ namespace ClashSinicizationTool
             {
                 //创建翻译脚本文件
                 File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
-                File.WriteAllText(GlobalData.FilePath.translationScriptFilePath, Resources.translationScript);
-                IniList ini = new();
-                ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
-                ini.CleanSectionValue(GlobalData.IniSection.scriptPath, cacheList);
+                UpdateTranslationScriptButton_Click(sender, e);
             }
             #region 检查创建翻译脚本列表文件
             //检查创建列表文件
@@ -102,7 +99,7 @@ namespace ClashSinicizationTool
 
             #region 检查创建clash目录列表
 
-            translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, cacheList);
+            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
             openClashBrowseButton.Enabled = true;
             clashPath = clashForWindowsPath.Text;
 
@@ -239,7 +236,7 @@ namespace ClashSinicizationTool
             clashForWindowsPath.Items.Clear();
 
             TranslationScriptFile translationScriptFile = new();
-            translationScriptFile.LoadClashList(clashForWindowsPath, logTextBox, GlobalData.FilePath.iniFilePath);
+            translationScriptFile.LoadClashList(clashForWindowsPath, GlobalData.FilePath.iniFilePath);
             openClashBrowseButton.Enabled = true;
             clashPath = clashForWindowsPath.Text;
 
@@ -350,7 +347,7 @@ namespace ClashSinicizationTool
         {
             foreach (Process p in Process.GetProcesses())
             {
-                if (p.ProcessName == Resources.clashProcessName)
+                if (p.ProcessName == GlobalData.clashProcessName)
                 {
                     if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -403,7 +400,7 @@ namespace ClashSinicizationTool
         {
             foreach (Process p in Process.GetProcesses())
             {
-                if (p.ProcessName == Resources.clashProcessName)
+                if (p.ProcessName == GlobalData.clashProcessName)
                 {
                     if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -460,10 +457,10 @@ namespace ClashSinicizationTool
         {
             foreach (Process vProc in Process.GetProcesses())
             {
-                if (vProc.ProcessName == Resources.clashProcessName)
+                if (vProc.ProcessName == GlobalData.clashProcessName)
                 {
-                    logTextBox.AppendText(Resources.clashProcessName + " 已开启，无需重复开启" + Environment.NewLine);
-                    MessageBox.Show(Resources.clashProcessName + " 已开启，无需重复开启", "提示");
+                    logTextBox.AppendText(GlobalData.clashProcessName + " 已开启，无需重复开启" + Environment.NewLine);
+                    MessageBox.Show(GlobalData.clashProcessName + " 已开启，无需重复开启", "提示");
                     goto c;
                 }
             }
@@ -486,27 +483,27 @@ namespace ClashSinicizationTool
         {
             foreach (Process vProc in Process.GetProcesses())   //[BugHere]:请不要加.Exe后缀名称
             {
-                if (vProc.ProcessName.ToUpper() == Resources.clashProcessName.ToUpper())
+                if (vProc.ProcessName.ToUpper() == GlobalData.clashProcessName.ToUpper())
                 {
                     try
                     {
                         vProc.Kill();
-                        logTextBox.AppendText("已关闭程序 " + Resources.clashProcessName + Environment.NewLine);
+                        logTextBox.AppendText("已关闭程序 " + GlobalData.clashProcessName + Environment.NewLine);
                         ProxySetting proxy = new();
                         proxy.CloseProxy();
                         goto c;
                     }
                     catch (Exception)
                     {
-                        logTextBox.AppendText("关闭 " + Resources.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
-                        MessageBox.Show(Resources.clashProcessName + "关闭 " + Resources.clashProcessName + " 失败，请手动关闭", "提示");
+                        logTextBox.AppendText("关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
+                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭", "提示");
                         goto c;
                         throw;
                     }
                 }
             }
-            logTextBox.AppendText(Resources.clashProcessName + " 未开启，无需关闭" + Environment.NewLine);
-            MessageBox.Show(Resources.clashProcessName + " 未开启，无需关闭", "提示");
+            logTextBox.AppendText(GlobalData.clashProcessName + " 未开启，无需关闭" + Environment.NewLine);
+            MessageBox.Show(GlobalData.clashProcessName + " 未开启，无需关闭", "提示");
         c:;
         }
 
@@ -515,7 +512,7 @@ namespace ClashSinicizationTool
         {
             foreach (Process vProc in Process.GetProcesses())
             {
-                if (vProc.ProcessName.ToUpper() == Resources.clashProcessName.ToUpper())
+                if (vProc.ProcessName.ToUpper() == GlobalData.clashProcessName.ToUpper())
                 {
                     clashPath = vProc.MainModule.FileName.Replace(@"\Clash for Windows.exe", "");
                     clashForWindowsPath.Text = clashPath;
@@ -529,14 +526,14 @@ namespace ClashSinicizationTool
                     try
                     {
                         vProc.Kill();
-                        logTextBox.AppendText("已关闭程序 " + Resources.clashProcessName + Environment.NewLine);
+                        logTextBox.AppendText("已关闭程序 " + GlobalData.clashProcessName + Environment.NewLine);
                         ProxySetting proxy = new();
                         proxy.CloseProxy();
                     }
                     catch (Exception)
                     {
-                        logTextBox.AppendText("关闭 " + Resources.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
-                        MessageBox.Show(Resources.clashProcessName + "关闭 " + Resources.clashProcessName + " 失败，请手动关闭", "提示");
+                        logTextBox.AppendText("关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
+                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭", "提示");
                         throw;
                     }
 
@@ -564,9 +561,37 @@ namespace ClashSinicizationTool
                     goto c;
                 }
             }
-            logTextBox.AppendText(Resources.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试" + Environment.NewLine);
-            MessageBox.Show(Resources.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试", "提示");
+            logTextBox.AppendText(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试" + Environment.NewLine);
+            MessageBox.Show(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试", "提示");
         c:;
+        }
+
+        //从云端更新脚本文件
+        private void UpdateTranslationScriptButton_Click(object sender, EventArgs e)
+        {
+            Net net = new();
+            if (net.DownloadFile(GlobalData.Url.translationScriptUrls, GlobalData.FilePath.translationScriptFilePath, toolStripProgressBar, logTextBox))
+            {
+                IniList ini = new();
+                if (translationScriptFileName.Text != GlobalData.FilePath.translationScriptFilePath)
+                {
+                    for (int i = 0; i < translationScriptFileName.Items.Count; i++)
+                    {
+                        if (translationScriptFileName.Items[i].ToString() == GlobalData.FilePath.translationScriptFilePath)
+                        {
+                            break;
+                        }
+                        if (translationScriptFileName.Items[i].ToString() != GlobalData.FilePath.translationScriptFilePath && i == translationScriptFileName.Items.Count - 1)
+                        {
+                            ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
+                            TranslationScriptFile translationScriptFile = new();
+                            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
+
+                        }
+                    }
+                }
+                LoadTranslationScriptButton_Click(sender, e);
+            }
         }
         #endregion
 
@@ -725,7 +750,27 @@ namespace ClashSinicizationTool
         //GitHub链接点击进入
         private void GithubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", Resources.projectUrl);
+            Process.Start("explorer.exe", GlobalData.Url.projectUrl);
+        }
+
+        private void ClashForWindowsPath_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.All;//调用DragDrop事件
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+
+        }
+
+        private void ClashForWindowsPath_DragDrop(object sender, DragEventArgs e)
+        {
+            string path = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString(); ;//拖放的多个文件的路径列表
+            MessageBox.Show(path);
+            clashForWindowsPath.Text = path;
         }
     }
 }

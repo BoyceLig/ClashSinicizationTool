@@ -60,9 +60,11 @@ namespace ClashSinicizationTool
             this.autoCkeckClashPathButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.githubToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.updateTranslationScriptButton = new System.Windows.Forms.Button();
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -268,18 +270,20 @@ namespace ClashSinicizationTool
             // 
             // translationScriptFileName
             // 
+            this.translationScriptFileName.AllowDrop = true;
             this.translationScriptFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.translationScriptFileName.FormattingEnabled = true;
             this.translationScriptFileName.Location = new System.Drawing.Point(86, 6);
             this.translationScriptFileName.Name = "translationScriptFileName";
-            this.translationScriptFileName.Size = new System.Drawing.Size(537, 25);
+            this.translationScriptFileName.Size = new System.Drawing.Size(435, 25);
             this.translationScriptFileName.TabIndex = 10;
             this.toolTip.SetToolTip(this.translationScriptFileName, "可手动粘贴路径（支持相对路径和绝对路径）。");
             this.translationScriptFileName.TextUpdate += new System.EventHandler(this.TranslationScriptFileName_TextChanged);
             // 
             // clashForWindowsPath
             // 
+            this.clashForWindowsPath.AllowDrop = true;
             this.clashForWindowsPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clashForWindowsPath.FormattingEnabled = true;
@@ -289,6 +293,8 @@ namespace ClashSinicizationTool
             this.clashForWindowsPath.TabIndex = 10;
             this.toolTip.SetToolTip(this.clashForWindowsPath, "可手动粘贴路径（支持相对路径和绝对路径）。");
             this.clashForWindowsPath.TextUpdate += new System.EventHandler(this.ClashForWindowsPath_TextUpdate);
+            this.clashForWindowsPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.ClashForWindowsPath_DragDrop);
+            this.clashForWindowsPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.ClashForWindowsPath_DragEnter);
             // 
             // autoCleanButton
             // 
@@ -375,6 +381,7 @@ namespace ClashSinicizationTool
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar,
             this.toolStripStatusLabel,
             this.githubToolStripStatusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 539);
@@ -383,10 +390,15 @@ namespace ClashSinicizationTool
             this.statusStrip.TabIndex = 14;
             this.statusStrip.Text = "statusStrip1";
             // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(180, 16);
+            // 
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(719, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(568, 17);
             this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
@@ -421,8 +433,20 @@ namespace ClashSinicizationTool
             this.splitContainer.SplitterDistance = 235;
             this.splitContainer.TabIndex = 15;
             // 
+            // updateTranslationScriptButton
+            // 
+            this.updateTranslationScriptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.updateTranslationScriptButton.Location = new System.Drawing.Point(527, 6);
+            this.updateTranslationScriptButton.Name = "updateTranslationScriptButton";
+            this.updateTranslationScriptButton.Size = new System.Drawing.Size(95, 23);
+            this.updateTranslationScriptButton.TabIndex = 3;
+            this.updateTranslationScriptButton.Text = "更新脚本文件";
+            this.updateTranslationScriptButton.UseVisualStyleBackColor = true;
+            this.updateTranslationScriptButton.Click += new System.EventHandler(this.UpdateTranslationScriptButton_Click);
+            // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 561);
@@ -440,6 +464,7 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.sinicizationButton);
             this.Controls.Add(this.unpackButton);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.updateTranslationScriptButton);
             this.Controls.Add(this.loadTranslationScriptButton);
             this.Controls.Add(this.autoCleanButton);
             this.Controls.Add(this.autoCkeckClashPathButton);
@@ -503,6 +528,8 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel githubToolStripStatusLabel;
         private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.Button updateTranslationScriptButton;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
     }
 }
 
