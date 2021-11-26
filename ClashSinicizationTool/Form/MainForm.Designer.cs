@@ -47,7 +47,6 @@ namespace ClashSinicizationTool
             this.openTranslationFileButton = new System.Windows.Forms.Button();
             this.openClashBrowseButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.translationScriptText = new System.Windows.Forms.TextBox();
             this.saveTranslationScriptButton = new System.Windows.Forms.Button();
             this.translationScriptFileName = new System.Windows.Forms.ComboBox();
             this.clashForWindowsPath = new System.Windows.Forms.ComboBox();
@@ -56,6 +55,7 @@ namespace ClashSinicizationTool
             this.revertButton = new System.Windows.Forms.Button();
             this.CloseClashButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.translationScriptRichTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.autoCkeckClashPathButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -242,19 +242,6 @@ namespace ClashSinicizationTool
             this.openClashBrowseButton.UseVisualStyleBackColor = true;
             this.openClashBrowseButton.Click += new System.EventHandler(this.OpenClashBrowseButton_Click);
             // 
-            // translationScriptText
-            // 
-            this.translationScriptText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.translationScriptText.Location = new System.Drawing.Point(3, 19);
-            this.translationScriptText.MaxLength = 0;
-            this.translationScriptText.Multiline = true;
-            this.translationScriptText.Name = "translationScriptText";
-            this.translationScriptText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.translationScriptText.Size = new System.Drawing.Size(851, 213);
-            this.translationScriptText.TabIndex = 8;
-            this.translationScriptText.WordWrap = false;
-            this.translationScriptText.TextChanged += new System.EventHandler(this.TranslationScriptText_TextChanged);
-            // 
             // saveTranslationScriptButton
             // 
             this.saveTranslationScriptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -346,7 +333,7 @@ namespace ClashSinicizationTool
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.translationScriptText);
+            this.groupBox1.Controls.Add(this.translationScriptRichTextBox);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -354,6 +341,21 @@ namespace ClashSinicizationTool
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "翻译脚本信息";
+            // 
+            // translationScriptRichTextBox
+            // 
+            this.translationScriptRichTextBox.AcceptsTab = true;
+            this.translationScriptRichTextBox.AutoWordSelection = true;
+            this.translationScriptRichTextBox.DetectUrls = false;
+            this.translationScriptRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.translationScriptRichTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.translationScriptRichTextBox.Location = new System.Drawing.Point(3, 19);
+            this.translationScriptRichTextBox.MaxLength = 0;
+            this.translationScriptRichTextBox.Name = "translationScriptRichTextBox";
+            this.translationScriptRichTextBox.Size = new System.Drawing.Size(851, 213);
+            this.translationScriptRichTextBox.TabIndex = 9;
+            this.translationScriptRichTextBox.Text = "";
+            this.translationScriptRichTextBox.WordWrap = false;
             // 
             // groupBox2
             // 
@@ -417,7 +419,7 @@ namespace ClashSinicizationTool
             this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.splitContainer.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitContainer.Location = new System.Drawing.Point(0, 122);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -481,7 +483,6 @@ namespace ClashSinicizationTool
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -519,7 +520,6 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.ToolStripMenuItem CleanToolStripMenuItem;
         private System.Windows.Forms.Button saveTranslationScriptButton;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox translationScriptText;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox logTextBox;
         private System.Windows.Forms.Button autoCkeckClashPathButton;
@@ -530,6 +530,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Button updateTranslationScriptButton;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.RichTextBox translationScriptRichTextBox;
     }
 }
 

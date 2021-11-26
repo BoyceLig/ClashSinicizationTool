@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Ini;
 using System.Threading;
 using ClashSinicizationTool.Properties;
+using System.Drawing;
 
 namespace ClashSinicizationTool
 {
@@ -90,7 +91,7 @@ namespace ClashSinicizationTool
             {
                 if (File.Exists(translationScriptFileName.Items[0].ToString()))
                 {
-                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptRichTextBox, logTextBox);
                     loadTranslationScriptButton.Enabled = true;
                     openTranslationFileButton.Enabled = true;
                 }
@@ -122,7 +123,7 @@ namespace ClashSinicizationTool
         private void SaveTranslationScriptButton_Click(object sender, EventArgs e)
         {
             TranslationScriptFile translationScriptFile = new();
-            translationScriptFile.SaveScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+            translationScriptFile.SaveScript(translationScriptFileName.Text, translationScriptRichTextBox, logTextBox);
             saveTranslationScriptButton.Enabled = false;
         }
 
@@ -130,7 +131,7 @@ namespace ClashSinicizationTool
         private void LoadTranslationScriptButton_Click(object sender, EventArgs e)
         {
             TranslationScriptFile translationScriptFile = new();
-            translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+            translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptRichTextBox, logTextBox);
 
             //把文件名加载到列表
             //如果item没有值
@@ -246,7 +247,7 @@ namespace ClashSinicizationTool
             {
                 if (File.Exists(translationScriptFileName.Items[0].ToString()))
                 {
-                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptText, logTextBox);
+                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptRichTextBox, logTextBox);
                     loadTranslationScriptButton.Enabled = true;
                     openTranslationFileButton.Enabled = true;
                 }
@@ -291,7 +292,7 @@ namespace ClashSinicizationTool
                                 string fileName = s[^1];
                                 File.Copy(clashPath + replacePaths[i], backup_original + @"\" + fileName, true);
                                 logTextBox.AppendText("已备份文件 " + clashPath + replacePaths[i] + Environment.NewLine);
-                                characterReplacement.CharacterReplace(translationScriptText, clashPath + replacePaths[i], logTextBox);
+                                characterReplacement.CharacterReplace(translationScriptRichTextBox, clashPath + replacePaths[i], logTextBox);
                             }
                             else
                             {
@@ -600,7 +601,7 @@ namespace ClashSinicizationTool
         private void TranslationScriptText_TextChanged(object sender, EventArgs e)
         {
             StreamReader streamReader = new(translationScriptFileName.Text, Encoding.UTF8);
-            if (translationScriptText.Text == streamReader.ReadToEnd())
+            if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
             {
                 saveTranslationScriptButton.Enabled = false;
             }

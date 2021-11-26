@@ -12,7 +12,7 @@ namespace ClashSinicizationTool
 {
     class CharacterReplacement
     {
-        public void CharacterReplace(TextBox textBox, string filePath, TextBox logText)
+        public void CharacterReplace(RichTextBox textBox, string filePath, TextBox logText)
         {
             //读取要被替换的文件
             StreamReader streamReader = new(filePath, Encoding.UTF8);

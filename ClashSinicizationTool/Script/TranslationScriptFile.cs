@@ -14,12 +14,8 @@ namespace ClashSinicizationTool
     class TranslationScriptFile
     {
         //加载脚本
-        public void LoadScript(string scriptFilePath, TextBox translationScriptText, TextBox logText)
+        public void LoadScript(string scriptFilePath, RichTextBox translationScriptText, TextBox logText)
         {
-            //StreamReader reader = new StreamReader(scriptFilePath, Encoding.UTF8);
-            //translationScriptText.Text = reader.ReadToEnd();
-            //reader.Close();
-            //translationScriptText.Lines = File.ReadAllLines(scriptFilePath, Encoding.UTF8);
             translationScriptText.Text = File.ReadAllText(scriptFilePath, Encoding.UTF8);
             translationScriptText.SelectionStart = translationScriptText.Text.Length;
             translationScriptText.ScrollToCaret();
@@ -27,7 +23,7 @@ namespace ClashSinicizationTool
         }
 
         //保存脚本
-        public void SaveScript(string scriptFilePath, TextBox translationScriptText, TextBox logText)
+        public void SaveScript(string scriptFilePath, RichTextBox translationScriptText, TextBox logText)
         {
             File.WriteAllText(scriptFilePath, translationScriptText.Text, Encoding.UTF8);
             logText.AppendText("已保存翻译脚本 " + scriptFilePath + Environment.NewLine);

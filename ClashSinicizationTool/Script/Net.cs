@@ -78,10 +78,6 @@ namespace ClashSinicizationTool
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
             logText.AppendText("下载失败，请重试！" + Environment.NewLine);
             return false;
