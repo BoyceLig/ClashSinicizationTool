@@ -348,6 +348,7 @@ namespace ClashSinicizationTool
             this.translationScriptRichTextBox.AutoWordSelection = true;
             this.translationScriptRichTextBox.DetectUrls = false;
             this.translationScriptRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.translationScriptRichTextBox.EnableAutoDragDrop = true;
             this.translationScriptRichTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.translationScriptRichTextBox.Location = new System.Drawing.Point(3, 19);
             this.translationScriptRichTextBox.MaxLength = 0;
@@ -356,6 +357,7 @@ namespace ClashSinicizationTool
             this.translationScriptRichTextBox.TabIndex = 9;
             this.translationScriptRichTextBox.Text = "";
             this.translationScriptRichTextBox.WordWrap = false;
+            this.translationScriptRichTextBox.TextChanged += new System.EventHandler(this.TranslationScriptText_TextChanged);
             // 
             // groupBox2
             // 
