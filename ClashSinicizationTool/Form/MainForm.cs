@@ -55,15 +55,17 @@ namespace ClashSinicizationTool
                 File.WriteAllText(GlobalData.FilePath.momentFilePath, Resources.moment_with_CN);
             }
 
+
             if (!File.Exists(GlobalData.FilePath.translationScriptFilePath))
             {
                 //创建翻译脚本文件
                 File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
-                UpdateTranslationScriptButton_Click(sender, e);
+                Net net = new();
+                net.DownloadFile(GlobalData.Url.translationScriptUrls, GlobalData.FilePath.translationScriptFilePath, toolStripProgressBar, logTextBox);
             }
             #region 检查创建翻译脚本列表文件
+
             //检查创建列表文件
-            TranslationScriptFile translationScriptFile = new();
             if (!File.Exists(cacheList))
             {
                 if (!Directory.Exists(cacheList.Replace(@"\CacheList.ini", string.Empty)))
@@ -76,7 +78,8 @@ namespace ClashSinicizationTool
             }
 
 
-            //加载列表文件                
+            //加载列表文件
+            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
             translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
             //自动加载第一个文件
             if (translationScriptFileName.Items.Count != 0)
