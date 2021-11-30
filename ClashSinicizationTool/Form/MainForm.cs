@@ -6,7 +6,6 @@ using System.Diagnostics;
 using Ini;
 using System.Threading;
 using ClashSinicizationTool.Properties;
-using System.Drawing;
 
 namespace ClashSinicizationTool
 {
@@ -55,13 +54,6 @@ namespace ClashSinicizationTool
                 File.Create(GlobalData.FilePath.momentFilePath).Close();
                 File.WriteAllText(GlobalData.FilePath.momentFilePath, Resources.moment_with_CN);
             }
-            if (File.Exists("英汉对照.txt"))
-            {
-                File.Move("英汉对照.txt", GlobalData.FilePath.translationScriptFilePath);
-                IniList ini = new();
-                ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
-                ini.CleanSectionValue(GlobalData.IniSection.scriptPath, cacheList);
-            }
 
             if (!File.Exists(GlobalData.FilePath.translationScriptFilePath))
             {
@@ -101,8 +93,11 @@ namespace ClashSinicizationTool
             #region 检查创建clash目录列表
 
             translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
-            openClashBrowseButton.Enabled = true;
-            clashPath = clashForWindowsPath.Text;
+            if (Directory.Exists(clashForWindowsPath.Text))
+            {
+                openClashBrowseButton.Enabled = true;
+                clashPath = clashForWindowsPath.Text;
+            }
 
             #endregion
 
@@ -752,26 +747,6 @@ namespace ClashSinicizationTool
         private void GithubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", GlobalData.Url.projectUrl);
-        }
-
-        private void ClashForWindowsPath_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.All;//调用DragDrop事件
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-
-        }
-
-        private void ClashForWindowsPath_DragDrop(object sender, DragEventArgs e)
-        {
-            string path = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString(); ;//拖放的多个文件的路径列表
-            MessageBox.Show(path);
-            clashForWindowsPath.Text = path;
         }
     }
 }

@@ -22,9 +22,9 @@
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>zh-CN</NeutralLanguage>
     <PackageReleaseNotes />
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <ApplicationIcon>Image\logo.ico</ApplicationIcon>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <UseWPF>False</UseWPF>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

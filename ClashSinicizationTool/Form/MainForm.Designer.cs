@@ -257,7 +257,6 @@ namespace ClashSinicizationTool
             // 
             // translationScriptFileName
             // 
-            this.translationScriptFileName.AllowDrop = true;
             this.translationScriptFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.translationScriptFileName.FormattingEnabled = true;
@@ -270,7 +269,6 @@ namespace ClashSinicizationTool
             // 
             // clashForWindowsPath
             // 
-            this.clashForWindowsPath.AllowDrop = true;
             this.clashForWindowsPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clashForWindowsPath.FormattingEnabled = true;
@@ -280,8 +278,6 @@ namespace ClashSinicizationTool
             this.clashForWindowsPath.TabIndex = 10;
             this.toolTip.SetToolTip(this.clashForWindowsPath, "可手动粘贴路径（支持相对路径和绝对路径）。");
             this.clashForWindowsPath.TextUpdate += new System.EventHandler(this.ClashForWindowsPath_TextUpdate);
-            this.clashForWindowsPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.ClashForWindowsPath_DragDrop);
-            this.clashForWindowsPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.ClashForWindowsPath_DragEnter);
             // 
             // autoCleanButton
             // 
@@ -450,7 +446,6 @@ namespace ClashSinicizationTool
             // 
             // MainForm
             // 
-            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 561);
