@@ -341,6 +341,7 @@ namespace ClashSinicizationTool
                     toolStripProgressBar.Value++;
                 }
                 logTextBox.AppendText("精简完成，请执行下一步操作" + Environment.NewLine);
+                toolStripProgressBar.Value = 0;
             }
             else
             {
