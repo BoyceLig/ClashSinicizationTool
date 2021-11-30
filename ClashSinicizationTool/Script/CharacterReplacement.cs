@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.Drawing.Text;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace ClashSinicizationTool
 {
@@ -27,6 +23,7 @@ namespace ClashSinicizationTool
                     string[] t = textBox.Lines[i].Split('=', 2, StringSplitOptions.None);
                     s = s.Replace(t[0], t[1]);
                 }
+                Application.DoEvents();
             }
 
             //保存替换后字段

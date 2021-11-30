@@ -277,10 +277,13 @@ namespace ClashSinicizationTool
                             Directory.CreateDirectory(backup_original);
                         }
                         //备份
+                        toolStripProgressBar.Value = 0;
+                        toolStripProgressBar.Maximum = replacePaths.Length + 1;
                         File.Copy(clashPath + @"\resources\app\node_modules\moment\moment.js", backup_original + @"\moment.js", true);
                         logTextBox.AppendText("已备份文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
                         File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                         logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+                        toolStripProgressBar.Value += 1;
                         CharacterReplacement characterReplacement = new();
                         for (int i = 0; i < replacePaths.Length; i++)
                         {
@@ -296,8 +299,10 @@ namespace ClashSinicizationTool
                             {
                                 logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
                             }
+                            toolStripProgressBar.Value++;
                         }
                         logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
+                        toolStripProgressBar.Value = 0;//恢复默认值
                     }
                     else
                     {
@@ -320,6 +325,8 @@ namespace ClashSinicizationTool
             string[] delectPaths = iniList.GetSectionValue(GlobalData.IniSection.delectPath, GlobalData.FilePath.iniFilePath).ToArray();
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
+                toolStripProgressBar.Value = 0;
+                toolStripProgressBar.Maximum = delectPaths.Length;
                 for (int i = 0; i < delectPaths.Length; i++)
                 {
                     if (Directory.Exists(clashPath + delectPaths[i]))
@@ -331,6 +338,7 @@ namespace ClashSinicizationTool
                     {
                         logTextBox.AppendText("目录不存在" + clashPath + delectPaths[i] + Environment.NewLine);
                     }
+                    toolStripProgressBar.Value++;
                 }
                 logTextBox.AppendText("精简完成，请执行下一步操作" + Environment.NewLine);
             }
@@ -417,16 +425,21 @@ namespace ClashSinicizationTool
             {
                 IniList ini = new();
                 string[] replacePath = ini.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
+                toolStripProgressBar.Maximum = replacePath.Length + 1;
+                toolStripProgressBar.Value = 0;
                 File.Copy(backup_original + @"\moment.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                 logTextBox.AppendText("已还原被汉化文件" + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+                toolStripProgressBar.Value += 1;
                 foreach (string item in replacePath)
                 {
                     string[] s = item.Split(@"\");
                     string fileName = s[^1];
                     File.Copy(backup_original + @"\" + fileName, clashPath + item, true);
                     logTextBox.AppendText("已还原被汉化文件 " + clashPath + item + Environment.NewLine);
+                    toolStripProgressBar.Value++;
                 }
                 MessageBox.Show("文件还原完毕，已还原至已解包状态，可以继续汉化。", "提示");
+                toolStripProgressBar.Value = 0;
                 logTextBox.AppendText("文件还原完毕，已还原至已解包状态，可以继续汉化。" + Environment.NewLine);
             }
             else if (File.Exists(clashPath + @"\resources\app.asar.bak"))
