@@ -232,26 +232,30 @@ namespace ClashSinicizationTool
             ini.CleanSectionValue(GlobalData.IniSection.scriptPath, cacheList);
             ini.CleanSectionValue(GlobalData.IniSection.clashPath, cacheList);
             translationScriptFileName.Items.Clear();
+            translationScriptFileName.Text = string.Empty;
             clashForWindowsPath.Items.Clear();
+            clashForWindowsPath.Text = string.Empty;
 
             TranslationScriptFile translationScriptFile = new();
-            translationScriptFile.LoadClashList(clashForWindowsPath, GlobalData.FilePath.iniFilePath);
-            openClashBrowseButton.Enabled = true;
-            clashPath = clashForWindowsPath.Text;
-
-            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, GlobalData.FilePath.iniFilePath);
-            //自动加载第一个文件
-            if (translationScriptFileName.Items.Count != 0)
+            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
+            if (File.Exists(clashForWindowsPath.Text))
             {
-                if (File.Exists(translationScriptFileName.Items[0].ToString()))
-                {
-                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptRichTextBox, logTextBox);
-                    loadTranslationScriptButton.Enabled = true;
-                    openTranslationFileButton.Enabled = true;
-                }
+                openClashBrowseButton.Enabled = true;
+                clashPath = clashForWindowsPath.Text;
             }
 
+            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
             logTextBox.AppendText("清理列表成功" + Environment.NewLine);
+            if (File.Exists(translationScriptFileName.Text) && Directory.Exists(clashPath))
+            {
+                openClashBrowseButton.Enabled = true;
+                clashPath = clashForWindowsPath.Text;
+                unpackButton.Enabled = true;
+                simplifyButton.Enabled = true;
+                sinicizationButton.Enabled = true;
+                packButton.Enabled = true;
+                revertButton.Enabled = true;
+            }
         }
 
         //汉化按钮
