@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Boyce Lig</Authors>
     <StartupObject>ClashSinicizationTool.Program</StartupObject>
-    <Version>1.3.0</Version>
+    <Version>1.3.1</Version>
     <Product>Clash Sinicization Tool</Product>
     <Company>Boyce Lig</Company>
     <PackageId>ClashSinicizationTool</PackageId>
