@@ -9,6 +9,6 @@
 
 Clash for Windows汉化工具，根据[@Hikari_Miyamoto](https://t.me/Hikari_Miyamoto)大佬汉化方法编写C#版可视化汉化工具.
 
-本软件必须安装Node环境和Asar插件才能正常使用。
+本软件已集成Node环境和Asar插件无需电脑安装。
 
 使用说明请进[Wiki](https://github.com/BoyceLig/ClashSinicizationTools/wiki)查看。
