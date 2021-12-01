@@ -16,6 +16,11 @@ namespace ClashSinicizationTool
             public const string translationScriptFilePath = "翻译脚本.txt";
         }
 
+        public struct DirectoryPath
+        {
+            public const string nodePath = "Node";
+        }
+
         public struct IniSection
         {
             public const string scriptPath = "Script Path";

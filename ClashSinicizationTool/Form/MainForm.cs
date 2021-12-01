@@ -203,7 +203,7 @@ namespace ClashSinicizationTool
             }
 
             //检查npm文件夹是否存在
-            if (Directory.Exists("npm"))
+            if (Directory.Exists(GlobalData.DirectoryPath.nodePath))
             {
                 //解包命令
                 CMDCommand command = new();
