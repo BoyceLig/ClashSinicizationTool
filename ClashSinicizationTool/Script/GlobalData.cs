@@ -25,7 +25,6 @@ namespace ClashSinicizationTool
         {
             public const string scriptPath = "Script Path";
             public const string clashPath = "Clash Path";
-            public const string delectPath = "Delect Path";
             public const string replacePath = "Replace Path";
         }
 

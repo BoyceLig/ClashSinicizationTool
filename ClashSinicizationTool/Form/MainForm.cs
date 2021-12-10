@@ -40,6 +40,9 @@ namespace ClashSinicizationTool
             }
             #endregion
 
+            //自动选择字词关闭（面板关闭按钮失效）
+            translationScriptRichTextBox.AutoWordSelection = false;
+
             //检查文件是否存在
             if (!File.Exists(GlobalData.FilePath.iniFilePath))
             {
@@ -108,7 +111,6 @@ namespace ClashSinicizationTool
             if (File.Exists(translationScriptFileName.Text) && Directory.Exists(clashPath))
             {
                 unpackButton.Enabled = true;
-                simplifyButton.Enabled = true;
                 sinicizationButton.Enabled = true;
                 packButton.Enabled = true;
                 revertButton.Enabled = true;
@@ -162,7 +164,6 @@ namespace ClashSinicizationTool
                 clashForWindowsPath.Text = clashPath;
                 openClashBrowseButton.Enabled = true;
                 unpackButton.Enabled = true;
-                simplifyButton.Enabled = true;
                 sinicizationButton.Enabled = true;
                 packButton.Enabled = true;
                 revertButton.Enabled = true;
@@ -177,7 +178,7 @@ namespace ClashSinicizationTool
                     {
                         if (clashForWindowsPath.Text == clashForWindowsPath.Items[i].ToString())
                         {
-                            goto c;
+                            return;
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
@@ -185,7 +186,6 @@ namespace ClashSinicizationTool
                     ini.AddSectionValue(GlobalData.IniSection.clashPath, cacheList, clashForWindowsPath.Text);
                 }
             }
-        c:;
         }
 
         //解包
@@ -251,7 +251,6 @@ namespace ClashSinicizationTool
                 openClashBrowseButton.Enabled = true;
                 clashPath = clashForWindowsPath.Text;
                 unpackButton.Enabled = true;
-                simplifyButton.Enabled = true;
                 sinicizationButton.Enabled = true;
                 packButton.Enabled = true;
                 revertButton.Enabled = true;
@@ -321,39 +320,6 @@ namespace ClashSinicizationTool
             }
         }
 
-        //点击精简包时候
-        private void SimplifyButton_Click(object sender, EventArgs e)
-        {
-            //调取ini文件
-            IniList iniList = new();
-            string[] delectPaths = iniList.GetSectionValue(GlobalData.IniSection.delectPath, GlobalData.FilePath.iniFilePath).ToArray();
-            if (Directory.Exists(clashPath + @"\resources\app"))
-            {
-                toolStripProgressBar.Value = 0;
-                toolStripProgressBar.Maximum = delectPaths.Length;
-                for (int i = 0; i < delectPaths.Length; i++)
-                {
-                    if (Directory.Exists(clashPath + delectPaths[i]))
-                    {
-                        Directory.Delete(clashPath + delectPaths[i], true);
-                        logTextBox.AppendText("已删除多余目录" + clashPath + delectPaths[i] + Environment.NewLine);
-                    }
-                    else
-                    {
-                        logTextBox.AppendText("目录不存在" + clashPath + delectPaths[i] + Environment.NewLine);
-                    }
-                    toolStripProgressBar.Value++;
-                }
-                logTextBox.AppendText("精简完成，请执行下一步操作" + Environment.NewLine);
-                toolStripProgressBar.Value = 0;
-            }
-            else
-            {
-                logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
-                MessageBox.Show("尚未解包，请按步骤操作", "提示");
-            }
-        }
-
         //打包app.asar
         private void PackButton_Click(object sender, EventArgs e)
         {
@@ -369,7 +335,7 @@ namespace ClashSinicizationTool
                     else
                     {
                         logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
-                        goto c;
+                        return;
                     }
                 }
             }
@@ -388,7 +354,6 @@ namespace ClashSinicizationTool
                 logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
                 MessageBox.Show("尚未解包，请按步骤操作", "提示");
             }
-        c:;
         }
 
         //用外界程序打开脚本
@@ -422,7 +387,7 @@ namespace ClashSinicizationTool
                     else
                     {
                         logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
-                        goto c;
+                        return;
                     }
                 }
             }
@@ -459,14 +424,12 @@ namespace ClashSinicizationTool
                 catch (Exception)
                 {
                     logTextBox.AppendText("无法还原，" + clashPath + @"\resources\app.asar.bak" + "文件丢失,请下载原版自行替换app.asar。" + Environment.NewLine);
-                    throw;
                 }
             }
             else
             {
                 logTextBox.AppendText("无法还原，" + clashPath + @"\resources\app.asar.bak" + "文件丢失,请下载原版自行替换app.asar。" + Environment.NewLine);
             }
-        c:;
         }
 
         //打开clash按钮
@@ -478,7 +441,7 @@ namespace ClashSinicizationTool
                 {
                     logTextBox.AppendText(GlobalData.clashProcessName + " 已开启，无需重复开启" + Environment.NewLine);
                     MessageBox.Show(GlobalData.clashProcessName + " 已开启，无需重复开启", "提示");
-                    goto c;
+                    return;
                 }
             }
             if (Directory.Exists(clashPath + @"\resources\app"))
@@ -492,7 +455,6 @@ namespace ClashSinicizationTool
                 Process.Start(clashPath + @"\Clash for Windows.exe");
                 logTextBox.AppendText("已打开Clash for Windows" + Environment.NewLine);
             }
-        c:;
         }
 
         //关闭Clash按钮
@@ -508,20 +470,18 @@ namespace ClashSinicizationTool
                         logTextBox.AppendText("已关闭程序 " + GlobalData.clashProcessName + Environment.NewLine);
                         ProxySetting proxy = new();
                         proxy.CloseProxy();
-                        goto c;
+                        return;
                     }
                     catch (Exception)
                     {
                         logTextBox.AppendText("关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
                         MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭", "提示");
-                        goto c;
-                        throw;
+                        return;
                     }
                 }
             }
             logTextBox.AppendText(GlobalData.clashProcessName + " 未开启，无需关闭" + Environment.NewLine);
             MessageBox.Show(GlobalData.clashProcessName + " 未开启，无需关闭", "提示");
-        c:;
         }
 
         //自动检测clash地址
@@ -535,7 +495,6 @@ namespace ClashSinicizationTool
                     clashForWindowsPath.Text = clashPath;
                     openClashBrowseButton.Enabled = true;
                     unpackButton.Enabled = true;
-                    simplifyButton.Enabled = true;
                     sinicizationButton.Enabled = true;
                     packButton.Enabled = true;
                     revertButton.Enabled = true;
@@ -567,7 +526,7 @@ namespace ClashSinicizationTool
                         {
                             if (clashForWindowsPath.Text == clashForWindowsPath.Items[i].ToString())
                             {
-                                goto c;
+                                return;
                             }
                         }
                         clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
@@ -575,12 +534,11 @@ namespace ClashSinicizationTool
                         ini.AddSectionValue(GlobalData.IniSection.clashPath, cacheList, clashForWindowsPath.Text);
                     }
                     logTextBox.AppendText("已加载地址" + clashPath + Environment.NewLine);
-                    goto c;
+                    return;
                 }
             }
             logTextBox.AppendText(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试" + Environment.NewLine);
             MessageBox.Show(GlobalData.clashProcessName + " 未开启 Clash for Windows ，请打开 Clash for Windows 后重试", "提示");
-        c:;
         }
 
         //从云端更新脚本文件
@@ -609,6 +567,22 @@ namespace ClashSinicizationTool
                 }
                 LoadTranslationScriptButton_Click(sender, e);
             }
+        }
+
+        //查找和替换
+        private void findReplaceButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == "查找和替换")
+                {
+                    f.Activate();
+                    return;
+                }
+            }
+            FindAndReplaceForm findAndReplaceForm = new FindAndReplaceForm(this);
+            findAndReplaceForm.StartPosition = FormStartPosition.CenterScreen;
+            findAndReplaceForm.Show();
         }
         #endregion
 
@@ -645,7 +619,6 @@ namespace ClashSinicizationTool
                 loadTranslationScriptButton.Enabled = false;
                 openTranslationFileButton.Enabled = false;
                 unpackButton.Enabled = false;
-                simplifyButton.Enabled = false;
                 sinicizationButton.Enabled = false;
                 packButton.Enabled = false;
                 revertButton.Enabled = false;
@@ -657,7 +630,6 @@ namespace ClashSinicizationTool
                     loadTranslationScriptButton.Enabled = true;
                     openTranslationFileButton.Enabled = true;
                     unpackButton.Enabled = true;
-                    simplifyButton.Enabled = true;
                     sinicizationButton.Enabled = true;
                     packButton.Enabled = true;
                     revertButton.Enabled = true;
@@ -665,20 +637,18 @@ namespace ClashSinicizationTool
                     {
                         if (item == translationScriptFileName.Text)
                         {
-                            goto c;
+                            return;
                         }
                     }
                     translationScriptFileName.Items.Add(translationScriptFileName.Text);
                     IniList ini = new();
                     ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, translationScriptFileName.Text);
-                c:;
                 }
                 else
                 {
                     loadTranslationScriptButton.Enabled = false;
                     openTranslationFileButton.Enabled = false;
                     unpackButton.Enabled = false;
-                    simplifyButton.Enabled = false;
                     sinicizationButton.Enabled = false;
                     packButton.Enabled = false;
                     revertButton.Enabled = false;
@@ -693,7 +663,6 @@ namespace ClashSinicizationTool
             {
                 openClashBrowseButton.Enabled = false;
                 unpackButton.Enabled = false;
-                simplifyButton.Enabled = false;
                 sinicizationButton.Enabled = false;
                 packButton.Enabled = false;
                 revertButton.Enabled = false;
@@ -705,7 +674,7 @@ namespace ClashSinicizationTool
                     openClashBrowseButton.Enabled = true;
                     clashPath = clashForWindowsPath.Text;
                     unpackButton.Enabled = true;
-                    simplifyButton.Enabled = true;
+
                     sinicizationButton.Enabled = true;
                     packButton.Enabled = true;
                     revertButton.Enabled = true;
@@ -713,19 +682,18 @@ namespace ClashSinicizationTool
                     {
                         if (item == clashForWindowsPath.Text)
                         {
-                            goto c;
+                            return;
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
                     IniList ini = new();
                     ini.AddSectionValue(GlobalData.IniSection.clashPath, cacheList, clashForWindowsPath.Text);
-                c:;
                 }
                 else
                 {
                     openClashBrowseButton.Enabled = false;
                     unpackButton.Enabled = false;
-                    simplifyButton.Enabled = false;
+
                     sinicizationButton.Enabled = false;
                     packButton.Enabled = false;
                     revertButton.Enabled = false;
@@ -753,7 +721,7 @@ namespace ClashSinicizationTool
         {
             if (logTextBox.SelectedText != string.Empty)
             {
-                Clipboard.SetDataObject(logTextBox.SelectedText);
+                logTextBox.Copy();
             }
         }
 
@@ -768,6 +736,87 @@ namespace ClashSinicizationTool
         private void GithubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", GlobalData.Url.projectUrl);
+        }
+
+        #region 脚本编辑器右键菜单
+        private void translationScriptRichTextBoxMenuStripCopy_Click(object sender, EventArgs e)
+        {
+            if (translationScriptRichTextBox.SelectedText != string.Empty)
+            {
+                translationScriptRichTextBox.Copy();
+            }
+        }
+
+        private void translationScriptRichTextBoxMenuStripCut_Click(object sender, EventArgs e)
+        {
+            if (translationScriptRichTextBox.SelectedText != string.Empty)
+            {
+                translationScriptRichTextBox.Cut();
+            }
+        }
+
+        private void translationScriptRichTextBoxMenuStripPaste_Click(object sender, EventArgs e)
+        {
+            translationScriptRichTextBox.Paste();
+        }
+
+        private void translationScriptRichTextBoxMenuStripUndo_Click(object sender, EventArgs e)
+        {
+            translationScriptRichTextBox.Undo();
+        }
+
+        #endregion
+
+        //检测复制、撤销和粘贴按钮是否可用
+        private void translationScriptRichTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (translationScriptRichTextBox.SelectedText == string.Empty)
+            {
+                translationScriptRichTextBoxMenuStripCopy.Enabled = false;
+                translationScriptRichTextBoxMenuStripCut.Enabled = false;
+            }
+            else
+            {
+                translationScriptRichTextBoxMenuStripCopy.Enabled = true;
+                translationScriptRichTextBoxMenuStripCut.Enabled = true;
+            }
+            if (translationScriptRichTextBox.CanUndo)
+            {
+                translationScriptRichTextBoxMenuStripUndo.Enabled = true;
+            }
+            else
+            {
+                translationScriptRichTextBoxMenuStripUndo.Enabled = false;
+            }
+            if (Clipboard.GetText() == string.Empty)
+            {
+                translationScriptRichTextBoxMenuStripPaste.Enabled = false;
+            }
+            else
+            {
+                translationScriptRichTextBoxMenuStripPaste.Enabled = true;
+            }
+        }
+
+        //检测log的右键按钮是否可用
+        private void logTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (logTextBox.Text == string.Empty)
+            {
+                CleanToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                CleanToolStripMenuItem.Enabled = true;
+            }
+            if (logTextBox.SelectedText == string.Empty)
+            {
+                CopyToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                CopyToolStripMenuItem.Enabled = true;
+            }
         }
     }
 }

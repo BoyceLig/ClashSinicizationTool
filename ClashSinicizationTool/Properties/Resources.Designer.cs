@@ -120,20 +120,15 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
-        ///   查找类似 [Delect Path]
-        ///\resources\app\dist\electron\static\files
-        ///\resources\app\node_modules\moment\dist
-        ///\resources\app\node_modules\moment\min
-        ///\resources\app\node_modules\moment\src
-        ///\resources\app\node_modules\moment\locale
-        ///
-        ///[Replace Path]
+        ///   查找类似 [Replace Path]
         ///\resources\app\dist\electron\renderer.js
         ///\resources\app\dist\electron\main.js
         ///\resources\app\node_modules\axios\lib\adapters\xhr.js
         ///\resources\app\node_modules\axios\dist\axios.js
         ///\resources\app\node_modules\axios\dist\axios.min.js
-        ///\resources\app\node_modules\axios\d [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///\resources\app\node_modules\axios\dist\axios.map
+        ///\resources\app\node_modules\axios\dist\axios.min.map
+        /// 的本地化字符串。
         /// </summary>
         public static string pathList {
             get {

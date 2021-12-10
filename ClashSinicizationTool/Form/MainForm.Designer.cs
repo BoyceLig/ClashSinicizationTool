@@ -42,7 +42,6 @@ namespace ClashSinicizationTool
             this.label5 = new System.Windows.Forms.Label();
             this.unpackButton = new System.Windows.Forms.Button();
             this.sinicizationButton = new System.Windows.Forms.Button();
-            this.simplifyButton = new System.Windows.Forms.Button();
             this.packButton = new System.Windows.Forms.Button();
             this.openTranslationFileButton = new System.Windows.Forms.Button();
             this.openClashBrowseButton = new System.Windows.Forms.Button();
@@ -56,6 +55,11 @@ namespace ClashSinicizationTool
             this.CloseClashButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.translationScriptRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.translationScriptRichTextBoxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.translationScriptRichTextBoxMenuStripCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.translationScriptRichTextBoxMenuStripCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.translationScriptRichTextBoxMenuStripPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.translationScriptRichTextBoxMenuStripUndo = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.autoCkeckClashPathButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -65,8 +69,10 @@ namespace ClashSinicizationTool
             this.githubToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.updateTranslationScriptButton = new System.Windows.Forms.Button();
+            this.findReplaceButton = new System.Windows.Forms.Button();
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.translationScriptRichTextBoxMenuStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -135,6 +141,7 @@ namespace ClashSinicizationTool
             this.logTextBox.Size = new System.Drawing.Size(851, 156);
             this.logTextBox.TabIndex = 4;
             this.logTextBox.WordWrap = false;
+            this.logTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.logTextBox_MouseDown);
             // 
             // logBoxMenuStrip
             // 
@@ -192,22 +199,10 @@ namespace ClashSinicizationTool
             this.sinicizationButton.UseVisualStyleBackColor = true;
             this.sinicizationButton.Click += new System.EventHandler(this.SinicizationButton_Click);
             // 
-            // simplifyButton
-            // 
-            this.simplifyButton.Enabled = false;
-            this.simplifyButton.Location = new System.Drawing.Point(177, 93);
-            this.simplifyButton.Name = "simplifyButton";
-            this.simplifyButton.Size = new System.Drawing.Size(240, 23);
-            this.simplifyButton.TabIndex = 7;
-            this.simplifyButton.Text = "2-2. 精简包体（删除无用文件）（可选）";
-            this.toolTip.SetToolTip(this.simplifyButton, "删除不必要的文件，被删除目录可参考 Delete Script.ini 文件。");
-            this.simplifyButton.UseVisualStyleBackColor = true;
-            this.simplifyButton.Click += new System.EventHandler(this.SimplifyButton_Click);
-            // 
             // packButton
             // 
             this.packButton.Enabled = false;
-            this.packButton.Location = new System.Drawing.Point(423, 93);
+            this.packButton.Location = new System.Drawing.Point(174, 93);
             this.packButton.Name = "packButton";
             this.packButton.Size = new System.Drawing.Size(75, 23);
             this.packButton.TabIndex = 7;
@@ -305,7 +300,7 @@ namespace ClashSinicizationTool
             // revertButton
             // 
             this.revertButton.Enabled = false;
-            this.revertButton.Location = new System.Drawing.Point(504, 93);
+            this.revertButton.Location = new System.Drawing.Point(255, 93);
             this.revertButton.Name = "revertButton";
             this.revertButton.Size = new System.Drawing.Size(75, 23);
             this.revertButton.TabIndex = 7;
@@ -341,11 +336,10 @@ namespace ClashSinicizationTool
             // translationScriptRichTextBox
             // 
             this.translationScriptRichTextBox.AcceptsTab = true;
-            this.translationScriptRichTextBox.AutoWordSelection = true;
+            this.translationScriptRichTextBox.ContextMenuStrip = this.translationScriptRichTextBoxMenuStrip;
             this.translationScriptRichTextBox.DetectUrls = false;
             this.translationScriptRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.translationScriptRichTextBox.EnableAutoDragDrop = true;
-            this.translationScriptRichTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.translationScriptRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.translationScriptRichTextBox.Location = new System.Drawing.Point(3, 19);
             this.translationScriptRichTextBox.MaxLength = 0;
             this.translationScriptRichTextBox.Name = "translationScriptRichTextBox";
@@ -354,6 +348,45 @@ namespace ClashSinicizationTool
             this.translationScriptRichTextBox.Text = "";
             this.translationScriptRichTextBox.WordWrap = false;
             this.translationScriptRichTextBox.TextChanged += new System.EventHandler(this.TranslationScriptText_TextChanged);
+            this.translationScriptRichTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.translationScriptRichTextBox_MouseDown);
+            // 
+            // translationScriptRichTextBoxMenuStrip
+            // 
+            this.translationScriptRichTextBoxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.translationScriptRichTextBoxMenuStripCopy,
+            this.translationScriptRichTextBoxMenuStripCut,
+            this.translationScriptRichTextBoxMenuStripPaste,
+            this.translationScriptRichTextBoxMenuStripUndo});
+            this.translationScriptRichTextBoxMenuStrip.Name = "translationScriptRichTextBoxMenuStrip";
+            this.translationScriptRichTextBoxMenuStrip.Size = new System.Drawing.Size(101, 92);
+            // 
+            // translationScriptRichTextBoxMenuStripCopy
+            // 
+            this.translationScriptRichTextBoxMenuStripCopy.Name = "translationScriptRichTextBoxMenuStripCopy";
+            this.translationScriptRichTextBoxMenuStripCopy.Size = new System.Drawing.Size(100, 22);
+            this.translationScriptRichTextBoxMenuStripCopy.Text = "复制";
+            this.translationScriptRichTextBoxMenuStripCopy.Click += new System.EventHandler(this.translationScriptRichTextBoxMenuStripCopy_Click);
+            // 
+            // translationScriptRichTextBoxMenuStripCut
+            // 
+            this.translationScriptRichTextBoxMenuStripCut.Name = "translationScriptRichTextBoxMenuStripCut";
+            this.translationScriptRichTextBoxMenuStripCut.Size = new System.Drawing.Size(100, 22);
+            this.translationScriptRichTextBoxMenuStripCut.Text = "剪切";
+            this.translationScriptRichTextBoxMenuStripCut.Click += new System.EventHandler(this.translationScriptRichTextBoxMenuStripCut_Click);
+            // 
+            // translationScriptRichTextBoxMenuStripPaste
+            // 
+            this.translationScriptRichTextBoxMenuStripPaste.Name = "translationScriptRichTextBoxMenuStripPaste";
+            this.translationScriptRichTextBoxMenuStripPaste.Size = new System.Drawing.Size(100, 22);
+            this.translationScriptRichTextBoxMenuStripPaste.Text = "粘贴";
+            this.translationScriptRichTextBoxMenuStripPaste.Click += new System.EventHandler(this.translationScriptRichTextBoxMenuStripPaste_Click);
+            // 
+            // translationScriptRichTextBoxMenuStripUndo
+            // 
+            this.translationScriptRichTextBoxMenuStripUndo.Name = "translationScriptRichTextBoxMenuStripUndo";
+            this.translationScriptRichTextBoxMenuStripUndo.Size = new System.Drawing.Size(100, 22);
+            this.translationScriptRichTextBoxMenuStripUndo.Text = "撤销";
+            this.translationScriptRichTextBoxMenuStripUndo.Click += new System.EventHandler(this.translationScriptRichTextBoxMenuStripUndo_Click);
             // 
             // groupBox2
             // 
@@ -444,6 +477,17 @@ namespace ClashSinicizationTool
             this.updateTranslationScriptButton.UseVisualStyleBackColor = true;
             this.updateTranslationScriptButton.Click += new System.EventHandler(this.UpdateTranslationScriptButton_Click);
             // 
+            // findReplaceButton
+            // 
+            this.findReplaceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.findReplaceButton.Location = new System.Drawing.Point(628, 93);
+            this.findReplaceButton.Name = "findReplaceButton";
+            this.findReplaceButton.Size = new System.Drawing.Size(93, 23);
+            this.findReplaceButton.TabIndex = 7;
+            this.findReplaceButton.Text = "查找和替换";
+            this.findReplaceButton.UseVisualStyleBackColor = true;
+            this.findReplaceButton.Click += new System.EventHandler(this.findReplaceButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -457,9 +501,9 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.translationScriptFileName);
             this.Controls.Add(this.CloseClashButton);
             this.Controls.Add(this.OpenClashButton);
+            this.Controls.Add(this.findReplaceButton);
             this.Controls.Add(this.revertButton);
             this.Controls.Add(this.packButton);
-            this.Controls.Add(this.simplifyButton);
             this.Controls.Add(this.sinicizationButton);
             this.Controls.Add(this.unpackButton);
             this.Controls.Add(this.label5);
@@ -471,6 +515,7 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.openClashBrowseButton);
             this.Controls.Add(this.openTranslationFileButton);
             this.Controls.Add(this.label2);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(873, 600);
@@ -480,6 +525,7 @@ namespace ClashSinicizationTool
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.translationScriptRichTextBoxMenuStrip.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -501,7 +547,6 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button unpackButton;
         private System.Windows.Forms.Button sinicizationButton;
-        private System.Windows.Forms.Button simplifyButton;
         private System.Windows.Forms.Button packButton;
         private System.Windows.Forms.Button openTranslationFileButton;
         private System.Windows.Forms.Button openClashBrowseButton;
@@ -527,7 +572,13 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Button updateTranslationScriptButton;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
-        private System.Windows.Forms.RichTextBox translationScriptRichTextBox;
+        private System.Windows.Forms.ContextMenuStrip translationScriptRichTextBoxMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem translationScriptRichTextBoxMenuStripCopy;
+        private System.Windows.Forms.ToolStripMenuItem translationScriptRichTextBoxMenuStripCut;
+        private System.Windows.Forms.ToolStripMenuItem translationScriptRichTextBoxMenuStripPaste;
+        private System.Windows.Forms.ToolStripMenuItem translationScriptRichTextBoxMenuStripUndo;
+        private System.Windows.Forms.Button findReplaceButton;
+        public System.Windows.Forms.RichTextBox translationScriptRichTextBox;
     }
 }
 
