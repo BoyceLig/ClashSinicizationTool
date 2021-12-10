@@ -703,15 +703,22 @@ namespace ClashSinicizationTool
 
         #endregion
 
-        //Ctrl+S快捷键
+        //快捷键
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            //保存快捷键
             if (e.KeyCode == Keys.S && e.Control)
             {
                 if (saveTranslationScriptButton.Enabled)
                 {
                     SaveTranslationScriptButton_Click(sender, e);
                 }
+            }
+
+            //替换和查找快捷键
+            if ((e.KeyCode == Keys.F && e.Control) || (e.KeyCode == Keys.H && e.Control))
+            {
+                findReplaceButton_Click(sender, e);
             }
         }
 
