@@ -191,37 +191,53 @@ namespace ClashSinicizationTool
         //解包
         private void UnpackButton_Click(object sender, EventArgs e)
         {
-            //备份文件
-            File.Copy(clashPath + @"\resources\app.asar", clashPath + @"\resources\app.asar.bak", true);
-            logTextBox.AppendText("app.asar文件备份成功，已备份到app.asar目录下的app.asar.bak文件" + Environment.NewLine);
-
-            //解包前检查app文件夹是否存在
-            if (Directory.Exists(clashPath + @"\resources\app"))
+            if (File.Exists(clashPath + @"\resources\app.asar"))
             {
-                //已存在删除文件夹再执行解包
-                Directory.Delete(clashPath + @"\resources\app", true);
-            }
+                //备份文件
+                File.Copy(clashPath + @"\resources\app.asar", clashPath + @"\resources\app.asar.bak", true);
+                logTextBox.AppendText("app.asar文件备份成功，已备份到app.asar目录下的app.asar.bak文件" + Environment.NewLine);
 
-            //检查npm文件夹是否存在
-            if (Directory.Exists(GlobalData.DirectoryPath.nodePath))
-            {
-                //解包命令
-                CMDCommand command = new();
-                command.Unpack(clashPath);
+                //解包前检查app文件夹是否存在
                 if (Directory.Exists(clashPath + @"\resources\app"))
                 {
-                    logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+                    //已存在删除文件夹再执行解包
+                    Directory.Delete(clashPath + @"\resources\app", true);
+                }
+
+                //检查npm文件夹是否存在
+                if (Directory.Exists(GlobalData.DirectoryPath.nodePath))
+                {
+                    //解包命令
+                    CMDCommand command = new();
+                    command.Unpack(clashPath);
+                    if (Directory.Exists(clashPath + @"\resources\app"))
+                    {
+                        logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+                    }
+                    else
+                    {
+                        MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找", "提示");
+                        logTextBox.AppendText("解包失败！但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找", "提示");
-                    logTextBox.AppendText("解包失败！但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                    MessageBox.Show("解包失败！npm文件夹检测不存在，请在TG群组求助", "提示");
+                    logTextBox.AppendText("解包失败！npm文件夹检测不存在，请在TG群组求助" + Environment.NewLine);
                 }
             }
             else
             {
-                MessageBox.Show("解包失败！npm文件夹检测不存在，请在TG群组求助", "提示");
-                logTextBox.AppendText("解包失败！npm文件夹检测不存在，请在TG群组求助" + Environment.NewLine);
+                if (Directory.Exists(clashPath + @"\resources\app"))
+                {
+                    MessageBox.Show("已解包，并且 app.asar 文件不存在", "提示");
+                    logTextBox.AppendText("已解包，并且 app.asar 文件不存在" + Environment.NewLine);
+                }
+                else
+                {
+                    MessageBox.Show("app.asar 文件不存在", "提示");
+                    logTextBox.AppendText("app.asar 文件不存在" + Environment.NewLine);
+                }
             }
         }
 
@@ -323,25 +339,25 @@ namespace ClashSinicizationTool
         //打包app.asar
         private void PackButton_Click(object sender, EventArgs e)
         {
-            foreach (Process p in Process.GetProcesses())
-            {
-                if (p.ProcessName == GlobalData.clashProcessName)
-                {
-                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        CloseClashButton_Click(sender, e);
-                        break;
-                    }
-                    else
-                    {
-                        logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
-                        return;
-                    }
-                }
-            }
-            Thread.Sleep(2000);
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
+                foreach (Process p in Process.GetProcesses())
+                {
+                    if (p.ProcessName == GlobalData.clashProcessName)
+                    {
+                        if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            CloseClashButton_Click(sender, e);
+                            break;
+                        }
+                        else
+                        {
+                            logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
+                            return;
+                        }
+                    }
+                }
+                Thread.Sleep(2000);
                 //打包命令
                 CMDCommand command = new();
                 command.Pack(clashPath);
@@ -375,24 +391,24 @@ namespace ClashSinicizationTool
         //还原按钮
         private void RevertButton_Click(object sender, EventArgs e)
         {
-            foreach (Process p in Process.GetProcesses())
-            {
-                if (p.ProcessName == GlobalData.clashProcessName)
-                {
-                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        CloseClashButton_Click(sender, e);
-                        break;
-                    }
-                    else
-                    {
-                        logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
-                        return;
-                    }
-                }
-            }
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
+                foreach (Process p in Process.GetProcesses())
+                {
+                    if (p.ProcessName == GlobalData.clashProcessName)
+                    {
+                        if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            CloseClashButton_Click(sender, e);
+                            break;
+                        }
+                        else
+                        {
+                            logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
+                            return;
+                        }
+                    }
+                }
                 IniList ini = new();
                 string[] replacePath = ini.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
                 toolStripProgressBar.Maximum = replacePath.Length + 1;
