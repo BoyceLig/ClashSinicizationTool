@@ -1,7 +1,7 @@
 name: CI
 on: [push, pull_request]
 env:
-  ProjectName: ShadowsocksR
+  ProjectName: ClashSinicizationTool
 
 jobs:
 
@@ -32,14 +32,6 @@ jobs:
       shell: pwsh
       run: .\build.ps1 app
 
-    - name: Build x64
-      shell: pwsh
-      run: .\build.ps1 x64
-
-    - name: Build x86
-      shell: pwsh
-      run: .\build.ps1 x86
-
     - name: Upload .NET App
       continue-on-error: true
       if: ${{ !startsWith(github.ref, 'refs/tags/') }}
@@ -47,23 +39,7 @@ jobs:
       with:
         name: ${{ env.ProjectName }}
         path: shadowsocks-csharp\bin\${{ env.Configuration }}\${{ env.NET_TFM }}\publish\
-
-    - name: Upload x64
-      continue-on-error: true
-      if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.ProjectName }}-Win64
-        path: shadowsocks-csharp\bin\${{ env.Configuration }}\${{ env.NET_TFM }}\win-x64\publish\
-
-    - name: Upload x86
-      continue-on-error: true
-      if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.ProjectName }}-Win32
-        path: shadowsocks-csharp\bin\${{ env.Configuration }}\${{ env.NET_TFM }}\win-x86\publish\
-
+        
     - name: Get tag
       if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
       id: tag
@@ -77,22 +53,6 @@ jobs:
         7z a -mx9 "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" ".\shadowsocks-csharp\bin\$env:Configuration\$env:NET_TFM\publish\"
         7z rn "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" publish $env:ProjectName
         echo "NET_SHA256=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-    - name: Package x64
-      if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
-      shell: pwsh
-      run: |
-        New-Item -ItemType Directory -Path C:\builtfiles -Force > $null
-        7z a -mx9 "C:\builtfiles\$env:ProjectName-Win64-${{ steps.tag.outputs.tag }}.7z" ".\shadowsocks-csharp\bin\$env:Configuration\$env:NET_TFM\win-x64\publish\"
-        7z rn "C:\builtfiles\$env:ProjectName-Win64-${{ steps.tag.outputs.tag }}.7z" publish $env:ProjectName
-        echo "NET64_SHA256=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-Win64-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-    - name: Package x86
-      if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
-      shell: pwsh
-      run: |
-        New-Item -ItemType Directory -Path C:\builtfiles -Force > $null
-        7z a -mx9 "C:\builtfiles\$env:ProjectName-Win32-${{ steps.tag.outputs.tag }}.7z" ".\shadowsocks-csharp\bin\$env:Configuration\$env:NET_TFM\win-x86\publish\"
-        7z rn "C:\builtfiles\$env:ProjectName-Win32-${{ steps.tag.outputs.tag }}.7z" publish $env:ProjectName
-        echo "NET86_SHA256=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-Win32-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     - name: Create a new GitHub release if a new tag is pushed
       uses: ncipollo/release-action@v1
       if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
