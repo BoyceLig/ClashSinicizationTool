@@ -8,6 +8,7 @@
 ![image](https://user-images.githubusercontent.com/49801599/137715022-44befe66-5b38-44f8-9310-ae1c61caddec.png)
 
 Clash for Windows汉化工具，根据[@Hikari_Miyamoto](https://t.me/Hikari_Miyamoto)大佬汉化方法编写C#版可视化汉化工具.
+根据[HMBSbige](https://github.com/HMBSbige)大佬制作编译工具.
 
 本软件已集成Node环境和Asar插件无需电脑安装。
 
