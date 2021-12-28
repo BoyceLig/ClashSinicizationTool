@@ -14,6 +14,7 @@ $dllpatcher_exe = "$dllpatcher_dir\bin\$configuration\$dllpatcher_tfm\DotNetDllP
 $proj_path = "$PSScriptRoot\ClashSinicizationTool\ClashSinicizationTool.csproj"
 
 $build    = $buildtfm -eq 'all' -or $buildtfm -eq 'app'
+
 function Build-App
 {
 	Write-Host 'Building .NET App'
@@ -24,24 +25,6 @@ function Build-App
 	Remove-Item $publishDir -Recurse -Force -Confirm:$false -ErrorAction Ignore
 	
 	dotnet publish -c $configuration -f $net_tfm $proj_path
-	if ($LASTEXITCODE) { exit $LASTEXITCODE }
-
-	& $dllpatcher_exe $publishDir\$exe bin
-	if ($LASTEXITCODE) { exit $LASTEXITCODE }
-}
-
-function Build-SelfContained
-{
-	param([string]$rid)
-
-	Write-Host "Building .NET App SelfContained $rid"
-
-	$outdir = "$output_dir\$net_tfm\$rid"
-	$publishDir = "$outdir\publish"
-
-	Remove-Item $publishDir -Recurse -Force -Confirm:$false -ErrorAction Ignore
-
-	dotnet publish -c $configuration -f $net_tfm -r $rid --self-contained true $proj_path
 	if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
 	& $dllpatcher_exe $publishDir\$exe bin
