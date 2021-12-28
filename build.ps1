@@ -5,7 +5,7 @@ Write-Host 'dotnet SDK info'
 dotnet --info
 
 $exe = 'Clash Sinicization Tool.exe'
-$net_tfm = 'net6.0-windows10.0.22000.0'
+$net_tfm = 'net6.0-windows'
 $dllpatcher_tfm = 'net6.0'
 $configuration = 'Release'
 $output_dir = "$PSScriptRoot\ClashSinicizationTool\bin\$configuration"
