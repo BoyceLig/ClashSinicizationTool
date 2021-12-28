@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     env:
       SyncfusionLicenseKey: ${{ secrets.SyncfusionLicenseKey }}
-      NET_TFM: net6.0-windows10.0.22000.0
+      NET_TFM: net6.0-windows
       Configuration: Release
 
     steps:
@@ -38,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.ProjectName }}
-        path: shadowsocks-csharp\bin\${{ env.Configuration }}\${{ env.NET_TFM }}\publish\
+        path: ClashSinicizationTool\bin\${{ env.Configuration }}\${{ env.NET_TFM }}\publish\
         
     - name: Get tag
       if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
@@ -50,7 +50,7 @@ jobs:
       shell: pwsh
       run: |
         New-Item -ItemType Directory -Path C:\builtfiles -Force > $null
-        7z a -mx9 "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" ".\shadowsocks-csharp\bin\$env:Configuration\$env:NET_TFM\publish\"
+        7z a -mx9 "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" ".\ClashSinicizationTool\bin\$env:Configuration\$env:NET_TFM\publish\"
         7z rn "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" publish $env:ProjectName
         echo "NET_SHA256=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     - name: Create a new GitHub release if a new tag is pushed
@@ -63,8 +63,7 @@ jobs:
         draft: false
         artifacts: C:\builtfiles\*
         body: |
-          [![](https://img.shields.io/badge/Channel-blue?label=Telegram&logo=telegram)](https://t.me/ShadowsocksR_Windows) [![](https://img.shields.io/badge/Group-green?label=Telegram&logo=telegram)](https://t.me/joinchat/Gn-Aa0-j4HcpdBaW-Iv8Sw)
-          [![](https://img.shields.io/badge/ShadowsocksR-Android-e482a3)](https://github.com/HMBSbige/ShadowsocksR-Android/releases)
+          [![](https://img.shields.io/badge/Channel-blue?label=Telegram&logo=telegram)](https://t.me/ClashR_for_Windows_Channel) [![](https://img.shields.io/badge/Group-green?label=Telegram&logo=telegram)](https://t.me/ClashR_For_Windows)
           ## 更新日志：
           * 这是 GitHub Action 自动化部署，更新日志应该很快会手动更新
           ## 文件校验
