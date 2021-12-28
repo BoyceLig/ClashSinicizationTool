@@ -54,4 +54,7 @@ if ($LASTEXITCODE) { exit $LASTEXITCODE }
 if ($build)
 {
     Build-App
+	$outdir = "$output_dir\$net_tfm"
+	$publishDir = "$outdir\publish"
+	Expand-Archive -Path $PSScriptRoot\Node_asar.zip -DestinationPath $publishDir
 }
