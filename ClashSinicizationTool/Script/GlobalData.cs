@@ -18,7 +18,7 @@ namespace ClashSinicizationTool
 
         public struct DirectoryPath
         {
-            public const string nodePath = "Node";
+            public const string nodePath = @"bin\Node";
         }
 
         public struct IniSection

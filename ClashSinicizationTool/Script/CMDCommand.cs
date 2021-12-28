@@ -138,14 +138,14 @@ namespace ClashSinicizationTool
         //解包命令
         public void Unpack(string appPath)
         {
-            string[] commands = new string[] { $@"set path={Application.StartupPath}\{GlobalData.DirectoryPath.nodePath};%path%", "asar extract app.asar app" };
+            string[] commands = new string[] { $@"set path={Application.StartupPath}\Node;%path%", "asar extract app.asar app" };
             CMDCommondBase(appPath + @"\resources", commands);
         }
 
         //打包
         public void Pack(string appPath)
         {
-            string[] commands = new string[] { $@"set path={Application.StartupPath}\{GlobalData.DirectoryPath.nodePath};%path%", "asar pack app app.asar" };
+            string[] commands = new string[] { $@"set path={Application.StartupPath}\Node;%path%", "asar pack app app.asar" };
             CMDCommondBase(appPath + @"\resources", commands);
         }
     }
