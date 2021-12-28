@@ -58,7 +58,7 @@ jobs:
       if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: v${{ steps.tag.outputs.tag }}
+        name: Clash Sinicization Tools 汉化工具 v${{ steps.tag.outputs.tag }}
         prerelease: true
         draft: false
         artifacts: C:\builtfiles\*
