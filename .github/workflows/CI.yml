@@ -66,9 +66,15 @@ jobs:
           [![](https://img.shields.io/badge/Channel-blue?label=Telegram&logo=telegram)](https://t.me/ClashR_for_Windows_Channel) [![](https://img.shields.io/badge/Group-green?label=Telegram&logo=telegram)](https://t.me/ClashR_For_Windows)
           ## 更新日志：
           * 这是 GitHub Action 自动化部署，更新日志应该很快会手动更新
+          [net6.0 Core 下载地址](https://dotnet.microsoft.com/download/dotnet/6.0/runtime)
           ## 文件校验
           | 文件名 | SHA256 |
           | :- | :- |
-          | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256 }}</sub> |
-          | <sub>${{ env.ProjectName }}-Win64-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET64_SHA256 }}</sub> |
-          | <sub>${{ env.ProjectName }}-Win32-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET86_SHA256 }}</sub> |
+          | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256 }}</sub> |          
+          ## 相关推荐：
+          8折优惠卷码：clash
+          [OK加速](https://ok.okjiasu.com/auth/register?code=F9B0)
+          [TG群组一键直达](https://t.me/okjiasu)
+          [TG公告板一键直达](https://t.me/okjiasuqi)
+          中转线路、千兆宽带轻松跑满。
+          注：每日【签到】可以白嫖流量。
