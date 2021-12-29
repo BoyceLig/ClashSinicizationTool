@@ -354,7 +354,7 @@ namespace ClashSinicizationTool
         {
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                if (!File.Exists(clashPath + @"\resources\app.asar"))
+                if (File.Exists(clashPath + @"\resources\app.asar"))
                 {
                     if (FileStatusHelper.IsFileOccupied(clashPath + @"\resources\app.asar"))
                     {
