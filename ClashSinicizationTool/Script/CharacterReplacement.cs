@@ -20,8 +20,15 @@ namespace ClashSinicizationTool
             {
                 if (textBox.Lines[i].FirstOrDefault() != '#' && textBox.Lines[i] != string.Empty)
                 {
-                    string[] t = textBox.Lines[i].Split('=', 2, StringSplitOptions.None);
-                    s = s.Replace(t[0], t[1]);
+                    if (textBox.Lines[i].Contains('='))
+                    {
+                        string[] t = textBox.Lines[i].Split('=', 2, StringSplitOptions.None);
+                        s = s.Replace(t[0], t[1]);                        
+                    }
+                    else
+                    {
+                        logText.AppendText($"第{i + 1}行 ‘{textBox.Lines[i]}’ 缺失‘=’，已跳过" + Environment.NewLine);
+                    }                    
                 }
                 Application.DoEvents();
             }

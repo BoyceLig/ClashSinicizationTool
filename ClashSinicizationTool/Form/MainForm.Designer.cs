@@ -65,11 +65,15 @@ namespace ClashSinicizationTool
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.githubToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.updateTranslationScriptButton = new System.Windows.Forms.Button();
             this.findReplaceButton = new System.Windows.Forms.Button();
+            this.checkTranslationScriptButton = new System.Windows.Forms.Button();
+            this.jumpLineButton = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.translationScriptRichTextBoxMenuStrip.SuspendLayout();
@@ -415,6 +419,7 @@ namespace ClashSinicizationTool
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar,
+            this.toolStripStatusLabel1,
             this.toolStripStatusLabel,
             this.githubToolStripStatusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 539);
@@ -428,10 +433,17 @@ namespace ClashSinicizationTool
             this.toolStripProgressBar.Name = "toolStripProgressBar";
             this.toolStripProgressBar.Size = new System.Drawing.Size(180, 16);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(58, 17);
+            this.toolStripStatusLabel1.Text = "行1，列1";
+            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(568, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(510, 17);
             this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
@@ -480,13 +492,39 @@ namespace ClashSinicizationTool
             // findReplaceButton
             // 
             this.findReplaceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.findReplaceButton.Location = new System.Drawing.Point(628, 93);
+            this.findReplaceButton.Location = new System.Drawing.Point(639, 93);
             this.findReplaceButton.Name = "findReplaceButton";
-            this.findReplaceButton.Size = new System.Drawing.Size(93, 23);
+            this.findReplaceButton.Size = new System.Drawing.Size(82, 23);
             this.findReplaceButton.TabIndex = 7;
             this.findReplaceButton.Text = "查找和替换";
             this.findReplaceButton.UseVisualStyleBackColor = true;
             this.findReplaceButton.Click += new System.EventHandler(this.findReplaceButton_Click);
+            // 
+            // checkTranslationScriptButton
+            // 
+            this.checkTranslationScriptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkTranslationScriptButton.Location = new System.Drawing.Point(463, 93);
+            this.checkTranslationScriptButton.Name = "checkTranslationScriptButton";
+            this.checkTranslationScriptButton.Size = new System.Drawing.Size(95, 23);
+            this.checkTranslationScriptButton.TabIndex = 7;
+            this.checkTranslationScriptButton.Text = "检查翻译脚本";
+            this.checkTranslationScriptButton.UseVisualStyleBackColor = true;
+            this.checkTranslationScriptButton.Click += new System.EventHandler(this.checkTranslationScriptButton_Click);
+            // 
+            // jumpLineButton
+            // 
+            this.jumpLineButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.jumpLineButton.Location = new System.Drawing.Point(564, 93);
+            this.jumpLineButton.Name = "jumpLineButton";
+            this.jumpLineButton.Size = new System.Drawing.Size(69, 23);
+            this.jumpLineButton.TabIndex = 7;
+            this.jumpLineButton.Text = "跳转到行";
+            this.jumpLineButton.UseVisualStyleBackColor = true;
+            this.jumpLineButton.Click += new System.EventHandler(this.jumpLineButton_Click);
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // MainForm
             // 
@@ -501,6 +539,8 @@ namespace ClashSinicizationTool
             this.Controls.Add(this.translationScriptFileName);
             this.Controls.Add(this.CloseClashButton);
             this.Controls.Add(this.OpenClashButton);
+            this.Controls.Add(this.checkTranslationScriptButton);
+            this.Controls.Add(this.jumpLineButton);
             this.Controls.Add(this.findReplaceButton);
             this.Controls.Add(this.revertButton);
             this.Controls.Add(this.packButton);
@@ -579,6 +619,10 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.ToolStripMenuItem translationScriptRichTextBoxMenuStripUndo;
         private System.Windows.Forms.Button findReplaceButton;
         public System.Windows.Forms.RichTextBox translationScriptRichTextBox;
+        private System.Windows.Forms.Button checkTranslationScriptButton;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button jumpLineButton;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

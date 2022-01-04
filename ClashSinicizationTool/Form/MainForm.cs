@@ -42,7 +42,7 @@ namespace ClashSinicizationTool
 
             //自动选择字词关闭（面板关闭按钮失效）
             translationScriptRichTextBox.AutoWordSelection = false;
-
+            timer.Start();
             //检查文件是否存在
             if (!File.Exists(GlobalData.FilePath.iniFilePath))
             {
@@ -691,6 +691,28 @@ namespace ClashSinicizationTool
             findAndReplaceForm.StartPosition = FormStartPosition.CenterScreen;
             findAndReplaceForm.Show();
         }
+
+        //检查翻译脚本完整性
+        private void checkTranslationScriptButton_Click(object sender, EventArgs e)
+        {
+            toolStripProgressBar.Value = 0;
+            toolStripProgressBar.Minimum = 0;
+            toolStripProgressBar.Maximum = translationScriptRichTextBox.Lines.Length;
+            for (int i = 0; i < translationScriptRichTextBox.Lines.Length; i++)
+            {
+                if (!translationScriptRichTextBox.Lines[i].StartsWith("#") && translationScriptRichTextBox.Lines[i] != string.Empty)
+                {
+                    if (!translationScriptRichTextBox.Lines[i].Contains('='))
+                    {
+                        logTextBox.AppendText($"第{i + 1}行 ‘{translationScriptRichTextBox.Lines[i]}’ 缺失‘=’" + Environment.NewLine);
+                    }
+                }
+                toolStripProgressBar.Value += 1;
+            }
+            toolStripProgressBar.Value = 0;
+            MessageBox.Show("翻译脚本检查已完成，结果已打印到log界面", "提示");
+            logTextBox.AppendText("翻译脚本检查已完成" + Environment.NewLine);
+        }
         #endregion
 
         #region Text检测
@@ -931,6 +953,26 @@ namespace ClashSinicizationTool
             {
                 CopyToolStripMenuItem.Enabled = true;
             }
+        }
+
+        private void jumpLineButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == "跳转到行")
+                {
+                    f.Activate();
+                    return;
+                }
+            }
+            JumpLineForm jumpLineForm = new JumpLineForm(this);
+            jumpLineForm.StartPosition = FormStartPosition.CenterScreen;
+            jumpLineForm.Show();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = $"行 {(1 + translationScriptRichTextBox.GetLineFromCharIndex(translationScriptRichTextBox.SelectionStart)).ToString()}，列{(1 + translationScriptRichTextBox.SelectionStart - (translationScriptRichTextBox.GetFirstCharIndexFromLine(1 + translationScriptRichTextBox.GetLineFromCharIndex(translationScriptRichTextBox.SelectionStart) - 1))).ToString()}";
         }
     }
 }
