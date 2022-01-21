@@ -292,16 +292,17 @@ namespace ClashSinicizationTool
             //调取ini文件
             IniList iniList = new();
             string[] replacePaths = iniList.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
-            if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
+
+            if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                MessageBox.Show("您已汉化，不需要二次汉化", "提示");
-                logTextBox.AppendText("您已汉化，不需要二次汉化" + Environment.NewLine);
-            }
-            else
-            {
-                if (Directory.Exists(clashPath + @"\resources\app"))
+                if (File.Exists("moment-with-CN.js"))
                 {
-                    if (File.Exists("moment-with-CN.js"))
+                    if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
+                    {
+                        MessageBox.Show("您已汉化，不需要二次汉化", "提示");
+                        logTextBox.AppendText("您已汉化，不需要二次汉化" + Environment.NewLine);
+                    }
+                    else
                     {
                         //创建备份目录
                         if (!Directory.Exists(backup_original))
@@ -336,17 +337,18 @@ namespace ClashSinicizationTool
                         logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
                         toolStripProgressBar.Value = 0;//恢复默认值
                     }
-                    else
-                    {
-                        logTextBox.AppendText("moment-with-CN.js 文件不存在" + Environment.NewLine);
-                    }
                 }
                 else
                 {
-                    logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
-                    MessageBox.Show("尚未解包，请按步骤操作", "提示");
+                    logTextBox.AppendText("moment-with-CN.js 文件不存在" + Environment.NewLine);
                 }
             }
+            else
+            {
+                logTextBox.AppendText("尚未解包，请按步骤操作" + Environment.NewLine);
+                MessageBox.Show("尚未解包，请按步骤操作", "提示");
+            }
+
         }
 
         //打包app.asar
