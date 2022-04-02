@@ -33,8 +33,8 @@ namespace ClashSinicizationTool
             public const string projectUrl = "https://github.com/BoyceLig/ClashSinicizationTool";
             public static readonly string[] translationScriptUrls =
                 {
-                "https://raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/master/%E7%BF%BB%E8%AF%91%E8%84%9A%E6%9C%AC.txt",
-                "https://github.boyce.workers.dev/raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/master/%E7%BF%BB%E8%AF%91%E8%84%9A%E6%9C%AC.txt",
+                "https://raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
+                "https://github.boyce.workers.dev/raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
             };
         }
 
