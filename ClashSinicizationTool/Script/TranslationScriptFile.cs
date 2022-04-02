@@ -11,10 +11,18 @@ namespace ClashSinicizationTool
         //加载脚本
         public void LoadScript(string scriptFilePath, RichTextBox translationScriptText, TextBox logText)
         {
-            translationScriptText.Text = File.ReadAllText(scriptFilePath, Encoding.UTF8);
-            translationScriptText.SelectionStart = translationScriptText.Text.Length;
-            translationScriptText.ScrollToCaret();
-            logText.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
+            if (File.Exists(scriptFilePath))
+            {
+                translationScriptText.Text = File.ReadAllText(scriptFilePath, Encoding.UTF8);
+                translationScriptText.SelectionStart = translationScriptText.Text.Length;
+                translationScriptText.ScrollToCaret();
+                logText.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
+            }
+            else
+            {
+                logText.AppendText("翻译脚本不存在"  + Environment.NewLine);
+            }
+
         }
 
         //保存脚本

@@ -1,12 +1,5 @@
 ﻿using Microsoft.VisualBasic.Devices;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ClashSinicizationTool
 {
@@ -14,8 +7,6 @@ namespace ClashSinicizationTool
     {
         public bool CheckNode()
         {
-            //RegistryKey regSubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Node.js");
-            //return regSubKey == null ? false : true;
             CMDCommand cmd = new CMDCommand();
             return cmd.CMDCommondBase("npm").Contains("npm <command>");
         }

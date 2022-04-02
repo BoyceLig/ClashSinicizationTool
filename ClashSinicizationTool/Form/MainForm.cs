@@ -1,11 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
+﻿using ClashSinicizationTool.Properties;
 using Ini;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Threading;
-using ClashSinicizationTool.Properties;
+using System.Windows.Forms;
 
 namespace ClashSinicizationTool
 {
