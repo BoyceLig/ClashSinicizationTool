@@ -1,0 +1,6 @@
+[submodule "Build/DotNetDllPathPatcher"]
+	path = Build/DotNetDllPathPatcher
+	url = git@github.com:HMBSbige/DotNetDllPathPatcher.git
+[submodule "Build/GetSHA256"]
+	path = Build/GetSHA256
+	url = git@github.com:HMBSbige/GetSHA256.git
