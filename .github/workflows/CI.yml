@@ -15,18 +15,18 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         submodules: true
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
 
     - name: Setup NuGet Private Sources
       shell: pwsh
-      run: dotnet nuget add source https://nuget.pkg.github.com/HMBSbige/index.json -n GitHub-HMBSbige -u HMBSbige -p ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget add source https://nuget.pkg.github.com/HMBSbige/index.json -n GitHub-HMBSbige -u HMBSbige -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
 
     - name: Build .NET App
       shell: pwsh
@@ -72,9 +72,3 @@ jobs:
           | :- | :- |
           | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256 }}</sub> |          
           ## 相关推荐：
-          8折优惠卷码：clash
-          [OK加速](https://ok.okjiasu.com/auth/register?code=F9B0)
-          [TG群组一键直达](https://t.me/okjiasu)
-          [TG公告板一键直达](https://t.me/okjiasuqi)
-          中转线路、千兆宽带轻松跑满。
-          注：每日【签到】可以白嫖流量。
