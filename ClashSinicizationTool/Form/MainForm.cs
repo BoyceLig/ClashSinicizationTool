@@ -101,20 +101,9 @@ namespace ClashSinicizationTool
             translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
             if (Directory.Exists(clashForWindowsPath.Text))
             {
-                openClashBrowseButton.Enabled = true;
                 clashPath = clashForWindowsPath.Text;
             }
 
-            #endregion
-
-            #region 解包……按钮使用权控制
-            if (File.Exists(translationScriptFileName.Text) && Directory.Exists(clashPath))
-            {
-                unpackButton.Enabled = true;
-                sinicizationButton.Enabled = true;
-                packButton.Enabled = true;
-                revertButton.Enabled = true;
-            }
             #endregion
         }
 
@@ -787,7 +776,7 @@ namespace ClashSinicizationTool
             }
         }
 
-        //clash目录栏文字修改时候
+        //clash目录栏文字修改时以及选择项目时
         private void ClashForWindowsPath_TextUpdate(object sender, EventArgs e)
         {
             if (clashForWindowsPath.Text == string.Empty)
@@ -804,11 +793,17 @@ namespace ClashSinicizationTool
                 {
                     openClashBrowseButton.Enabled = true;
                     clashPath = clashForWindowsPath.Text;
-                    unpackButton.Enabled = true;
 
-                    sinicizationButton.Enabled = true;
-                    packButton.Enabled = true;
-                    revertButton.Enabled = true;
+                    #region 解包……按钮使用权控制
+                    if (File.Exists(translationScriptFileName.Text))
+                    {
+                        unpackButton.Enabled = true;
+                        sinicizationButton.Enabled = true;
+                        packButton.Enabled = true;
+                        revertButton.Enabled = true;
+                    }
+                    #endregion
+
                     foreach (string item in clashForWindowsPath.Items)
                     {
                         if (item == clashForWindowsPath.Text)
