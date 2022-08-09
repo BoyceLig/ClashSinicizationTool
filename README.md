@@ -3,7 +3,7 @@
 ## 简介
 
 [![](https://img.shields.io/badge/Telegram-公告板-blue)](https://t.me/ClashR_for_Windows_Channel)
-[![](https://img.shields.io/badge/Telegram-交流群-purple)](https://t.me/ClashR_For_Windows)
+[![](https://img.shields.io/badge/Telegram-交流群-purple)](https://t.me/+Se4RSc06w8QK1HiS)
 
 ![image](https://user-images.githubusercontent.com/49801599/137715022-44befe66-5b38-44f8-9310-ae1c61caddec.png)
 
