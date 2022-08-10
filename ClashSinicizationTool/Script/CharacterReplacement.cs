@@ -16,21 +16,24 @@ namespace ClashSinicizationTool
             streamReader.Close();
 
             //拆分替换文本
-            for (int i = 0; i < textBox.Lines.Length; i++)
+            string transText = textBox.Text;
+            string[] transArr = transText.Split('\n');
+            int i = 0;
+            foreach (string str in transArr)
             {
-                if (textBox.Lines[i].FirstOrDefault() != '#' && textBox.Lines[i] != string.Empty)
+                if (!string.IsNullOrEmpty(str) && str.FirstOrDefault() != '#')
                 {
-                    if (textBox.Lines[i].Contains('='))
+                    if (str.Contains('='))
                     {
-                        string[] t = textBox.Lines[i].Split('=', 2, StringSplitOptions.None);
-                        s = s.Replace(t[0], t[1]);                        
+                        string[] t = str.Split('=', 2, StringSplitOptions.None);
+                        s = s.Replace(t[0], t[1]);
                     }
                     else
                     {
-                        logText.AppendText($"第{i + 1}行 ‘{textBox.Lines[i]}’ 缺失‘=’，已跳过" + Environment.NewLine);
-                    }                    
+                        logText.AppendText($"第{i + 1}行 ‘{str}’ 缺失‘=’，已跳过{Environment.NewLine}");
+                    }
                 }
-                Application.DoEvents();
+                i++;
             }
 
             //保存替换后字段
