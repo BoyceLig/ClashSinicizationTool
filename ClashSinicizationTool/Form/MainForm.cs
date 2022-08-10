@@ -1,6 +1,7 @@
 ﻿using ClashSinicizationTool.Properties;
 using Ini;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -191,7 +192,6 @@ namespace ClashSinicizationTool
             {
 
             }
-            SetActionButtonState(false);
             if (File.Exists(clashPath + @"\resources\app.asar"))
             {
                 if (!Directory.Exists(backup_original))
@@ -212,17 +212,13 @@ namespace ClashSinicizationTool
                 //检查npm文件夹是否存在
                 if (Directory.Exists(GlobalData.DirectoryPath.nodePath))
                 {
+                    SetActionButtonState(false);
                     //解包命令
-                    CMDCommand command = new();
-                    command.Unpack(clashPath);
-                    if (Directory.Exists(clashPath + @"\resources\app"))
+                    using (BackgroundWorker bw = new BackgroundWorker())
                     {
-                        logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
-                    }
-                    else
-                    {
-                        MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找", "提示");
-                        logTextBox.AppendText("解包失败！但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                        bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Unpack_RunWorkerCompleted);
+                        bw.DoWork += new DoWorkEventHandler(Unpack_DoWork);
+                        bw.RunWorkerAsync();
                     }
                 }
                 else
@@ -244,7 +240,6 @@ namespace ClashSinicizationTool
                     logTextBox.AppendText("app.asar 文件不存在" + Environment.NewLine);
                 }
             }
-            SetActionButtonState(true);
         }
 
         //自动清理失效目录和文件
@@ -297,7 +292,9 @@ namespace ClashSinicizationTool
 
                         transTask = Task.Factory.StartNew(() =>
                         {
+                            SetActionButtonState(false);
                             TransHandler();
+                            SetActionButtonState(true);
                         });
                     }
                 }
@@ -319,7 +316,6 @@ namespace ClashSinicizationTool
         {
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                SetActionButtonState(false);
                 if (File.Exists(clashPath + @"\resources\app.asar"))
                 {
                     if (FileStatusHelper.IsFileOccupied(clashPath + @"\resources\app.asar"))
@@ -329,38 +325,14 @@ namespace ClashSinicizationTool
                         return;
                     }
                 }
-                foreach (Process p in Process.GetProcesses())
+
+                SetActionButtonState(false);
+                using (BackgroundWorker bw = new BackgroundWorker())
                 {
-                    if (p.ProcessName == GlobalData.clashProcessName)
-                    {
-                        if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            CloseClashButton_Click(sender, e);
-                            break;
-                        }
-                        else
-                        {
-                            logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
-                            return;
-                        }
-                    }
+                    bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Pack_RunWorkerCompleted);
+                    bw.DoWork += new DoWorkEventHandler(Pack_DoWork);
+                    bw.RunWorkerAsync();
                 }
-                Thread.Sleep(2000);
-                //打包命令
-                CMDCommand command = new();
-                command.Pack(clashPath);
-                logTextBox.AppendText("打包完成。请打开 Clash for Windows 使用。" + Environment.NewLine);
-                try
-                {
-                    Directory.Delete(clashPath + @"\resources\app", true);
-                    logTextBox.AppendText("已删除解包文件夹app。" + Environment.NewLine);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show($@"{clashPath}\resources\app 文件夹删除失败，有文件占用。", "提示");
-                    logTextBox.AppendText($@"{clashPath}\resources\app 文件夹删除失败，有文件占用。" + Environment.NewLine);
-                }
-                SetActionButtonState(true);
             }
             else
             {
@@ -388,7 +360,6 @@ namespace ClashSinicizationTool
         //还原按钮
         private void RevertButton_Click(object sender, EventArgs e)
         {
-            SetActionButtonState(false);
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 if (!File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
@@ -398,79 +369,24 @@ namespace ClashSinicizationTool
                 }
                 else
                 {
-                    foreach (Process p in Process.GetProcesses())
+                    SetActionButtonState(false);
+                    using (BackgroundWorker bw = new BackgroundWorker())
                     {
-                        if (p.ProcessName == GlobalData.clashProcessName)
-                        {
-                            if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            {
-                                CloseClashButton_Click(sender, e);
-                                break;
-                            }
-                            else
-                            {
-                                logTextBox.AppendText("Clash for Windows已开启，请关闭Clash for Windows后重试。" + Environment.NewLine);
-                                return;
-                            }
-                        }
-                    }
-                    IniList ini = new();
-                    string[] replacePath = ini.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
-                    toolStripProgressBar.Maximum = replacePath.Length + 1;
-                    toolStripProgressBar.Value = 0;
-                    bool isfileExists = false;
-                    if (File.Exists(backup_original + @"\moment.js"))
-                    {
-                        try
-                        {
-                            File.Move(backup_original + @"\moment.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
-                            logTextBox.AppendText("已还原被汉化文件" + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
-                            isfileExists = true;
-                        }
-                        catch (Exception)
-                        {
-                            logTextBox.AppendText(backup_original + @"\moment.js 文件被占用，无法还原。" + Environment.NewLine);
-                        }
-                    }
-                    else
-                    {
-                        logTextBox.AppendText(backup_original + @"\moment.js 文件不存在，无法还原。" + Environment.NewLine);
-                    }
-                    toolStripProgressBar.Value += 1;
-                    foreach (string item in replacePath)
-                    {
-                        string[] s = item.Split(@"\");
-                        string fileName = s[^1];
-                        if (File.Exists(backup_original + @"\" + fileName))
-                        {
-                            File.Move(backup_original + @"\" + fileName, clashPath + item, true);
-                            logTextBox.AppendText("已还原被汉化文件 " + clashPath + item + Environment.NewLine);
-                            isfileExists = true;
-                        }
-                        else
-                        {
-                            logTextBox.AppendText(backup_original + @"\" + fileName + "不存在，无法还原" + Environment.NewLine);
-                        }
-                        toolStripProgressBar.Value++;
-                    }
-                    toolStripProgressBar.Value = 0;
-
-                    //判断备份文件是否全不存在
-                    if (isfileExists)
-                    {
-                        MessageBox.Show("文件还原完毕，已还原至已解包状态，可以继续汉化。", "提示");
-                        logTextBox.AppendText("文件还原完毕，已还原至已解包状态，可以继续汉化。" + Environment.NewLine);
-                    }
-                    else
-                    {
-                        MessageBox.Show("散备份文件不存在或丢失。", "提示");
-                        logTextBox.AppendText("散备份文件不存在或丢失。" + Environment.NewLine);
+                        bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Revert_RunWorkerCompleted);
+                        bw.DoWork += new DoWorkEventHandler(Revert_DoWork);
+                        bw.RunWorkerAsync();
                     }
                 }
             }
             else if (File.Exists(backup_original + @"\app.asar"))
             {
-                Thread.Sleep(2000);
+                if (FileStatusHelper.IsFileOccupied(clashPath + @"\resources\app.asar"))
+                {
+                    logTextBox.AppendText(clashPath + @"\resources\app.asar被占用，无法还原。" + Environment.NewLine);
+                    MessageBox.Show(clashPath + @"\resources\app.asar被占用，无法还原。", "提示");
+                    return;
+                }
+
                 try
                 {
                     File.Delete(clashPath + @"\resources\app.asar");
@@ -496,7 +412,6 @@ namespace ClashSinicizationTool
                 MessageBox.Show($@"无法还原，{backup_original}\app.asar 文件丢失,请下载原版自行替换app.asar。", "提示");
                 logTextBox.AppendText($@"无法还原，{backup_original}\app.asar 文件丢失,请下载原版自行替换app.asar。" + Environment.NewLine);
             }
-            SetActionButtonState(true);
         }
 
         //打开clash按钮
@@ -536,28 +451,12 @@ namespace ClashSinicizationTool
         //关闭Clash按钮
         private void CloseClashButton_Click(object sender, EventArgs e)
         {
-            foreach (Process vProc in Process.GetProcesses())   //[BugHere]:请不要加.Exe后缀名称
+            using (BackgroundWorker bw = new BackgroundWorker())
             {
-                if (vProc.ProcessName.ToUpper() == GlobalData.clashProcessName.ToUpper())
-                {
-                    try
-                    {
-                        vProc.Kill();
-                        logTextBox.AppendText("已关闭程序 " + GlobalData.clashProcessName + Environment.NewLine);
-                        ProxySetting proxy = new();
-                        proxy.CloseProxy();
-                        return;
-                    }
-                    catch (Exception)
-                    {
-                        logTextBox.AppendText("关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭" + Environment.NewLine);
-                        MessageBox.Show(GlobalData.clashProcessName + "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭", "提示");
-                        return;
-                    }
-                }
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CloseClash_RunWorkerCompleted);
+                bw.DoWork += new DoWorkEventHandler(CloseClash_DoWork);
+                bw.RunWorkerAsync();
             }
-            logTextBox.AppendText(GlobalData.clashProcessName + " 未开启，无需关闭" + Environment.NewLine);
-            MessageBox.Show(GlobalData.clashProcessName + " 未开启，无需关闭", "提示");
         }
 
         //自动检测clash地址
@@ -942,13 +841,85 @@ namespace ClashSinicizationTool
         }
         #endregion
 
-        #region 翻译操作
+        #region 操作方法
         /// <summary>
-        /// 翻译工作
+        /// 关闭 Clash for Windows 程序
+        /// </summary>
+        /// <returns>结果消息</returns>
+        private string CloseClash()
+        {
+            foreach (Process vProc in Process.GetProcesses())   //[BugHere]:请不要加.Exe后缀名称
+            {
+                if (vProc.ProcessName.ToUpper() == GlobalData.clashProcessName.ToUpper())
+                {
+                    try
+                    {
+                        vProc.Kill();
+                        vProc.WaitForExit();
+                        ProxySetting proxy = new();
+                        proxy.CloseProxy();
+                        return "已关闭程序 " + GlobalData.clashProcessName;
+                    }
+                    catch (Exception)
+                    {
+                        return "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭";
+                    }
+                }
+            }
+            return GlobalData.clashProcessName + " 未开启，无需关闭";
+        }
+
+        /// <summary>
+        /// 后台关闭 Clash 工作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseClash_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string message = CloseClash();
+            e.Result = e.Argument + message;
+        }
+
+        private void CloseClash_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string resText = e.Result.ToString();
+            logTextBox.AppendText(resText + Environment.NewLine);
+            if (resText.Contains("失败") || resText.Contains("未开启"))
+            {
+                MessageBox.Show(resText, "提示");
+            }
+        }
+
+        /// <summary>
+        /// 后台解包工作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Unpack_DoWork(object sender, DoWorkEventArgs e)
+        {
+            CMDCommand command = new();
+            command.Unpack(clashPath);
+        }
+
+        private void Unpack_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (Directory.Exists(clashPath + @"\resources\app"))
+            {
+                logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+            }
+            else
+            {
+                logTextBox.AppendText("解包失败！但是不知道问题出在了哪里，请自行查找" + Environment.NewLine);
+                MessageBox.Show("解包失败！但是不知道问题出在了哪里，请自行查找", "提示");
+            }
+            SetActionButtonState(true);
+        }
+
+        /// <summary>
+        /// 汉化工作
         /// </summary>
         private void TransHandler()
         {
-            SetActionButtonState(false);
             //调取ini文件
             IniList iniList = new();
             string[] replacePaths = iniList.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
@@ -984,6 +955,149 @@ namespace ClashSinicizationTool
             }
             logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
             toolStripProgressBar.Value = 0;//恢复默认值
+        }
+
+        /// <summary>
+        /// 后台打包工作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Pack_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string message = "";
+            foreach (Process p in Process.GetProcesses())
+            {
+                if (p.ProcessName == GlobalData.clashProcessName)
+                {
+                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        message = CloseClash();
+                        break;
+                    }
+                    else
+                    {
+                        e.Result = e.Argument + "Clash for Windows 已开启，请关闭 Clash for Windows 后重试。";
+                        return;
+                    }
+                }
+            }
+
+            if (message.Contains("失败"))
+            {
+                e.Result = e.Argument + message;
+                return;
+            }
+
+            CMDCommand command = new();
+            command.Pack(clashPath);
+            try
+            {
+                Directory.Delete(clashPath + @"\resources\app", true);
+                e.Result = e.Argument + "打包完成。已删除解包文件夹app。请打开 Clash for Windows 使用。";
+            }
+            catch (Exception)
+            {
+                e.Result = e.Argument + $@"打包完成。{clashPath}\resources\app 文件夹删除失败，有文件占用。请打开 Clash for Windows 使用。";
+            }
+
+        }
+
+        private void Pack_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string resText = e.Result.ToString();
+            logTextBox.AppendText(resText + Environment.NewLine);
+            if (resText.Contains("失败"))
+            {
+                MessageBox.Show(resText, "提示");
+            }
+            SetActionButtonState(true);
+        }
+
+        /// <summary>
+        /// 后台还原工作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Revert_DoWork(object sender, DoWorkEventArgs e)
+        {
+            foreach (Process p in Process.GetProcesses())
+            {
+                if (p.ProcessName == GlobalData.clashProcessName)
+                {
+                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        e.Result = e.Argument + CloseClash();
+                        return;
+                    }
+                    else
+                    {
+                        e.Result = e.Argument + "Clash for Windows 已开启，请关闭 Clash for Windows 后重试。";
+                        return;
+                    }
+                }
+            }
+            e.Result = e.Argument + "Clash for Windows 未开启，可以继续操作";
+        }
+
+        private void Revert_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string resText = e.Result.ToString();
+            logTextBox.AppendText(resText + Environment.NewLine);
+            if (!resText.Contains("失败"))
+            {
+                IniList ini = new();
+                string[] replacePath = ini.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
+                toolStripProgressBar.Maximum = replacePath.Length + 1;
+                toolStripProgressBar.Value = 0;
+                bool isfileExists = false;
+                if (File.Exists(backup_original + @"\moment.js"))
+                {
+                    try
+                    {
+                        File.Move(backup_original + @"\moment.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
+                        logTextBox.AppendText("已还原被汉化文件" + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+                        isfileExists = true;
+                    }
+                    catch (Exception)
+                    {
+                        logTextBox.AppendText(backup_original + @"\moment.js 文件被占用，无法还原。" + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    logTextBox.AppendText(backup_original + @"\moment.js 文件不存在，无法还原。" + Environment.NewLine);
+                }
+                toolStripProgressBar.Value += 1;
+                foreach (string item in replacePath)
+                {
+                    string[] s = item.Split(@"\");
+                    string fileName = s[^1];
+                    if (File.Exists(backup_original + @"\" + fileName))
+                    {
+                        File.Move(backup_original + @"\" + fileName, clashPath + item, true);
+                        logTextBox.AppendText("已还原被汉化文件 " + clashPath + item + Environment.NewLine);
+                        isfileExists = true;
+                    }
+                    else
+                    {
+                        logTextBox.AppendText(backup_original + @"\" + fileName + "不存在，无法还原" + Environment.NewLine);
+                    }
+                    toolStripProgressBar.Value++;
+                }
+                toolStripProgressBar.Value = 0;
+
+                //判断备份文件是否全不存在
+                if (isfileExists)
+                {
+                    MessageBox.Show("文件还原完毕，已还原至已解包状态，可以继续汉化。", "提示");
+                    logTextBox.AppendText("文件还原完毕，已还原至已解包状态，可以继续汉化。" + Environment.NewLine);
+                }
+                else
+                {
+                    MessageBox.Show("散备份文件不存在或丢失。", "提示");
+                    logTextBox.AppendText("散备份文件不存在或丢失。" + Environment.NewLine);
+                }
+            }
             SetActionButtonState(true);
         }
         #endregion
