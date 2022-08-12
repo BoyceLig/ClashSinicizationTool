@@ -1043,7 +1043,7 @@ namespace ClashSinicizationTool
         {
             string resText = e.Result.ToString();
             logTextBox.AppendText(resText + Environment.NewLine);
-            if (!resText.Contains("失败"))
+            if (!resText.Contains("失败") && !resText.Contains("已开启"))
             {
                 IniList ini = new();
                 string[] replacePath = ini.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
