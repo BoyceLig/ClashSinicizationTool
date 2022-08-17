@@ -1,6 +1,6 @@
-﻿namespace ClashSinicizationTool
+﻿namespace ClashSinicizationToolBase
 {
-    class GlobalData
+    public class GlobalData
     {
         public const string clashProcessName = "Clash for Windows";
         public struct FilePath
@@ -31,6 +31,5 @@
                 "https://github.boyce.workers.dev/raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
             };
         }
-
     }
 }

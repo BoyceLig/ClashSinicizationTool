@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <StartupObject>ClashSinicizationToolCLI.Program</StartupObject>
+    <AssemblyName>CLI</AssemblyName>
+    <ApplicationIcon>Image\logo-cli.ico</ApplicationIcon>
+    <PackageId>ClashSinicizationToolCLI</PackageId>
+    <Authors>Boyce Lig</Authors>
+    <Product>Clash Sinicization Tool</Product>
+    <Description>Clash for Windows 汉化程序 CLI</Description>
+    <Copyright>Copyright © 2021</Copyright>
+    <PackageProjectUrl>https://github.com/BoyceLig/ClashSinicizationTool</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BoyceLig/ClashSinicizationTool.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Image\logo-cli.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClashSinicizationToolBase\ClashSinicizationToolBase.csproj" />
+  </ItemGroup>
+
+</Project>
