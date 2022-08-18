@@ -20,6 +20,21 @@ namespace ClashSinicizationToolCLI
             {
                 if (!string.IsNullOrEmpty(clash) && !string.IsNullOrEmpty(transScript))
                 {
+                    //检查文件是否存在
+                    if (!File.Exists(GlobalData.FilePath.iniFilePath))
+                    {
+                        //创建替换索引路径文件
+                        File.Create(GlobalData.FilePath.iniFilePath).Close();
+                        File.WriteAllText(GlobalData.FilePath.iniFilePath, ClashSinicizationToolBase.Properties.Resources.PathList);
+                    }
+
+                    if (!File.Exists(GlobalData.FilePath.momentFilePath))
+                    {
+                        //创建翻译所需文件
+                        File.Create(GlobalData.FilePath.momentFilePath).Close();
+                        File.WriteAllText(GlobalData.FilePath.momentFilePath, ClashSinicizationToolBase.Properties.Resources.moment_with_CN);
+                    }
+
                     bool unpackState = Unpack(clash);
                     if (unpackState)
                     {

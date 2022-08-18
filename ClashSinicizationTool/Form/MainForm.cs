@@ -50,14 +50,14 @@ namespace ClashSinicizationTool
             {
                 //创建替换索引路径文件
                 File.Create(GlobalData.FilePath.iniFilePath).Close();
-                File.WriteAllText(GlobalData.FilePath.iniFilePath, Resources.pathList);
+                File.WriteAllText(GlobalData.FilePath.iniFilePath, ClashSinicizationToolBase.Properties.Resources.PathList);
             }
 
             if (!File.Exists(GlobalData.FilePath.momentFilePath))
             {
                 //创建翻译所需文件
                 File.Create(GlobalData.FilePath.momentFilePath).Close();
-                File.WriteAllText(GlobalData.FilePath.momentFilePath, Resources.moment_with_CN);
+                File.WriteAllText(GlobalData.FilePath.momentFilePath, ClashSinicizationToolBase.Properties.Resources.moment_with_CN);
             }
 
 
@@ -79,7 +79,7 @@ namespace ClashSinicizationTool
                 }
                 //创建cacheList文件
                 File.Create(cacheList).Close();
-                File.WriteAllText(cacheList, Resources.cacheList);
+                File.WriteAllText(cacheList, ClashSinicizationToolBase.Properties.Resources.CacheList);
             }
 
 

@@ -1,8 +1,7 @@
 {
   "profiles": {
     "ClashSinicizationToolCLI": {
-      "commandName": "Project",
-      "commandLineArgs": "-c D:\\ClashWorkflow\\Clash.for.Windows-0.19.26-win\\ -t 翻译脚本.txt"
+      "commandName": "Project"
     }
   }
 }
