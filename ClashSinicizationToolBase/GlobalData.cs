@@ -10,9 +10,9 @@
             public const string translationScriptFilePath = "翻译脚本.txt";
         }
 
-        public struct DirectoryPath
+        public static class DirectoryPath
         {
-            public const string nodePath = @"bin\Node";
+            public static string nodePath = @$"{AppContext.BaseDirectory}\Node";
         }
 
         public struct IniSection
