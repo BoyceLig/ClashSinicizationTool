@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.ProjectName }}
-        path: ClashSinicizationTool\bin\${{ env.Configuration }}\${{ env.NET_TFM }}\publish\
+        path: Dist\${{ env.Configuration }}\
         
     - name: Get tag
       if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
@@ -53,8 +53,8 @@ jobs:
       shell: pwsh
       run: |
         New-Item -ItemType Directory -Path C:\builtfiles -Force > $null
-        7z a -mx9 "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" ".\ClashSinicizationTool\bin\$env:Configuration\$env:NET_TFM\publish\"
-        7z rn "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" publish $env:ProjectName
+        7z a -mx9 "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" ".\Dist\$env:Configuration\"
+        7z rn "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" $env:Configuration $env:ProjectName
         echo "NET_SHA256=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     - name: Create a new GitHub release if a new tag is pushed
       uses: ncipollo/release-action@v1
@@ -75,3 +75,34 @@ jobs:
           | :- | :- |
           | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256 }}</sub> |          
           ## 相关推荐：
+
+          ### 相关推荐1：OK加速
+
+          8.8折优惠卷码：clash
+
+          [OK加速](http://o.okjiasu.com/auth/register?code=F9B0)
+          [TG群组一键直达](https://t.me/okjiasu)
+          [TG公告板一键直达](https://t.me/okjiasuqi)
+
+          特色属性：
+          ✅不限速，不限时。
+          ✅使用不满意随时🉑退款！！！
+          ✅尊重用户隐私，不保留用户使用记录！！！
+          ✅免费提供Netflix高级视频会员账号。
+          ✅免费提供iOS美区id内含小火箭/圈X等多款付费软件。
+          购买小火箭、Google voice👉[神马杂货铺](https://googlevoice.top/)
+
+
+          ### 相关推荐2：Cherry VPN
+
+          8折优惠卷：clash
+
+          [Cherry VPN 官网](https://cherryvpn.net/auth/register?code=EO50)
+          [讨论组](https://t.me/cherrylink_vpn)
+          [公告板直达](https://t.me/cherrylink_channel)
+
+          特色属性：
+          ✅全SS隧道中转节点.
+          ✅轻松带你畅游世界。
+          ✅使用不满意随时🉑退款！！！
+          ✅尊重用户隐私，不保留用户使用记录！！！
