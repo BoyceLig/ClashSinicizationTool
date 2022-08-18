@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ClashSinicizationTool
+namespace ClashSinicizationToolBase
 {
-    class FileStatusHelper
+    public class FileStatusHelper
     {
         [DllImport("kernel32.dll")]
         public static extern IntPtr _lopen(string lpPathName, int iReadWrite);

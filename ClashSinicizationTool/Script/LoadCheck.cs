@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic.Devices;
 using System;
+using ClashSinicizationToolBase;
 
 namespace ClashSinicizationTool
 {

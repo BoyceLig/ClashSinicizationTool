@@ -33,12 +33,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Resources\moment-with-CN.js">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\PathList.ini">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\ClashSinicizationToolBase\ClashSinicizationToolBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>

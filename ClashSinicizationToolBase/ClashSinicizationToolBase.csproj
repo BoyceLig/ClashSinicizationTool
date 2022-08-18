@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>$(VersionPrefix)</Version>
+    <Authors>Boyce Lig</Authors>
+    <Product>Clash Sinicization Tool</Product>
+    <Description>Clash for Windows 汉化程序类库</Description>
+    <Copyright>Copyright © 2021</Copyright>
+    <PackageProjectUrl>https://github.com/BoyceLig/ClashSinicizationTool</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BoyceLig/ClashSinicizationTool.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

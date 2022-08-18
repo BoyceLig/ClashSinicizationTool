@@ -1,25 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 using System.IO;
 
-namespace ClashSinicizationTool
+namespace ClashSinicizationToolBase
 {
-    class CharacterReplacement
+    public class CharacterReplacement
     {
-        public void CharacterReplace(RichTextBox textBox, string filePath, TextBox logText)
+        private readonly string[] transArr;
+
+        public CharacterReplacement(string[] transArr)
+        {
+            //拆分替换文本
+            this.transArr = transArr;
+        }
+
+        public string CharacterReplace(string filePath)
         {
             //读取要被替换的文件
             StreamReader streamReader = new(filePath, Encoding.UTF8);
             string s = streamReader.ReadToEnd();
             streamReader.Close();
 
-            //拆分替换文本
-            string transText = textBox.Text;
-            string[] transArr = transText.Split('\n');
+            string resText = "";
             int i = 0;
-            foreach (string str in transArr)
+            foreach (string str in this.transArr)
             {
                 if (!string.IsNullOrEmpty(str) && str.FirstOrDefault() != '#')
                 {
@@ -30,7 +37,7 @@ namespace ClashSinicizationTool
                     }
                     else
                     {
-                        logText.AppendText($"第{i + 1}行 ‘{str}’ 缺失‘=’，已跳过{Environment.NewLine}");
+                        resText += $"第{i + 1}行 ‘{str}’ 缺失‘=’，已跳过{Environment.NewLine}";
                     }
                 }
                 i++;
@@ -41,7 +48,8 @@ namespace ClashSinicizationTool
             streamWriter.WriteLine(s);
             streamWriter.Flush();
             streamWriter.Close();
-            logText.AppendText("已汉化文件 " + filePath + Environment.NewLine);
-        }        
+            resText += "已汉化文件 " + filePath + Environment.NewLine;
+            return resText;
+        }
     }
 }

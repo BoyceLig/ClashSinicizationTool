@@ -61,19 +61,6 @@ namespace ClashSinicizationTool.Properties {
         }
         
         /// <summary>
-        ///   查找类似 [Script Path]
-        ///翻译脚本.txt
-        ///
-        ///[Clash Path]
-        /// 的本地化字符串。
-        /// </summary>
-        public static string cacheList {
-            get {
-                return ResourceManager.GetString("cacheList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap GitHub_Logo {
@@ -90,49 +77,6 @@ namespace ClashSinicizationTool.Properties {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 ;(function (global, factory) {
-        ///    typeof exports === &apos;object&apos; &amp;&amp; typeof module !== &apos;undefined&apos; ? module.exports = factory() :
-        ///    typeof define === &apos;function&apos; &amp;&amp; define.amd ? define(factory) :
-        ///    global.moment = factory()
-        ///}(this, (function () { &apos;use strict&apos;;
-        ///
-        ///    var hookCallback;
-        ///
-        ///    function hooks() {
-        ///        return hookCallback.apply(null, arguments);
-        ///    }
-        ///
-        ///    function setHookCallback(callback) {
-        ///        hookCallback = callback;
-        ///    }
-        ///
-        ///    function isArray(input) {
-        ///        return (        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        public static string moment_with_CN {
-            get {
-                return ResourceManager.GetString("moment_with_CN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 [Replace Path]
-        ///\resources\app\dist\electron\renderer.js
-        ///\resources\app\dist\electron\main.js
-        ///\resources\app\node_modules\axios\lib\adapters\xhr.js
-        ///\resources\app\node_modules\axios\dist\axios.js
-        ///\resources\app\node_modules\axios\dist\axios.min.js
-        ///\resources\app\node_modules\axios\dist\axios.map
-        ///\resources\app\node_modules\axios\dist\axios.min.map
-        /// 的本地化字符串。
-        /// </summary>
-        public static string pathList {
-            get {
-                return ResourceManager.GetString("pathList", resourceCulture);
             }
         }
     }

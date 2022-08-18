@@ -4,15 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace ClashSinicizationTool
+namespace ClashSinicizationToolBase
 {
-    class CMDCommand
+    public class CMDCommand
     {
         public string CMDCommondBase(string startPath, string command)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
             Process process = new Process();
             //设置要启动的应用程序
             process.StartInfo.FileName = "cmd.exe";
@@ -44,7 +42,6 @@ namespace ClashSinicizationTool
         }
         public string CMDCommondBase(string command)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
             Process process = new Process();
             //设置要启动的应用程序
             process.StartInfo.FileName = "cmd.exe";
@@ -72,7 +69,6 @@ namespace ClashSinicizationTool
         }
         public string CMDCommondBase(string startPath, string[] commands)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
             Process process = new Process();
             //设置要启动的应用程序
             process.StartInfo.FileName = "cmd.exe";
@@ -105,7 +101,6 @@ namespace ClashSinicizationTool
         }
         public string CMDCommondBase(string[] commands)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
             Process process = new Process();
             //设置要启动的应用程序
             process.StartInfo.FileName = "cmd.exe";
@@ -138,14 +133,14 @@ namespace ClashSinicizationTool
         //解包命令
         public void Unpack(string appPath)
         {
-            string[] commands = new string[] { $@"set path={Application.StartupPath}\Node;%path%", "asar extract app.asar app" };
+            string[] commands = new string[] { $@"set path={AppContext.BaseDirectory}\Node;%path%", "asar extract app.asar app" };
             CMDCommondBase(appPath + @"\resources", commands);
         }
 
         //打包
         public void Pack(string appPath)
         {
-            string[] commands = new string[] { $@"set path={Application.StartupPath}\Node;%path%", "asar pack app app.asar" };
+            string[] commands = new string[] { $@"set path={AppContext.BaseDirectory}\Node;%path%", "asar pack app app.asar" };
             CMDCommondBase(appPath + @"\resources", commands);
         }
     }

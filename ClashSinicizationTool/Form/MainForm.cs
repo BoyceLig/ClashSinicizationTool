@@ -1,5 +1,4 @@
 ﻿using ClashSinicizationTool.Properties;
-using Ini;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClashSinicizationToolBase;
 
 namespace ClashSinicizationTool
 {
@@ -17,7 +17,6 @@ namespace ClashSinicizationTool
         private readonly string cacheList = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\CacheList.ini";
         private readonly string backup_original = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\Clash Sinicization Tool\backup_original";
         Version currentVersion;
-        private Task transTask;
 
         public MainForm()
         {
@@ -51,14 +50,14 @@ namespace ClashSinicizationTool
             {
                 //创建替换索引路径文件
                 File.Create(GlobalData.FilePath.iniFilePath).Close();
-                File.WriteAllText(GlobalData.FilePath.iniFilePath, Resources.pathList);
+                File.WriteAllText(GlobalData.FilePath.iniFilePath, ClashSinicizationToolBase.Properties.Resources.PathList);
             }
 
             if (!File.Exists(GlobalData.FilePath.momentFilePath))
             {
                 //创建翻译所需文件
                 File.Create(GlobalData.FilePath.momentFilePath).Close();
-                File.WriteAllText(GlobalData.FilePath.momentFilePath, Resources.moment_with_CN);
+                File.WriteAllText(GlobalData.FilePath.momentFilePath, ClashSinicizationToolBase.Properties.Resources.moment_with_CN);
             }
 
 
@@ -80,7 +79,7 @@ namespace ClashSinicizationTool
                 }
                 //创建cacheList文件
                 File.Create(cacheList).Close();
-                File.WriteAllText(cacheList, Resources.cacheList);
+                File.WriteAllText(cacheList, ClashSinicizationToolBase.Properties.Resources.CacheList);
             }
 
 
@@ -285,17 +284,16 @@ namespace ClashSinicizationTool
                     }
                     else
                     {
-                        if (transTask != null)
+                        SetActionButtonState(false);
+                        string transText = translationScriptRichTextBox.Text;
+                        using (BackgroundWorker bw = new BackgroundWorker())
                         {
-                            transTask.Dispose();
+                            bw.WorkerReportsProgress = true;
+                            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Trans_RunWorkerCompleted);
+                            bw.ProgressChanged += new ProgressChangedEventHandler(Trans_ProgressChanged);
+                            bw.DoWork += new DoWorkEventHandler(Trans_DoWork);
+                            bw.RunWorkerAsync(transText);
                         }
-
-                        transTask = Task.Factory.StartNew(() =>
-                        {
-                            SetActionButtonState(false);
-                            TransHandler();
-                            SetActionButtonState(true);
-                        });
                     }
                 }
                 else
@@ -916,10 +914,16 @@ namespace ClashSinicizationTool
         }
 
         /// <summary>
-        /// 汉化工作
+        /// 后台汉化工作
         /// </summary>
-        private void TransHandler()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Trans_DoWork(object sender, DoWorkEventArgs e)
         {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            string transText = e.Argument.ToString();
+            string[] transArr = transText.Split('\n');
+
             //调取ini文件
             IniList iniList = new();
             string[] replacePaths = iniList.GetSectionValue(GlobalData.IniSection.replacePath, GlobalData.FilePath.iniFilePath).ToArray();
@@ -928,15 +932,13 @@ namespace ClashSinicizationTool
             {
                 Directory.CreateDirectory(backup_original);
             }
-            //备份
-            toolStripProgressBar.Value = 0;
-            toolStripProgressBar.Maximum = replacePaths.Length + 1;
+            worker.ReportProgress(0, (replacePaths.Length + 1) * 2);
             File.Copy(clashPath + @"\resources\app\node_modules\moment\moment.js", backup_original + @"\moment.js", true);
-            logTextBox.AppendText("已备份文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+            worker.ReportProgress(1, "已备份文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
             File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
-            logTextBox.AppendText("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
-            toolStripProgressBar.Value += 1;
-            CharacterReplacement characterReplacement = new();
+            worker.ReportProgress(2, "已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js" + Environment.NewLine);
+
+            CharacterReplacement characterReplacement = new(transArr);
             for (int i = 0; i < replacePaths.Length; i++)
             {
                 if (File.Exists(clashPath + replacePaths[i]))
@@ -944,17 +946,37 @@ namespace ClashSinicizationTool
                     string[] s = replacePaths[i].Split(@"\");
                     string fileName = s[^1];
                     File.Copy(clashPath + replacePaths[i], backup_original + @"\" + fileName, true);
-                    logTextBox.AppendText("已备份文件 " + clashPath + replacePaths[i] + Environment.NewLine);
-                    characterReplacement.CharacterReplace(translationScriptRichTextBox, clashPath + replacePaths[i], logTextBox);
+                    worker.ReportProgress(i * 2 + 3, "已备份文件 " + clashPath + replacePaths[i] + Environment.NewLine);
+                    string resText = characterReplacement.CharacterReplace(clashPath + replacePaths[i]);
+                    worker.ReportProgress(i * 2 + 4, resText);
                 }
                 else
                 {
-                    logTextBox.AppendText("被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
+                    worker.ReportProgress(i * 2 + 3, "被汉化文件不存在 " + clashPath + replacePaths[i] + Environment.NewLine);
                 }
-                toolStripProgressBar.Value++;
             }
+        }
+
+        private void Trans_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            switch (e.ProgressPercentage)
+            {
+                case 0:
+                    toolStripProgressBar.Value = 0;
+                    toolStripProgressBar.Maximum = (int)e.UserState;
+                    break;
+                default:
+                    logTextBox.AppendText(e.UserState.ToString());
+                    toolStripProgressBar.Value++;
+                    break;
+            }
+        }
+
+        private void Trans_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
             logTextBox.AppendText("汉化完成，请执行下一步操作" + Environment.NewLine);
             toolStripProgressBar.Value = 0;//恢复默认值
+            SetActionButtonState(true);
         }
 
         /// <summary>

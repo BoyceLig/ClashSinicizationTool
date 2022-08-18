@@ -1,15 +1,12 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
-namespace Ini
+namespace ClashSinicizationToolBase
 {
-    class IniList
+    public class IniList
     {
         public List<string> GetSectionValue(string section, string iniFilePath)
         {
