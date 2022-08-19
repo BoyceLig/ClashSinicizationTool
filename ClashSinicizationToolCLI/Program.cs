@@ -12,11 +12,13 @@ namespace ClashSinicizationToolCLI
         {
             var clashOpt = new Option<string>(new string[] { "--clash", "-c" }, "Clash for Windows 程序目录");
             var transScriptOpt = new Option<string>(new string[] { "--trans-script", "-t" }, "翻译脚本文件路径");
+            var outputOpt = new Option<string>(new string[] { "--output", "-o" }, "额外拷贝输出 app.asar 文件至指定目录");
             var rootCmd = new RootCommand("Clash for Windows 汉化工具 CLI.");
             rootCmd.AddOption(clashOpt);
             rootCmd.AddOption(transScriptOpt);
+            rootCmd.AddOption(outputOpt);
 
-            rootCmd.SetHandler((clash, transScript) =>
+            rootCmd.SetHandler((clash, transScript, output) =>
             {
                 if (!string.IsNullOrEmpty(clash) && !string.IsNullOrEmpty(transScript))
                 {
@@ -41,11 +43,22 @@ namespace ClashSinicizationToolCLI
                         bool sinicizationState = Sinicization(clash, transScript);
                         if (sinicizationState)
                         {
-                            Pack(clash);
+                            bool packState = Pack(clash);
+                            if (packState && !string.IsNullOrEmpty(output))
+                            {
+                                if (!Directory.Exists(output))
+                                {
+                                    Directory.CreateDirectory(output);
+                                }
+
+                                string asarPath = Path.Combine(clash, @"resources\", "app.asar");
+                                File.Copy(asarPath, Path.Combine(output, "app.asar"), true);
+                                Console.WriteLine("已将 app.asar 文件拷贝至：" + output);
+                            }
                         }
                     }
                 }
-            }, clashOpt, transScriptOpt);
+            }, clashOpt, transScriptOpt, outputOpt);
 
             rootCmd.Invoke(args);
         }
@@ -184,7 +197,8 @@ namespace ClashSinicizationToolCLI
         /// 打包
         /// </summary>
         /// <param name="clashPath"></param>
-        private static void Pack(string clashPath)
+        /// <returns></returns>
+        private static bool Pack(string clashPath)
         {
             string appPath = Path.Combine(clashPath, @"resources\", @"app\");
             if (Directory.Exists(appPath))
@@ -195,7 +209,7 @@ namespace ClashSinicizationToolCLI
                     if (FileStatusHelper.IsFileOccupied(asarPath))
                     {
                         Console.WriteLine(asarPath + " 被占用，无法打包。");
-                        return;
+                        return false;
                     }
                 }
 
@@ -210,11 +224,13 @@ namespace ClashSinicizationToolCLI
                 {
                     Console.WriteLine($"打包完成。{appPath} 文件夹删除失败，有文件占用。");
                 }
+                return true;
             }
             else
             {
                 Console.WriteLine("尚未解包，请按步骤操作");
             }
+            return false;
         }
 
         /// <summary>
