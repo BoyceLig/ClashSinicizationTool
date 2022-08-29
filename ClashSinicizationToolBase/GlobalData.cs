@@ -28,7 +28,7 @@
             public static readonly string[] translationScriptUrls =
                 {
                 "https://raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
-                "https://github.boyce.workers.dev/raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
+                "https://github.boyce.workers.dev/https://raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
             };
         }
     }
