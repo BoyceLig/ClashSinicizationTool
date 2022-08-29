@@ -63,10 +63,14 @@ namespace ClashSinicizationTool
 
             if (!File.Exists(GlobalData.FilePath.translationScriptFilePath))
             {
+                //显示等待操作提示弹窗
+                var msgBox = new MessageForm("正在下载翻译脚本文件，请耐心等待...", "Clash 汉化工具");
+                msgBox.Show();
                 //创建翻译脚本文件
                 File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
                 Net net = new();
                 net.DownloadFile(GlobalData.Url.translationScriptUrls, GlobalData.FilePath.translationScriptFilePath, toolStripProgressBar, logTextBox);
+                msgBox.Close();
             }
             #region 检查创建翻译脚本列表文件
 

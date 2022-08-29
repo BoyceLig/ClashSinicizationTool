@@ -22,14 +22,31 @@
             public const string replacePath = "Replace Path";
         }
 
-        public struct Url
+        private static readonly List<string> SourceUrl = new List<string>
+        {
+            "https://raw.githubusercontent.com/BoyceLig/{repo}/main/{path}",
+            "https://github.boyce.workers.dev/https://raw.githubusercontent.com/BoyceLig/{repo}/main/{path}",
+            "https://gcore.jsdelivr.net/gh/BoyceLig/{repo}@main/{path}",
+            "https://fastly.jsdelivr.net/gh/BoyceLig/{repo}@main/{path}",
+            "https://testingcf.jsdelivr.net/gh/BoyceLig/{repo}@main/{path}",
+            "https://raw.fastgit.org/BoyceLig/{repo}/main/{path}",
+            "https://cdn.staticaly.com/gh/BoyceLig/{repo}/main/{path}"
+        };
+
+        private static string[] GetFileUrl(string repo, string filePath)
+        {
+            List<string> urlRes = new List<string>();
+            foreach (string sUrl in SourceUrl)
+            {
+                urlRes.Add(sUrl.Replace("{repo}", repo).Replace("{path}", filePath));
+            }
+            return urlRes.ToArray();
+        }
+
+        public static class Url
         {
             public const string projectUrl = "https://github.com/BoyceLig/ClashSinicizationTool";
-            public static readonly string[] translationScriptUrls =
-                {
-                "https://raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
-                "https://github.boyce.workers.dev/raw.githubusercontent.com/BoyceLig/Clash_Chinese_Patch/main/翻译脚本.txt",
-            };
+            public static string[] translationScriptUrls = GetFileUrl("Clash_Chinese_Patch", "翻译脚本.txt");
         }
     }
 }
