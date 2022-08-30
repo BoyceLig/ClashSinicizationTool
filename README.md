@@ -8,6 +8,8 @@
 [![](https://img.shields.io/badge/Releases-最新下载-blue)](https://github.com/BoyceLig/ClashSinicizationTool/releases)
 [![](https://img.shields.io/badge/Wiki-使用说明-blue)](https://github.com/BoyceLig/ClashSinicizationTools/wiki)
 
+⚠️软件永久免费，请注意欺诈！！！
+
 ![image](https://user-images.githubusercontent.com/49801599/187366158-88970141-977f-4823-a60d-eeb6d5a2503c.png)
 
 Clash for Windows汉化工具，根据[@Hikari_Miyamoto](https://t.me/Hikari_Miyamoto)大佬汉化方法编写C#版可视化汉化工具.
