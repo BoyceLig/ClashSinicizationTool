@@ -4,6 +4,7 @@
 
 [![](https://img.shields.io/badge/Telegram-公告板-blue)](https://t.me/ClashR_for_Windows_Channel)
 [![](https://img.shields.io/badge/Telegram-交流群-purple)](https://t.me/+Se4RSc06w8QK1HiS)
+[![](https://img.shields.io/badge/Telegram-升级日志-blue)](https://github.com/BoyceLig/ClashSinicizationTool/blob/main/Update%20Log.md)
 
 ![image](https://user-images.githubusercontent.com/49801599/187366158-88970141-977f-4823-a60d-eeb6d5a2503c.png)
 
