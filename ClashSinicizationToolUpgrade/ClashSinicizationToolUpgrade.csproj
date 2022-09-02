@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>ClashSinicizationToolUpgrade.Program</StartupObject>
+    <AssemblyName>Upgrade</AssemblyName>
+    <PackageId>ClashSinicizationToolUpgrade</PackageId>
+    <Authors>Boyce Lig</Authors>
+    <Product>Clash Sinicization Tool</Product>
+    <Description>Clash Sinicization Tool 升级程序</Description>
+    <Copyright>Copyright © 2021</Copyright>
+    <PackageProjectUrl>https://github.com/BoyceLig/ClashSinicizationTool</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+    <ApplicationIcon>Image\upgrade.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Image\upgrade.ico" />
+  </ItemGroup>
+
+</Project>

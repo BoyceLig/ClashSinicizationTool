@@ -74,6 +74,7 @@ namespace ClashSinicizationTool
             this.checkTranslationScriptButton = new System.Windows.Forms.Button();
             this.jumpLineButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.CheckUpdateButton = new System.Windows.Forms.Button();
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.translationScriptRichTextBoxMenuStrip.SuspendLayout();
@@ -283,7 +284,7 @@ namespace ClashSinicizationTool
             // autoCleanButton
             // 
             this.autoCleanButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.autoCleanButton.Location = new System.Drawing.Point(385, 64);
+            this.autoCleanButton.Location = new System.Drawing.Point(305, 64);
             this.autoCleanButton.Name = "autoCleanButton";
             this.autoCleanButton.Size = new System.Drawing.Size(106, 23);
             this.autoCleanButton.TabIndex = 3;
@@ -295,7 +296,7 @@ namespace ClashSinicizationTool
             // OpenClashButton
             // 
             this.OpenClashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.OpenClashButton.Location = new System.Drawing.Point(497, 64);
+            this.OpenClashButton.Location = new System.Drawing.Point(417, 64);
             this.OpenClashButton.Name = "OpenClashButton";
             this.OpenClashButton.Size = new System.Drawing.Size(171, 23);
             this.OpenClashButton.TabIndex = 7;
@@ -320,7 +321,7 @@ namespace ClashSinicizationTool
             // CloseClashButton
             // 
             this.CloseClashButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseClashButton.Location = new System.Drawing.Point(674, 64);
+            this.CloseClashButton.Location = new System.Drawing.Point(594, 64);
             this.CloseClashButton.Name = "CloseClashButton";
             this.CloseClashButton.Size = new System.Drawing.Size(171, 23);
             this.CloseClashButton.TabIndex = 7;
@@ -529,11 +530,24 @@ namespace ClashSinicizationTool
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // CheckUpdateButton
+            // 
+            this.CheckUpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckUpdateButton.Location = new System.Drawing.Point(770, 64);
+            this.CheckUpdateButton.Name = "CheckUpdateButton";
+            this.CheckUpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.CheckUpdateButton.TabIndex = 16;
+            this.CheckUpdateButton.Text = "检查更新";
+            this.toolTip.SetToolTip(this.CheckUpdateButton, "检查汉化工具是否存在新版本");
+            this.CheckUpdateButton.UseVisualStyleBackColor = true;
+            this.CheckUpdateButton.Click += new System.EventHandler(this.CheckUpdateButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 561);
+            this.Controls.Add(this.CheckUpdateButton);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.clashForWindowsPath);
@@ -626,6 +640,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Button jumpLineButton;
         private System.Windows.Forms.Timer timer;
         public System.Windows.Forms.RichTextBox translationScriptRichTextBox;
+        private System.Windows.Forms.Button CheckUpdateButton;
     }
 }
 

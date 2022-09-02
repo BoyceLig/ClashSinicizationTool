@@ -8,6 +8,8 @@
             public const string iniFilePath = "PathList.ini";
             public const string momentFilePath = "moment-with-CN.js";
             public const string translationScriptFilePath = "翻译脚本.txt";
+            public const string configPath = "config.xml";
+            public const string upgradeExePath = "Upgrade.exe";
         }
 
         public static class DirectoryPath
@@ -46,6 +48,7 @@
         public static class Url
         {
             public const string projectUrl = "https://github.com/BoyceLig/ClashSinicizationTool";
+            public const string latestApiUrl = "https://api.github.com/repos/BoyceLig/ClashSinicizationTool/releases/latest";
             public static string[] translationScriptUrls = GetFileUrl("Clash_Chinese_Patch", "翻译脚本.txt");
         }
     }
