@@ -111,6 +111,21 @@ namespace ClashSinicizationTool
             }
 
             #endregion
+
+            #region 读取程序配置
+            AppConfig.LoadConfig();
+            GlobState.ConfAutoCheck = AppConfig.GetValue("AutoCheck") == "1";
+            #endregion
+
+            #region 启动时检查程序更新
+            if (GlobState.ConfAutoCheck)
+            {
+                UpdateCheck UC = new UpdateCheck(Application.ProductVersion.ToString());
+                UC.HasUpdated += UC_HasUpdated;
+                Task task = Task.Run(() => UC.UpdateChecking());
+                task.Wait(TimeSpan.FromSeconds(5));
+            }
+            #endregion
         }
 
         #region 按钮
@@ -829,6 +844,17 @@ namespace ClashSinicizationTool
             toolStripStatusLabel1.Text = $"行 {(1 + translationScriptRichTextBox.GetLineFromCharIndex(translationScriptRichTextBox.SelectionStart)).ToString()}，列{(1 + translationScriptRichTextBox.SelectionStart - (translationScriptRichTextBox.GetFirstCharIndexFromLine(1 + translationScriptRichTextBox.GetLineFromCharIndex(translationScriptRichTextBox.SelectionStart) - 1))).ToString()}";
         }
 
+        /// <summary>
+        /// 检查更新按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckUpdateButton_Click(object sender, EventArgs e)
+        {
+            UpgradeForm up = new UpgradeForm(this);
+            up.ShowDialog();
+        }
+
         #region 按钮状态
         /// <summary>
         /// 设置汉化操作四个按钮的状态
@@ -1125,6 +1151,29 @@ namespace ClashSinicizationTool
                 }
             }
             SetActionButtonState(true);
+        }
+
+        /// <summary>
+        /// 检查程序更新完成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="isU"></param>
+        /// <param name="isE"></param>
+        private void UC_HasUpdated(object sender, bool isU, bool isE)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                if (!isE && isU)
+                {
+                    GlobState.HadAppUpdate = true;
+                    GlobState.AppUpdateTag = sender.ToString();
+                }
+
+                if (GlobState.HadAppUpdate)
+                {
+                    this.Text += $" (存在新版本)";
+                }
+            }));
         }
         #endregion
     }
