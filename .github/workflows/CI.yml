@@ -55,7 +55,10 @@ jobs:
         New-Item -ItemType Directory -Path C:\builtfiles -Force > $null
         7z a -mx9 "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" ".\Dist\$env:Configuration\"
         7z rn "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z" $env:Configuration $env:ProjectName
-        echo "NET_SHA256=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "NET_SHA256_7z=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.7z)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        Copy-Item -Path ".\Dist\$env:Configuration\" -Destination ".\Dist\$env:ProjectName\" -Recurse -Force
+        Compress-Archive -Path ".\Dist\$env:ProjectName\" "C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.zip"
+        echo "NET_SHA256_zip=$(.\Build\GetSHA256\GetSHA256.ps1 C:\builtfiles\$env:ProjectName-${{ steps.tag.outputs.tag }}.zip)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     - name: Create a new GitHub release if a new tag is pushed
       uses: ncipollo/release-action@v1
       if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
@@ -73,7 +76,9 @@ jobs:
           ## 文件校验
           | 文件名 | SHA256 |
           | :- | :- |
-          | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256 }}</sub> |          
+          | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256_7z }}</sub> |
+          | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.zip</sub> | <sub>${{ env.NET_SHA256_zip }}</sub> |
+
           ## 相关推荐：
 
           ### 相关推荐1：OK加速
