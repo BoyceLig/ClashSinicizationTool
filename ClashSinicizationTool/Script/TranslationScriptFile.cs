@@ -33,47 +33,49 @@ namespace ClashSinicizationTool
         }
 
         //导入脚本列表
-        public void LoadScriptList(ComboBox translationScriptFileName, TextBox logText, string iniPath)
+        public void LoadScriptList(ComboBox translationScriptFileName, string iniPath, bool needExist = false)
         {
             IniList ini = new IniList();
             string[] lines = ini.GetSectionValue("Script Path", iniPath).ToArray();
             for (int i = 0; i < lines.Length; i++)
             {
-                //不加载空行空行
-                if (lines[i] != string.Empty)
+                string line = lines[i].Trim();
+                //不加载空行
+                if (line != string.Empty)
                 {
-                    translationScriptFileName.Items.Add(lines[i]);
+                    if (!needExist || File.Exists(line))
+                    {
+                        translationScriptFileName.Items.Add(line);
+                    }
                 }
             }
-            foreach (string item in translationScriptFileName.Items)
+
+            if (translationScriptFileName.Items.Count > 0)
             {
-                if (File.Exists(item))
-                {
-                    translationScriptFileName.Text = item;
-                    break;
-                }
+                translationScriptFileName.Text = translationScriptFileName.Items[0].ToString();
             }
         }
 
         //导入Clash目录文件
-        public void LoadClashList(ComboBox clashPath, string iniPath)
+        public void LoadClashList(ComboBox clashPath, string iniPath, bool needExist = false)
         {
             IniList ini = new IniList();
             string[] lines = ini.GetSectionValue("Clash Path", iniPath).ToArray();
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i] != string.Empty)
+                string line = lines[i].Trim();
+                if (line != string.Empty)
                 {
-                    clashPath.Items.Add(lines[i]);
+                    if (!needExist || Directory.Exists(line))
+                    {
+                        clashPath.Items.Add(line);
+                    }
                 }
             }
-            foreach (string item in clashPath.Items)
+
+            if (clashPath.Items.Count > 0)
             {
-                if (Directory.Exists(item))
-                {
-                    clashPath.Text = item;
-                    break;
-                }
+                clashPath.Text = clashPath.Items[0].ToString();
             }
         }
     }

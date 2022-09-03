@@ -10,10 +10,10 @@ namespace ClashSinicizationTool
         /// <summary>
         /// http下载文件
         /// </summary>
-        /// <param name="url">下载文件地址</param>
-        /// <param name="path">文件存放地址，包含文件名</param>
+        /// <param name="URL">下载文件地址</param>
+        /// <param name="filename">文件存放地址，包含文件名</param>
         /// <returns></returns>
-        public bool DownloadFile(string URL, string filename, ToolStripProgressBar progressBar, TextBox logBox)
+        public bool DownloadFile(string URL, string filename)
         {
             try
             {
@@ -30,7 +30,6 @@ namespace ClashSinicizationTool
                 fileStream.Flush();
                 fileStream.Close();
 
-                logBox.AppendText("下载完成" + Environment.NewLine);
                 return true;
             }
             catch (Exception)
@@ -39,16 +38,15 @@ namespace ClashSinicizationTool
             }
         }
 
-        public bool DownloadFile(string[] urls, string path, ToolStripProgressBar progressBar, TextBox logText)
+        public bool DownloadFile(string[] urls, string path)
         {
             for (int i = 0; i < urls.Length; i++)
             {
-                if (DownloadFile(urls[i], path, progressBar, logText))
+                if (DownloadFile(urls[i], path))
                 {
                     return true;
                 }
             }
-            logText.AppendText("下载失败，请重试！" + Environment.NewLine);
             return false;
         }
     }
