@@ -1,5 +1,4 @@
-﻿using ClashSinicizationTool.Properties;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -60,18 +59,18 @@ namespace ClashSinicizationTool
                 File.WriteAllText(GlobalData.FilePath.momentFilePath, ClashSinicizationToolBase.Properties.Resources.moment_with_CN);
             }
 
+            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
 
-            if (!File.Exists(GlobalData.FilePath.translationScriptFilePath))
+            #region 检查创建clash目录列表
+
+            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
+            if (Directory.Exists(clashForWindowsPath.Text))
             {
-                //显示等待操作提示弹窗
-                var msgBox = new MessageForm("正在下载翻译脚本文件，请耐心等待...", "Clash 汉化工具");
-                msgBox.Show();
-                //创建翻译脚本文件
-                File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
-                Net net = new();
-                net.DownloadFile(GlobalData.Url.translationScriptUrls, GlobalData.FilePath.translationScriptFilePath, toolStripProgressBar, logTextBox);
-                msgBox.Close();
+                clashPath = clashForWindowsPath.Text;
             }
+
+            #endregion
+
             #region 检查创建翻译脚本列表文件
 
             //检查创建列表文件
@@ -86,30 +85,34 @@ namespace ClashSinicizationTool
                 File.WriteAllText(cacheList, ClashSinicizationToolBase.Properties.Resources.CacheList);
             }
 
-
             //加载列表文件
-            TranslationScriptFile translationScriptFile = new TranslationScriptFile();
-            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
+            translationScriptFile.LoadScriptList(translationScriptFileName, cacheList);
             //自动加载第一个文件
             if (translationScriptFileName.Items.Count != 0)
             {
-                if (File.Exists(translationScriptFileName.Items[0].ToString()))
+                string curTransFile = translationScriptFileName.Items[0].ToString();
+                if (File.Exists(curTransFile))
                 {
-                    translationScriptFile.LoadScript(translationScriptFileName.Text, translationScriptRichTextBox, logTextBox);
+                    translationScriptFile.LoadScript(curTransFile, translationScriptRichTextBox, logTextBox);
                     loadTranslationScriptButton.Enabled = true;
                     openTranslationFileButton.Enabled = true;
+                    SetActionButtonState(true);
+                }
+                else if (curTransFile == GlobalData.FilePath.translationScriptFilePath)
+                {
+                    //显示等待下载操作提示
+                    SetActionButtonState(false);
+                    logTextBox.AppendText("目录下不存在翻译脚本文件，正在自动下载中，请耐心等待..." + Environment.NewLine);
+
+                    File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
+                    using (BackgroundWorker bw = new BackgroundWorker())
+                    {
+                        bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(TransScriptDownload_RunWorkerCompleted);
+                        bw.DoWork += new DoWorkEventHandler(TransScriptDownload_DoWork);
+                        bw.RunWorkerAsync();
+                    }
                 }
             }
-            #endregion
-
-            #region 检查创建clash目录列表
-
-            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
-            if (Directory.Exists(clashForWindowsPath.Text))
-            {
-                clashPath = clashForWindowsPath.Text;
-            }
-
             #endregion
 
             #region 读取程序配置
@@ -173,10 +176,7 @@ namespace ClashSinicizationTool
                 clashPath = folderBrowserDialog.SelectedPath;
                 clashForWindowsPath.Text = clashPath;
                 openClashBrowseButton.Enabled = true;
-                unpackButton.Enabled = true;
-                sinicizationButton.Enabled = true;
-                packButton.Enabled = true;
-                revertButton.Enabled = true;
+                SetActionButtonState(true);
                 if (clashForWindowsPath.Items.Count == 0)
                 {
                     //把文件名加载到列表
@@ -272,21 +272,31 @@ namespace ClashSinicizationTool
             clashForWindowsPath.Text = string.Empty;
 
             TranslationScriptFile translationScriptFile = new();
-            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
-            if (File.Exists(clashForWindowsPath.Text))
+
+            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList, true);
+            for (int i = 0; i < clashForWindowsPath.Items.Count; i++)
+            {
+                ini.AddSectionValue(GlobalData.IniSection.clashPath, cacheList, clashForWindowsPath.Items[i].ToString());
+            }
+            if (Directory.Exists(clashForWindowsPath.Text))
             {
                 openClashBrowseButton.Enabled = true;
                 clashPath = clashForWindowsPath.Text;
             }
 
-            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
-            logTextBox.AppendText("清理列表成功" + Environment.NewLine);
+            translationScriptFile.LoadScriptList(translationScriptFileName, cacheList, true);
+            for (int i = 0; i < translationScriptFileName.Items.Count; i++)
+            {
+                ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, translationScriptFileName.Items[i].ToString());
+            }
             if (File.Exists(translationScriptFileName.Text) && Directory.Exists(clashPath))
             {
                 openClashBrowseButton.Enabled = true;
                 clashPath = clashForWindowsPath.Text;
                 SetActionButtonState(true);
             }
+
+            logTextBox.AppendText("清理列表成功" + Environment.NewLine);
         }
 
         //汉化按钮
@@ -533,28 +543,19 @@ namespace ClashSinicizationTool
         //从云端更新脚本文件
         private void UpdateTranslationScriptButton_Click(object sender, EventArgs e)
         {
-            Net net = new();
-            if (net.DownloadFile(GlobalData.Url.translationScriptUrls, GlobalData.FilePath.translationScriptFilePath, toolStripProgressBar, logTextBox))
-            {
-                IniList ini = new();
-                if (translationScriptFileName.Text != GlobalData.FilePath.translationScriptFilePath)
-                {
-                    for (int i = 0; i < translationScriptFileName.Items.Count; i++)
-                    {
-                        if (translationScriptFileName.Items[i].ToString() == GlobalData.FilePath.translationScriptFilePath)
-                        {
-                            break;
-                        }
-                        if (translationScriptFileName.Items[i].ToString() != GlobalData.FilePath.translationScriptFilePath && i == translationScriptFileName.Items.Count - 1)
-                        {
-                            ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
-                            TranslationScriptFile translationScriptFile = new();
-                            translationScriptFile.LoadScriptList(translationScriptFileName, logTextBox, cacheList);
+            //显示等待下载操作提示
+            logTextBox.AppendText("正在下载更新翻译脚本文件，请耐心等待..." + Environment.NewLine);
+            SetActionButtonState(false);
 
-                        }
-                    }
-                }
-                LoadTranslationScriptButton_Click(sender, e);
+            if (!File.Exists(GlobalData.FilePath.translationScriptFilePath))
+            {
+                File.Create(GlobalData.FilePath.translationScriptFilePath).Close();
+            }
+            using (BackgroundWorker bw = new BackgroundWorker())
+            {
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(TransScriptDownload_RunWorkerCompleted);
+                bw.DoWork += new DoWorkEventHandler(TransScriptDownload_DoWork);
+                bw.RunWorkerAsync();
             }
         }
 
@@ -1174,6 +1175,63 @@ namespace ClashSinicizationTool
                     this.Text += $" (存在新版本)";
                 }
             }));
+        }
+
+        /// <summary>
+        /// 后台脚本下载工作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TransScriptDownload_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Net net = new();
+            e.Result = net.DownloadFile(GlobalData.Url.translationScriptUrls, GlobalData.FilePath.translationScriptFilePath);
+        }
+
+        private void TransScriptDownload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if ((bool)e.Result)
+            {
+                logTextBox.AppendText("下载完成" + Environment.NewLine);
+                TranslationScriptFile translationScriptFile = new TranslationScriptFile();
+                translationScriptFile.LoadScript(GlobalData.FilePath.translationScriptFilePath, translationScriptRichTextBox, logTextBox);
+                if (translationScriptFileName.Text != GlobalData.FilePath.translationScriptFilePath)
+                {
+                    IniList ini = new();
+                    if (translationScriptFileName.Items.Count > 0)
+                    {
+                        for (int i = 0; i < translationScriptFileName.Items.Count; i++)
+                        {
+                            if (translationScriptFileName.Items[i].ToString() == GlobalData.FilePath.translationScriptFilePath)
+                            {
+                                break;
+                            }
+
+                            if (translationScriptFileName.Items[i].ToString() != GlobalData.FilePath.translationScriptFilePath && i == translationScriptFileName.Items.Count - 1)
+                            {
+                                ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
+                                translationScriptFileName.Items.Add(GlobalData.FilePath.translationScriptFilePath);
+                                translationScriptFileName.Text = GlobalData.FilePath.translationScriptFilePath;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ini.AddSectionValue(GlobalData.IniSection.scriptPath, cacheList, GlobalData.FilePath.translationScriptFilePath);
+                        translationScriptFileName.Items.Add(GlobalData.FilePath.translationScriptFilePath);
+                        translationScriptFileName.Text = GlobalData.FilePath.translationScriptFilePath;
+                    }
+                }
+
+                loadTranslationScriptButton.Enabled = true;
+                openTranslationFileButton.Enabled = true;
+            }
+            else
+            {
+                logTextBox.AppendText("下载失败，请重试！" + Environment.NewLine);
+            }
+
+            SetActionButtonState(true);
         }
         #endregion
     }
