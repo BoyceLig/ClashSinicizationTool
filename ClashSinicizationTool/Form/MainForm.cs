@@ -61,18 +61,6 @@ namespace ClashSinicizationTool
 
             TranslationScriptFile translationScriptFile = new TranslationScriptFile();
 
-            #region 检查创建clash目录列表
-
-            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
-            if (Directory.Exists(clashForWindowsPath.Text))
-            {
-                clashPath = clashForWindowsPath.Text;
-            }
-
-            #endregion
-
-            #region 检查创建翻译脚本列表文件
-
             //检查创建列表文件
             if (!File.Exists(cacheList))
             {
@@ -84,6 +72,18 @@ namespace ClashSinicizationTool
                 File.Create(cacheList).Close();
                 File.WriteAllText(cacheList, ClashSinicizationToolBase.Properties.Resources.CacheList);
             }
+
+            #region 检查创建clash目录列表
+
+            translationScriptFile.LoadClashList(clashForWindowsPath, cacheList);
+            if (Directory.Exists(clashForWindowsPath.Text))
+            {
+                clashPath = clashForWindowsPath.Text;
+            }
+
+            #endregion
+
+            #region 检查创建翻译脚本列表文件
 
             //加载列表文件
             translationScriptFile.LoadScriptList(translationScriptFileName, cacheList);
