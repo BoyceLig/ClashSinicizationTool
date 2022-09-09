@@ -192,9 +192,10 @@ namespace ClashSinicizationTool
                         }
                     }
                     clashForWindowsPath.Items.Add(clashForWindowsPath.Text);
-                    IniList ini = new();
-                    ini.AddSectionValue(GlobalData.IniSection.clashPath, cacheList, clashForWindowsPath.Text);
                 }
+
+                IniList ini = new();
+                ini.AddSectionValue(GlobalData.IniSection.clashPath, cacheList, clashForWindowsPath.Text);
             }
         }
 
