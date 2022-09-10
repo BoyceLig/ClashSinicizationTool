@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ClashSinicizationToolBase;
+using System;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using ClashSinicizationToolBase;
 
 namespace ClashSinicizationTool
 {

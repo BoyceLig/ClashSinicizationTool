@@ -586,13 +586,18 @@ namespace ClashSinicizationTool
             toolStripProgressBar.Value = 0;
             toolStripProgressBar.Minimum = 0;
             toolStripProgressBar.Maximum = translationScriptRichTextBox.Lines.Length;
-            for (int i = 0; i < translationScriptRichTextBox.Lines.Length; i++)
+            
+            //拆分string加快速度
+            string transText = translationScriptRichTextBox.Text;
+            string[] transTexts = transText.Split('\n');
+
+            for (int i = 0; i < transTexts.Length; i++)
             {
-                if (!translationScriptRichTextBox.Lines[i].StartsWith("#") && translationScriptRichTextBox.Lines[i] != string.Empty)
+                if (!transTexts[i].StartsWith("#") && transTexts[i] != string.Empty)
                 {
-                    if (!translationScriptRichTextBox.Lines[i].Contains('='))
+                    if (!transTexts[i].Contains('='))
                     {
-                        logTextBox.AppendText($"第{i + 1}行 ‘{translationScriptRichTextBox.Lines[i]}’ 缺失‘=’" + Environment.NewLine);
+                        logTextBox.AppendText($"第{i + 1}行 ‘{transTexts[i]}’ 缺失‘=’" + Environment.NewLine);
                     }
                 }
                 toolStripProgressBar.Value += 1;
