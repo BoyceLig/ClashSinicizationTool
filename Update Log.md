@@ -1,3 +1,14 @@
+# 1.6.3
+* chore: 调整在生产环境下不生成辅助文件
+* chore: 调整打包流程
+* fix: 修复升级程序窗口内文本显示为乱码的问题 [#19](https://github.com/BoyceLig/ClashSinicizationTool/pull/19)
+* fix: 修复程序会更新失败的问题
+* new: 增加行号显示布局
+
+# 1.6.2
+* 修复【BUG】查找和替换窗口布局问题和区分大小写判定问题 [#15](https://github.com/BoyceLig/ClashSinicizationTool/pull/15)
+* 修复【BUG】输入新字段时候他文字总比其它原有的小 [#16](https://github.com/BoyceLig/ClashSinicizationTool/pull/16)
+
 # 1.6.1
 * 修复上一版本首次启动程序时报错的问题
 
