@@ -41,6 +41,10 @@ namespace ClashSinicizationTool
             }
             #endregion
 
+            #region 翻译脚本内容输入框字体
+            translationScriptRichTextBox.LanguageOption = RichTextBoxLanguageOptions.DualFont;
+            #endregion
+
             //自动选择字词关闭（面板关闭按钮失效）
             translationScriptRichTextBox.AutoWordSelection = false;
             timer.Start();
