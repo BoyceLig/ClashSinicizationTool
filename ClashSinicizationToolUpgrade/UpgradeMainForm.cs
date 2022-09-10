@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,12 +19,13 @@ namespace ClashSinicizationToolUpgrade
         {
             InitializeComponent();
 
-            this.appPath = appPath;
+            this.appPath = appPath.Replace("\"", "");
         }
 
         private void UpgradeMainForm_Load(object sender, EventArgs e)
         {
-            this.ContentLabel.Text = "ÕıÔÚÉı¼¶Ö÷³ÌĞò...";
+            this.PathLabel.Text = "ç¨‹åºè·¯å¾„: " + appPath;
+            this.ContentLabel.Text = "æ­£åœ¨å‡çº§ä¸»ç¨‹åº...";
             this.RunButton.Enabled = false;
             if (CloseMainProgram())
             {
@@ -32,7 +33,7 @@ namespace ClashSinicizationToolUpgrade
             }
             else
             {
-                this.ContentLabel.Text = "ÎŞ·¨ÍË³öÖ÷³ÌĞò£¡";
+                this.ContentLabel.Text = "æ— æ³•é€€å‡ºä¸»ç¨‹åºï¼";
             }
         }
 
@@ -59,19 +60,41 @@ namespace ClashSinicizationToolUpgrade
 
         private void Upgrading()
         {
-            if (Directory.Exists(appPath))
+            var mainInfo = Directory.GetParent(Application.StartupPath);
+            if (Directory.Exists(appPath) &&  mainInfo != null && mainInfo.Parent != null)
             {
-                foreach (string file in Directory.GetFiles(Directory.GetCurrentDirectory()))
+                string mainPath = mainInfo.Parent.FullName;
+                foreach (string file in GetFiles(mainPath))
                 {
-                    File.Copy(file, Path.Combine(appPath, Path.GetRelativePath(Directory.GetCurrentDirectory(), file)), true);
+                    File.Copy(file, Path.Combine(appPath, Path.GetRelativePath(mainPath, file)), true);
                 }
-                this.ContentLabel.Text = "Éı¼¶Íê³É£¡";
+                this.ContentLabel.Text = "å‡çº§å®Œæˆï¼";
                 this.RunButton.Enabled = true;
             }
             else
             {
-                this.ContentLabel.Text = "³ÌĞòÄ¿Â¼²»´æÔÚ£¡";
+                this.ContentLabel.Text = "ç¨‹åºç›®å½•ä¸å­˜åœ¨ï¼";
             }
+        }
+
+        private string[] GetFiles(string dirPath)
+        {
+            List<string> files = new List<string>();
+            DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
+            foreach (FileInfo file in dirInfo.GetFiles())
+            {
+                files.Add(file.FullName);
+            }
+
+            foreach (DirectoryInfo dir in dirInfo.GetDirectories())
+            {
+                foreach (string subFile in GetFiles(dir.FullName))
+                {
+                    files.Add(subFile);
+                }
+            }
+
+            return files.ToArray();
         }
 
         private void DeleteItSelfByCMD()
@@ -100,7 +123,7 @@ namespace ClashSinicizationToolUpgrade
             {
                 run = false;
                 p.Close();
-                this.ContentLabel.Text = "Ö÷³ÌĞòÆô¶¯Ê§°Ü£¡";
+                this.ContentLabel.Text = "ä¸»ç¨‹åºå¯åŠ¨å¤±è´¥ï¼";
             }
 
             if (run)
