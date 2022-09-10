@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,7 +68,7 @@ namespace ClashSinicizationTool
                     }
 
                     if (isCompleted)
-                    { //! ÏÂÔØÍê³É
+                    { //! ä¸‹è½½å®Œæˆ
                         if (Directory.Exists(tempDir))
                         {
                             Directory.Delete(tempDir, true);

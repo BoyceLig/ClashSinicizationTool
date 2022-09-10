@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +24,7 @@ namespace ClashSinicizationToolUpgrade
 
         private void UpgradeMainForm_Load(object sender, EventArgs e)
         {
-            this.ContentLabel.Text = "ÕıÔÚÉı¼¶Ö÷³ÌĞò...";
+            this.ContentLabel.Text = "æ­£åœ¨å‡çº§ä¸»ç¨‹åº...";
             this.RunButton.Enabled = false;
             if (CloseMainProgram())
             {
@@ -32,7 +32,7 @@ namespace ClashSinicizationToolUpgrade
             }
             else
             {
-                this.ContentLabel.Text = "ÎŞ·¨ÍË³öÖ÷³ÌĞò£¡";
+                this.ContentLabel.Text = "æ— æ³•é€€å‡ºä¸»ç¨‹åºï¼";
             }
         }
 
@@ -65,12 +65,12 @@ namespace ClashSinicizationToolUpgrade
                 {
                     File.Copy(file, Path.Combine(appPath, Path.GetRelativePath(Directory.GetCurrentDirectory(), file)), true);
                 }
-                this.ContentLabel.Text = "Éı¼¶Íê³É£¡";
+                this.ContentLabel.Text = "å‡çº§å®Œæˆï¼";
                 this.RunButton.Enabled = true;
             }
             else
             {
-                this.ContentLabel.Text = "³ÌĞòÄ¿Â¼²»´æÔÚ£¡";
+                this.ContentLabel.Text = "ç¨‹åºç›®å½•ä¸å­˜åœ¨ï¼";
             }
         }
 
@@ -100,7 +100,7 @@ namespace ClashSinicizationToolUpgrade
             {
                 run = false;
                 p.Close();
-                this.ContentLabel.Text = "Ö÷³ÌĞòÆô¶¯Ê§°Ü£¡";
+                this.ContentLabel.Text = "ä¸»ç¨‹åºå¯åŠ¨å¤±è´¥ï¼";
             }
 
             if (run)

@@ -1,4 +1,4 @@
-namespace ClashSinicizationToolUpgrade
+﻿namespace ClashSinicizationToolUpgrade
 {
     internal static class Program
     {
