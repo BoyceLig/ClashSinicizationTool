@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO.Compression;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace ClashSinicizationToolUpgrade
 {
@@ -61,7 +52,7 @@ namespace ClashSinicizationToolUpgrade
         private void Upgrading()
         {
             var mainInfo = Directory.GetParent(Application.StartupPath);
-            if (Directory.Exists(appPath) &&  mainInfo != null && mainInfo.Parent != null)
+            if (Directory.Exists(appPath) && mainInfo != null && mainInfo.Parent != null)
             {
                 string mainPath = mainInfo.Parent.FullName;
                 foreach (string file in GetFiles(mainPath))
