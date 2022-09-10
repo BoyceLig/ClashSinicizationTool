@@ -84,7 +84,7 @@ namespace ClashSinicizationTool
                             {
                                 Process upApp = new Process();
                                 upApp.StartInfo.FileName = tempExe;
-                                upApp.StartInfo.Arguments = Directory.GetCurrentDirectory();
+                                upApp.StartInfo.Arguments = "\"\"\"" + Directory.GetParent(Application.StartupPath).Parent.FullName + "\"\"\"";
                                 upApp.StartInfo.WorkingDirectory = tempDir;
                                 upApp.Start();
                                 upApp.Close();

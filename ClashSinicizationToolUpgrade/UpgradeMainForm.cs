@@ -19,11 +19,12 @@ namespace ClashSinicizationToolUpgrade
         {
             InitializeComponent();
 
-            this.appPath = appPath;
+            this.appPath = appPath.Replace("\"", "");
         }
 
         private void UpgradeMainForm_Load(object sender, EventArgs e)
         {
+            this.PathLabel.Text = "程序路径: " + appPath;
             this.ContentLabel.Text = "正在升级主程序...";
             this.RunButton.Enabled = false;
             if (CloseMainProgram())
@@ -59,11 +60,13 @@ namespace ClashSinicizationToolUpgrade
 
         private void Upgrading()
         {
-            if (Directory.Exists(appPath))
+            var mainInfo = Directory.GetParent(Application.StartupPath);
+            if (Directory.Exists(appPath) &&  mainInfo != null && mainInfo.Parent != null)
             {
-                foreach (string file in Directory.GetFiles(Directory.GetCurrentDirectory()))
+                string mainPath = mainInfo.Parent.FullName;
+                foreach (string file in GetFiles(mainPath))
                 {
-                    File.Copy(file, Path.Combine(appPath, Path.GetRelativePath(Directory.GetCurrentDirectory(), file)), true);
+                    File.Copy(file, Path.Combine(appPath, Path.GetRelativePath(mainPath, file)), true);
                 }
                 this.ContentLabel.Text = "升级完成！";
                 this.RunButton.Enabled = true;
@@ -72,6 +75,26 @@ namespace ClashSinicizationToolUpgrade
             {
                 this.ContentLabel.Text = "程序目录不存在！";
             }
+        }
+
+        private string[] GetFiles(string dirPath)
+        {
+            List<string> files = new List<string>();
+            DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
+            foreach (FileInfo file in dirInfo.GetFiles())
+            {
+                files.Add(file.FullName);
+            }
+
+            foreach (DirectoryInfo dir in dirInfo.GetDirectories())
+            {
+                foreach (string subFile in GetFiles(dir.FullName))
+                {
+                    files.Add(subFile);
+                }
+            }
+
+            return files.ToArray();
         }
 
         private void DeleteItSelfByCMD()
