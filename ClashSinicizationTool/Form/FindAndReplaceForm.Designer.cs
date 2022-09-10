@@ -46,11 +46,12 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.downRadioButton);
             this.groupBox1.Controls.Add(this.upRadioButton);
-            this.groupBox1.Location = new System.Drawing.Point(117, 67);
+            this.groupBox1.Location = new System.Drawing.Point(117, 64);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(118, 62);
+            this.groupBox1.Size = new System.Drawing.Size(118, 65);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "方向";
@@ -189,7 +190,7 @@
             this.Controls.Add(this.replaceButton);
             this.Controls.Add(this.findNextButton);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(10000, 183);
+            this.MaximumSize = new System.Drawing.Size(10000, 200);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(404, 183);
             this.Name = "FindAndReplaceForm";
