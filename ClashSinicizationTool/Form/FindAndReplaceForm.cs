@@ -66,20 +66,6 @@ namespace ClashSinicizationTool
             Close();
         }
 
-        private void DownRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (upRadioButton.Checked)
-            {
-                caseSensitiveCheckBox.Checked = false;
-                caseSensitiveCheckBox.Enabled = false;
-            }
-            else if (downRadioButton.Checked)
-            {
-                caseSensitiveCheckBox.Checked = true;
-                caseSensitiveCheckBox.Enabled = true;
-            }
-        }
-
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
             if (findTextBox.Text != string.Empty)

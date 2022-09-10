@@ -66,7 +66,6 @@
             this.downRadioButton.TabStop = true;
             this.downRadioButton.Text = "向下";
             this.downRadioButton.UseVisualStyleBackColor = true;
-            this.downRadioButton.CheckedChanged += new System.EventHandler(this.DownRadioButton_CheckedChanged);
             // 
             // upRadioButton
             // 
