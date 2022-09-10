@@ -369,6 +369,7 @@ namespace ClashSinicizationTool
             // panel2
             // 
             this.panel2.AutoSize = true;
+            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
