@@ -739,6 +739,11 @@ namespace ClashSinicizationTool
             {
                 findReplaceButton_Click(sender, e);
             }
+
+            if ((e.KeyCode == Keys.G && e.Control))
+            {
+                jumpLineButton_Click(sender, e);
+            }
         }
 
         #region log右键菜单
@@ -1308,7 +1313,8 @@ namespace ClashSinicizationTool
             }
 
             //行号左右位置
-            int brushX = this.panel2.ClientRectangle.Width - Convert.ToInt32(font.Size * 5);
+            //int brushX = panel2.ClientRectangle.Width - Convert.ToInt32(font.Size * 5);
+            int brushX = 0;
 
             int brushY = crntLastPos.Y + Convert.ToInt32(font.Size * 0.21f);
             for (int i = crntLastLine; i >= crntFirstLine; i--)
@@ -1337,6 +1343,6 @@ namespace ClashSinicizationTool
             ShowLineNo();
         }
 
-       
+
     }
 }

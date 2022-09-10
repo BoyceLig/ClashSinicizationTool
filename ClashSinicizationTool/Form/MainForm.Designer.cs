@@ -357,23 +357,22 @@ namespace ClashSinicizationTool
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.splitContainer1.Panel1.Controls.Add(this.panel2);
-            this.splitContainer1.Panel1MinSize = 58;
+            this.splitContainer1.Panel1MinSize = 33;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.translationScriptRichTextBox);
             this.splitContainer1.Size = new System.Drawing.Size(851, 212);
-            this.splitContainer1.SplitterDistance = 58;
+            this.splitContainer1.SplitterDistance = 33;
             this.splitContainer1.TabIndex = 10;
             // 
             // panel2
             // 
             this.panel2.AutoSize = true;
-            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(58, 212);
+            this.panel2.Size = new System.Drawing.Size(33, 212);
             this.panel2.TabIndex = 0;
             // 
             // translationScriptRichTextBox
@@ -385,7 +384,7 @@ namespace ClashSinicizationTool
             this.translationScriptRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.translationScriptRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.translationScriptRichTextBox.Name = "translationScriptRichTextBox";
-            this.translationScriptRichTextBox.Size = new System.Drawing.Size(789, 212);
+            this.translationScriptRichTextBox.Size = new System.Drawing.Size(814, 212);
             this.translationScriptRichTextBox.TabIndex = 9;
             this.translationScriptRichTextBox.Text = "";
             this.translationScriptRichTextBox.WordWrap = false;
