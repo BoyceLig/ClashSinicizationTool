@@ -4,14 +4,14 @@ $ErrorActionPreference = 'Stop'
 Write-Host 'dotnet SDK info'
 dotnet --info
 
-$exe = @('Clash Sinicization Tool.exe', 'Upgrade.exe')
+$exe = @('CLI.exe')
 $net_tfm = 'net6.0-windows'
 $dllpatcher_tfm = 'net6.0'
 $configuration = 'Release'
-$output_dir = @("$PSScriptRoot\ClashSinicizationTool\bin\$configuration", "$PSScriptRoot\ClashSinicizationToolUpgrade\bin\$configuration")
+$output_dir = @("$PSScriptRoot\ClashSinicizationToolCLI\bin\$configuration")
 $dllpatcher_dir = "$PSScriptRoot\Build\DotNetDllPathPatcher"
 $dllpatcher_exe = "$dllpatcher_dir\bin\$configuration\$dllpatcher_tfm\DotNetDllPathPatcher.exe"
-$proj_path = @("$PSScriptRoot\ClashSinicizationTool\ClashSinicizationTool.csproj", "$PSScriptRoot\ClashSinicizationToolUpgrade\ClashSinicizationToolUpgrade.csproj")
+$proj_path = @("$PSScriptRoot\ClashSinicizationToolCLI\ClashSinicizationToolCLI.csproj")
 $dist_path = "$PSScriptRoot\Dist\$configuration"
 
 $build    = $buildtfm -eq 'all' -or $buildtfm -eq 'app'
@@ -20,7 +20,7 @@ function Build-App
 {
 	Write-Host 'Building .NET App'
 	
-	for ($i = 0; $i -lt 2; $i++)
+	for ($i = 0; $i -lt 1; $i++)
 	{
 		$outdir = "{0}\$net_tfm" -f $output_dir[$i]
 		$publishDir = "$outdir\publish"
