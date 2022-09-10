@@ -1278,8 +1278,8 @@ namespace ClashSinicizationTool
 
             //刷新画布
 
-            Rectangle rect = this.panel2.ClientRectangle;
-            brush.Color = this.panel2.BackColor;
+            Rectangle rect = panel2.ClientRectangle;
+            brush.Color = panel2.BackColor;
 
             g.FillRectangle(brush, 0, 0, this.panel2.ClientRectangle.Width, this.panel2.ClientRectangle.Height);
 
@@ -1300,7 +1300,9 @@ namespace ClashSinicizationTool
                 lineSpace = Convert.ToInt32(this.translationScriptRichTextBox.Font.Size);
 
             }
-            int brushX = this.panel2.ClientRectangle.Width - Convert.ToInt32(font.Size * 3);
+
+            //行号左右位置
+            int brushX = this.panel2.ClientRectangle.Width - Convert.ToInt32(font.Size * 5);
 
             int brushY = crntLastPos.Y + Convert.ToInt32(font.Size * 0.21f);
             for (int i = crntLastLine; i >= crntFirstLine; i--)
@@ -1320,6 +1322,11 @@ namespace ClashSinicizationTool
 
         //滚动调整
         private void translationScriptRichTextBox_VScroll(object sender, EventArgs e)
+        {
+            ShowLineNo();
+        }
+
+        private void translationScriptRichTextBox_SizeChanged(object sender, EventArgs e)
         {
             ShowLineNo();
         }

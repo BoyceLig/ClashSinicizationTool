@@ -356,20 +356,22 @@ namespace ClashSinicizationTool
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            this.splitContainer1.Panel1MinSize = 58;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.translationScriptRichTextBox);
             this.splitContainer1.Size = new System.Drawing.Size(851, 212);
-            this.splitContainer1.SplitterDistance = 45;
+            this.splitContainer1.SplitterDistance = 58;
             this.splitContainer1.TabIndex = 10;
             // 
             // panel2
             // 
+            this.panel2.AutoSize = true;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(45, 212);
+            this.panel2.Size = new System.Drawing.Size(58, 212);
             this.panel2.TabIndex = 0;
             // 
             // translationScriptRichTextBox
@@ -381,11 +383,12 @@ namespace ClashSinicizationTool
             this.translationScriptRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.translationScriptRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.translationScriptRichTextBox.Name = "translationScriptRichTextBox";
-            this.translationScriptRichTextBox.Size = new System.Drawing.Size(802, 212);
+            this.translationScriptRichTextBox.Size = new System.Drawing.Size(789, 212);
             this.translationScriptRichTextBox.TabIndex = 9;
             this.translationScriptRichTextBox.Text = "";
             this.translationScriptRichTextBox.WordWrap = false;
             this.translationScriptRichTextBox.VScroll += new System.EventHandler(this.translationScriptRichTextBox_VScroll);
+            this.translationScriptRichTextBox.SizeChanged += new System.EventHandler(this.translationScriptRichTextBox_SizeChanged);
             this.translationScriptRichTextBox.TextChanged += new System.EventHandler(this.TranslationScriptText_TextChanged);
             this.translationScriptRichTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.translationScriptRichTextBox_MouseDown);
             // 
@@ -616,6 +619,7 @@ namespace ClashSinicizationTool
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
