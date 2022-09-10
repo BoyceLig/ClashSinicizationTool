@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ClashSinicizationToolBase;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ClashSinicizationToolBase;
 
 namespace ClashSinicizationTool
 {
@@ -133,6 +133,13 @@ namespace ClashSinicizationTool
                 task.Wait(TimeSpan.FromSeconds(5));
             }
             #endregion
+
+        }
+
+        //第一次显示时候执行
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            ShowLineNo();
         }
 
         #region 按钮
@@ -586,7 +593,7 @@ namespace ClashSinicizationTool
             toolStripProgressBar.Value = 0;
             toolStripProgressBar.Minimum = 0;
             toolStripProgressBar.Maximum = translationScriptRichTextBox.Lines.Length;
-            
+
             //拆分string加快速度
             string transText = translationScriptRichTextBox.Text;
             string[] transTexts = transText.Split('\n');
@@ -612,6 +619,9 @@ namespace ClashSinicizationTool
         //翻译脚本显示器修改时，检测与源文件匹配，控制保存开关
         private void TranslationScriptText_TextChanged(object sender, EventArgs e)
         {
+            //控件加载事件
+            ShowLineNo();
+
             StreamReader streamReader = new(translationScriptFileName.Text, Encoding.UTF8);
             if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
             {
@@ -728,6 +738,11 @@ namespace ClashSinicizationTool
             if ((e.KeyCode == Keys.F && e.Control) || (e.KeyCode == Keys.H && e.Control))
             {
                 findReplaceButton_Click(sender, e);
+            }
+
+            if ((e.KeyCode == Keys.G && e.Control))
+            {
+                jumpLineButton_Click(sender, e);
             }
         }
 
@@ -1244,5 +1259,90 @@ namespace ClashSinicizationTool
             SetActionButtonState(true);
         }
         #endregion
+
+        //准备Panel画布，当接到文件字符后进行坐标解析，绘制行号
+        private void ShowLineNo()
+        {
+            //获得当前坐标信息
+            Point p = this.translationScriptRichTextBox.Location;
+            int crntFirstIndex = translationScriptRichTextBox.GetCharIndexFromPosition(p);
+
+            int crntFirstLine = translationScriptRichTextBox.GetLineFromCharIndex(crntFirstIndex);
+
+            Point crntFirstPos = translationScriptRichTextBox.GetPositionFromCharIndex(crntFirstIndex);
+
+            p.Y += this.translationScriptRichTextBox.Height;
+
+            int crntLastIndex = translationScriptRichTextBox.GetCharIndexFromPosition(p);
+
+            int crntLastLine = translationScriptRichTextBox.GetLineFromCharIndex(crntLastIndex);
+            Point crntLastPos = translationScriptRichTextBox.GetPositionFromCharIndex(crntLastIndex);
+
+            //准备画图
+            Graphics g = panel2.CreateGraphics();
+
+            Font font = new Font(translationScriptRichTextBox.Font, this.translationScriptRichTextBox.Font.Style);
+
+            SolidBrush brush = new SolidBrush(Color.Green);
+
+            //画图开始
+
+            //刷新画布
+
+            Rectangle rect = panel2.ClientRectangle;
+            brush.Color = panel2.BackColor;
+
+            g.FillRectangle(brush, 0, 0, this.panel2.ClientRectangle.Width, this.panel2.ClientRectangle.Height);
+
+            brush.Color = Color.White;//重置画笔颜色
+
+            //绘制行号
+
+            int lineSpace = 0;
+
+            if (crntFirstLine != crntLastLine)
+            {
+                lineSpace = (crntLastPos.Y - crntFirstPos.Y) / (crntLastLine - crntFirstLine);
+
+            }
+
+            else
+            {
+                lineSpace = Convert.ToInt32(this.translationScriptRichTextBox.Font.Size);
+
+            }
+
+            //行号左右位置
+            //int brushX = panel2.ClientRectangle.Width - Convert.ToInt32(font.Size * 5);
+            int brushX = 0;
+
+            int brushY = crntLastPos.Y + Convert.ToInt32(font.Size * 0.21f);
+            for (int i = crntLastLine; i >= crntFirstLine; i--)
+            {
+
+                g.DrawString((i + 1).ToString(), font, brush, brushX, brushY);
+
+                brushY -= lineSpace;
+            }
+
+            g.Dispose();
+
+            font.Dispose();
+
+            brush.Dispose();
+        }
+
+        //滚动调整
+        private void translationScriptRichTextBox_VScroll(object sender, EventArgs e)
+        {
+            ShowLineNo();
+        }
+
+        private void translationScriptRichTextBox_SizeChanged(object sender, EventArgs e)
+        {
+            ShowLineNo();
+        }
+
+
     }
 }
