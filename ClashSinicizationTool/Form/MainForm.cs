@@ -136,6 +136,12 @@ namespace ClashSinicizationTool
 
         }
 
+        //第一次显示时候执行
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            ShowLineNo();
+        }
+
         #region 按钮
         //保存当前翻译脚本的修改
         private void SaveTranslationScriptButton_Click(object sender, EventArgs e)
@@ -1330,5 +1336,7 @@ namespace ClashSinicizationTool
         {
             ShowLineNo();
         }
+
+       
     }
 }

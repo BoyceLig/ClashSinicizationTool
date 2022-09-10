@@ -348,6 +348,7 @@ namespace ClashSinicizationTool
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 19);
             this.splitContainer1.Name = "splitContainer1";
@@ -368,6 +369,7 @@ namespace ClashSinicizationTool
             // panel2
             // 
             this.panel2.AutoSize = true;
+            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -615,6 +617,7 @@ namespace ClashSinicizationTool
             this.Name = "MainForm";
             this.Text = "Clash 汉化工具";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
