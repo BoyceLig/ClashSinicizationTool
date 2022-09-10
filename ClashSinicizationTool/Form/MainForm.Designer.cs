@@ -54,6 +54,8 @@ namespace ClashSinicizationTool
             this.revertButton = new System.Windows.Forms.Button();
             this.CloseClashButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.translationScriptRichTextBox = new System.Windows.Forms.RichTextBox();
             this.translationScriptRichTextBoxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.translationScriptRichTextBoxMenuStripCopy = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +65,7 @@ namespace ClashSinicizationTool
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.autoCkeckClashPathButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CheckUpdateButton = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -74,9 +77,12 @@ namespace ClashSinicizationTool
             this.checkTranslationScriptButton = new System.Windows.Forms.Button();
             this.jumpLineButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.CheckUpdateButton = new System.Windows.Forms.Button();
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.translationScriptRichTextBoxMenuStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -331,7 +337,7 @@ namespace ClashSinicizationTool
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.translationScriptRichTextBox);
+            this.groupBox1.Controls.Add(this.splitContainer1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -340,6 +346,32 @@ namespace ClashSinicizationTool
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "翻译脚本信息";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 19);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.translationScriptRichTextBox);
+            this.splitContainer1.Size = new System.Drawing.Size(851, 212);
+            this.splitContainer1.SplitterDistance = 45;
+            this.splitContainer1.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(45, 212);
+            this.panel2.TabIndex = 0;
+            // 
             // translationScriptRichTextBox
             // 
             this.translationScriptRichTextBox.AcceptsTab = true;
@@ -347,12 +379,13 @@ namespace ClashSinicizationTool
             this.translationScriptRichTextBox.DetectUrls = false;
             this.translationScriptRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.translationScriptRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.translationScriptRichTextBox.Location = new System.Drawing.Point(3, 19);
+            this.translationScriptRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.translationScriptRichTextBox.Name = "translationScriptRichTextBox";
-            this.translationScriptRichTextBox.Size = new System.Drawing.Size(851, 212);
+            this.translationScriptRichTextBox.Size = new System.Drawing.Size(802, 212);
             this.translationScriptRichTextBox.TabIndex = 9;
             this.translationScriptRichTextBox.Text = "";
             this.translationScriptRichTextBox.WordWrap = false;
+            this.translationScriptRichTextBox.VScroll += new System.EventHandler(this.translationScriptRichTextBox_VScroll);
             this.translationScriptRichTextBox.TextChanged += new System.EventHandler(this.TranslationScriptText_TextChanged);
             this.translationScriptRichTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.translationScriptRichTextBox_MouseDown);
             // 
@@ -417,6 +450,18 @@ namespace ClashSinicizationTool
             this.toolTip.SetToolTip(this.autoCkeckClashPathButton, "需要打开 Clash for Windows 程序，来检测已打开的Clash for Windows的目录位置。检测后自动关闭。");
             this.autoCkeckClashPathButton.UseVisualStyleBackColor = true;
             this.autoCkeckClashPathButton.Click += new System.EventHandler(this.AutoCkeckClashPathButton_Click);
+            // 
+            // CheckUpdateButton
+            // 
+            this.CheckUpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckUpdateButton.Location = new System.Drawing.Point(770, 64);
+            this.CheckUpdateButton.Name = "CheckUpdateButton";
+            this.CheckUpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.CheckUpdateButton.TabIndex = 16;
+            this.CheckUpdateButton.Text = "检查更新";
+            this.toolTip.SetToolTip(this.CheckUpdateButton, "检查汉化工具是否存在新版本");
+            this.CheckUpdateButton.UseVisualStyleBackColor = true;
+            this.CheckUpdateButton.Click += new System.EventHandler(this.CheckUpdateButton_Click);
             // 
             // statusStrip
             // 
@@ -530,18 +575,6 @@ namespace ClashSinicizationTool
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // CheckUpdateButton
-            // 
-            this.CheckUpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CheckUpdateButton.Location = new System.Drawing.Point(770, 64);
-            this.CheckUpdateButton.Name = "CheckUpdateButton";
-            this.CheckUpdateButton.Size = new System.Drawing.Size(75, 23);
-            this.CheckUpdateButton.TabIndex = 16;
-            this.CheckUpdateButton.Text = "检查更新";
-            this.toolTip.SetToolTip(this.CheckUpdateButton, "检查汉化工具是否存在新版本");
-            this.CheckUpdateButton.UseVisualStyleBackColor = true;
-            this.CheckUpdateButton.Click += new System.EventHandler(this.CheckUpdateButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -582,6 +615,10 @@ namespace ClashSinicizationTool
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.translationScriptRichTextBoxMenuStrip.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -641,6 +678,8 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Timer timer;
         public System.Windows.Forms.RichTextBox translationScriptRichTextBox;
         private System.Windows.Forms.Button CheckUpdateButton;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
