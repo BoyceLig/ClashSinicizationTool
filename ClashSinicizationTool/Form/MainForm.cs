@@ -134,6 +134,11 @@ namespace ClashSinicizationTool
             }
             #endregion
 
+            //限定行号显示位置的宽度，自动计算当前行号的宽度
+            int totalRows = translationScriptRichTextBox.Lines.Length;
+            float displayOfLineNumbersWidth = totalRows.ToString().Length * translationScriptRichTextBox.Font.Size;
+            splitContainer1.SplitterDistance = (int)displayOfLineNumbersWidth;
+
         }
 
         //第一次显示时候执行
