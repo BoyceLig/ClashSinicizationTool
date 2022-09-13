@@ -1,4 +1,6 @@
-﻿namespace ClashSinicizationToolUpgrade
+﻿using System.IO;
+
+namespace ClashSinicizationToolUpgrade
 {
     internal static class Program
     {
@@ -8,12 +10,20 @@
         [STAThread]
         static void Main(string[] args)
         {
-            if (!string.IsNullOrEmpty(args[0]))
+            if (args.Length > 0)
             {
-                // To customize application configuration such as set high DPI settings or default font,
-                // see https://aka.ms/applicationconfiguration.
-                ApplicationConfiguration.Initialize();
-                Application.Run(new UpgradeMainForm(args[0]));
+                string path = string.Join(" ", args).Trim();
+                if (!string.IsNullOrEmpty(path))
+                {
+                    // To customize application configuration such as set high DPI settings or default font,
+                    // see https://aka.ms/applicationconfiguration.
+                    ApplicationConfiguration.Initialize();
+                    Application.Run(new UpgradeMainForm(path));
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
             else
             {
