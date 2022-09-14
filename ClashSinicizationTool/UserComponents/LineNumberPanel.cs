@@ -138,7 +138,7 @@ namespace ClashSinicizationTool.UserComponents
             SolidBrush bBrush = new SolidBrush(BackColor);
             g.FillRectangle(bBrush, new Rectangle(new Point(0, 0), new Size(this.Width, this.Height)));
 
-            if (lBottomPosition > 0)
+            if (lBottomPosition >= 0)
             {
                 SolidBrush tBrush = new SolidBrush(ForeColor);
                 for (int pos = lBottomPosition, num = lLargeNumber; pos >= -lSpace && num > 0; pos -= lSpace, num--)
