@@ -71,10 +71,15 @@ jobs:
         artifacts: C:\builtfiles\*
         body: |
           [![](https://img.shields.io/badge/Channel-blue?label=Telegram&logo=telegram)](https://t.me/ClashR_for_Windows_Channel) [![](https://img.shields.io/badge/Group-green?label=Telegram&logo=telegram)](https://t.me/+Se4RSc06w8QK1HiS)
+          
           ## 更新日志：
+          
           * 这是 GitHub Action 自动化部署，更新日志应该很快会手动更新
+          
           [net6.0 Core 下载地址](https://dotnet.microsoft.com/download/dotnet/6.0/runtime)
+          
           ## 文件校验
+          
           | 文件名 | SHA256 |
           | :- | :- |
           | <sub>${{ env.ProjectName }}-${{ steps.tag.outputs.tag }}.7z</sub> | <sub>${{ env.NET_SHA256_7z }}</sub> |
