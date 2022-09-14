@@ -1193,6 +1193,16 @@ namespace ClashSinicizationTool
                 if (GlobState.HadAppUpdate)
                 {
                     this.Text += $" (存在新版本)";
+
+                    switch (MessageBox.Show(this, "存在新版本 " + GlobState.AppUpdateTag + "，是否下载更新程序？", "更新提示", MessageBoxButtons.YesNo))
+                    {
+                        case DialogResult.Yes:
+                            DownloadForm df = new DownloadForm(GlobState.AppUpdateTag);
+                            df.ShowDialog(this);
+                            break;
+                        case DialogResult.No:
+                            break;
+                    }
                 }
             }));
         }
