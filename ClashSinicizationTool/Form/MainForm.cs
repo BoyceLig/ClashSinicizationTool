@@ -618,24 +618,23 @@ namespace ClashSinicizationTool
             //控件加载事件
             ShowLineNo();
 
-            StreamReader streamReader = new(translationScriptFileName.Text, Encoding.UTF8);
-            if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
-            {
-                saveTranslationScriptButton.Enabled = false;
+            string scriptFile = translationScriptFileName.Text.Trim();
+            if (!string.IsNullOrEmpty(scriptFile) && File.Exists(scriptFile)) {
+                StreamReader streamReader = new(scriptFile, Encoding.UTF8);
+                if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
+                {
+                    saveTranslationScriptButton.Enabled = false;
+                }
+                else
+                {
+                    saveTranslationScriptButton.Enabled = true;
+                }
+                streamReader.Close();
+                openTranslationFileButton.Enabled = true;
             }
             else
-            {
-                saveTranslationScriptButton.Enabled = true;
-            }
-            streamReader.Close();
-
-            if (translationScriptFileName.Text == string.Empty)
             {
                 openTranslationFileButton.Enabled = false;
-            }
-            else
-            {
-                openTranslationFileButton.Enabled = true;
             }
         }
 
