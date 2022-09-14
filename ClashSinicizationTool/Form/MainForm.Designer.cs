@@ -356,6 +356,7 @@ namespace ClashSinicizationTool
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer1.Panel1.Controls.Add(this.linePanel);
             this.splitContainer1.Panel1MinSize = 33;
             // 
