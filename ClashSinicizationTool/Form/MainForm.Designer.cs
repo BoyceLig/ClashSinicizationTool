@@ -358,7 +358,7 @@ namespace ClashSinicizationTool
             this.translationAndLineSplitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.translationAndLineSplitContainer.Panel1.Controls.Add(this.linePanel);
             this.translationAndLineSplitContainer.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.translationAndLineSplitContainer.Panel1MinSize = 33;
+            this.translationAndLineSplitContainer.Panel1MinSize = 20;
             // 
             // translationAndLineSplitContainer.Panel2
             // 

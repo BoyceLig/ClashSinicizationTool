@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace ClashSinicizationTool.UserComponents
@@ -29,9 +30,9 @@ namespace ClashSinicizationTool.UserComponents
 
         /// <summary>
         /// 行号的位数
-        /// - 限制至少为 4 位
+        /// - 限制至少为 1 位
         /// </summary>
-        protected int lDigit = 4;
+        protected int lDigit = 1;
         #endregion
 
         #region 内部变量
@@ -44,7 +45,7 @@ namespace ClashSinicizationTool.UserComponents
         {
             get
             {
-                return (int)Math.Ceiling(Font.Size * lDigit);
+                return (int)Math.Ceiling(Font.Size * (lDigit + 0.1f));
             }
         }
         #endregion
@@ -95,14 +96,14 @@ namespace ClashSinicizationTool.UserComponents
             }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Always), Browsable(true), DefaultValue(4), Category("行为"), Description("获取或设置行号的位数，至少为 4 位")]
+        [EditorBrowsable(EditorBrowsableState.Always), Browsable(true), DefaultValue(1), Category("行为"), Description("获取或设置行号的位数，至少为 1 位")]
         public int Digit
         {
             get { return lDigit; }
             set
             {
                 int oldValue = lDigit;
-                lDigit = value >= 4 ? value : 4;
+                lDigit = value >= 1 ? value : 1;
                 if (oldValue != lDigit)
                 {
                     Invalidate();
@@ -132,7 +133,7 @@ namespace ClashSinicizationTool.UserComponents
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
 
             SolidBrush bBrush = new SolidBrush(BackColor);
             g.FillRectangle(bBrush, new Rectangle(new Point(0, 0), new Size(this.Width, this.Height)));

@@ -1264,7 +1264,7 @@ namespace ClashSinicizationTool
             int crntFirstLine = translationScriptRichTextBox.GetLineFromCharIndex(crntFirstIndex);
             Point crntFirstPos = translationScriptRichTextBox.GetPositionFromCharIndex(crntFirstIndex);
             p.Y += translationScriptRichTextBox.Height;
-            int crntLastIndex = translationScriptRichTextBox.GetCharIndexFromPosition(p);
+            int crntLastIndex = translationScriptRichTextBox.GetCharIndexFromPosition(p) + 1;
             int crntLastLine = translationScriptRichTextBox.GetLineFromCharIndex(crntLastIndex);
             Point crntLastPos = translationScriptRichTextBox.GetPositionFromCharIndex(crntLastIndex);
 
@@ -1286,8 +1286,8 @@ namespace ClashSinicizationTool
             if (nowDigit != linePanel.Digit)
             {
                 linePanel.Digit = nowDigit;
-                translationAndLineSplitContainer.SplitterDistance = linePanel.GetControlWidth();
                 translationAndLineSplitContainer.Panel1MinSize = linePanel.GetControlWidth();
+                translationAndLineSplitContainer.SplitterDistance = linePanel.GetControlWidth();
             }
         }
 
@@ -1301,5 +1301,7 @@ namespace ClashSinicizationTool
         {
             ShowLineNo();
         }
+
+
     }
 }
