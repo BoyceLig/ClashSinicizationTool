@@ -45,7 +45,7 @@ namespace ClashSinicizationTool
             translationScriptRichTextBox.LanguageOption = RichTextBoxLanguageOptions.DualFont;
             #endregion
 
-            splitContainer1.SplitterDistance = linePanel.GetControlWidth();
+            translationAndLineSplitContainer.SplitterDistance = linePanel.GetControlWidth();
 
             //自动选择字词关闭（面板关闭按钮失效）
             translationScriptRichTextBox.AutoWordSelection = false;
@@ -618,7 +618,8 @@ namespace ClashSinicizationTool
             ShowLineNo();
 
             string scriptFile = translationScriptFileName.Text.Trim();
-            if (!string.IsNullOrEmpty(scriptFile) && File.Exists(scriptFile)) {
+            if (!string.IsNullOrEmpty(scriptFile) && File.Exists(scriptFile))
+            {
                 StreamReader streamReader = new(scriptFile, Encoding.UTF8);
                 if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
                 {
@@ -1285,7 +1286,8 @@ namespace ClashSinicizationTool
             if (nowDigit != linePanel.Digit)
             {
                 linePanel.Digit = nowDigit;
-                splitContainer1.SplitterDistance = linePanel.GetControlWidth();
+                translationAndLineSplitContainer.SplitterDistance = linePanel.GetControlWidth();
+                translationAndLineSplitContainer.Panel1MinSize = linePanel.GetControlWidth();
             }
         }
 

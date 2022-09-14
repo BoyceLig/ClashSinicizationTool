@@ -54,7 +54,7 @@ namespace ClashSinicizationTool
             this.revertButton = new System.Windows.Forms.Button();
             this.CloseClashButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.translationAndLineSplitContainer = new System.Windows.Forms.SplitContainer();
             this.linePanel = new ClashSinicizationTool.UserComponents.LineNumberPanel(this.components);
             this.translationScriptRichTextBox = new System.Windows.Forms.RichTextBox();
             this.translationScriptRichTextBoxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -71,7 +71,7 @@ namespace ClashSinicizationTool
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.githubToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.translationAndLogSplitContainer = new System.Windows.Forms.SplitContainer();
             this.updateTranslationScriptButton = new System.Windows.Forms.Button();
             this.findReplaceButton = new System.Windows.Forms.Button();
             this.checkTranslationScriptButton = new System.Windows.Forms.Button();
@@ -79,17 +79,17 @@ namespace ClashSinicizationTool
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.logBoxMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.translationAndLineSplitContainer)).BeginInit();
+            this.translationAndLineSplitContainer.Panel1.SuspendLayout();
+            this.translationAndLineSplitContainer.Panel2.SuspendLayout();
+            this.translationAndLineSplitContainer.SuspendLayout();
             this.translationScriptRichTextBoxMenuStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
-            this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.translationAndLogSplitContainer)).BeginInit();
+            this.translationAndLogSplitContainer.Panel1.SuspendLayout();
+            this.translationAndLogSplitContainer.Panel2.SuspendLayout();
+            this.translationAndLogSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -337,7 +337,7 @@ namespace ClashSinicizationTool
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.splitContainer1);
+            this.groupBox1.Controls.Add(this.translationAndLineSplitContainer);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -346,26 +346,26 @@ namespace ClashSinicizationTool
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "翻译脚本信息";
             // 
-            // splitContainer1
+            // translationAndLineSplitContainer
             // 
-            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 19);
-            this.splitContainer1.Name = "splitContainer1";
+            this.translationAndLineSplitContainer.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.translationAndLineSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.translationAndLineSplitContainer.Location = new System.Drawing.Point(3, 19);
+            this.translationAndLineSplitContainer.Name = "translationAndLineSplitContainer";
             // 
-            // splitContainer1.Panel1
+            // translationAndLineSplitContainer.Panel1
             // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.splitContainer1.Panel1.Controls.Add(this.linePanel);
-            this.splitContainer1.Panel1MinSize = 33;
+            this.translationAndLineSplitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.translationAndLineSplitContainer.Panel1.Controls.Add(this.linePanel);
+            this.translationAndLineSplitContainer.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.translationAndLineSplitContainer.Panel1MinSize = 33;
             // 
-            // splitContainer1.Panel2
+            // translationAndLineSplitContainer.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.translationScriptRichTextBox);
-            this.splitContainer1.Size = new System.Drawing.Size(851, 212);
-            this.splitContainer1.SplitterDistance = 33;
-            this.splitContainer1.TabIndex = 10;
+            this.translationAndLineSplitContainer.Panel2.Controls.Add(this.translationScriptRichTextBox);
+            this.translationAndLineSplitContainer.Size = new System.Drawing.Size(851, 212);
+            this.translationAndLineSplitContainer.SplitterDistance = 33;
+            this.translationAndLineSplitContainer.TabIndex = 10;
             // 
             // linePanel
             // 
@@ -514,26 +514,26 @@ namespace ClashSinicizationTool
             this.githubToolStripStatusLabel.ToolTipText = "点击进入 GitHub 项目地址。";
             this.githubToolStripStatusLabel.Click += new System.EventHandler(this.GithubToolStripStatusLabel_Click);
             // 
-            // splitContainer
+            // translationAndLogSplitContainer
             // 
-            this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.translationAndLogSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.splitContainer.Location = new System.Drawing.Point(0, 122);
-            this.splitContainer.Name = "splitContainer";
-            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.translationAndLogSplitContainer.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.translationAndLogSplitContainer.Location = new System.Drawing.Point(0, 122);
+            this.translationAndLogSplitContainer.Name = "translationAndLogSplitContainer";
+            this.translationAndLogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer.Panel1
+            // translationAndLogSplitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.groupBox1);
+            this.translationAndLogSplitContainer.Panel1.Controls.Add(this.groupBox1);
             // 
-            // splitContainer.Panel2
+            // translationAndLogSplitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer.Size = new System.Drawing.Size(857, 417);
-            this.splitContainer.SplitterDistance = 234;
-            this.splitContainer.TabIndex = 15;
+            this.translationAndLogSplitContainer.Panel2.Controls.Add(this.groupBox2);
+            this.translationAndLogSplitContainer.Size = new System.Drawing.Size(857, 417);
+            this.translationAndLogSplitContainer.SplitterDistance = 234;
+            this.translationAndLogSplitContainer.TabIndex = 15;
             // 
             // updateTranslationScriptButton
             // 
@@ -589,7 +589,7 @@ namespace ClashSinicizationTool
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 561);
             this.Controls.Add(this.CheckUpdateButton);
-            this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.translationAndLogSplitContainer);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.clashForWindowsPath);
             this.Controls.Add(this.saveTranslationScriptButton);
@@ -623,19 +623,19 @@ namespace ClashSinicizationTool
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.translationAndLineSplitContainer.Panel1.ResumeLayout(false);
+            this.translationAndLineSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.translationAndLineSplitContainer)).EndInit();
+            this.translationAndLineSplitContainer.ResumeLayout(false);
             this.translationScriptRichTextBoxMenuStrip.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
-            this.splitContainer.ResumeLayout(false);
+            this.translationAndLogSplitContainer.Panel1.ResumeLayout(false);
+            this.translationAndLogSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.translationAndLogSplitContainer)).EndInit();
+            this.translationAndLogSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -671,7 +671,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel githubToolStripStatusLabel;
-        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.SplitContainer translationAndLogSplitContainer;
         private System.Windows.Forms.Button updateTranslationScriptButton;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.ContextMenuStrip translationScriptRichTextBoxMenuStrip;
@@ -686,7 +686,7 @@ namespace ClashSinicizationTool
         private System.Windows.Forms.Timer timer;
         public System.Windows.Forms.RichTextBox translationScriptRichTextBox;
         private System.Windows.Forms.Button CheckUpdateButton;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer translationAndLineSplitContainer;
         private UserComponents.LineNumberPanel linePanel;
     }
 }

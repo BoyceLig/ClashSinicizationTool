@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClashSinicizationTool.UserComponents
@@ -40,7 +35,8 @@ namespace ClashSinicizationTool.UserComponents
         #endregion
 
         #region 内部变量
-        private readonly StringFormat format = new StringFormat() {
+        private readonly StringFormat format = new StringFormat()
+        {
             Alignment = StringAlignment.Far,
             LineAlignment = StringAlignment.Center,
         };
