@@ -55,7 +55,7 @@ namespace ClashSinicizationTool
             this.CloseClashButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.linePanel = new ClashSinicizationTool.UserComponents.LineNumberPanel(this.components);
             this.translationScriptRichTextBox = new System.Windows.Forms.RichTextBox();
             this.translationScriptRichTextBoxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.translationScriptRichTextBoxMenuStripCopy = new System.Windows.Forms.ToolStripMenuItem();
@@ -356,8 +356,8 @@ namespace ClashSinicizationTool
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.splitContainer1.Panel1.Controls.Add(this.panel2);
             this.splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.splitContainer1.Panel1.Controls.Add(this.linePanel);
             this.splitContainer1.Panel1MinSize = 33;
             // 
             // splitContainer1.Panel2
@@ -367,15 +367,17 @@ namespace ClashSinicizationTool
             this.splitContainer1.SplitterDistance = 33;
             this.splitContainer1.TabIndex = 10;
             // 
-            // panel2
+            // linePanel
             // 
-            this.panel2.AutoSize = true;
-            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(33, 212);
-            this.panel2.TabIndex = 0;
+            this.linePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.linePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.linePanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linePanel.ForeColor = System.Drawing.Color.White;
+            this.linePanel.Location = new System.Drawing.Point(0, 0);
+            this.linePanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.linePanel.Name = "linePanel";
+            this.linePanel.Size = new System.Drawing.Size(33, 212);
+            this.linePanel.TabIndex = 0;
             // 
             // translationScriptRichTextBox
             // 
@@ -618,12 +620,10 @@ namespace ClashSinicizationTool
             this.Name = "MainForm";
             this.Text = "Clash 汉化工具";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.logBoxMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -687,7 +687,7 @@ namespace ClashSinicizationTool
         public System.Windows.Forms.RichTextBox translationScriptRichTextBox;
         private System.Windows.Forms.Button CheckUpdateButton;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel2;
+        private UserComponents.LineNumberPanel linePanel;
     }
 }
 

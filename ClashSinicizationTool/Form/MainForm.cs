@@ -45,6 +45,8 @@ namespace ClashSinicizationTool
             translationScriptRichTextBox.LanguageOption = RichTextBoxLanguageOptions.DualFont;
             #endregion
 
+            splitContainer1.SplitterDistance = linePanel.GetControlWidth();
+
             //自动选择字词关闭（面板关闭按钮失效）
             translationScriptRichTextBox.AutoWordSelection = false;
             timer.Start();
@@ -133,18 +135,6 @@ namespace ClashSinicizationTool
                 task.Wait(TimeSpan.FromSeconds(5));
             }
             #endregion
-
-            //限定行号显示位置的宽度，自动计算当前行号的宽度
-            int totalRows = translationScriptRichTextBox.Lines.Length;
-            float displayOfLineNumbersWidth = totalRows.ToString().Length * translationScriptRichTextBox.Font.Size;
-            splitContainer1.SplitterDistance = (int)displayOfLineNumbersWidth;
-
-        }
-
-        //第一次显示时候执行
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-            ShowLineNo();
         }
 
         #region 按钮
@@ -627,24 +617,23 @@ namespace ClashSinicizationTool
             //控件加载事件
             ShowLineNo();
 
-            StreamReader streamReader = new(translationScriptFileName.Text, Encoding.UTF8);
-            if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
-            {
-                saveTranslationScriptButton.Enabled = false;
+            string scriptFile = translationScriptFileName.Text.Trim();
+            if (!string.IsNullOrEmpty(scriptFile) && File.Exists(scriptFile)) {
+                StreamReader streamReader = new(scriptFile, Encoding.UTF8);
+                if (translationScriptRichTextBox.Text == streamReader.ReadToEnd())
+                {
+                    saveTranslationScriptButton.Enabled = false;
+                }
+                else
+                {
+                    saveTranslationScriptButton.Enabled = true;
+                }
+                streamReader.Close();
+                openTranslationFileButton.Enabled = true;
             }
             else
-            {
-                saveTranslationScriptButton.Enabled = true;
-            }
-            streamReader.Close();
-
-            if (translationScriptFileName.Text == string.Empty)
             {
                 openTranslationFileButton.Enabled = false;
-            }
-            else
-            {
-                openTranslationFileButton.Enabled = true;
             }
         }
 
@@ -1269,72 +1258,35 @@ namespace ClashSinicizationTool
         private void ShowLineNo()
         {
             //获得当前坐标信息
-            Point p = this.translationScriptRichTextBox.Location;
+            Point p = translationScriptRichTextBox.Location;
             int crntFirstIndex = translationScriptRichTextBox.GetCharIndexFromPosition(p);
-
             int crntFirstLine = translationScriptRichTextBox.GetLineFromCharIndex(crntFirstIndex);
-
             Point crntFirstPos = translationScriptRichTextBox.GetPositionFromCharIndex(crntFirstIndex);
-
-            p.Y += this.translationScriptRichTextBox.Height;
-
+            p.Y += translationScriptRichTextBox.Height;
             int crntLastIndex = translationScriptRichTextBox.GetCharIndexFromPosition(p);
-
             int crntLastLine = translationScriptRichTextBox.GetLineFromCharIndex(crntLastIndex);
             Point crntLastPos = translationScriptRichTextBox.GetPositionFromCharIndex(crntLastIndex);
 
-            //准备画图
-            Graphics g = panel2.CreateGraphics();
-
-            Font font = new Font(translationScriptRichTextBox.Font, this.translationScriptRichTextBox.Font.Style);
-
-            SolidBrush brush = new SolidBrush(Color.Green);
-
-            //画图开始
-
-            //刷新画布
-
-            Rectangle rect = panel2.ClientRectangle;
-            brush.Color = panel2.BackColor;
-
-            g.FillRectangle(brush, 0, 0, this.panel2.ClientRectangle.Width, this.panel2.ClientRectangle.Height);
-
-            brush.Color = Color.White;//重置画笔颜色
-
-            //绘制行号
-
-            int lineSpace = 0;
-
+            int space;
             if (crntFirstLine != crntLastLine)
             {
-                lineSpace = (crntLastPos.Y - crntFirstPos.Y) / (crntLastLine - crntFirstLine);
-
+                space = (crntLastPos.Y - crntFirstPos.Y) / (crntLastLine - crntFirstLine);
             }
-
             else
             {
-                lineSpace = Convert.ToInt32(this.translationScriptRichTextBox.Font.Size);
-
+                Size charSize = TextRenderer.MeasureText("8", translationScriptRichTextBox.Font);
+                space = (int)(charSize.Height * 1.5);
             }
+            linePanel.Space = space;
+            linePanel.LargeNumber = crntLastLine + 1;
+            linePanel.BottomPosition = crntLastPos.Y;
 
-            //行号左右位置
-            //int brushX = panel2.ClientRectangle.Width - Convert.ToInt32(font.Size * 5);
-            int brushX = 0;
-
-            int brushY = crntLastPos.Y + Convert.ToInt32(font.Size * 0.21f);
-            for (int i = crntLastLine; i >= crntFirstLine; i--)
+            int nowDigit = translationScriptRichTextBox.Lines.Length.ToString().Length;
+            if (nowDigit != linePanel.Digit)
             {
-
-                g.DrawString((i + 1).ToString(), font, brush, brushX, brushY);
-
-                brushY -= lineSpace;
+                linePanel.Digit = nowDigit;
+                splitContainer1.SplitterDistance = linePanel.GetControlWidth();
             }
-
-            g.Dispose();
-
-            font.Dispose();
-
-            brush.Dispose();
         }
 
         //滚动调整
@@ -1347,7 +1299,5 @@ namespace ClashSinicizationTool
         {
             ShowLineNo();
         }
-
-
     }
 }
