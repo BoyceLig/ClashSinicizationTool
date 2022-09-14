@@ -371,7 +371,7 @@ namespace ClashSinicizationTool
             // 
             this.linePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.linePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.linePanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linePanel.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linePanel.ForeColor = System.Drawing.Color.White;
             this.linePanel.Location = new System.Drawing.Point(0, 0);
             this.linePanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
