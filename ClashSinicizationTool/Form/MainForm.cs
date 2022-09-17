@@ -45,6 +45,7 @@ namespace ClashSinicizationTool
             translationScriptRichTextBox.LanguageOption = RichTextBoxLanguageOptions.DualFont;
             #endregion
 
+            translationAndLineSplitContainer.Panel1MinSize = linePanel.GetControlWidth();
             translationAndLineSplitContainer.SplitterDistance = linePanel.GetControlWidth();
 
             //自动选择字词关闭（面板关闭按钮失效）
