@@ -41,11 +41,20 @@ namespace ClashSinicizationTool.UserComponents
             Alignment = StringAlignment.Far,
             LineAlignment = StringAlignment.Center,
         };
-        private int controlWidth
+        private int FontWidth
         {
             get
             {
-                return (int)Math.Ceiling(Font.Size * (lDigit + 0.1f));
+                int oneSize = TextRenderer.MeasureText("0", Font).Width;
+                int twoSize = TextRenderer.MeasureText("00", Font).Width;
+                return twoSize - oneSize;
+            }
+        }
+        private int ControlWidth
+        {
+            get
+            {
+                return FontWidth * lDigit + (int)Math.Ceiling(Font.Size / 2f) - lDigit / (int)Math.Ceiling(FontWidth / 2f);
             }
         }
         #endregion
@@ -127,7 +136,7 @@ namespace ClashSinicizationTool.UserComponents
 
         public int GetControlWidth()
         {
-            return controlWidth;
+            return ControlWidth;
         }
 
         protected override void OnPaint(PaintEventArgs e)
