@@ -156,7 +156,7 @@ namespace ClashSinicizationToolCLI
 
                         string[] transArr = LoadTranslationScript(scriptPath);
                         //备份
-                        File.Copy(clashPath + @"\resources\app\node_modules\moment\moment.js", BackupOriginal + @"moment.js", true);
+                        File.Copy(clashPath + @"\resources\app\node_modules\moment\moment.js", BackupOriginal + @"\moment.js", true);
                         Console.WriteLine("已备份文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js");
                         File.Copy("moment-with-CN.js", clashPath + @"\resources\app\node_modules\moment\moment.js", true);
                         Console.WriteLine("已替换文件 " + clashPath + @"\resources\app\node_modules\moment\moment.js");

@@ -209,24 +209,12 @@ namespace ClashSinicizationTool
         //解包
         private void UnpackButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Directory.Delete(backup_original, true);
-                Directory.CreateDirectory(backup_original);
-            }
-            catch (Exception)
-            {
-
-            }
             if (File.Exists(clashPath + @"\resources\app.asar"))
             {
                 if (!Directory.Exists(backup_original))
                 {
                     Directory.CreateDirectory(backup_original);
                 }
-                //备份文件
-                File.Copy(clashPath + @"\resources\app.asar", backup_original + @"\app.asar", true);
-                logTextBox.AppendText($@"app.asar文件备份成功，已备份到{backup_original}目录" + Environment.NewLine);
 
                 //解包前检查app文件夹是否存在
                 if (Directory.Exists(clashPath + @"\resources\app"))
@@ -314,7 +302,7 @@ namespace ClashSinicizationTool
             {
                 if (File.Exists("moment-with-CN.js"))
                 {
-                    if (File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
+                    if (IsSinicization())
                     {
                         MessageBox.Show("您已汉化，不需要二次汉化", "提示");
                         logTextBox.AppendText("您已汉化，不需要二次汉化" + Environment.NewLine);
@@ -397,7 +385,7 @@ namespace ClashSinicizationTool
         {
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
-                if (!File.ReadAllText(clashPath + @"\resources\app\dist\electron\main.js").Contains("退出"))
+                if (!IsSinicization())
                 {
                     MessageBox.Show("当前已经是英文版，不需要还原", "提示");
                     logTextBox.AppendText("当前已经是英文版，不需要还原" + Environment.NewLine);
@@ -956,6 +944,17 @@ namespace ClashSinicizationTool
             if (Directory.Exists(clashPath + @"\resources\app"))
             {
                 logTextBox.AppendText("解包完成，已生成app文件夹，请继续汉化。" + Environment.NewLine);
+
+                if (IsSinicization())
+                {
+                    logTextBox.AppendText("该app.asar文件已汉化过，故不会对其进行备份" + Environment.NewLine);
+                }
+                else
+                {
+                    //备份文件
+                    File.Copy(clashPath + @"\resources\app.asar", backup_original + @"\app.asar", true);
+                    logTextBox.AppendText($@"app.asar文件备份成功，已备份到{backup_original}目录" + Environment.NewLine);
+                }
             }
             else
             {
@@ -1265,6 +1264,21 @@ namespace ClashSinicizationTool
             SetActionButtonState(true);
         }
         #endregion
+
+        /// <summary>
+        /// 检测文件是否已经汉化
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns>若已汉化，则返回 true</returns>
+        private bool IsSinicization()
+        {
+            string file = clashPath + @"\resources\app\dist\electron\main.js";
+            if (File.Exists(file) && File.ReadAllText(file).Contains("退出"))
+            {
+                return true;
+            }
+            return false;
+        }
 
         //准备Panel画布，当接到文件字符后进行坐标解析，绘制行号
         private void ShowLineNo()
