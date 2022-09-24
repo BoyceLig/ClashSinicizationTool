@@ -23,6 +23,15 @@ namespace ClashSinicizationTool
             {
                 e.Handled = true;
             }
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (targetingButton.Enabled)
+                {
+                    targetingButton.PerformClick();
+                    cancelButton.PerformClick();
+                }
+            }
         }
 
         private void targetingButton_Click(object sender, EventArgs e)

@@ -47,6 +47,7 @@ namespace ClashSinicizationTool
 
             translationAndLineSplitContainer.Panel1MinSize = linePanel.GetControlWidth();
             translationAndLineSplitContainer.SplitterDistance = linePanel.GetControlWidth();
+            translationScriptRichTextBox.MouseWheel += translationScriptRichTextBox_MouseWheel;
 
             //自动选择字词关闭（面板关闭按钮失效）
             translationScriptRichTextBox.AutoWordSelection = false;
@@ -1327,6 +1328,12 @@ namespace ClashSinicizationTool
             ShowLineNo();
         }
 
-
+        private void translationScriptRichTextBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if ((ModifierKeys & Keys.Control) != 0)
+            {
+                ((HandledMouseEventArgs)e).Handled = true;
+            }
+        }
     }
 }
