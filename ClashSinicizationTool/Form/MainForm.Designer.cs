@@ -370,6 +370,7 @@ namespace ClashSinicizationTool
             // 
             this.translationAndLineSplitContainer.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.translationAndLineSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.translationAndLineSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.translationAndLineSplitContainer.Location = new System.Drawing.Point(5, 27);
             this.translationAndLineSplitContainer.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.translationAndLineSplitContainer.Name = "translationAndLineSplitContainer";
@@ -529,7 +530,7 @@ namespace ClashSinicizationTool
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(771, 25);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(817, 25);
             this.toolStripStatusLabel.Spring = true;
             // 
             // githubToolStripStatusLabel
