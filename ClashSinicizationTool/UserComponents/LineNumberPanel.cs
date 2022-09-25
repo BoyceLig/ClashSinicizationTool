@@ -54,7 +54,7 @@ namespace ClashSinicizationTool.UserComponents
         {
             get
             {
-                return FontWidth * lDigit + (int)Math.Ceiling(Font.Size / 2f) - lDigit / (int)Math.Ceiling(FontWidth / 2f);
+                return FontWidth * lDigit + (int)Math.Ceiling(Font.Size * 1.5 / 2f) - (int)Math.Ceiling(lDigit * 1.5) / (int)Math.Ceiling(FontWidth / 2f);
             }
         }
         #endregion
