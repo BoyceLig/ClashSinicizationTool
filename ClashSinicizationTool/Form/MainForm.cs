@@ -748,11 +748,23 @@ namespace ClashSinicizationTool
         }
         #endregion
 
+        #region 右下角链接跳转
         //GitHub链接点击进入
         private void GithubToolStripStatusLabel_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", GlobalData.Url.projectUrl);
         }
+
+        private void TGNoticeBoardToolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", GlobalData.Url.m_TGNoticeBoardUrl);
+        }
+
+        private void TGDiscussionGroupToolStripStatusLabel3_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", GlobalData.Url.m_TGDiscussionGroup);
+        }
+        #endregion
 
         #region 脚本编辑器右键菜单
         private void translationScriptRichTextBoxMenuStripCopy_Click(object sender, EventArgs e)

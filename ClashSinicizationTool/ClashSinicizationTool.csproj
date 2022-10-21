@@ -47,9 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Form\DownloadForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Form\DownloadForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

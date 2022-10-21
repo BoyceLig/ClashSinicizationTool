@@ -79,5 +79,15 @@ namespace ClashSinicizationTool.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Bitmap Telegram_2019_Logo {
+            get {
+                object obj = ResourceManager.GetObject("Telegram_2019_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

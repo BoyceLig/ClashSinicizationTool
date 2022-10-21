@@ -49,6 +49,8 @@
         {
             public const string projectUrl = "https://github.com/BoyceLig/ClashSinicizationTool";
             public const string latestApiUrl = "https://api.github.com/repos/BoyceLig/ClashSinicizationTool/releases/latest";
+            public const string m_TGNoticeBoardUrl = "https://t.me/ClashR_for_Windows_Channel";
+            public const string m_TGDiscussionGroup = "https://t.me/+Se4RSc06w8QK1HiS";
             public static string[] translationScriptUrls = GetFileUrl("Clash_Chinese_Patch", "翻译脚本.txt");
         }
     }

@@ -115,7 +115,7 @@ namespace ClashSinicizationToolCLI
                 }
                 else
                 {
-                    Console.WriteLine("解包失败！npm文件夹检测不存在，请在TG群组求助");
+                    Console.WriteLine("解包失败！Node文件夹检测不存在，请在TG群组求助");
                 }
             }
             else
