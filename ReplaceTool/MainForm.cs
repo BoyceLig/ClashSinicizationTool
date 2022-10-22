@@ -236,6 +236,8 @@ namespace ReplaceTool
             SetActionButtonState(false);
             using (BackgroundWorker bw = new BackgroundWorker())
             {
+                bw.WorkerReportsProgress = true;
+                bw.ProgressChanged += new ProgressChangedEventHandler(Revert_ProgressChanged);
                 bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Revert_RunWorkerCompleted);
                 bw.DoWork += new DoWorkEventHandler(Revert_DoWork);
                 bw.RunWorkerAsync();
@@ -511,17 +513,6 @@ namespace ReplaceTool
             toolStripStatusLabel1.Text = $"行 {(1 + translationScriptRichTextBox.GetLineFromCharIndex(translationScriptRichTextBox.SelectionStart)).ToString()}，列{(1 + translationScriptRichTextBox.SelectionStart - (translationScriptRichTextBox.GetFirstCharIndexFromLine(1 + translationScriptRichTextBox.GetLineFromCharIndex(translationScriptRichTextBox.SelectionStart) - 1))).ToString()}";
         }
 
-        /// <summary>
-        /// 检查更新按钮点击事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CheckUpdateButton_Click(object sender, EventArgs e)
-        {
-            UpgradeForm up = new UpgradeForm(this);
-            up.ShowDialog();
-        }
-
         #region 按钮状态
         /// <summary>
         /// 设置汉化操作四个按钮的状态
@@ -535,52 +526,6 @@ namespace ReplaceTool
         #endregion
 
         #region 操作方法
-        /// <summary>
-        /// 关闭 Clash for Windows 程序
-        /// </summary>
-        /// <returns>结果消息</returns>
-        private string CloseClash()
-        {
-            foreach (Process vProc in Process.GetProcesses())   //[BugHere]:请不要加.Exe后缀名称
-            {
-                if (vProc.ProcessName.ToUpper() == GlobalData.clashProcessName.ToUpper())
-                {
-                    try
-                    {
-                        vProc.Kill();
-                        vProc.WaitForExit();
-
-                        return "已关闭程序 " + GlobalData.clashProcessName;
-                    }
-                    catch (Exception)
-                    {
-                        return "关闭 " + GlobalData.clashProcessName + " 失败，请手动关闭";
-                    }
-                }
-            }
-            return GlobalData.clashProcessName + " 未开启，无需关闭";
-        }
-
-        /// <summary>
-        /// 后台关闭 Clash 工作
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CloseClash_DoWork(object sender, DoWorkEventArgs e)
-        {
-            string message = CloseClash();
-            e.Result = e.Argument + message;
-        }
-
-        private void CloseClash_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            string resText = e.Result.ToString();
-            logTextBox.AppendText(resText + Environment.NewLine);
-            if (resText.Contains("失败") || resText.Contains("未开启"))
-            {
-                MessageBox.Show(resText, "提示");
-            }
-        }
 
         /// <summary>
         /// 后台汉化工作
@@ -644,77 +589,34 @@ namespace ReplaceTool
         /// <param name="e"></param>
         private void Revert_DoWork(object sender, DoWorkEventArgs e)
         {
-            foreach (Process p in Process.GetProcesses())
+            BackgroundWorker worker = sender as BackgroundWorker;
+            string[] s = filePath.Split(@"\");
+            string fileName = s[^1];
+            if (File.Exists(backup_original + @"\" + fileName))
             {
-                if (p.ProcessName == GlobalData.clashProcessName)
-                {
-                    if (MessageBox.Show("Clash for Windows 已开启，是否关闭 Clash for Windows？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        e.Result = e.Argument + CloseClash();
-                        return;
-                    }
-                    else
-                    {
-                        e.Result = e.Argument + "Clash for Windows 已开启，请关闭 Clash for Windows 后重试。";
-                        return;
-                    }
-                }
+                File.Move(backup_original + @"\" + fileName, filePath, true);
+                worker.ReportProgress(0, "已还原被替换文件 " + filePath + Environment.NewLine);
             }
-            e.Result = e.Argument + "Clash for Windows 未开启，可以继续操作";
+            else
+            {
+                worker.ReportProgress(1, backup_original + @"\" + fileName + "不存在，无法还原" + Environment.NewLine);
+            }
+
         }
 
-        private void Revert_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void Revert_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            string resText = e.Result.ToString();
-            logTextBox.AppendText(resText + Environment.NewLine);
-            if (!resText.Contains("失败") && !resText.Contains("已开启"))
-            {
-                string[] s = replaceFilePath.Text.Split(@"\");
-                string fileName = s[^1];
-                if (File.Exists(backup_original + @"\" + fileName))
-                {
-                    File.Move(backup_original + @"\" + fileName, filePath, true);
-                    logTextBox.AppendText("已还原被汉化文件 " + filePath + Environment.NewLine);
-                }
-                else
-                {
-                    logTextBox.AppendText(backup_original + @"\" + fileName + "不存在，无法还原" + Environment.NewLine);
-                }
+            switch (e.ProgressPercentage)
+            {   
+                default:
+                    logTextBox.AppendText(e.UserState.ToString());
+                    break;
             }
+        }
+
+        void Revert_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
             SetActionButtonState(true);
-        }
-
-        /// <summary>
-        /// 检查程序更新完成
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="isU"></param>
-        /// <param name="isE"></param>
-        private void UC_HasUpdated(object sender, bool isU, bool isE)
-        {
-            this.Invoke(new MethodInvoker(() =>
-            {
-                if (!isE && isU)
-                {
-                    GlobState.HadAppUpdate = true;
-                    GlobState.AppUpdateTag = sender.ToString();
-                }
-
-                if (GlobState.HadAppUpdate)
-                {
-                    this.Text += $" (存在新版本)";
-
-                    switch (MessageBox.Show(this, "存在新版本 " + GlobState.AppUpdateTag + "，是否下载更新程序？", "更新提示", MessageBoxButtons.YesNo))
-                    {
-                        case DialogResult.Yes:
-                            DownloadForm df = new DownloadForm(GlobState.AppUpdateTag);
-                            df.ShowDialog(this);
-                            break;
-                        case DialogResult.No:
-                            break;
-                    }
-                }
-            }));
         }
         #endregion
 
