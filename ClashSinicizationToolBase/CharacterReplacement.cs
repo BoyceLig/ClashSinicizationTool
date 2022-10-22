@@ -19,17 +19,22 @@ namespace ClashSinicizationToolBase
             string s = streamReader.ReadToEnd();
             streamReader.Close();
 
-            string resText = "";
+            string resText = string.Empty;
             int i = 0;
             foreach (string str in this.transArr)
             {
                 if (!string.IsNullOrEmpty(str) && str.FirstOrDefault() != '#')
                 {
-                    if (str.Contains('='))
+                    if (str.Contains("==="))
+                    {
+                        string[] t = str.Split("===", 2, StringSplitOptions.None);
+                        s = s.Replace(t[0], t[1]);
+                    }
+                    else if(str.Contains('='))
                     {
                         string[] t = str.Split('=', 2, StringSplitOptions.None);
                         s = s.Replace(t[0], t[1]);
-                    }
+                    }                   
                     else
                     {
                         resText += $"第{i + 1}行 ‘{str}’ 缺失‘=’，已跳过{Environment.NewLine}";

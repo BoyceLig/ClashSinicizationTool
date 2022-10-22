@@ -1,12 +1,9 @@
 ﻿using ClashSinicizationToolBase;
-using System;
-using System.IO;
 using System.Text;
-using System.Windows.Forms;
 
-namespace ClashSinicizationTool
+namespace ReplaceTool
 {
-   public class TranslationScriptFile
+    public class ReplaceScriptFile
     {
         //加载脚本
         public void LoadScript(string scriptFilePath, RichTextBox translationScriptText, TextBox logText)
@@ -16,11 +13,11 @@ namespace ClashSinicizationTool
                 translationScriptText.Text = File.ReadAllText(scriptFilePath, Encoding.UTF8);
                 translationScriptText.SelectionStart = translationScriptText.Text.Length;
                 translationScriptText.ScrollToCaret();
-                logText.AppendText("已加载翻译脚本 " + scriptFilePath + Environment.NewLine);
+                logText.AppendText("已加载替换脚本 " + scriptFilePath + Environment.NewLine);
             }
             else
             {
-                logText.AppendText("翻译脚本不存在"  + Environment.NewLine);
+                logText.AppendText("替换脚本不存在" + Environment.NewLine);
             }
 
         }
@@ -29,7 +26,7 @@ namespace ClashSinicizationTool
         public void SaveScript(string scriptFilePath, RichTextBox translationScriptText, TextBox logText)
         {
             File.WriteAllText(scriptFilePath, translationScriptText.Text, Encoding.UTF8);
-            logText.AppendText("已保存翻译脚本 " + scriptFilePath + Environment.NewLine);
+            logText.AppendText("已保存替换脚本 " + scriptFilePath + Environment.NewLine);
         }
 
         //导入脚本列表
@@ -57,16 +54,16 @@ namespace ClashSinicizationTool
         }
 
         //导入Clash目录文件
-        public void LoadClashList(ComboBox clashPath, string iniPath, bool needExist = false)
+        public void LoadReplaceFileList(ComboBox clashPath, string iniPath, bool needExist = false)
         {
             IniList ini = new IniList();
-            string[] lines = ini.GetSectionValue("Clash Path", iniPath).ToArray();
+            string[] lines = ini.GetSectionValue(GlobalData.IniSection.replacePath, iniPath).ToArray();
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i].Trim();
                 if (line != string.Empty)
                 {
-                    if (!needExist || Directory.Exists(line))
+                    if (!needExist || File.Exists(line))
                     {
                         clashPath.Items.Add(line);
                     }

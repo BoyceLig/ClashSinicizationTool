@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClashSinicizationToolCLI", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClashSinicizationToolBase", "ClashSinicizationToolBase\ClashSinicizationToolBase.csproj", "{0311A680-B9DC-43A0-B0F0-BC43D3AB1C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClashSinicizationToolUpgrade", "ClashSinicizationToolUpgrade\ClashSinicizationToolUpgrade.csproj", "{876076FB-826C-4569-BDC4-23366D12EC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClashSinicizationToolUpgrade", "ClashSinicizationToolUpgrade\ClashSinicizationToolUpgrade.csproj", "{876076FB-826C-4569-BDC4-23366D12EC40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceTool", "ReplaceTool\ReplaceTool.csproj", "{EC736103-1104-401D-AA10-9D0EE7FE7A09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{876076FB-826C-4569-BDC4-23366D12EC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{876076FB-826C-4569-BDC4-23366D12EC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{876076FB-826C-4569-BDC4-23366D12EC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC736103-1104-401D-AA10-9D0EE7FE7A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC736103-1104-401D-AA10-9D0EE7FE7A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC736103-1104-401D-AA10-9D0EE7FE7A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC736103-1104-401D-AA10-9D0EE7FE7A09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
