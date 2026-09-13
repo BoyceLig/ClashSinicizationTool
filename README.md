@@ -19,3 +19,5 @@ Clash for Windows汉化工具，根据[@Hikari_Miyamoto](https://t.me/Hikari_Miy
 本软件已集成Node环境和Asar插件无需电脑安装。
 
 使用说明请进[Wiki](https://github.com/BoyceLig/ClashSinicizationTools/wiki)查看。
+
+相关推荐：https://github.com/BoyceLig/ProxyRecommendations
